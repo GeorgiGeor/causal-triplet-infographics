@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<title>Vzročna mreža · slv-125164</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.shell { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+.graph-pane { padding: 24px 12px 24px 24px; }
+header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+header h1 { margin: 0; font-size: 13px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; }
+header .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #94a3b8; }
+.hint { color: #64748b; font-size: 12px; margin: 0 0 12px; }
+
+.svg-wrap { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+svg { display: block; width: 100%; height: auto; }
+
+.node rect { fill: #1e3a5f; stroke: #0f172a; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
+.node.central rect { fill: #c2410c; }
+.node.selected rect { stroke: #fbbf24; stroke-width: 3; }
+.node.dimmed { opacity: 0.25; }
+.node-label { fill: #fff; font-size: 11px; font-weight: 600; text-anchor: middle; alignment-baseline: middle; pointer-events: none; }
+
+.edge path { fill: none; stroke: #94a3b8; stroke-width: 1.4; transition: stroke 0.15s, stroke-width 0.15s; cursor: pointer; }
+.edge.highlight path { stroke: #2563eb; stroke-width: 2.5; }
+.edge.dimmed path { opacity: 0.15; }
+.edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+.edge-label-wrap rect { fill: white; }
+.edge-label { fill: #475569; font-size: 9px; font-weight: 600; text-anchor: middle; letter-spacing: 0.04em; pointer-events: none; }
+.edge.highlight .edge-label { fill: #1d4ed8; }
+
+.sidebar { background: white; border-left: 1px solid #e2e8f0; padding: 24px 20px; overflow: auto; max-height: 100vh; position: sticky; top: 0; }
+.sidebar h2 { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; margin: 0 0 12px; }
+.entity-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 4px; }
+.entity-list li { padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid transparent; transition: background 0.15s; display: flex; justify-content: space-between; gap: 6px; align-items: baseline; }
+.entity-list li:hover { background: #f1f5f9; }
+.entity-list li.selected { background: #eff6ff; border-color: #93c5fd; }
+.entity-list li.central { font-weight: 600; }
+.entity-list .badge { background: #c2410c; color: white; font-size: 10px; padding: 1px 6px; border-radius: 999px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.entity-list .count { color: #94a3b8; font-size: 11px; }
+
+.empty-state { color: #94a3b8; font-size: 12px; line-height: 1.5; }
+.detail .back { background: none; border: none; color: #2563eb; font-size: 12px; cursor: pointer; padding: 0; margin-bottom: 8px; }
+.detail .back:hover { text-decoration: underline; }
+.detail h3 { margin: 0 0 4px; font-size: 16px; }
+.detail .meta { color: #64748b; font-size: 12px; margin: 0 0 16px; }
+
+.relations { display: flex; flex-direction: column; gap: 10px; }
+.relation { padding: 10px 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #cbd5e1; font-size: 12px; }
+.relation.highlight { border-left-color: #2563eb; background: #eff6ff; }
+.relation .triple { font-size: 13px; }
+.relation .triple .predicate { color: #1d4ed8; font-weight: 600; padding: 0 4px; }
+.relation .triple .self { font-weight: 600; color: #0f172a; }
+.relation .ev { color: #475569; margin-top: 4px; font-style: italic; line-height: 1.4; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <main class="graph-pane">
+    <header>
+      <h1>Vzročna mreža</h1>
+      <span class="code">slv-125164</span>
+    </header>
+    <p class="hint">Klikni vozlišče ali povezavo za podrobnosti.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 1485.5 400.0" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 9 3, 0 6" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <g class="edge" data-triplet-idx="0" id="edge-t0"><path d="M 180.12,41.21 C 225.59,47.95 281.07,56.17 328.05,63.13 L 339.18,64.78" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.12,41.21 C 225.59,47.95 281.07,56.17 328.05,63.13 L 339.18,64.78"/><g class="edge-label-wrap"><rect x="237.8" y="42.0" width="44.0" height="12" rx="3"/><text class="edge-label" x="259.8" y="51.0">SPREJELA</text></g></g><g class="edge" data-triplet-idx="1" id="edge-t1"><path d="M 519.57,96.40 C 565.43,105.87 621.51,117.45 668.92,127.24 L 680.14,129.56" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 519.57,96.40 C 565.43,105.87 621.51,117.45 668.92,127.24 L 680.14,129.56"/><g class="edge-label-wrap"><rect x="547.8" y="102.0" width="104.5" height="12" rx="3"/><text class="edge-label" x="600.0" y="111.0">NAJ BI OBREMENJEVAL</text></g></g><g class="edge" data-triplet-idx="2" id="edge-t2"><path d="M 519.71,78.01 C 638.76,78.01 849.01,78.01 973.67,78.01 L 985.09,78.01" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 519.71,78.01 C 638.76,78.01 849.01,78.01 973.67,78.01 L 985.09,78.01"/><g class="edge-label-wrap"><rect x="708.5" y="67.0" width="88.0" height="12" rx="3"/><text class="edge-label" x="752.5" y="76.0">VSEBUJE DOKAZE O</text></g></g><g class="edge" data-triplet-idx="3" id="edge-t3"><path d="M 860.69,229.82 C 940.79,229.47 1061.50,226.33 1165.50,212.76 C 1208.00,207.22 1254.30,197.64 1294.10,188.29 L 1305.20,185.66" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 860.69,229.82 C 940.79,229.47 1061.50,226.33 1165.50,212.76 C 1208.00,207.22 1254.30,197.64 1294.10,188.29 L 1305.20,185.66"/><g class="edge-label-wrap"><rect x="1061.0" y="184.5" width="44.0" height="12" rx="3"/><text class="edge-label" x="1083.0" y="193.5">SPROŽILO</text></g></g><g class="edge" data-triplet-idx="4" id="edge-t4"><path d="M 860.77,127.39 C 896.29,119.18 937.33,109.70 973.89,101.26 L 985.08,98.67" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 860.77,127.39 C 896.29,119.18 937.33,109.70 973.89,101.26 L 985.08,98.67"/><g class="edge-label-wrap"><rect x="887.2" y="102.0" width="71.5" height="12" rx="3"/><text class="edge-label" x="923.0" y="111.0">NI SE IZLOČIL</text></g></g><g class="edge" data-triplet-idx="5" id="edge-t5"><path d="M 180.12,101.56 C 225.49,97.26 280.83,92.01 327.75,87.56 L 339.18,86.48" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.12,101.56 C 225.49,97.26 280.83,92.01 327.75,87.56 L 339.18,86.48"/><g class="edge-label-wrap"><rect x="207.5" y="83.0" width="104.5" height="12" rx="3"/><text class="edge-label" x="259.8" y="92.0">ZANIKA RELEVANTNOST</text></g></g><g class="edge" data-triplet-idx="6" id="edge-t6"><path d="M 180.38,117.42 C 227.66,121.17 286.70,125.59 339.50,128.76 C 452.11,135.53 581.45,141.01 668.62,144.37 L 680.10,144.81" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.38,117.42 C 227.66,121.17 286.70,125.59 339.50,128.76 C 452.11,135.53 581.45,141.01 668.62,144.37 L 680.10,144.81"/><g class="edge-label-wrap"><rect x="411.0" y="118.0" width="38.5" height="12" rx="3"/><text class="edge-label" x="430.2" y="127.0">ZASTOPA</text></g></g><g class="edge" data-triplet-idx="7" id="edge-t7"><path d="M 1165.90,162.01 C 1205.70,162.01 1252.80,162.01 1293.80,162.01 L 1305.20,162.01" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1165.90,162.01 C 1205.70,162.01 1252.80,162.01 1293.80,162.01 L 1305.20,162.01"/><g class="edge-label-wrap"><rect x="1194.2" y="151.0" width="82.5" height="12" rx="3"/><text class="edge-label" x="1235.5" y="160.0">ODSTOPIL ZARADI</text></g></g><g class="edge" data-triplet-idx="8" id="edge-t8"><path d="M 860.77,152.14 C 896.29,153.78 937.33,155.67 973.89,157.36 L 985.08,157.88" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 860.77,152.14 C 896.29,153.78 937.33,155.67 973.89,157.36 L 985.08,157.88"/><g class="edge-label-wrap"><rect x="901.0" y="144.0" width="44.0" height="12" rx="3"/><text class="edge-label" x="923.0" y="153.0">IMENOVAL</text></g></g><g class="edge" data-triplet-idx="9" id="edge-t9"><path d="M 180.47,20.64 C 248.45,15.67 344.30,10.01 428.50,10.01 C 428.50,10.01 428.50,10.01 1076.50,10.01 C 1184.20,10.01 1294.20,81.92 1352.40,126.82 L 1361.30,133.78" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.47,20.64 C 248.45,15.67 344.30,10.01 428.50,10.01 C 428.50,10.01 428.50,10.01 1076.50,10.01 C 1184.20,10.01 1294.20,81.92 1352.40,126.82 L 1361.30,133.78"/><g class="edge-label-wrap"><rect x="720.8" y="84.0" width="44.0" height="12" rx="3"/><text class="edge-label" x="742.8" y="93.0">PREVERJA</text></g></g><g class="edge" data-triplet-idx="10" id="edge-t10"><path d="M 860.77,209.27 C 896.29,201.42 937.33,192.34 973.89,184.26 L 985.08,181.78" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 860.77,209.27 C 896.29,201.42 937.33,192.34 973.89,184.26 L 985.08,181.78"/><g class="edge-label-wrap"><rect x="898.2" y="184.5" width="49.5" height="12" rx="3"/><text class="edge-label" x="923.0" y="193.5">VKLJUČUJE</text></g></g>
+        <g class="node" data-entity-id="kpk" id="node-kpk"><rect x="0.0" y="0.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="24.0">Komisija za</text><text class="node-label" x="90.0" y="40.0">preprečevanje korupcije</text></g><g class="node central" data-entity-id="zadeva_karigador" id="node-zadeva_karigador"><rect x="1305.5" y="134.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1395.5" y="166.0">Zadeva Karigador</text></g><g class="node" data-entity-id="robert_golob" id="node-robert_golob"><rect x="680.5" y="120.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="770.5" y="152.0">Robert Golob</text></g><g class="node" data-entity-id="dopolnjeni_osnutek_ugotovitev" id="node-dopolnjeni_osnutek_ugotovitev"><rect x="339.5" y="50.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="429.5" y="74.0">Dopolnjeni osnutek</text><text class="node-label" x="429.5" y="90.0">ugotovitev</text></g><g class="node" data-entity-id="tomaz_subotic" id="node-tomaz_subotic"><rect x="985.5" y="134.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1075.5" y="166.0">Tomaž Subotič</text></g><g class="node" data-entity-id="stojan_zdolsek" id="node-stojan_zdolsek"><rect x="0.0" y="82.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="114.0">Stojan Zdolšek</text></g><g class="node" data-entity-id="nasprotje_interesov" id="node-nasprotje_interesov"><rect x="985.5" y="50.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1075.5" y="82.0">Nasprotje interesov</text></g><g class="node" data-entity-id="dopustovanje_v_karigadorju" id="node-dopustovanje_v_karigadorju"><rect x="680.5" y="201.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="770.5" y="225.0">Dopustovanje v hiši</text><text class="node-label" x="770.5" y="241.0">poslovneža</text></g>
+      </svg>
+    </div>
+  </main>
+  <aside class="sidebar"><h2>Entitete (8)</h2><ul class="entity-list" id="entity-list"><li class="entity-item" data-entity-id="kpk"><span>Komisija za preprečevanje korupcije </span><span class="count">2</span></li><li class="entity-item central" data-entity-id="zadeva_karigador"><span>Zadeva Karigador <span class="badge">centralna</span></span><span class="count">3</span></li><li class="entity-item" data-entity-id="robert_golob"><span>Robert Golob </span><span class="count">4</span></li><li class="entity-item" data-entity-id="dopolnjeni_osnutek_ugotovitev"><span>Dopolnjeni osnutek ugotovitev </span><span class="count">4</span></li><li class="entity-item" data-entity-id="tomaz_subotic"><span>Tomaž Subotič </span><span class="count">3</span></li><li class="entity-item" data-entity-id="stojan_zdolsek"><span>Stojan Zdolšek </span><span class="count">2</span></li><li class="entity-item" data-entity-id="nasprotje_interesov"><span>Nasprotje interesov </span><span class="count">2</span></li><li class="entity-item" data-entity-id="dopustovanje_v_karigadorju"><span>Dopustovanje v hiši poslovneža </span><span class="count">2</span></li></ul><div id="detail" class="empty-state">Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.</div></aside>
+</div>
+
+<script>
+const DATA = {"entities": [{"id": "kpk", "label": "Komisija za preprečevanje korupcije", "central": false}, {"id": "zadeva_karigador", "label": "Zadeva Karigador", "central": true}, {"id": "robert_golob", "label": "Robert Golob", "central": false}, {"id": "dopolnjeni_osnutek_ugotovitev", "label": "Dopolnjeni osnutek ugotovitev", "central": false}, {"id": "tomaz_subotic", "label": "Tomaž Subotič", "central": false}, {"id": "stojan_zdolsek", "label": "Stojan Zdolšek", "central": false}, {"id": "nasprotje_interesov", "label": "Nasprotje interesov", "central": false}, {"id": "dopustovanje_v_karigadorju", "label": "Dopustovanje v hiši poslovneža", "central": false}], "triplets": [{"subject_id": "kpk", "predicate": "sprejela", "object_id": "dopolnjeni_osnutek_ugotovitev", "evidence": "KPK je v postopku ugotavljanja nasprotja interesov pri odhajajočem premierju Robertu Golobu v zadevi Karigador sprejela drugi osnutek ugotovitev", "confidence": "high"}, {"subject_id": "dopolnjeni_osnutek_ugotovitev", "predicate": "naj bi obremenjeval", "object_id": "robert_golob", "evidence": "Neuradno naj bi bili za Goloba obremenjujoči.", "confidence": "medium"}, {"subject_id": "dopolnjeni_osnutek_ugotovitev", "predicate": "vsebuje dokaze o", "object_id": "nasprotje_interesov", "evidence": "Na KPK so dodali tudi dodatne dokaze v breme Goloba. Po informacijah POP TV novi dokazi kažejo na to, kako tesen je odnos med Golobom in Subotičem in zakaj bi se Golob moral izločiti iz odločanja o tem kadrovanju.", "confidence": "high"}, {"subject_id": "dopustovanje_v_karigadorju", "predicate": "sprožilo", "object_id": "zadeva_karigador", "evidence": "Gre sicer za t. i. afero Karigador. Golob je namreč s takratno partnerko Tino Gaber poleti 2023 večkrat dopustoval v hiši poslovneža Subotiča.", "confidence": "high"}, {"subject_id": "robert_golob", "predicate": "ni se izločil", "object_id": "nasprotje_interesov", "evidence": "KPK je v omenjeni zadevi preverjala, ali se je Golob kot predsednik vlade s tem, ko se na dveh sejah ni izločil iz glasovanja o imenovanju poslovneža Tomaža Subotiča... znašel v okoliščinah, ki predstavljajo nasprotje interesov.", "confidence": "high"}, {"subject_id": "stojan_zdolsek", "predicate": "zanika relevantnost", "object_id": "dopolnjeni_osnutek_ugotovitev", "evidence": "Sam sicer v njem ne vidi nobenih novih relevantnih dokazov.", "confidence": "high"}, {"subject_id": "stojan_zdolsek", "predicate": "zastopa", "object_id": "robert_golob", "evidence": "Golobov odvetnik Stojan Zdolšek je za POP TV potrdil, da so osnutek prejeli", "confidence": "high"}, {"subject_id": "tomaz_subotic", "predicate": "odstopil zaradi", "object_id": "zadeva_karigador", "evidence": "Po razkritjih je Subotič odstopil z mesta predsednika sveta celjske bolnišnice", "confidence": "high"}, {"subject_id": "robert_golob", "predicate": "imenoval", "object_id": "tomaz_subotic", "evidence": "glasovanja o imenovanju poslovneža Tomaža Subotiča v svet celjske bolnišnice in ljubljanske psihiatrične klinike", "confidence": "high"}, {"subject_id": "kpk", "predicate": "preverja", "object_id": "zadeva_karigador", "evidence": "KPK je v omenjeni zadevi preverjala, ali se je Golob kot predsednik vlade... znašel v okoliščinah, ki predstavljajo nasprotje interesov.", "confidence": "high"}, {"subject_id": "dopustovanje_v_karigadorju", "predicate": "vključuje", "object_id": "tomaz_subotic", "evidence": "Golob je namreč s takratno partnerko Tino Gaber poleti 2023 večkrat dopustoval v hiši poslovneža Subotiča.", "confidence": "high"}], "ui": {"title": "Vzročna mreža", "hint": "Klikni vozlišče ali povezavo za podrobnosti.", "entities_header": "Entitete", "central_badge": "centralna", "involves_header": "Sodeluje v {n} razmerjih", "select_hint": "Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.", "predicate": "predikat", "subject": "subjekt", "object": "objekt", "evidence": "dokaz", "confidence": "zaupanje", "high": "visoko", "medium": "srednje", "low": "nizko", "back": "Nazaj na vse entitete"}};
+
+const entityById = Object.fromEntries(DATA.entities.map(e => [e.id, e]));
+const tripletsByEntity = {};
+DATA.entities.forEach(e => tripletsByEntity[e.id] = []);
+DATA.triplets.forEach((t, idx) => {
+  if (tripletsByEntity[t.subject_id]) tripletsByEntity[t.subject_id].push({...t, idx, role: 'subject'});
+  if (tripletsByEntity[t.object_id])  tripletsByEntity[t.object_id].push({...t, idx, role: 'object'});
+});
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('selected','dimmed'));
+  document.querySelectorAll('.edge').forEach(e => e.classList.remove('highlight','dimmed'));
+  document.querySelectorAll('.entity-item').forEach(li => li.classList.remove('selected'));
+}
+
+function selectEntity(entityId) {
+  clearHighlights();
+  const sel = entityById[entityId];
+  if (!sel) return;
+
+  // Highlight the node
+  const node = document.getElementById('node-' + entityId);
+  if (node) node.classList.add('selected');
+  // Dim others
+  document.querySelectorAll('.node').forEach(n => {
+    if (n.dataset.entityId !== entityId) n.classList.add('dimmed');
+  });
+
+  // Highlight involved edges
+  const rels = tripletsByEntity[entityId] || [];
+  const involvedEdgeIdxs = new Set(rels.map(r => r.idx));
+  document.querySelectorAll('.edge').forEach(e => {
+    if (involvedEdgeIdxs.has(parseInt(e.dataset.tripletIdx))) e.classList.add('highlight');
+    else e.classList.add('dimmed');
+  });
+  // Un-dim the nodes at the ends of involved edges
+  rels.forEach(r => {
+    const otherId = r.role === 'subject' ? r.object_id : r.subject_id;
+    const otherNode = document.getElementById('node-' + otherId);
+    if (otherNode) otherNode.classList.remove('dimmed');
+  });
+
+  // Sidebar selection
+  document.querySelectorAll('.entity-item').forEach(li => {
+    if (li.dataset.entityId === entityId) li.classList.add('selected');
+  });
+
+  // Render detail panel
+  const detail = document.getElementById('detail');
+  detail.classList.remove('empty-state');
+  detail.classList.add('detail');
+  const centralBadge = sel.central ? ` <span class="badge" style="background:#c2410c;color:white;font-size:10px;padding:1px 6px;border-radius:999px;font-weight:600;text-transform:uppercase;">${DATA.ui.central_badge}</span>` : '';
+  let html = '';
+  html += `<button class="back" onclick="resetSelection()">← ${DATA.ui.back}</button>`;
+  html += `<h3>${escapeHtml(sel.label)}${centralBadge}</h3>`;
+  html += `<p class="meta">${DATA.ui.involves_header.replace('{n}', rels.length)}</p>`;
+  html += '<div class="relations">';
+  rels.forEach(r => {
+    const subjLabel = (entityById[r.subject_id] || {}).label || r.subject_id;
+    const objLabel  = (entityById[r.object_id]  || {}).label || r.object_id;
+    const selfId = entityId;
+    const sCls = r.subject_id === selfId ? ' class="self"' : '';
+    const oCls = r.object_id  === selfId ? ' class="self"' : '';
+    const confKey = (r.confidence || '').toLowerCase();
+    const confLabel = ({high: DATA.ui.high, medium: DATA.ui.medium, low: DATA.ui.low})[confKey] || r.confidence || '';
+    html += '<div class="relation highlight">';
+    html += `<div class="triple"><span${sCls}>${escapeHtml(subjLabel)}</span> <span class="predicate">${escapeHtml(r.predicate || '')}</span> <span${oCls}>${escapeHtml(objLabel)}</span></div>`;
+    if (r.evidence) html += `<div class="ev">„${escapeHtml(r.evidence)}"</div>`;
+    if (confKey)   html += `<span class="confidence ${confKey}">${DATA.ui.confidence}: ${escapeHtml(confLabel)}</span>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  detail.innerHTML = html;
+}
+
+function selectTriplet(idx) {
+  const t = DATA.triplets[idx];
+  if (!t) return;
+  // Select the subject entity but ALSO highlight only this edge
+  selectEntity(t.subject_id);
+  // Re-clear other involving edges and only keep the clicked one highlighted
+  document.querySelectorAll('.edge').forEach(e => {
+    e.classList.remove('highlight');
+    if (parseInt(e.dataset.tripletIdx) === idx) {
+      e.classList.add('highlight');
+      e.classList.remove('dimmed');
+    } else {
+      e.classList.add('dimmed');
+    }
+  });
+}
+
+function resetSelection() {
+  clearHighlights();
+  const detail = document.getElementById('detail');
+  detail.classList.add('empty-state');
+  detail.classList.remove('detail');
+  detail.innerHTML = `<p>${escapeHtml(DATA.ui.select_hint)}</p>`;
+}
+
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', e => {
+    e.stopPropagation();
+    selectEntity(n.dataset.entityId);
+  });
+});
+document.querySelectorAll('.edge').forEach(g => {
+  g.addEventListener('click', e => {
+    e.stopPropagation();
+    selectTriplet(parseInt(g.dataset.tripletIdx));
+  });
+});
+document.querySelectorAll('.entity-item').forEach(li => {
+  li.addEventListener('click', () => selectEntity(li.dataset.entityId));
+});
+document.querySelector('svg').addEventListener('click', () => resetSelection());
+</script>
+
+</body>
+</html>

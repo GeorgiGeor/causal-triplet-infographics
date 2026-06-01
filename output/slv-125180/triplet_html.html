@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<title>Vzročna mreža · slv-125180</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.shell { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+.graph-pane { padding: 24px 12px 24px 24px; }
+header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+header h1 { margin: 0; font-size: 13px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; }
+header .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #94a3b8; }
+.hint { color: #64748b; font-size: 12px; margin: 0 0 12px; }
+
+.svg-wrap { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+svg { display: block; width: 100%; height: auto; }
+
+.node rect { fill: #1e3a5f; stroke: #0f172a; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
+.node.central rect { fill: #c2410c; }
+.node.selected rect { stroke: #fbbf24; stroke-width: 3; }
+.node.dimmed { opacity: 0.25; }
+.node-label { fill: #fff; font-size: 11px; font-weight: 600; text-anchor: middle; alignment-baseline: middle; pointer-events: none; }
+
+.edge path { fill: none; stroke: #94a3b8; stroke-width: 1.4; transition: stroke 0.15s, stroke-width 0.15s; cursor: pointer; }
+.edge.highlight path { stroke: #2563eb; stroke-width: 2.5; }
+.edge.dimmed path { opacity: 0.15; }
+.edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+.edge-label-wrap rect { fill: white; }
+.edge-label { fill: #475569; font-size: 9px; font-weight: 600; text-anchor: middle; letter-spacing: 0.04em; pointer-events: none; }
+.edge.highlight .edge-label { fill: #1d4ed8; }
+
+.sidebar { background: white; border-left: 1px solid #e2e8f0; padding: 24px 20px; overflow: auto; max-height: 100vh; position: sticky; top: 0; }
+.sidebar h2 { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; margin: 0 0 12px; }
+.entity-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 4px; }
+.entity-list li { padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid transparent; transition: background 0.15s; display: flex; justify-content: space-between; gap: 6px; align-items: baseline; }
+.entity-list li:hover { background: #f1f5f9; }
+.entity-list li.selected { background: #eff6ff; border-color: #93c5fd; }
+.entity-list li.central { font-weight: 600; }
+.entity-list .badge { background: #c2410c; color: white; font-size: 10px; padding: 1px 6px; border-radius: 999px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.entity-list .count { color: #94a3b8; font-size: 11px; }
+
+.empty-state { color: #94a3b8; font-size: 12px; line-height: 1.5; }
+.detail .back { background: none; border: none; color: #2563eb; font-size: 12px; cursor: pointer; padding: 0; margin-bottom: 8px; }
+.detail .back:hover { text-decoration: underline; }
+.detail h3 { margin: 0 0 4px; font-size: 16px; }
+.detail .meta { color: #64748b; font-size: 12px; margin: 0 0 16px; }
+
+.relations { display: flex; flex-direction: column; gap: 10px; }
+.relation { padding: 10px 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #cbd5e1; font-size: 12px; }
+.relation.highlight { border-left-color: #2563eb; background: #eff6ff; }
+.relation .triple { font-size: 13px; }
+.relation .triple .predicate { color: #1d4ed8; font-weight: 600; padding: 0 4px; }
+.relation .triple .self { font-weight: 600; color: #0f172a; }
+.relation .ev { color: #475569; margin-top: 4px; font-style: italic; line-height: 1.4; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <main class="graph-pane">
+    <header>
+      <h1>Vzročna mreža</h1>
+      <span class="code">slv-125180</span>
+    </header>
+    <p class="hint">Klikni vozlišče ali povezavo za podrobnosti.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 1157.2 400.0" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 9 3, 0 6" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <g class="edge" data-triplet-idx="0" id="edge-t0"><path d="M 180.24,151.01 C 210.72,151.01 245.01,151.01 276.31,151.01 L 287.70,151.01" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.24,151.01 C 210.72,151.01 245.01,151.01 276.31,151.01 L 287.70,151.01"/><g class="edge-label-wrap"><rect x="214.6" y="140.0" width="38.5" height="12" rx="3"/><text class="edge-label" x="233.9" y="149.0">SPREJEL</text></g></g><g class="edge" data-triplet-idx="1" id="edge-t1"><path d="M 467.91,171.71 C 513.00,182.18 567.88,194.92 614.44,205.72 L 625.47,208.28" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 467.91,171.71 C 513.00,182.18 567.88,194.92 614.44,205.72 L 625.47,208.28"/><g class="edge-label-wrap"><rect x="522.0" y="179.0" width="49.5" height="12" rx="3"/><text class="edge-label" x="546.8" y="188.0">ZAHTEVAJO</text></g></g><g class="edge" data-triplet-idx="2" id="edge-t2"><path d="M 805.85,215.50 C 854.64,208.10 915.27,198.91 965.74,191.25 L 977.01,189.54" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 805.85,215.50 C 854.64,208.10 915.27,198.91 965.74,191.25 L 977.01,189.54"/><g class="edge-label-wrap"><rect x="855.7" y="191.5" width="71.5" height="12" rx="3"/><text class="edge-label" x="891.5" y="200.5">MORA OPRAVITI</text></g></g><g class="edge" data-triplet-idx="3" id="edge-t3"><path d="M 805.85,249.66 C 854.74,260.99 915.52,275.08 966.06,286.79 L 977.01,289.33" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 805.85,249.66 C 854.74,260.99 915.52,275.08 966.06,286.79 L 977.01,289.33"/><g class="edge-label-wrap"><rect x="864.0" y="258.5" width="55.0" height="12" rx="3"/><text class="edge-label" x="891.5" y="267.5">PREPREČUJE</text></g></g><g class="edge" data-triplet-idx="4" id="edge-t4"><path d="M 146.47,179.39 C 241.56,226.26 443.11,317.98 625.75,351.01 C 704.47,365.25 725.99,357.25 805.75,351.01 C 858.89,346.85 917.58,338.00 965.78,329.58 L 976.84,327.62" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 146.47,179.39 C 241.56,226.26 443.11,317.98 625.75,351.01 C 704.47,365.25 725.99,357.25 805.75,351.01 C 858.89,346.85 917.58,338.00 965.78,329.58 L 976.84,327.62"/><g class="edge-label-wrap"><rect x="556.6" y="219.5" width="44.0" height="12" rx="3"/><text class="edge-label" x="578.6" y="228.5">ODLOČA O</text></g></g><g class="edge" data-triplet-idx="5" id="edge-t5"><path d="M 805.85,310.01 C 854.64,310.01 915.27,310.01 965.74,310.01 L 977.01,310.01" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 805.85,310.01 C 854.64,310.01 915.27,310.01 965.74,310.01 L 977.01,310.01"/><g class="edge-label-wrap"><rect x="866.7" y="299.0" width="49.5" height="12" rx="3"/><text class="edge-label" x="891.5" y="308.0">VPLIVA NA</text></g></g><g class="edge" data-triplet-idx="6" id="edge-t6"><path d="M 421.07,122.58 C 445.52,107.23 477.38,89.02 507.75,77.01 C 541.53,63.65 579.91,53.32 614.36,45.67 L 625.40,43.28" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 421.07,122.58 C 445.52,107.23 477.38,89.02 507.75,77.01 C 541.53,63.65 579.91,53.32 614.36,45.67 L 625.40,43.28"/><g class="edge-label-wrap"><rect x="494.5" y="78.5" width="104.5" height="12" rx="3"/><text class="edge-label" x="546.8" y="87.5">ZMANJŠUJEJO ŠTEVILO</text></g></g><g class="edge" data-triplet-idx="7" id="edge-t7"><path d="M 805.85,37.95 C 854.64,43.40 915.27,50.16 965.74,55.80 L 977.01,57.05" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 805.85,37.95 C 854.64,43.40 915.27,50.16 965.74,55.80 L 977.01,57.05"/><g class="edge-label-wrap"><rect x="831.0" y="36.5" width="121.0" height="12" rx="3"/><text class="edge-label" x="891.5" y="45.5">PRINAŠAJO PRIHRANEK ZA</text></g></g><g class="edge" data-triplet-idx="8" id="edge-t8"><path d="M 467.92,154.25 C 595.99,158.91 831.29,167.47 965.49,172.35 L 976.96,172.76" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 467.92,154.25 C 595.99,158.91 831.29,167.47 965.49,172.35 L 976.96,172.76"/><g class="edge-label-wrap"><rect x="681.2" y="152.5" width="82.5" height="12" rx="3"/><text class="edge-label" x="722.5" y="161.5">RAZBREMENJUJEJO</text></g></g><g class="edge" data-triplet-idx="9" id="edge-t9"><path d="M 436.44,179.34 C 486.36,203.73 560.59,239.68 625.75,270.01 C 630.58,272.26 635.57,274.56 640.61,276.87 L 650.97,281.59" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 436.44,179.34 C 486.36,203.73 560.59,239.68 625.75,270.01 C 630.58,272.26 635.57,274.56 640.61,276.87 L 650.97,281.59"/><g class="edge-label-wrap"><rect x="494.5" y="219.5" width="104.5" height="12" rx="3"/><text class="edge-label" x="546.8" y="228.5">UVAJAJO SANKCIJE ZA</text></g></g><g class="edge" data-triplet-idx="10" id="edge-t10"><path d="M 173.62,122.51 C 256.86,95.21 389.55,55.51 507.75,37.01 C 542.15,31.63 580.14,29.03 614.08,27.88 L 625.42,27.54" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 173.62,122.51 C 256.86,95.21 389.55,55.51 507.75,37.01 C 542.15,31.63 580.14,29.03 614.08,27.88 L 625.42,27.54"/><g class="edge-label-wrap"><rect x="372.6" y="78.5" width="60.5" height="12" rx="3"/><text class="edge-label" x="402.9" y="87.5">BELEŽI MANJ</text></g></g><g class="edge" data-triplet-idx="11" id="edge-t11"><path d="M 467.92,140.12 C 596.11,124.45 831.77,95.66 965.90,79.27 L 976.96,77.92" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 467.92,140.12 C 596.11,124.45 831.77,95.66 965.90,79.27 L 976.96,77.92"/><g class="edge-label-wrap"><rect x="689.5" y="98.0" width="66.0" height="12" rx="3"/><text class="edge-label" x="722.5" y="107.0">KORISTIJO ZA</text></g></g>
+        <g class="node central" data-entity-id="spremembe_pravil_zzzs" id="node-spremembe_pravil_zzzs"><rect x="287.8" y="123.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="377.8" y="147.0">Spremembe pravil obveznega</text><text class="node-label" x="377.8" y="163.0">zdravstvenega zavarovanja</text></g><g class="node" data-entity-id="zzzs" id="node-zzzs"><rect x="0.0" y="123.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="147.0">Zavod za zdravstveno</text><text class="node-label" x="90.0" y="163.0">zavarovanje Slovenije</text></g><g class="node" data-entity-id="osebni_zdravnik" id="node-osebni_zdravnik"><rect x="977.2" y="148.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1067.2" y="180.0">Osebni zdravnik</text></g><g class="node" data-entity-id="obvezni_osebni_pregled" id="node-obvezni_osebni_pregled"><rect x="625.8" y="201.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="715.8" y="225.0">Obvezni osebni pregled</text><text class="node-label" x="715.8" y="241.0">pri zdravniku</text></g><g class="node" data-entity-id="zadrzanje_nadomestila_place" id="node-zadrzanje_nadomestila_place"><rect x="977.2" y="282.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1067.2" y="306.0">Zadržanje</text><text class="node-label" x="1067.2" y="322.0">nadomestila plače</text></g><g class="node" data-entity-id="izgubljeni_delovni_dnevi" id="node-izgubljeni_delovni_dnevi"><rect x="625.8" y="0.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="715.8" y="24.0">Izgubljeni</text><text class="node-label" x="715.8" y="40.0">delovni dnevi</text></g><g class="node" data-entity-id="delodajalci" id="node-delodajalci"><rect x="977.2" y="39.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1067.2" y="71.0">Delodajalci</text></g><g class="node" data-entity-id="neupostevanje_rezimov_gibanja" id="node-neupostevanje_rezimov_gibanja"><rect x="625.8" y="282.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="715.8" y="306.0">Neupoštevanje</text><text class="node-label" x="715.8" y="322.0">režimov gibanja</text></g>
+      </svg>
+    </div>
+  </main>
+  <aside class="sidebar"><h2>Entitete (8)</h2><ul class="entity-list" id="entity-list"><li class="entity-item central" data-entity-id="spremembe_pravil_zzzs"><span>Spremembe pravil obveznega zdravstvenega zavarovanja <span class="badge">centralna</span></span><span class="count">6</span></li><li class="entity-item" data-entity-id="zzzs"><span>Zavod za zdravstveno zavarovanje Slovenije </span><span class="count">3</span></li><li class="entity-item" data-entity-id="osebni_zdravnik"><span>Osebni zdravnik </span><span class="count">2</span></li><li class="entity-item" data-entity-id="obvezni_osebni_pregled"><span>Obvezni osebni pregled pri zdravniku </span><span class="count">3</span></li><li class="entity-item" data-entity-id="zadrzanje_nadomestila_place"><span>Zadržanje nadomestila plače </span><span class="count">3</span></li><li class="entity-item" data-entity-id="izgubljeni_delovni_dnevi"><span>Izgubljeni delovni dnevi </span><span class="count">3</span></li><li class="entity-item" data-entity-id="delodajalci"><span>Delodajalci </span><span class="count">2</span></li><li class="entity-item" data-entity-id="neupostevanje_rezimov_gibanja"><span>Neupoštevanje režimov gibanja </span><span class="count">2</span></li></ul><div id="detail" class="empty-state">Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.</div></aside>
+</div>
+
+<script>
+const DATA = {"entities": [{"id": "spremembe_pravil_zzzs", "label": "Spremembe pravil obveznega zdravstvenega zavarovanja", "central": true}, {"id": "zzzs", "label": "Zavod za zdravstveno zavarovanje Slovenije", "central": false}, {"id": "osebni_zdravnik", "label": "Osebni zdravnik", "central": false}, {"id": "obvezni_osebni_pregled", "label": "Obvezni osebni pregled pri zdravniku", "central": false}, {"id": "zadrzanje_nadomestila_place", "label": "Zadržanje nadomestila plače", "central": false}, {"id": "izgubljeni_delovni_dnevi", "label": "Izgubljeni delovni dnevi", "central": false}, {"id": "delodajalci", "label": "Delodajalci", "central": false}, {"id": "neupostevanje_rezimov_gibanja", "label": "Neupoštevanje režimov gibanja", "central": false}], "triplets": [{"subject_id": "zzzs", "predicate": "sprejel", "object_id": "spremembe_pravil_zzzs", "evidence": "Zavod za zdravstveno zavarovanje RS (ZZZS) sprejel še drugi paket sprememb.", "confidence": "high"}, {"subject_id": "spremembe_pravil_zzzs", "predicate": "zahtevajo", "object_id": "obvezni_osebni_pregled", "evidence": "Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža.", "confidence": "high"}, {"subject_id": "obvezni_osebni_pregled", "predicate": "mora opraviti", "object_id": "osebni_zdravnik", "evidence": "Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.", "confidence": "high"}, {"subject_id": "obvezni_osebni_pregled", "predicate": "preprečuje", "object_id": "zadrzanje_nadomestila_place", "evidence": "Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.", "confidence": "high"}, {"subject_id": "zzzs", "predicate": "odloča o", "object_id": "zadrzanje_nadomestila_place", "evidence": "bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.", "confidence": "high"}, {"subject_id": "neupostevanje_rezimov_gibanja", "predicate": "vpliva na", "object_id": "zadrzanje_nadomestila_place", "evidence": "Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja", "confidence": "high"}, {"subject_id": "spremembe_pravil_zzzs", "predicate": "zmanjšujejo število", "object_id": "izgubljeni_delovni_dnevi", "evidence": "prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani", "confidence": "high"}, {"subject_id": "izgubljeni_delovni_dnevi", "predicate": "prinašajo prihranek za", "object_id": "delodajalci", "evidence": "v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.", "confidence": "high"}, {"subject_id": "spremembe_pravil_zzzs", "predicate": "razbremenjujejo", "object_id": "osebni_zdravnik", "evidence": "v tem primeru lahko sporoči odsotnost, ko se vrne domov, že isti dan in tudi v tem primeru, to je novost in razbremenitev za družinske zdravnike", "confidence": "medium"}, {"subject_id": "spremembe_pravil_zzzs", "predicate": "uvajajo sankcije za", "object_id": "neupostevanje_rezimov_gibanja", "evidence": "takrat z interventnim zakonom, ki je prinesel zlasti strožje sankcije v primeru kršitev navodil za ravnanje", "confidence": "high"}, {"subject_id": "zzzs", "predicate": "beleži manj", "object_id": "izgubljeni_delovni_dnevi", "evidence": "Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani", "confidence": "high"}, {"subject_id": "spremembe_pravil_zzzs", "predicate": "koristijo za", "object_id": "delodajalci", "evidence": "da seveda staleže odpirajo odgovorno, skrbno, ne samo do delodajalcev, do zdravstvene blagajne, ampak predvsem tudi do pacientov", "confidence": "medium"}], "ui": {"title": "Vzročna mreža", "hint": "Klikni vozlišče ali povezavo za podrobnosti.", "entities_header": "Entitete", "central_badge": "centralna", "involves_header": "Sodeluje v {n} razmerjih", "select_hint": "Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.", "predicate": "predikat", "subject": "subjekt", "object": "objekt", "evidence": "dokaz", "confidence": "zaupanje", "high": "visoko", "medium": "srednje", "low": "nizko", "back": "Nazaj na vse entitete"}};
+
+const entityById = Object.fromEntries(DATA.entities.map(e => [e.id, e]));
+const tripletsByEntity = {};
+DATA.entities.forEach(e => tripletsByEntity[e.id] = []);
+DATA.triplets.forEach((t, idx) => {
+  if (tripletsByEntity[t.subject_id]) tripletsByEntity[t.subject_id].push({...t, idx, role: 'subject'});
+  if (tripletsByEntity[t.object_id])  tripletsByEntity[t.object_id].push({...t, idx, role: 'object'});
+});
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('selected','dimmed'));
+  document.querySelectorAll('.edge').forEach(e => e.classList.remove('highlight','dimmed'));
+  document.querySelectorAll('.entity-item').forEach(li => li.classList.remove('selected'));
+}
+
+function selectEntity(entityId) {
+  clearHighlights();
+  const sel = entityById[entityId];
+  if (!sel) return;
+
+  // Highlight the node
+  const node = document.getElementById('node-' + entityId);
+  if (node) node.classList.add('selected');
+  // Dim others
+  document.querySelectorAll('.node').forEach(n => {
+    if (n.dataset.entityId !== entityId) n.classList.add('dimmed');
+  });
+
+  // Highlight involved edges
+  const rels = tripletsByEntity[entityId] || [];
+  const involvedEdgeIdxs = new Set(rels.map(r => r.idx));
+  document.querySelectorAll('.edge').forEach(e => {
+    if (involvedEdgeIdxs.has(parseInt(e.dataset.tripletIdx))) e.classList.add('highlight');
+    else e.classList.add('dimmed');
+  });
+  // Un-dim the nodes at the ends of involved edges
+  rels.forEach(r => {
+    const otherId = r.role === 'subject' ? r.object_id : r.subject_id;
+    const otherNode = document.getElementById('node-' + otherId);
+    if (otherNode) otherNode.classList.remove('dimmed');
+  });
+
+  // Sidebar selection
+  document.querySelectorAll('.entity-item').forEach(li => {
+    if (li.dataset.entityId === entityId) li.classList.add('selected');
+  });
+
+  // Render detail panel
+  const detail = document.getElementById('detail');
+  detail.classList.remove('empty-state');
+  detail.classList.add('detail');
+  const centralBadge = sel.central ? ` <span class="badge" style="background:#c2410c;color:white;font-size:10px;padding:1px 6px;border-radius:999px;font-weight:600;text-transform:uppercase;">${DATA.ui.central_badge}</span>` : '';
+  let html = '';
+  html += `<button class="back" onclick="resetSelection()">← ${DATA.ui.back}</button>`;
+  html += `<h3>${escapeHtml(sel.label)}${centralBadge}</h3>`;
+  html += `<p class="meta">${DATA.ui.involves_header.replace('{n}', rels.length)}</p>`;
+  html += '<div class="relations">';
+  rels.forEach(r => {
+    const subjLabel = (entityById[r.subject_id] || {}).label || r.subject_id;
+    const objLabel  = (entityById[r.object_id]  || {}).label || r.object_id;
+    const selfId = entityId;
+    const sCls = r.subject_id === selfId ? ' class="self"' : '';
+    const oCls = r.object_id  === selfId ? ' class="self"' : '';
+    const confKey = (r.confidence || '').toLowerCase();
+    const confLabel = ({high: DATA.ui.high, medium: DATA.ui.medium, low: DATA.ui.low})[confKey] || r.confidence || '';
+    html += '<div class="relation highlight">';
+    html += `<div class="triple"><span${sCls}>${escapeHtml(subjLabel)}</span> <span class="predicate">${escapeHtml(r.predicate || '')}</span> <span${oCls}>${escapeHtml(objLabel)}</span></div>`;
+    if (r.evidence) html += `<div class="ev">„${escapeHtml(r.evidence)}"</div>`;
+    if (confKey)   html += `<span class="confidence ${confKey}">${DATA.ui.confidence}: ${escapeHtml(confLabel)}</span>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  detail.innerHTML = html;
+}
+
+function selectTriplet(idx) {
+  const t = DATA.triplets[idx];
+  if (!t) return;
+  // Select the subject entity but ALSO highlight only this edge
+  selectEntity(t.subject_id);
+  // Re-clear other involving edges and only keep the clicked one highlighted
+  document.querySelectorAll('.edge').forEach(e => {
+    e.classList.remove('highlight');
+    if (parseInt(e.dataset.tripletIdx) === idx) {
+      e.classList.add('highlight');
+      e.classList.remove('dimmed');
+    } else {
+      e.classList.add('dimmed');
+    }
+  });
+}
+
+function resetSelection() {
+  clearHighlights();
+  const detail = document.getElementById('detail');
+  detail.classList.add('empty-state');
+  detail.classList.remove('detail');
+  detail.innerHTML = `<p>${escapeHtml(DATA.ui.select_hint)}</p>`;
+}
+
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', e => {
+    e.stopPropagation();
+    selectEntity(n.dataset.entityId);
+  });
+});
+document.querySelectorAll('.edge').forEach(g => {
+  g.addEventListener('click', e => {
+    e.stopPropagation();
+    selectTriplet(parseInt(g.dataset.tripletIdx));
+  });
+});
+document.querySelectorAll('.entity-item').forEach(li => {
+  li.addEventListener('click', () => selectEntity(li.dataset.entityId));
+});
+document.querySelector('svg').addEventListener('click', () => resetSelection());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<title>Vzročna mreža · slv-125152</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.shell { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+.graph-pane { padding: 24px 12px 24px 24px; }
+header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+header h1 { margin: 0; font-size: 13px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; }
+header .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #94a3b8; }
+.hint { color: #64748b; font-size: 12px; margin: 0 0 12px; }
+
+.svg-wrap { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+svg { display: block; width: 100%; height: auto; }
+
+.node rect { fill: #1e3a5f; stroke: #0f172a; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
+.node.central rect { fill: #c2410c; }
+.node.selected rect { stroke: #fbbf24; stroke-width: 3; }
+.node.dimmed { opacity: 0.25; }
+.node-label { fill: #fff; font-size: 11px; font-weight: 600; text-anchor: middle; alignment-baseline: middle; pointer-events: none; }
+
+.edge path { fill: none; stroke: #94a3b8; stroke-width: 1.4; transition: stroke 0.15s, stroke-width 0.15s; cursor: pointer; }
+.edge.highlight path { stroke: #2563eb; stroke-width: 2.5; }
+.edge.dimmed path { opacity: 0.15; }
+.edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+.edge-label-wrap rect { fill: white; }
+.edge-label { fill: #475569; font-size: 9px; font-weight: 600; text-anchor: middle; letter-spacing: 0.04em; pointer-events: none; }
+.edge.highlight .edge-label { fill: #1d4ed8; }
+
+.sidebar { background: white; border-left: 1px solid #e2e8f0; padding: 24px 20px; overflow: auto; max-height: 100vh; position: sticky; top: 0; }
+.sidebar h2 { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; margin: 0 0 12px; }
+.entity-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 4px; }
+.entity-list li { padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid transparent; transition: background 0.15s; display: flex; justify-content: space-between; gap: 6px; align-items: baseline; }
+.entity-list li:hover { background: #f1f5f9; }
+.entity-list li.selected { background: #eff6ff; border-color: #93c5fd; }
+.entity-list li.central { font-weight: 600; }
+.entity-list .badge { background: #c2410c; color: white; font-size: 10px; padding: 1px 6px; border-radius: 999px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.entity-list .count { color: #94a3b8; font-size: 11px; }
+
+.empty-state { color: #94a3b8; font-size: 12px; line-height: 1.5; }
+.detail .back { background: none; border: none; color: #2563eb; font-size: 12px; cursor: pointer; padding: 0; margin-bottom: 8px; }
+.detail .back:hover { text-decoration: underline; }
+.detail h3 { margin: 0 0 4px; font-size: 16px; }
+.detail .meta { color: #64748b; font-size: 12px; margin: 0 0 16px; }
+
+.relations { display: flex; flex-direction: column; gap: 10px; }
+.relation { padding: 10px 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #cbd5e1; font-size: 12px; }
+.relation.highlight { border-left-color: #2563eb; background: #eff6ff; }
+.relation .triple { font-size: 13px; }
+.relation .triple .predicate { color: #1d4ed8; font-weight: 600; padding: 0 4px; }
+.relation .triple .self { font-weight: 600; color: #0f172a; }
+.relation .ev { color: #475569; margin-top: 4px; font-style: italic; line-height: 1.4; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <main class="graph-pane">
+    <header>
+      <h1>Vzročna mreža</h1>
+      <span class="code">slv-125152</span>
+    </header>
+    <p class="hint">Klikni vozlišče ali povezavo za podrobnosti.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 1492.2 400.0" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 9 3, 0 6" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <g class="edge" data-triplet-idx="0" id="edge-t0"><path d="M 180.25,109.01 C 245.78,109.01 334.85,109.01 402.90,109.01 L 414.06,109.01" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.25,109.01 C 245.78,109.01 334.85,109.01 402.90,109.01 L 414.06,109.01"/><g class="edge-label-wrap"><rect x="278.0" y="98.0" width="38.5" height="12" rx="3"/><text class="edge-label" x="297.2" y="107.0">IZVEDEL</text></g></g><g class="edge" data-triplet-idx="1" id="edge-t1"><path d="M 594.69,127.07 C 632.62,134.74 677.04,143.73 716.13,151.65 L 727.28,153.90" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 594.69,127.07 C 632.62,134.74 677.04,143.73 716.13,151.65 L 727.28,153.90"/><g class="edge-label-wrap"><rect x="636.4" y="129.5" width="49.5" height="12" rx="3"/><text class="edge-label" x="661.1" y="138.5">POVZROČIL</text></g></g><g class="edge" data-triplet-idx="2" id="edge-t2"><path d="M 180.25,91.49 C 245.78,78.62 334.85,61.13 402.90,47.77 L 414.06,45.57" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.25,91.49 C 245.78,78.62 334.85,61.13 402.90,47.77 L 414.06,45.57"/><g class="edge-label-wrap"><rect x="278.0" y="57.5" width="38.5" height="12" rx="3"/><text class="edge-label" x="297.2" y="66.5">SKLENIL</text></g></g><g class="edge" data-triplet-idx="3" id="edge-t3"><path d="M 594.69,35.18 C 632.54,38.22 676.85,41.77 715.88,44.91 L 727.28,45.83" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 594.69,35.18 C 632.54,38.22 676.85,41.77 715.88,44.91 L 727.28,45.83"/><g class="edge-label-wrap"><rect x="622.6" y="29.5" width="77.0" height="12" rx="3"/><text class="edge-label" x="661.1" y="38.5">DOLOČIL VIŠINO</text></g></g><g class="edge" data-triplet-idx="4" id="edge-t4"><path d="M 908.20,184.03 C 939.94,188.30 975.86,193.12 1008.50,197.50 L 1019.80,199.03" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 908.20,184.03 C 939.94,188.30 975.86,193.12 1008.50,197.50 L 1019.80,199.03"/><g class="edge-label-wrap"><rect x="941.9" y="180.5" width="44.0" height="12" rx="3"/><text class="edge-label" x="963.9" y="189.5">SPROŽILA</text></g></g><g class="edge" data-triplet-idx="5" id="edge-t5"><path d="M 1200.50,198.99 C 1232.20,194.73 1268.10,189.90 1300.70,185.52 L 1312.10,183.99" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1200.50,198.99 C 1232.20,194.73 1268.10,189.90 1300.70,185.52 L 1312.10,183.99"/><g class="edge-label-wrap"><rect x="1234.1" y="180.5" width="44.0" height="12" rx="3"/><text class="edge-label" x="1256.1" y="189.5">VODIL DO</text></g></g><g class="edge" data-triplet-idx="6" id="edge-t6"><path d="M 907.91,170.94 C 942.86,170.56 983.31,170.19 1020.00,170.01 C 1100.00,169.61 1120.00,169.61 1200.00,170.01 C 1232.80,170.18 1268.60,170.49 1300.90,170.82 L 1312.10,170.94" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 907.91,170.94 C 942.86,170.56 983.31,170.19 1020.00,170.01 C 1100.00,169.61 1120.00,169.61 1200.00,170.01 C 1232.80,170.18 1268.60,170.49 1300.90,170.82 L 1312.10,170.94"/><g class="edge-label-wrap"><rect x="1057.7" y="161.0" width="104.5" height="12" rx="3"/><text class="edge-label" x="1110.0" y="170.0">BOTROVALA SPREJETJU</text></g></g><g class="edge" data-triplet-idx="7" id="edge-t7"><path d="M 180.25,196.78 C 245.91,178.95 335.21,154.70 403.32,136.21 L 414.06,133.30" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.25,196.78 C 245.91,178.95 335.21,154.70 403.32,136.21 L 414.06,133.30"/><g class="edge-label-wrap"><rect x="198.2" y="154.0" width="198.0" height="12" rx="3"/><text class="edge-label" x="297.2" y="163.0">NAJ BI IZZVALO (PO NAVEDBAH OBRAMBE)</text></g></g><g class="edge" data-triplet-idx="8" id="edge-t8"><path d="M 180.39,223.98 C 281.25,226.30 450.08,227.09 594.50,212.76 C 634.65,208.78 678.41,201.42 716.40,194.04 L 727.47,191.86" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.39,223.98 C 281.25,226.30 450.08,227.09 594.50,212.76 C 634.65,208.78 678.41,201.42 716.40,194.04 L 727.47,191.86"/><g class="edge-label-wrap"><rect x="346.6" y="185.5" width="214.5" height="12" rx="3"/><text class="edge-label" x="453.9" y="194.5">NAJ BI POVZROČILO (PO NAVEDBAH OBRAMBE)</text></g></g><g class="edge" data-triplet-idx="9" id="edge-t9"><path d="M 594.69,92.96 C 632.62,86.14 677.04,78.15 716.13,71.12 L 727.28,69.11" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 594.69,92.96 C 632.62,86.14 677.04,78.15 716.13,71.12 L 727.28,69.11"/><g class="edge-label-wrap"><rect x="628.1" y="70.0" width="66.0" height="12" rx="3"/><text class="edge-label" x="661.1" y="79.0">REZULTIRAL V</text></g></g><g class="edge" data-triplet-idx="10" id="edge-t10"><path d="M 180.22,126.09 C 244.98,137.73 334.83,152.33 414.50,159.76 C 516.98,169.32 634.73,171.94 716.23,172.43 L 727.48,172.49" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.22,126.09 C 244.98,137.73 334.83,152.33 414.50,159.76 C 516.98,169.32 634.73,171.94 716.23,172.43 L 727.48,172.49"/><g class="edge-label-wrap"><rect x="431.9" y="129.5" width="44.0" height="12" rx="3"/><text class="edge-label" x="453.9" y="138.5">OBŽALUJE</text></g></g>
+        <g class="node" data-entity-id="samire_siljic" id="node-samire_siljic"><rect x="0.0" y="81.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="113.0">Samire Šiljić</text></g><g class="node central" data-entity-id="napad_na_alesa_sutarja" id="node-napad_na_alesa_sutarja"><rect x="414.5" y="81.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="504.5" y="113.0">Napad na Aleša Šutarja</text></g><g class="node" data-entity-id="smrt_alesa_sutarja" id="node-smrt_alesa_sutarja"><rect x="727.8" y="144.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="817.8" y="176.0">Smrt Aleša Šutarja</text></g><g class="node" data-entity-id="sporazum_o_priznanju_krivde" id="node-sporazum_o_priznanju_krivde"><rect x="414.5" y="0.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="504.5" y="24.0">Sporazum o</text><text class="node-label" x="504.5" y="40.0">priznanju krivde</text></g><g class="node" data-entity-id="sodba_sest_let_in_devet_mesecev" id="node-sodba_sest_let_in_devet_mesecev"><rect x="727.8" y="25.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="817.8" y="49.0">Sodba na 6 let in 9</text><text class="node-label" x="817.8" y="65.0">mesecev zapora</text></g><g class="node" data-entity-id="protest_v_novem_mestu" id="node-protest_v_novem_mestu"><rect x="1020.0" y="183.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1110.0" y="215.0">Protest v Novem mestu</text></g><g class="node" data-entity-id="sutarjev_zakon" id="node-sutarjev_zakon"><rect x="1312.2" y="144.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1402.2" y="176.0">Šutarjev zakon</text></g><g class="node" data-entity-id="agresivno_verbalno_ravnanje" id="node-agresivno_verbalno_ravnanje"><rect x="0.0" y="193.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="217.0">Agresivno verbalno</text><text class="node-label" x="90.0" y="233.0">ravnanje Šutarja</text></g>
+      </svg>
+    </div>
+  </main>
+  <aside class="sidebar"><h2>Entitete (8)</h2><ul class="entity-list" id="entity-list"><li class="entity-item" data-entity-id="samire_siljic"><span>Samire Šiljić </span><span class="count">3</span></li><li class="entity-item central" data-entity-id="napad_na_alesa_sutarja"><span>Napad na Aleša Šutarja <span class="badge">centralna</span></span><span class="count">4</span></li><li class="entity-item" data-entity-id="smrt_alesa_sutarja"><span>Smrt Aleša Šutarja </span><span class="count">5</span></li><li class="entity-item" data-entity-id="sporazum_o_priznanju_krivde"><span>Sporazum o priznanju krivde </span><span class="count">2</span></li><li class="entity-item" data-entity-id="sodba_sest_let_in_devet_mesecev"><span>Sodba na 6 let in 9 mesecev zapora </span><span class="count">2</span></li><li class="entity-item" data-entity-id="protest_v_novem_mestu"><span>Protest v Novem mestu </span><span class="count">2</span></li><li class="entity-item" data-entity-id="sutarjev_zakon"><span>Šutarjev zakon </span><span class="count">2</span></li><li class="entity-item" data-entity-id="agresivno_verbalno_ravnanje"><span>Agresivno verbalno ravnanje Šutarja </span><span class="count">2</span></li></ul><div id="detail" class="empty-state">Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.</div></aside>
+</div>
+
+<script>
+const DATA = {"entities": [{"id": "samire_siljic", "label": "Samire Šiljić", "central": false}, {"id": "napad_na_alesa_sutarja", "label": "Napad na Aleša Šutarja", "central": true}, {"id": "smrt_alesa_sutarja", "label": "Smrt Aleša Šutarja", "central": false}, {"id": "sporazum_o_priznanju_krivde", "label": "Sporazum o priznanju krivde", "central": false}, {"id": "sodba_sest_let_in_devet_mesecev", "label": "Sodba na 6 let in 9 mesecev zapora", "central": false}, {"id": "protest_v_novem_mestu", "label": "Protest v Novem mestu", "central": false}, {"id": "sutarjev_zakon", "label": "Šutarjev zakon", "central": false}, {"id": "agresivno_verbalno_ravnanje", "label": "Agresivno verbalno ravnanje Šutarja", "central": false}], "triplets": [{"subject_id": "samire_siljic", "predicate": "izvedel", "object_id": "napad_na_alesa_sutarja", "evidence": "Šiljiću je tožilstvo očitalo, da je pred klubom LokalPatriot v središču Novega mesta Šutarja... napadel in udaril", "confidence": "high"}, {"subject_id": "napad_na_alesa_sutarja", "predicate": "povzročil", "object_id": "smrt_alesa_sutarja", "evidence": "napadel in udaril, zaradi česar je ta padel in z glavo udaril ob tla. Poškodbe glave so bile tako hude, da je še isti dan umrl.", "confidence": "high"}, {"subject_id": "samire_siljic", "predicate": "sklenil", "object_id": "sporazum_o_priznanju_krivde", "evidence": "Samire Šiljić je na sodišču po sporazumu, ki ga je sklenil s tožilstvom, priznal krivdo.", "confidence": "high"}, {"subject_id": "sporazum_o_priznanju_krivde", "predicate": "določil višino", "object_id": "sodba_sest_let_in_devet_mesecev", "evidence": "V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim.", "confidence": "high"}, {"subject_id": "smrt_alesa_sutarja", "predicate": "sprožila", "object_id": "protest_v_novem_mestu", "evidence": "Šutarjeva smrt je oktobra lani sprožila protest, na katerem je okoli 10.000 ljudi v Novem mestu protestiralo", "confidence": "high"}, {"subject_id": "protest_v_novem_mestu", "predicate": "vodil do", "object_id": "sutarjev_zakon", "evidence": "protestiralo proti nereševanju romskih vprašanj, čemur je nato sledilo sprejetje t. i. Šutarjevega zakona", "confidence": "medium"}, {"subject_id": "smrt_alesa_sutarja", "predicate": "botrovala sprejetju", "object_id": "sutarjev_zakon", "evidence": "Šutarjeva smrt je oktobra lani sprožila protest... čemur je nato sledilo sprejetje t. i. Šutarjevega zakona", "confidence": "high"}, {"subject_id": "agresivno_verbalno_ravnanje", "predicate": "naj bi izzvalo (po navedbah obrambe)", "object_id": "napad_na_alesa_sutarja", "evidence": "vse bi se mirno izšlo, če se ne bi Šutar s svojim določeno agresivnim verbalnim ravnanjem zapletel z bratrancem obdolženca.", "confidence": "medium"}, {"subject_id": "agresivno_verbalno_ravnanje", "predicate": "naj bi povzročilo (po navedbah obrambe)", "object_id": "smrt_alesa_sutarja", "evidence": "tudi ni mogoče mimo tega, da je dogodek izzval Šutar. 'Zabava v lokalu se je takrat zaključevala in vse bi se mirno izšlo, če se ne bi Šutar s svojim določeno agresivnim verbalnim ravnanjem zapletel'", "confidence": "medium"}, {"subject_id": "napad_na_alesa_sutarja", "predicate": "rezultiral v", "object_id": "sodba_sest_let_in_devet_mesecev", "evidence": "Sodišče mu je za napad izreklo šest let in tri mesece zapora... mu izreklo enotno kazen šest let in devet mesecev zapora.", "confidence": "high"}, {"subject_id": "samire_siljic", "predicate": "obžaluje", "object_id": "smrt_alesa_sutarja", "evidence": "Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval", "confidence": "high"}], "ui": {"title": "Vzročna mreža", "hint": "Klikni vozlišče ali povezavo za podrobnosti.", "entities_header": "Entitete", "central_badge": "centralna", "involves_header": "Sodeluje v {n} razmerjih", "select_hint": "Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.", "predicate": "predikat", "subject": "subjekt", "object": "objekt", "evidence": "dokaz", "confidence": "zaupanje", "high": "visoko", "medium": "srednje", "low": "nizko", "back": "Nazaj na vse entitete"}};
+
+const entityById = Object.fromEntries(DATA.entities.map(e => [e.id, e]));
+const tripletsByEntity = {};
+DATA.entities.forEach(e => tripletsByEntity[e.id] = []);
+DATA.triplets.forEach((t, idx) => {
+  if (tripletsByEntity[t.subject_id]) tripletsByEntity[t.subject_id].push({...t, idx, role: 'subject'});
+  if (tripletsByEntity[t.object_id])  tripletsByEntity[t.object_id].push({...t, idx, role: 'object'});
+});
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('selected','dimmed'));
+  document.querySelectorAll('.edge').forEach(e => e.classList.remove('highlight','dimmed'));
+  document.querySelectorAll('.entity-item').forEach(li => li.classList.remove('selected'));
+}
+
+function selectEntity(entityId) {
+  clearHighlights();
+  const sel = entityById[entityId];
+  if (!sel) return;
+
+  // Highlight the node
+  const node = document.getElementById('node-' + entityId);
+  if (node) node.classList.add('selected');
+  // Dim others
+  document.querySelectorAll('.node').forEach(n => {
+    if (n.dataset.entityId !== entityId) n.classList.add('dimmed');
+  });
+
+  // Highlight involved edges
+  const rels = tripletsByEntity[entityId] || [];
+  const involvedEdgeIdxs = new Set(rels.map(r => r.idx));
+  document.querySelectorAll('.edge').forEach(e => {
+    if (involvedEdgeIdxs.has(parseInt(e.dataset.tripletIdx))) e.classList.add('highlight');
+    else e.classList.add('dimmed');
+  });
+  // Un-dim the nodes at the ends of involved edges
+  rels.forEach(r => {
+    const otherId = r.role === 'subject' ? r.object_id : r.subject_id;
+    const otherNode = document.getElementById('node-' + otherId);
+    if (otherNode) otherNode.classList.remove('dimmed');
+  });
+
+  // Sidebar selection
+  document.querySelectorAll('.entity-item').forEach(li => {
+    if (li.dataset.entityId === entityId) li.classList.add('selected');
+  });
+
+  // Render detail panel
+  const detail = document.getElementById('detail');
+  detail.classList.remove('empty-state');
+  detail.classList.add('detail');
+  const centralBadge = sel.central ? ` <span class="badge" style="background:#c2410c;color:white;font-size:10px;padding:1px 6px;border-radius:999px;font-weight:600;text-transform:uppercase;">${DATA.ui.central_badge}</span>` : '';
+  let html = '';
+  html += `<button class="back" onclick="resetSelection()">← ${DATA.ui.back}</button>`;
+  html += `<h3>${escapeHtml(sel.label)}${centralBadge}</h3>`;
+  html += `<p class="meta">${DATA.ui.involves_header.replace('{n}', rels.length)}</p>`;
+  html += '<div class="relations">';
+  rels.forEach(r => {
+    const subjLabel = (entityById[r.subject_id] || {}).label || r.subject_id;
+    const objLabel  = (entityById[r.object_id]  || {}).label || r.object_id;
+    const selfId = entityId;
+    const sCls = r.subject_id === selfId ? ' class="self"' : '';
+    const oCls = r.object_id  === selfId ? ' class="self"' : '';
+    const confKey = (r.confidence || '').toLowerCase();
+    const confLabel = ({high: DATA.ui.high, medium: DATA.ui.medium, low: DATA.ui.low})[confKey] || r.confidence || '';
+    html += '<div class="relation highlight">';
+    html += `<div class="triple"><span${sCls}>${escapeHtml(subjLabel)}</span> <span class="predicate">${escapeHtml(r.predicate || '')}</span> <span${oCls}>${escapeHtml(objLabel)}</span></div>`;
+    if (r.evidence) html += `<div class="ev">„${escapeHtml(r.evidence)}"</div>`;
+    if (confKey)   html += `<span class="confidence ${confKey}">${DATA.ui.confidence}: ${escapeHtml(confLabel)}</span>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  detail.innerHTML = html;
+}
+
+function selectTriplet(idx) {
+  const t = DATA.triplets[idx];
+  if (!t) return;
+  // Select the subject entity but ALSO highlight only this edge
+  selectEntity(t.subject_id);
+  // Re-clear other involving edges and only keep the clicked one highlighted
+  document.querySelectorAll('.edge').forEach(e => {
+    e.classList.remove('highlight');
+    if (parseInt(e.dataset.tripletIdx) === idx) {
+      e.classList.add('highlight');
+      e.classList.remove('dimmed');
+    } else {
+      e.classList.add('dimmed');
+    }
+  });
+}
+
+function resetSelection() {
+  clearHighlights();
+  const detail = document.getElementById('detail');
+  detail.classList.add('empty-state');
+  detail.classList.remove('detail');
+  detail.innerHTML = `<p>${escapeHtml(DATA.ui.select_hint)}</p>`;
+}
+
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', e => {
+    e.stopPropagation();
+    selectEntity(n.dataset.entityId);
+  });
+});
+document.querySelectorAll('.edge').forEach(g => {
+  g.addEventListener('click', e => {
+    e.stopPropagation();
+    selectTriplet(parseInt(g.dataset.tripletIdx));
+  });
+});
+document.querySelectorAll('.entity-item').forEach(li => {
+  li.addEventListener('click', () => selectEntity(li.dataset.entityId));
+});
+document.querySelector('svg').addEventListener('click', () => resetSelection());
+</script>
+
+</body>
+</html>

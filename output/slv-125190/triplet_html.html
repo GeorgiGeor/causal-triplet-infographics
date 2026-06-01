@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<title>Vzročna mreža · slv-125190</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.shell { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+.graph-pane { padding: 24px 12px 24px 24px; }
+header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+header h1 { margin: 0; font-size: 13px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; }
+header .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #94a3b8; }
+.hint { color: #64748b; font-size: 12px; margin: 0 0 12px; }
+
+.svg-wrap { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+svg { display: block; width: 100%; height: auto; }
+
+.node rect { fill: #1e3a5f; stroke: #0f172a; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
+.node.central rect { fill: #c2410c; }
+.node.selected rect { stroke: #fbbf24; stroke-width: 3; }
+.node.dimmed { opacity: 0.25; }
+.node-label { fill: #fff; font-size: 11px; font-weight: 600; text-anchor: middle; alignment-baseline: middle; pointer-events: none; }
+
+.edge path { fill: none; stroke: #94a3b8; stroke-width: 1.4; transition: stroke 0.15s, stroke-width 0.15s; cursor: pointer; }
+.edge.highlight path { stroke: #2563eb; stroke-width: 2.5; }
+.edge.dimmed path { opacity: 0.15; }
+.edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+.edge-label-wrap rect { fill: white; }
+.edge-label { fill: #475569; font-size: 9px; font-weight: 600; text-anchor: middle; letter-spacing: 0.04em; pointer-events: none; }
+.edge.highlight .edge-label { fill: #1d4ed8; }
+
+.sidebar { background: white; border-left: 1px solid #e2e8f0; padding: 24px 20px; overflow: auto; max-height: 100vh; position: sticky; top: 0; }
+.sidebar h2 { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; margin: 0 0 12px; }
+.entity-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 4px; }
+.entity-list li { padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid transparent; transition: background 0.15s; display: flex; justify-content: space-between; gap: 6px; align-items: baseline; }
+.entity-list li:hover { background: #f1f5f9; }
+.entity-list li.selected { background: #eff6ff; border-color: #93c5fd; }
+.entity-list li.central { font-weight: 600; }
+.entity-list .badge { background: #c2410c; color: white; font-size: 10px; padding: 1px 6px; border-radius: 999px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.entity-list .count { color: #94a3b8; font-size: 11px; }
+
+.empty-state { color: #94a3b8; font-size: 12px; line-height: 1.5; }
+.detail .back { background: none; border: none; color: #2563eb; font-size: 12px; cursor: pointer; padding: 0; margin-bottom: 8px; }
+.detail .back:hover { text-decoration: underline; }
+.detail h3 { margin: 0 0 4px; font-size: 16px; }
+.detail .meta { color: #64748b; font-size: 12px; margin: 0 0 16px; }
+
+.relations { display: flex; flex-direction: column; gap: 10px; }
+.relation { padding: 10px 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #cbd5e1; font-size: 12px; }
+.relation.highlight { border-left-color: #2563eb; background: #eff6ff; }
+.relation .triple { font-size: 13px; }
+.relation .triple .predicate { color: #1d4ed8; font-weight: 600; padding: 0 4px; }
+.relation .triple .self { font-weight: 600; color: #0f172a; }
+.relation .ev { color: #475569; margin-top: 4px; font-style: italic; line-height: 1.4; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <main class="graph-pane">
+    <header>
+      <h1>Vzročna mreža</h1>
+      <span class="code">slv-125190</span>
+    </header>
+    <p class="hint">Klikni vozlišče ali povezavo za podrobnosti.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 893.5 442.7" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 9 3, 0 6" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <g class="edge" data-triplet-idx="0" id="edge-t0"><path d="M 528.05,104.99 C 572.28,104.88 626.21,107.57 673.50,118.01 C 694.60,122.67 716.62,130.62 736.37,139.00 L 746.78,143.55" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 528.05,104.99 C 572.28,104.88 626.21,107.57 673.50,118.01 C 694.60,122.67 716.62,130.62 736.37,139.00 L 746.78,143.55"/><g class="edge-label-wrap"><rect x="598.6" y="129.5" width="44.0" height="12" rx="3"/><text class="edge-label" x="620.6" y="138.5">SPROŽILO</text></g></g><g class="edge" data-triplet-idx="1" id="edge-t1"><path d="M 180.39,172.01 C 313.35,172.01 562.45,172.01 701.71,172.01 L 713.19,172.01" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.39,172.01 C 313.35,172.01 562.45,172.01 701.71,172.01 L 713.19,172.01"/><g class="edge-label-wrap"><rect x="391.8" y="161.0" width="110.0" height="12" rx="3"/><text class="edge-label" x="446.8" y="170.0">OMEJUJE FINANCIRANJE</text></g></g><g class="edge" data-triplet-idx="2" id="edge-t2"><path d="M 159.31,143.56 C 216.49,119.75 298.12,85.75 358.04,60.80 L 368.58,56.40" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 159.31,143.56 C 216.49,119.75 298.12,85.75 358.04,60.80 L 368.58,56.40"/><g class="edge-label-wrap"><rect x="230.9" y="89.0" width="66.0" height="12" rx="3"/><text class="edge-label" x="263.9" y="98.0">UTEMELJUJE Z</text></g></g><g class="edge" data-triplet-idx="3" id="edge-t3"><path d="M 528.15,44.82 C 572.90,54.92 627.25,69.79 673.50,90.01 C 702.14,102.53 731.73,120.89 755.33,137.06 L 764.73,143.60" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 528.15,44.82 C 572.90,54.92 627.25,69.79 673.50,90.01 C 702.14,102.53 731.73,120.89 755.33,137.06 L 764.73,143.60"/><g class="edge-label-wrap"><rect x="560.1" y="89.0" width="121.0" height="12" rx="3"/><text class="edge-label" x="620.6" y="98.0">POVZROČAJO POMANJKANJE</text></g></g><g class="edge" data-triplet-idx="4" id="edge-t4"><path d="M 180.49,192.20 C 228.20,202.96 287.06,216.24 336.33,227.36 L 347.34,229.84" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.49,192.20 C 228.20,202.96 287.06,216.24 336.33,227.36 L 347.34,229.84"/><g class="edge-label-wrap"><rect x="219.9" y="200.0" width="88.0" height="12" rx="3"/><text class="edge-label" x="263.9" y="209.0">NAJ BI POVZROČIL</text></g></g><g class="edge" data-triplet-idx="5" id="edge-t5"><path d="M 527.98,231.56 C 571.84,222.43 625.47,211.15 673.50,200.76 C 682.69,198.77 692.24,196.69 701.80,194.58 L 713.01,192.11" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 527.98,231.56 C 571.84,222.43 625.47,211.15 673.50,200.76 C 682.69,198.77 692.24,196.69 701.80,194.58 L 713.01,192.11"/><g class="edge-label-wrap"><rect x="604.1" y="200.0" width="33.0" height="12" rx="3"/><text class="edge-label" x="620.6" y="209.0">OGROŽA</text></g></g><g class="edge" data-triplet-idx="6" id="edge-t6"><path d="M 180.49,275.21 C 228.10,270.53 286.81,264.76 336.02,259.92 L 347.34,258.80" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.49,275.21 C 228.10,270.53 286.81,264.76 336.02,259.92 L 347.34,258.80"/><g class="edge-label-wrap"><rect x="233.6" y="256.0" width="60.5" height="12" rx="3"/><text class="edge-label" x="263.9" y="265.0">OPOZARJA NA</text></g></g><g class="edge" data-triplet-idx="7" id="edge-t7"><path d="M 180.49,296.18 C 228.10,302.65 286.81,310.63 336.02,317.32 L 347.34,318.86" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.49,296.18 C 228.10,302.65 286.81,310.63 336.02,317.32 L 347.34,318.86"/><g class="edge-label-wrap"><rect x="208.9" y="296.5" width="110.0" height="12" rx="3"/><text class="edge-label" x="263.9" y="305.5">PREDLAGA RAZPRAVO NA</text></g></g><g class="edge" data-triplet-idx="8" id="edge-t8"><path d="M 517.04,302.56 C 563.08,285.25 622.16,262.06 673.50,238.76 C 695.70,228.69 719.53,216.70 740.59,205.69 L 750.69,200.37" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 517.04,302.56 C 563.08,285.25 622.16,262.06 673.50,238.76 C 695.70,228.69 719.53,216.70 740.59,205.69 L 750.69,200.37"/><g class="edge-label-wrap"><rect x="584.9" y="240.5" width="71.5" height="12" rx="3"/><text class="edge-label" x="620.6" y="249.5">BO OBRAVNAVAL</text></g></g><g class="edge" data-triplet-idx="9" id="edge-t9"><path d="M 180.47,385.51 C 270.23,401.32 411.46,415.93 527.75,381.76 C 631.16,351.38 724.71,260.38 771.33,208.78 L 778.94,200.24" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.47,385.51 C 270.23,401.32 411.46,415.93 527.75,381.76 C 631.16,351.38 724.71,260.38 771.33,208.78 L 778.94,200.24"/><g class="edge-label-wrap"><rect x="424.8" y="258.0" width="44.0" height="12" rx="3"/><text class="edge-label" x="446.8" y="267.0">OSTAJA V</text></g></g><g class="edge" data-triplet-idx="10" id="edge-t10"><path d="M 180.46,362.62 C 221.09,358.14 268.68,348.60 307.75,328.76 C 329.82,317.56 327.27,303.91 347.75,290.01 C 350.76,287.97 353.90,285.98 357.12,284.07 L 366.96,278.51" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.46,362.62 C 221.09,358.14 268.68,348.60 307.75,328.76 C 329.82,317.56 327.27,303.91 347.75,290.01 C 350.76,287.97 353.90,285.98 357.12,284.07 L 366.96,278.51"/><g class="edge-label-wrap"><rect x="222.6" y="297.0" width="82.5" height="12" rx="3"/><text class="edge-label" x="263.9" y="306.0">NI PRISPEVALA V</text></g></g><g class="edge" data-triplet-idx="11" id="edge-t11"><path d="M 528.20,124.50 C 580.84,133.62 647.56,145.18 702.01,154.61 L 713.08,156.53" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 528.20,124.50 C 580.84,133.62 647.56,145.18 702.01,154.61 L 713.08,156.53"/><g class="edge-label-wrap"><rect x="560.1" y="129.5" width="121.0" height="12" rx="3"/><text class="edge-label" x="620.6" y="138.5">ONEMOGOČA NADOMESTITEV</text></g></g>
+        <g class="node central" data-entity-id="ceska_pobuda_za_strelivo" id="node-ceska_pobuda_za_strelivo"><rect x="713.5" y="144.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="803.5" y="168.0">Češka pobuda za preskrbo Ukrajine</text><text class="node-label" x="803.5" y="184.0">z artilerijskim strelivom</text></g><g class="node" data-entity-id="andrej_babis" id="node-andrej_babis"><rect x="0.0" y="144.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="176.0">Andrej Babiš</text></g><g class="node" data-entity-id="pomanjkanje_proizvodnih_zmogljivosti_eu" id="node-pomanjkanje_proizvodnih_zmogljivosti_eu"><rect x="347.8" y="81.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="437.8" y="105.0">Pomanjkanje proizvodnih</text><text class="node-label" x="437.8" y="121.0">zmogljivosti v EU</text></g><g class="node" data-entity-id="izstop_devetih_drzav" id="node-izstop_devetih_drzav"><rect x="347.8" y="222.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="437.8" y="246.0">Izstop devetih držav</text><text class="node-label" x="437.8" y="262.0">iz pobude</text></g><g class="node" data-entity-id="visoki_stroski_energentov" id="node-visoki_stroski_energentov"><rect x="347.8" y="0.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="437.8" y="24.0">Visoki stroški</text><text class="node-label" x="437.8" y="40.0">energentov</text></g><g class="node" data-entity-id="petr_pavel" id="node-petr_pavel"><rect x="0.0" y="256.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="288.0">Petr Pavel</text></g><g class="node" data-entity-id="slovenija" id="node-slovenija"><rect x="0.0" y="338.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="370.0">Slovenija</text></g><g class="node" data-entity-id="vrh_nato_v_ankari" id="node-vrh_nato_v_ankari"><rect x="347.8" y="303.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="437.8" y="327.0">Vrh zveze Nato v</text><text class="node-label" x="437.8" y="343.0">Ankari</text></g>
+      </svg>
+    </div>
+  </main>
+  <aside class="sidebar"><h2>Entitete (8)</h2><ul class="entity-list" id="entity-list"><li class="entity-item central" data-entity-id="ceska_pobuda_za_strelivo"><span>Češka pobuda za preskrbo Ukrajine z artilerijskim strelivom <span class="badge">centralna</span></span><span class="count">7</span></li><li class="entity-item" data-entity-id="andrej_babis"><span>Andrej Babiš </span><span class="count">3</span></li><li class="entity-item" data-entity-id="pomanjkanje_proizvodnih_zmogljivosti_eu"><span>Pomanjkanje proizvodnih zmogljivosti v EU </span><span class="count">2</span></li><li class="entity-item" data-entity-id="izstop_devetih_drzav"><span>Izstop devetih držav iz pobude </span><span class="count">4</span></li><li class="entity-item" data-entity-id="visoki_stroski_energentov"><span>Visoki stroški energentov </span><span class="count">2</span></li><li class="entity-item" data-entity-id="petr_pavel"><span>Petr Pavel </span><span class="count">2</span></li><li class="entity-item" data-entity-id="slovenija"><span>Slovenija </span><span class="count">2</span></li><li class="entity-item" data-entity-id="vrh_nato_v_ankari"><span>Vrh zveze Nato v Ankari </span><span class="count">2</span></li></ul><div id="detail" class="empty-state">Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.</div></aside>
+</div>
+
+<script>
+const DATA = {"entities": [{"id": "ceska_pobuda_za_strelivo", "label": "Češka pobuda za preskrbo Ukrajine z artilerijskim strelivom", "central": true}, {"id": "andrej_babis", "label": "Andrej Babiš", "central": false}, {"id": "pomanjkanje_proizvodnih_zmogljivosti_eu", "label": "Pomanjkanje proizvodnih zmogljivosti v EU", "central": false}, {"id": "izstop_devetih_drzav", "label": "Izstop devetih držav iz pobude", "central": false}, {"id": "visoki_stroski_energentov", "label": "Visoki stroški energentov", "central": false}, {"id": "petr_pavel", "label": "Petr Pavel", "central": false}, {"id": "slovenija", "label": "Slovenija", "central": false}, {"id": "vrh_nato_v_ankari", "label": "Vrh zveze Nato v Ankari", "central": false}], "triplets": [{"subject_id": "pomanjkanje_proizvodnih_zmogljivosti_eu", "predicate": "sprožilo", "object_id": "ceska_pobuda_za_strelivo", "evidence": "Češka je nakup topniških izstrelkov za Ukrajino v tretjih državah predlagala v začetku leta 2024 kot odgovor na pomanjkanje proizvodnih zmogljivosti v EU-ju.", "confidence": "high"}, {"subject_id": "andrej_babis", "predicate": "omejuje financiranje", "object_id": "ceska_pobuda_za_strelivo", "evidence": "odkar se je premier Andrej Babiš decembra lani vrnil na položaj z obljubo, da Češka v pobudo ne bo več vlagala lastnega denarja", "confidence": "high"}, {"subject_id": "andrej_babis", "predicate": "utemeljuje z", "object_id": "visoki_stroski_energentov", "evidence": "Češki premier je za Financial Times povedal, da njegova vlada omejena javna sredstva namenja prednostno češkim državljanom, saj se gospodinjstva zaradi konflikta na Bližnjem vzhodu soočajo z visokimi stroški energentov.", "confidence": "high"}, {"subject_id": "visoki_stroski_energentov", "predicate": "povzročajo pomanjkanje", "object_id": "ceska_pobuda_za_strelivo", "evidence": "Denarja nimamo, zato prejemamo sredstva od drugih držav in nato dostavljamo (strelivo)", "confidence": "medium"}, {"subject_id": "andrej_babis", "predicate": "naj bi povzročil", "object_id": "izstop_devetih_drzav", "evidence": "Število držav, ki sodeluje v češki pobudi za preskrbo Ukrajine z artilerijskim strelivom, se je prepolovilo z 18 na devet, odkar se je premier Andrej Babiš decembra lani vrnil na položaj", "confidence": "medium"}, {"subject_id": "izstop_devetih_drzav", "predicate": "ogroža", "object_id": "ceska_pobuda_za_strelivo", "evidence": "Pobuda še vedno deluje, vendar je nova težava v tem, da finančno prispeva le okoli devet držav članic.", "confidence": "high"}, {"subject_id": "petr_pavel", "predicate": "opozarja na", "object_id": "izstop_devetih_drzav", "evidence": "Pavel sicer ni razkril, katere države so nedavno izstopile iz pobude.", "confidence": "high"}, {"subject_id": "petr_pavel", "predicate": "predlaga razpravo na", "object_id": "vrh_nato_v_ankari", "evidence": "Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.", "confidence": "high"}, {"subject_id": "vrh_nato_v_ankari", "predicate": "bo obravnaval", "object_id": "ceska_pobuda_za_strelivo", "evidence": "Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.", "confidence": "high"}, {"subject_id": "slovenija", "predicate": "ostaja v", "object_id": "ceska_pobuda_za_strelivo", "evidence": "Na ministrstvu za obrambo so danes za STA pojasnili, da Slovenija sicer letos Ukrajini v okviru češke pobude ni prispevala finančnih sredstev, a da to ne pomeni, da je iz nje izstopila.", "confidence": "high"}, {"subject_id": "slovenija", "predicate": "ni prispevala v", "object_id": "izstop_devetih_drzav", "evidence": "Slovenija sicer letos Ukrajini v okviru češke pobude ni prispevala finančnih sredstev, a da to ne pomeni, da je iz nje izstopila.", "confidence": "medium"}, {"subject_id": "pomanjkanje_proizvodnih_zmogljivosti_eu", "predicate": "onemogoča nadomestitev", "object_id": "ceska_pobuda_za_strelivo", "evidence": "Ta pobuda je Ukrajincem zagotavljala do 50 odstotkov vsega streliva velikega kalibra, zato je ni mogoče zlahka nadomestiti", "confidence": "medium"}], "ui": {"title": "Vzročna mreža", "hint": "Klikni vozlišče ali povezavo za podrobnosti.", "entities_header": "Entitete", "central_badge": "centralna", "involves_header": "Sodeluje v {n} razmerjih", "select_hint": "Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.", "predicate": "predikat", "subject": "subjekt", "object": "objekt", "evidence": "dokaz", "confidence": "zaupanje", "high": "visoko", "medium": "srednje", "low": "nizko", "back": "Nazaj na vse entitete"}};
+
+const entityById = Object.fromEntries(DATA.entities.map(e => [e.id, e]));
+const tripletsByEntity = {};
+DATA.entities.forEach(e => tripletsByEntity[e.id] = []);
+DATA.triplets.forEach((t, idx) => {
+  if (tripletsByEntity[t.subject_id]) tripletsByEntity[t.subject_id].push({...t, idx, role: 'subject'});
+  if (tripletsByEntity[t.object_id])  tripletsByEntity[t.object_id].push({...t, idx, role: 'object'});
+});
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('selected','dimmed'));
+  document.querySelectorAll('.edge').forEach(e => e.classList.remove('highlight','dimmed'));
+  document.querySelectorAll('.entity-item').forEach(li => li.classList.remove('selected'));
+}
+
+function selectEntity(entityId) {
+  clearHighlights();
+  const sel = entityById[entityId];
+  if (!sel) return;
+
+  // Highlight the node
+  const node = document.getElementById('node-' + entityId);
+  if (node) node.classList.add('selected');
+  // Dim others
+  document.querySelectorAll('.node').forEach(n => {
+    if (n.dataset.entityId !== entityId) n.classList.add('dimmed');
+  });
+
+  // Highlight involved edges
+  const rels = tripletsByEntity[entityId] || [];
+  const involvedEdgeIdxs = new Set(rels.map(r => r.idx));
+  document.querySelectorAll('.edge').forEach(e => {
+    if (involvedEdgeIdxs.has(parseInt(e.dataset.tripletIdx))) e.classList.add('highlight');
+    else e.classList.add('dimmed');
+  });
+  // Un-dim the nodes at the ends of involved edges
+  rels.forEach(r => {
+    const otherId = r.role === 'subject' ? r.object_id : r.subject_id;
+    const otherNode = document.getElementById('node-' + otherId);
+    if (otherNode) otherNode.classList.remove('dimmed');
+  });
+
+  // Sidebar selection
+  document.querySelectorAll('.entity-item').forEach(li => {
+    if (li.dataset.entityId === entityId) li.classList.add('selected');
+  });
+
+  // Render detail panel
+  const detail = document.getElementById('detail');
+  detail.classList.remove('empty-state');
+  detail.classList.add('detail');
+  const centralBadge = sel.central ? ` <span class="badge" style="background:#c2410c;color:white;font-size:10px;padding:1px 6px;border-radius:999px;font-weight:600;text-transform:uppercase;">${DATA.ui.central_badge}</span>` : '';
+  let html = '';
+  html += `<button class="back" onclick="resetSelection()">← ${DATA.ui.back}</button>`;
+  html += `<h3>${escapeHtml(sel.label)}${centralBadge}</h3>`;
+  html += `<p class="meta">${DATA.ui.involves_header.replace('{n}', rels.length)}</p>`;
+  html += '<div class="relations">';
+  rels.forEach(r => {
+    const subjLabel = (entityById[r.subject_id] || {}).label || r.subject_id;
+    const objLabel  = (entityById[r.object_id]  || {}).label || r.object_id;
+    const selfId = entityId;
+    const sCls = r.subject_id === selfId ? ' class="self"' : '';
+    const oCls = r.object_id  === selfId ? ' class="self"' : '';
+    const confKey = (r.confidence || '').toLowerCase();
+    const confLabel = ({high: DATA.ui.high, medium: DATA.ui.medium, low: DATA.ui.low})[confKey] || r.confidence || '';
+    html += '<div class="relation highlight">';
+    html += `<div class="triple"><span${sCls}>${escapeHtml(subjLabel)}</span> <span class="predicate">${escapeHtml(r.predicate || '')}</span> <span${oCls}>${escapeHtml(objLabel)}</span></div>`;
+    if (r.evidence) html += `<div class="ev">„${escapeHtml(r.evidence)}"</div>`;
+    if (confKey)   html += `<span class="confidence ${confKey}">${DATA.ui.confidence}: ${escapeHtml(confLabel)}</span>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  detail.innerHTML = html;
+}
+
+function selectTriplet(idx) {
+  const t = DATA.triplets[idx];
+  if (!t) return;
+  // Select the subject entity but ALSO highlight only this edge
+  selectEntity(t.subject_id);
+  // Re-clear other involving edges and only keep the clicked one highlighted
+  document.querySelectorAll('.edge').forEach(e => {
+    e.classList.remove('highlight');
+    if (parseInt(e.dataset.tripletIdx) === idx) {
+      e.classList.add('highlight');
+      e.classList.remove('dimmed');
+    } else {
+      e.classList.add('dimmed');
+    }
+  });
+}
+
+function resetSelection() {
+  clearHighlights();
+  const detail = document.getElementById('detail');
+  detail.classList.add('empty-state');
+  detail.classList.remove('detail');
+  detail.innerHTML = `<p>${escapeHtml(DATA.ui.select_hint)}</p>`;
+}
+
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', e => {
+    e.stopPropagation();
+    selectEntity(n.dataset.entityId);
+  });
+});
+document.querySelectorAll('.edge').forEach(g => {
+  g.addEventListener('click', e => {
+    e.stopPropagation();
+    selectTriplet(parseInt(g.dataset.tripletIdx));
+  });
+});
+document.querySelectorAll('.entity-item').forEach(li => {
+  li.addEventListener('click', () => selectEntity(li.dataset.entityId));
+});
+document.querySelector('svg').addEventListener('click', () => resetSelection());
+</script>
+
+</body>
+</html>

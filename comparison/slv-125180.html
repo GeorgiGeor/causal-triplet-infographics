@@ -977,10 +977,12 @@ ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca apr
     if (e.triplet_image){ restorePerEdge(e.triplet_image.per_edge); restoreAdditions(e.triplet_image.additions); }
   }
   function freeze(){
-    // Read-only: lock every control and drop edit affordances.
+    // Read-only: lock the scoring INPUTS only. Buttons are left alone — the
+    // editable ones (export/import, +add, remove) are hidden via CSS, while
+    // viewing-aid buttons (close focus, close source, search) must keep working.
     document.body.classList.add("frozen");
     document.querySelectorAll("#score-card, .triplets-table, .focus-overlay, .ftl-additions")
-      .forEach(scope => scope.querySelectorAll("input, select, textarea, button")
+      .forEach(scope => scope.querySelectorAll("input, select, textarea")
         .forEach(el => { el.disabled = true; el.setAttribute("tabindex", "-1"); }));
   }
   window.exportScores = function(){

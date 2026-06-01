@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<title>Vzročna mreža · slv-125182</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.shell { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+.graph-pane { padding: 24px 12px 24px 24px; }
+header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+header h1 { margin: 0; font-size: 13px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; }
+header .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #94a3b8; }
+.hint { color: #64748b; font-size: 12px; margin: 0 0 12px; }
+
+.svg-wrap { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+svg { display: block; width: 100%; height: auto; }
+
+.node rect { fill: #1e3a5f; stroke: #0f172a; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
+.node.central rect { fill: #c2410c; }
+.node.selected rect { stroke: #fbbf24; stroke-width: 3; }
+.node.dimmed { opacity: 0.25; }
+.node-label { fill: #fff; font-size: 11px; font-weight: 600; text-anchor: middle; alignment-baseline: middle; pointer-events: none; }
+
+.edge path { fill: none; stroke: #94a3b8; stroke-width: 1.4; transition: stroke 0.15s, stroke-width 0.15s; cursor: pointer; }
+.edge.highlight path { stroke: #2563eb; stroke-width: 2.5; }
+.edge.dimmed path { opacity: 0.15; }
+.edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+.edge-label-wrap rect { fill: white; }
+.edge-label { fill: #475569; font-size: 9px; font-weight: 600; text-anchor: middle; letter-spacing: 0.04em; pointer-events: none; }
+.edge.highlight .edge-label { fill: #1d4ed8; }
+
+.sidebar { background: white; border-left: 1px solid #e2e8f0; padding: 24px 20px; overflow: auto; max-height: 100vh; position: sticky; top: 0; }
+.sidebar h2 { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; margin: 0 0 12px; }
+.entity-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 4px; }
+.entity-list li { padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid transparent; transition: background 0.15s; display: flex; justify-content: space-between; gap: 6px; align-items: baseline; }
+.entity-list li:hover { background: #f1f5f9; }
+.entity-list li.selected { background: #eff6ff; border-color: #93c5fd; }
+.entity-list li.central { font-weight: 600; }
+.entity-list .badge { background: #c2410c; color: white; font-size: 10px; padding: 1px 6px; border-radius: 999px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.entity-list .count { color: #94a3b8; font-size: 11px; }
+
+.empty-state { color: #94a3b8; font-size: 12px; line-height: 1.5; }
+.detail .back { background: none; border: none; color: #2563eb; font-size: 12px; cursor: pointer; padding: 0; margin-bottom: 8px; }
+.detail .back:hover { text-decoration: underline; }
+.detail h3 { margin: 0 0 4px; font-size: 16px; }
+.detail .meta { color: #64748b; font-size: 12px; margin: 0 0 16px; }
+
+.relations { display: flex; flex-direction: column; gap: 10px; }
+.relation { padding: 10px 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #cbd5e1; font-size: 12px; }
+.relation.highlight { border-left-color: #2563eb; background: #eff6ff; }
+.relation .triple { font-size: 13px; }
+.relation .triple .predicate { color: #1d4ed8; font-weight: 600; padding: 0 4px; }
+.relation .triple .self { font-weight: 600; color: #0f172a; }
+.relation .ev { color: #475569; margin-top: 4px; font-style: italic; line-height: 1.4; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <main class="graph-pane">
+    <header>
+      <h1>Vzročna mreža</h1>
+      <span class="code">slv-125182</span>
+    </header>
+    <p class="hint">Klikni vozlišče ali povezavo za podrobnosti.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 1723.2 400.0" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 9 3, 0 6" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <g class="edge" data-triplet-idx="0" id="edge-t0"><path d="M 180.19,22.25 C 255.35,16.57 365.75,9.75 462.25,9.75 C 462.25,9.75 462.25,9.75 1273.00,9.75 C 1366.00,9.75 1469.40,35.60 1541.20,57.92 L 1552.10,61.32" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.19,22.25 C 255.35,16.57 365.75,9.75 462.25,9.75 C 462.25,9.75 462.25,9.75 1273.00,9.75 C 1366.00,9.75 1469.40,35.60 1541.20,57.92 L 1552.10,61.32"/><g class="edge-label-wrap"><rect x="842.4" y="48.8" width="38.5" height="12" rx="3"/><text class="edge-label" x="861.6" y="57.8">VLOŽILI</text></g></g><g class="edge" data-triplet-idx="1" id="edge-t1"><path d="M 1561.80,118.23 C 1508.00,138.75 1431.50,165.27 1362.00,179.75 C 1160.60,221.74 918.53,221.33 785.04,216.83 L 773.65,216.43" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1561.80,118.23 C 1508.00,138.75 1431.50,165.27 1362.00,179.75 C 1160.60,221.74 918.53,221.33 785.04,216.83 L 773.65,216.43"/><g class="edge-label-wrap"><rect x="1136.2" y="139.8" width="44.0" height="12" rx="3"/><text class="edge-label" x="1158.2" y="148.8">CILJA NA</text></g></g><g class="edge" data-triplet-idx="2" id="edge-t2"><path d="M 180.40,106.12 C 235.11,100.23 305.24,92.67 361.85,86.57 L 372.99,85.37" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.40,106.12 C 235.11,100.23 305.24,92.67 361.85,86.57 L 372.99,85.37"/><g class="edge-label-wrap"><rect x="257.4" y="84.8" width="38.5" height="12" rx="3"/><text class="edge-label" x="276.6" y="93.8">POTRDIL</text></g></g><g class="edge" data-triplet-idx="3" id="edge-t3"><path d="M 553.48,76.82 C 767.08,79.38 1306.70,85.85 1531.50,88.54 L 1542.90,88.68" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 553.48,76.82 C 767.08,79.38 1306.70,85.85 1531.50,88.54 L 1542.90,88.68"/><g class="edge-label-wrap"><rect x="1023.5" y="71.8" width="49.5" height="12" rx="3"/><text class="edge-label" x="1048.2" y="80.8">ONEMOGOČA</text></g></g><g class="edge" data-triplet-idx="4" id="edge-t4"><path d="M 1362.30,126.58 C 1413.70,119.56 1478.40,110.73 1531.70,103.47 L 1542.80,101.95" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1362.30,126.58 C 1413.70,119.56 1478.40,110.73 1531.70,103.47 L 1542.80,101.95"/><g class="edge-label-wrap"><rect x="1389.3" y="103.2" width="126.5" height="12" rx="3"/><text class="edge-label" x="1452.6" y="112.2">ONEMOGOČAJO (PO USTAVI)</text></g></g><g class="edge" data-triplet-idx="5" id="edge-t5"><path d="M 773.75,207.89 C 835.58,204.59 919.62,198.85 993.25,189.50 C 1052.40,181.99 1118.00,170.17 1170.60,159.82 L 1181.60,157.64" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 773.75,207.89 C 835.58,204.59 919.62,198.85 993.25,189.50 C 1052.40,181.99 1118.00,170.17 1170.60,159.82 L 1181.60,157.64"/><g class="edge-label-wrap"><rect x="958.4" y="164.3" width="38.5" height="12" rx="3"/><text class="edge-label" x="977.6" y="173.3">VSEBUJE</text></g></g><g class="edge" data-triplet-idx="6" id="edge-t6"><path d="M 993.50,138.75 C 1047.00,138.75 1115.10,138.75 1170.40,138.75 L 1181.70,138.75" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 993.50,138.75 C 1047.00,138.75 1115.10,138.75 1170.40,138.75 L 1181.70,138.75"/><g class="edge-label-wrap"><rect x="1021.6" y="127.8" width="132.0" height="12" rx="3"/><text class="edge-label" x="1087.6" y="136.8">PREPOVEDUJE REFERENDUM O</text></g></g><g class="edge" data-triplet-idx="7" id="edge-t7"><path d="M 553.61,94.52 C 566.87,97.03 580.40,99.45 593.25,101.50 C 662.57,112.58 741.11,122.01 801.66,128.61 L 812.75,129.81" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 553.61,94.52 C 566.87,97.03 580.40,99.45 593.25,101.50 C 662.57,112.58 741.11,122.01 801.66,128.61 L 812.75,129.81"/><g class="edge-label-wrap"><rect x="603.5" y="96.2" width="159.5" height="12" rx="3"/><text class="edge-label" x="683.2" y="105.2">NAJ BI KRŠIL (PO NAVEDBAH SD)</text></g></g><g class="edge" data-triplet-idx="8" id="edge-t8"><path d="M 180.37,210.16 C 227.47,208.48 285.27,201.64 333.25,181.50 C 370.28,165.96 405.03,136.24 429.12,112.25 L 437.18,104.03" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.37,210.16 C 227.47,208.48 285.27,201.64 333.25,181.50 C 370.28,165.96 405.03,136.24 429.12,112.25 L 437.18,104.03"/><g class="edge-label-wrap"><rect x="249.1" y="130.8" width="55.0" height="12" rx="3"/><text class="edge-label" x="276.6" y="139.8">NASPROTUJE</text></g></g><g class="edge" data-triplet-idx="9" id="edge-t9"><path d="M 180.42,218.53 C 193.67,219.76 207.18,220.82 220.00,221.50 C 344.46,228.12 488.00,223.12 581.68,218.16 L 593.14,217.54" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.42,218.53 C 193.67,219.76 207.18,220.82 220.00,221.50 C 344.46,228.12 488.00,223.12 581.68,218.16 L 593.14,217.54"/><g class="edge-label-wrap"><rect x="361.9" y="198.8" width="49.5" height="12" rx="3"/><text class="edge-label" x="386.6" y="207.8">KRITIZIRA</text></g></g><g class="edge" data-triplet-idx="10" id="edge-t10"><path d="M 180.40,40.83 C 235.11,47.61 305.24,56.30 361.85,63.31 L 372.99,64.69" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.40,40.83 C 235.11,47.61 305.24,56.30 361.85,63.31 L 372.99,64.69"/><g class="edge-label-wrap"><rect x="205.1" y="41.8" width="143.0" height="12" rx="3"/><text class="edge-label" x="276.6" y="50.8">NAPOVEDALI USTAVNO PRESOJO</text></g></g><g class="edge" data-triplet-idx="11" id="edge-t11"><path d="M 180.48,130.28 C 288.31,147.79 469.01,177.13 581.60,195.41 L 592.96,197.25" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.48,130.28 C 288.31,147.79 469.01,177.13 581.60,195.41 L 592.96,197.25"/><g class="edge-label-wrap"><rect x="350.9" y="152.8" width="71.5" height="12" rx="3"/><text class="edge-label" x="386.6" y="161.8">RAZPRAVLJAL O</text></g></g>
+        <g class="node central" data-entity-id="interventni_zakon" id="node-interventni_zakon"><rect x="593.2" y="183.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="683.2" y="207.8">Zakon o interventnih ukrepih</text><text class="node-label" x="683.2" y="223.8">za razvoj Slovenije</text></g><g class="node" data-entity-id="drzavni_zbor" id="node-drzavni_zbor"><rect x="0.0" y="87.7" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="119.7">Državni zbor</text></g><g class="node" data-entity-id="sindikati" id="node-sindikati"><rect x="0.0" y="1.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="33.8">Sindikati</text></g><g class="node" data-entity-id="pobuda_za_referendum" id="node-pobuda_za_referendum"><rect x="1543.2" y="61.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1633.2" y="85.8">Pobuda za razpis naknadnega</text><text class="node-label" x="1633.2" y="101.8">zakonodajnega referenduma</text></g><g class="node" data-entity-id="ustava_rs" id="node-ustava_rs"><rect x="813.2" y="110.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="903.2" y="134.8">Ustava Republike</text><text class="node-label" x="903.2" y="150.8">Slovenije</text></g><g class="node" data-entity-id="sklep_o_nedopustnosti" id="node-sklep_o_nedopustnosti"><rect x="373.2" y="47.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="463.2" y="71.8">Sklep o nedopustnosti</text><text class="node-label" x="463.2" y="87.8">referenduma</text></g><g class="node" data-entity-id="davcne_dolocbe" id="node-davcne_dolocbe"><rect x="1182.0" y="110.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1272.0" y="134.8">Davčne določbe v</text><text class="node-label" x="1272.0" y="150.8">zakonu</text></g><g class="node" data-entity-id="opozicija" id="node-opozicija"><rect x="0.0" y="179.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="203.8">Opozicijske stranke (SD,</text><text class="node-label" x="90.0" y="219.8">Levica, Vesna, Svoboda)</text></g>
+      </svg>
+    </div>
+  </main>
+  <aside class="sidebar"><h2>Entitete (8)</h2><ul class="entity-list" id="entity-list"><li class="entity-item central" data-entity-id="interventni_zakon"><span>Zakon o interventnih ukrepih za razvoj Slovenije <span class="badge">centralna</span></span><span class="count">4</span></li><li class="entity-item" data-entity-id="drzavni_zbor"><span>Državni zbor </span><span class="count">2</span></li><li class="entity-item" data-entity-id="sindikati"><span>Sindikati </span><span class="count">2</span></li><li class="entity-item" data-entity-id="pobuda_za_referendum"><span>Pobuda za razpis naknadnega zakonodajnega referenduma </span><span class="count">4</span></li><li class="entity-item" data-entity-id="ustava_rs"><span>Ustava Republike Slovenije </span><span class="count">2</span></li><li class="entity-item" data-entity-id="sklep_o_nedopustnosti"><span>Sklep o nedopustnosti referenduma </span><span class="count">5</span></li><li class="entity-item" data-entity-id="davcne_dolocbe"><span>Davčne določbe v zakonu </span><span class="count">3</span></li><li class="entity-item" data-entity-id="opozicija"><span>Opozicijske stranke (SD, Levica, Vesna, Svoboda) </span><span class="count">2</span></li></ul><div id="detail" class="empty-state">Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.</div></aside>
+</div>
+
+<script>
+const DATA = {"entities": [{"id": "interventni_zakon", "label": "Zakon o interventnih ukrepih za razvoj Slovenije", "central": true}, {"id": "drzavni_zbor", "label": "Državni zbor", "central": false}, {"id": "sindikati", "label": "Sindikati", "central": false}, {"id": "pobuda_za_referendum", "label": "Pobuda za razpis naknadnega zakonodajnega referenduma", "central": false}, {"id": "ustava_rs", "label": "Ustava Republike Slovenije", "central": false}, {"id": "sklep_o_nedopustnosti", "label": "Sklep o nedopustnosti referenduma", "central": false}, {"id": "davcne_dolocbe", "label": "Davčne določbe v zakonu", "central": false}, {"id": "opozicija", "label": "Opozicijske stranke (SD, Levica, Vesna, Svoboda)", "central": false}], "triplets": [{"subject_id": "sindikati", "predicate": "vložili", "object_id": "pobuda_za_referendum", "evidence": "Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe", "confidence": "high"}, {"subject_id": "pobuda_za_referendum", "predicate": "cilja na", "object_id": "interventni_zakon", "evidence": "vložili pobudo za razpis naknadnega zakonodajnega referenduma ... o zakonu o interventnih ukrepih za razvoj Slovenije", "confidence": "high"}, {"subject_id": "drzavni_zbor", "predicate": "potrdil", "object_id": "sklep_o_nedopustnosti", "evidence": "DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma.", "confidence": "high"}, {"subject_id": "sklep_o_nedopustnosti", "predicate": "onemogoča", "object_id": "pobuda_za_referendum", "evidence": "DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu", "confidence": "high"}, {"subject_id": "davcne_dolocbe", "predicate": "onemogočajo (po ustavi)", "object_id": "pobuda_za_referendum", "evidence": "V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah", "confidence": "high"}, {"subject_id": "interventni_zakon", "predicate": "vsebuje", "object_id": "davcne_dolocbe", "evidence": "interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov", "confidence": "high"}, {"subject_id": "ustava_rs", "predicate": "prepoveduje referendum o", "object_id": "davcne_dolocbe", "evidence": "V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah", "confidence": "high"}, {"subject_id": "sklep_o_nedopustnosti", "predicate": "naj bi kršil (po navedbah SD)", "object_id": "ustava_rs", "evidence": "Gre za grobo zlorabo ustave, pa je sprejemu sklepa nasprotovala Meira Hot (SD).", "confidence": "medium"}, {"subject_id": "opozicija", "predicate": "nasprotuje", "object_id": "sklep_o_nedopustnosti", "evidence": "v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.", "confidence": "high"}, {"subject_id": "opozicija", "predicate": "kritizira", "object_id": "interventni_zakon", "evidence": "Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse.", "confidence": "high"}, {"subject_id": "sindikati", "predicate": "napovedali ustavno presojo", "object_id": "sklep_o_nedopustnosti", "evidence": "DZ potrdil nedopustnost razpisa referenduma. Sindikati napovedali ustavno presojo.", "confidence": "high"}, {"subject_id": "drzavni_zbor", "predicate": "razpravljal o", "object_id": "interventni_zakon", "evidence": "Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili", "confidence": "high"}], "ui": {"title": "Vzročna mreža", "hint": "Klikni vozlišče ali povezavo za podrobnosti.", "entities_header": "Entitete", "central_badge": "centralna", "involves_header": "Sodeluje v {n} razmerjih", "select_hint": "Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.", "predicate": "predikat", "subject": "subjekt", "object": "objekt", "evidence": "dokaz", "confidence": "zaupanje", "high": "visoko", "medium": "srednje", "low": "nizko", "back": "Nazaj na vse entitete"}};
+
+const entityById = Object.fromEntries(DATA.entities.map(e => [e.id, e]));
+const tripletsByEntity = {};
+DATA.entities.forEach(e => tripletsByEntity[e.id] = []);
+DATA.triplets.forEach((t, idx) => {
+  if (tripletsByEntity[t.subject_id]) tripletsByEntity[t.subject_id].push({...t, idx, role: 'subject'});
+  if (tripletsByEntity[t.object_id])  tripletsByEntity[t.object_id].push({...t, idx, role: 'object'});
+});
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('selected','dimmed'));
+  document.querySelectorAll('.edge').forEach(e => e.classList.remove('highlight','dimmed'));
+  document.querySelectorAll('.entity-item').forEach(li => li.classList.remove('selected'));
+}
+
+function selectEntity(entityId) {
+  clearHighlights();
+  const sel = entityById[entityId];
+  if (!sel) return;
+
+  // Highlight the node
+  const node = document.getElementById('node-' + entityId);
+  if (node) node.classList.add('selected');
+  // Dim others
+  document.querySelectorAll('.node').forEach(n => {
+    if (n.dataset.entityId !== entityId) n.classList.add('dimmed');
+  });
+
+  // Highlight involved edges
+  const rels = tripletsByEntity[entityId] || [];
+  const involvedEdgeIdxs = new Set(rels.map(r => r.idx));
+  document.querySelectorAll('.edge').forEach(e => {
+    if (involvedEdgeIdxs.has(parseInt(e.dataset.tripletIdx))) e.classList.add('highlight');
+    else e.classList.add('dimmed');
+  });
+  // Un-dim the nodes at the ends of involved edges
+  rels.forEach(r => {
+    const otherId = r.role === 'subject' ? r.object_id : r.subject_id;
+    const otherNode = document.getElementById('node-' + otherId);
+    if (otherNode) otherNode.classList.remove('dimmed');
+  });
+
+  // Sidebar selection
+  document.querySelectorAll('.entity-item').forEach(li => {
+    if (li.dataset.entityId === entityId) li.classList.add('selected');
+  });
+
+  // Render detail panel
+  const detail = document.getElementById('detail');
+  detail.classList.remove('empty-state');
+  detail.classList.add('detail');
+  const centralBadge = sel.central ? ` <span class="badge" style="background:#c2410c;color:white;font-size:10px;padding:1px 6px;border-radius:999px;font-weight:600;text-transform:uppercase;">${DATA.ui.central_badge}</span>` : '';
+  let html = '';
+  html += `<button class="back" onclick="resetSelection()">← ${DATA.ui.back}</button>`;
+  html += `<h3>${escapeHtml(sel.label)}${centralBadge}</h3>`;
+  html += `<p class="meta">${DATA.ui.involves_header.replace('{n}', rels.length)}</p>`;
+  html += '<div class="relations">';
+  rels.forEach(r => {
+    const subjLabel = (entityById[r.subject_id] || {}).label || r.subject_id;
+    const objLabel  = (entityById[r.object_id]  || {}).label || r.object_id;
+    const selfId = entityId;
+    const sCls = r.subject_id === selfId ? ' class="self"' : '';
+    const oCls = r.object_id  === selfId ? ' class="self"' : '';
+    const confKey = (r.confidence || '').toLowerCase();
+    const confLabel = ({high: DATA.ui.high, medium: DATA.ui.medium, low: DATA.ui.low})[confKey] || r.confidence || '';
+    html += '<div class="relation highlight">';
+    html += `<div class="triple"><span${sCls}>${escapeHtml(subjLabel)}</span> <span class="predicate">${escapeHtml(r.predicate || '')}</span> <span${oCls}>${escapeHtml(objLabel)}</span></div>`;
+    if (r.evidence) html += `<div class="ev">„${escapeHtml(r.evidence)}"</div>`;
+    if (confKey)   html += `<span class="confidence ${confKey}">${DATA.ui.confidence}: ${escapeHtml(confLabel)}</span>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  detail.innerHTML = html;
+}
+
+function selectTriplet(idx) {
+  const t = DATA.triplets[idx];
+  if (!t) return;
+  // Select the subject entity but ALSO highlight only this edge
+  selectEntity(t.subject_id);
+  // Re-clear other involving edges and only keep the clicked one highlighted
+  document.querySelectorAll('.edge').forEach(e => {
+    e.classList.remove('highlight');
+    if (parseInt(e.dataset.tripletIdx) === idx) {
+      e.classList.add('highlight');
+      e.classList.remove('dimmed');
+    } else {
+      e.classList.add('dimmed');
+    }
+  });
+}
+
+function resetSelection() {
+  clearHighlights();
+  const detail = document.getElementById('detail');
+  detail.classList.add('empty-state');
+  detail.classList.remove('detail');
+  detail.innerHTML = `<p>${escapeHtml(DATA.ui.select_hint)}</p>`;
+}
+
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', e => {
+    e.stopPropagation();
+    selectEntity(n.dataset.entityId);
+  });
+});
+document.querySelectorAll('.edge').forEach(g => {
+  g.addEventListener('click', e => {
+    e.stopPropagation();
+    selectTriplet(parseInt(g.dataset.tripletIdx));
+  });
+});
+document.querySelectorAll('.entity-item').forEach(li => {
+  li.addEventListener('click', () => selectEntity(li.dataset.entityId));
+});
+document.querySelector('svg').addEventListener('click', () => resetSelection());
+</script>
+
+</body>
+</html>

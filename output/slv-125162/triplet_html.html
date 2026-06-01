@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<title>Vzročna mreža · slv-125162</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.shell { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+.graph-pane { padding: 24px 12px 24px 24px; }
+header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+header h1 { margin: 0; font-size: 13px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; }
+header .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #94a3b8; }
+.hint { color: #64748b; font-size: 12px; margin: 0 0 12px; }
+
+.svg-wrap { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+svg { display: block; width: 100%; height: auto; }
+
+.node rect { fill: #1e3a5f; stroke: #0f172a; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
+.node.central rect { fill: #c2410c; }
+.node.selected rect { stroke: #fbbf24; stroke-width: 3; }
+.node.dimmed { opacity: 0.25; }
+.node-label { fill: #fff; font-size: 11px; font-weight: 600; text-anchor: middle; alignment-baseline: middle; pointer-events: none; }
+
+.edge path { fill: none; stroke: #94a3b8; stroke-width: 1.4; transition: stroke 0.15s, stroke-width 0.15s; cursor: pointer; }
+.edge.highlight path { stroke: #2563eb; stroke-width: 2.5; }
+.edge.dimmed path { opacity: 0.15; }
+.edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+.edge-label-wrap rect { fill: white; }
+.edge-label { fill: #475569; font-size: 9px; font-weight: 600; text-anchor: middle; letter-spacing: 0.04em; pointer-events: none; }
+.edge.highlight .edge-label { fill: #1d4ed8; }
+
+.sidebar { background: white; border-left: 1px solid #e2e8f0; padding: 24px 20px; overflow: auto; max-height: 100vh; position: sticky; top: 0; }
+.sidebar h2 { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; margin: 0 0 12px; }
+.entity-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 4px; }
+.entity-list li { padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid transparent; transition: background 0.15s; display: flex; justify-content: space-between; gap: 6px; align-items: baseline; }
+.entity-list li:hover { background: #f1f5f9; }
+.entity-list li.selected { background: #eff6ff; border-color: #93c5fd; }
+.entity-list li.central { font-weight: 600; }
+.entity-list .badge { background: #c2410c; color: white; font-size: 10px; padding: 1px 6px; border-radius: 999px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.entity-list .count { color: #94a3b8; font-size: 11px; }
+
+.empty-state { color: #94a3b8; font-size: 12px; line-height: 1.5; }
+.detail .back { background: none; border: none; color: #2563eb; font-size: 12px; cursor: pointer; padding: 0; margin-bottom: 8px; }
+.detail .back:hover { text-decoration: underline; }
+.detail h3 { margin: 0 0 4px; font-size: 16px; }
+.detail .meta { color: #64748b; font-size: 12px; margin: 0 0 16px; }
+
+.relations { display: flex; flex-direction: column; gap: 10px; }
+.relation { padding: 10px 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #cbd5e1; font-size: 12px; }
+.relation.highlight { border-left-color: #2563eb; background: #eff6ff; }
+.relation .triple { font-size: 13px; }
+.relation .triple .predicate { color: #1d4ed8; font-weight: 600; padding: 0 4px; }
+.relation .triple .self { font-weight: 600; color: #0f172a; }
+.relation .ev { color: #475569; margin-top: 4px; font-style: italic; line-height: 1.4; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <main class="graph-pane">
+    <header>
+      <h1>Vzročna mreža</h1>
+      <span class="code">slv-125162</span>
+    </header>
+    <p class="hint">Klikni vozlišče ali povezavo za podrobnosti.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 1436.8 400.0" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 9 3, 0 6" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <g class="edge" data-triplet-idx="0" id="edge-t0"><path d="M 180.47,63.24 C 264.81,68.30 394.53,78.20 506.00,95.75 C 535.59,100.41 567.44,106.97 596.48,113.56 L 607.46,116.08" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.47,63.24 C 264.81,68.30 394.53,78.20 506.00,95.75 C 535.59,100.41 567.44,106.97 596.48,113.56 L 607.46,116.08"/><g class="edge-label-wrap"><rect x="374.6" y="87.8" width="38.5" height="12" rx="3"/><text class="edge-label" x="393.9" y="96.8">IZVEDLA</text></g></g><g class="edge" data-triplet-idx="1" id="edge-t1"><path d="M 180.39,80.27 C 222.00,90.29 271.68,102.25 314.58,112.58 L 325.62,115.23" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.39,80.27 C 222.00,90.29 271.68,102.25 314.58,112.58 L 325.62,115.23"/><g class="edge-label-wrap"><rect x="222.8" y="86.8" width="60.5" height="12" rx="3"/><text class="edge-label" x="253.0" y="95.8">POOBLASTILA</text></g></g><g class="edge" data-triplet-idx="2" id="edge-t2"><path d="M 506.28,137.39 C 534.93,137.60 566.84,137.82 596.23,138.03 L 607.35,138.11" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 506.28,137.39 C 534.93,137.60 566.84,137.82 596.23,138.03 L 607.35,138.11"/><g class="edge-label-wrap"><rect x="540.4" y="126.8" width="33.0" height="12" rx="3"/><text class="edge-label" x="556.9" y="135.8">VODILI</text></g></g><g class="edge" data-triplet-idx="3" id="edge-t3"><path d="M 935.68,195.40 C 893.30,185.26 842.51,173.12 798.84,162.68 L 787.90,160.07" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 935.68,195.40 C 893.30,185.26 842.51,173.12 798.84,162.68 L 787.90,160.07"/><g class="edge-label-wrap"><rect x="842.6" y="166.8" width="38.5" height="12" rx="3"/><text class="edge-label" x="861.9" y="175.8">VPISALI</text></g></g><g class="edge" data-triplet-idx="4" id="edge-t4"><path d="M 1116.20,196.60 C 1156.30,187.55 1203.70,176.83 1245.10,167.49 L 1256.30,164.96" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1116.20,196.60 C 1156.30,187.55 1203.70,176.83 1245.10,167.49 L 1256.30,164.96"/><g class="edge-label-wrap"><rect x="1147.9" y="169.8" width="77.0" height="12" rx="3"/><text class="edge-label" x="1186.4" y="178.8">IZKAZALI MOČNO</text></g></g><g class="edge" data-triplet-idx="5" id="edge-t5"><path d="M 1256.30,143.92 C 1136.60,142.81 924.76,140.85 799.51,139.69 L 788.03,139.58" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1256.30,143.92 C 1136.60,142.81 924.76,140.85 799.51,139.69 L 788.03,139.58"/><g class="edge-label-wrap"><rect x="994.8" y="130.8" width="55.0" height="12" rx="3"/><text class="edge-label" x="1022.3" y="139.8">POGOJEVALE</text></g></g><g class="edge" data-triplet-idx="6" id="edge-t6"><path d="M 787.90,121.54 C 830.16,113.38 880.83,103.59 924.45,95.17 L 935.68,93.00" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 787.90,121.54 C 830.16,113.38 880.83,103.59 924.45,95.17 L 935.68,93.00"/><g class="edge-label-wrap"><rect x="834.4" y="96.2" width="55.0" height="12" rx="3"/><text class="edge-label" x="861.9" y="105.2">PRISPEVA K</text></g></g><g class="edge" data-triplet-idx="7" id="edge-t7"><path d="M 180.40,182.19 C 264.69,191.88 394.38,201.54 506.00,187.50 C 535.77,183.76 567.55,176.85 596.47,169.39 L 607.40,166.50" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.40,182.19 C 264.69,191.88 394.38,201.54 506.00,187.50 C 535.77,183.76 567.55,176.85 596.47,169.39 L 607.40,166.50"/><g class="edge-label-wrap"><rect x="366.4" y="143.3" width="55.0" height="12" rx="3"/><text class="edge-label" x="393.9" y="152.3">NAPOVEDALO</text></g></g><g class="edge" data-triplet-idx="8" id="edge-t8"><path d="M 1256.30,37.54 C 1192.70,24.30 1105.10,9.75 1027.00,9.75 C 415.00,9.75 415.00,9.75 415.00,9.75 C 339.46,9.75 255.12,22.93 191.43,35.62 L 180.19,37.90" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1256.30,37.54 C 1192.70,24.30 1105.10,9.75 1027.00,9.75 C 415.00,9.75 415.00,9.75 415.00,9.75 C 339.46,9.75 255.12,22.93 191.43,35.62 L 180.19,37.90"/><g class="edge-label-wrap"><rect x="699.1" y="47.8" width="38.5" height="12" rx="3"/><text class="edge-label" x="718.4" y="56.8">OMEJUJE</text></g></g><g class="edge" data-triplet-idx="9" id="edge-t9"><path d="M 747.35,167.20 C 770.86,179.59 799.95,192.98 827.75,200.50 C 858.62,208.86 893.11,213.28 924.52,215.54 L 935.94,216.27" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 747.35,167.20 C 770.86,179.59 799.95,192.98 827.75,200.50 C 858.62,208.86 893.11,213.28 924.52,215.54 L 935.94,216.27"/><g class="edge-label-wrap"><rect x="820.6" y="166.8" width="82.5" height="12" rx="3"/><text class="edge-label" x="861.9" y="175.8">POVEČANA ZARADI</text></g></g><g class="edge" data-triplet-idx="10" id="edge-t10"><path d="M 180.39,160.65 C 221.92,156.42 271.47,151.37 314.31,147.01 L 325.62,145.86" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.39,160.65 C 221.92,156.42 271.47,151.37 314.31,147.01 L 325.62,145.86"/><g class="edge-label-wrap"><rect x="211.8" y="142.3" width="82.5" height="12" rx="3"/><text class="edge-label" x="253.0" y="151.3">PODELILO MANDAT</text></g></g><g class="edge" data-triplet-idx="11" id="edge-t11"><path d="M 1116.20,70.99 C 1156.20,68.86 1203.50,66.34 1244.80,64.14 L 1256.30,63.52" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1116.20,70.99 C 1156.20,68.86 1203.50,66.34 1244.80,64.14 L 1256.30,63.52"/><g class="edge-label-wrap"><rect x="1167.2" y="56.2" width="38.5" height="12" rx="3"/><text class="edge-label" x="1186.4" y="65.2">JE CILJ</text></g></g>
+        <g class="node" data-entity-id="republika_slovenija" id="node-republika_slovenija"><rect x="0.0" y="30.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="62.8">Republika Slovenija</text></g><g class="node central" data-entity-id="izdaja_sedemletne_obveznice" id="node-izdaja_sedemletne_obveznice"><rect x="607.8" y="110.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="697.8" y="134.8">Izdaja nove</text><text class="node-label" x="697.8" y="150.8">sedemletne obveznice</text></g><g class="node" data-entity-id="otp_in_unicredit" id="node-otp_in_unicredit"><rect x="326.0" y="108.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="416.0" y="132.8">OTP banka in UniCredit</text><text class="node-label" x="416.0" y="148.8">banka Slovenija</text></g><g class="node" data-entity-id="domaci_vlagatelji" id="node-domaci_vlagatelji"><rect x="936.0" y="188.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1026.0" y="220.8">Domači vlagatelji</text></g><g class="node" data-entity-id="ministrstvo_za_finance" id="node-ministrstvo_za_finance"><rect x="0.0" y="141.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="173.8">Ministrstvo za finance</text></g><g class="node" data-entity-id="razprsitev_virov_financiranja" id="node-razprsitev_virov_financiranja"><rect x="936.0" y="47.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1026.0" y="71.8">Razpršitev virov financiranja</text><text class="node-label" x="1026.0" y="87.8">državnega proračuna</text></g><g class="node" data-entity-id="program_financiranja_proracuna" id="node-program_financiranja_proracuna"><rect x="1256.8" y="30.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1346.8" y="54.8">Program financiranja</text><text class="node-label" x="1346.8" y="70.8">proračuna</text></g><g class="node" data-entity-id="trzne_razmere" id="node-trzne_razmere"><rect x="1256.8" y="116.8" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1346.8" y="140.8">Razmere na</text><text class="node-label" x="1346.8" y="156.8">finančnih trgih</text></g>
+      </svg>
+    </div>
+  </main>
+  <aside class="sidebar"><h2>Entitete (8)</h2><ul class="entity-list" id="entity-list"><li class="entity-item" data-entity-id="republika_slovenija"><span>Republika Slovenija </span><span class="count">3</span></li><li class="entity-item central" data-entity-id="izdaja_sedemletne_obveznice"><span>Izdaja nove sedemletne obveznice <span class="badge">centralna</span></span><span class="count">7</span></li><li class="entity-item" data-entity-id="otp_in_unicredit"><span>OTP banka in UniCredit banka Slovenija </span><span class="count">3</span></li><li class="entity-item" data-entity-id="domaci_vlagatelji"><span>Domači vlagatelji </span><span class="count">3</span></li><li class="entity-item" data-entity-id="ministrstvo_za_finance"><span>Ministrstvo za finance </span><span class="count">2</span></li><li class="entity-item" data-entity-id="razprsitev_virov_financiranja"><span>Razpršitev virov financiranja državnega proračuna </span><span class="count">2</span></li><li class="entity-item" data-entity-id="program_financiranja_proracuna"><span>Program financiranja proračuna </span><span class="count">2</span></li><li class="entity-item" data-entity-id="trzne_razmere"><span>Razmere na finančnih trgih </span><span class="count">2</span></li></ul><div id="detail" class="empty-state">Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.</div></aside>
+</div>
+
+<script>
+const DATA = {"entities": [{"id": "republika_slovenija", "label": "Republika Slovenija", "central": false}, {"id": "izdaja_sedemletne_obveznice", "label": "Izdaja nove sedemletne obveznice", "central": true}, {"id": "otp_in_unicredit", "label": "OTP banka in UniCredit banka Slovenija", "central": false}, {"id": "domaci_vlagatelji", "label": "Domači vlagatelji", "central": false}, {"id": "ministrstvo_za_finance", "label": "Ministrstvo za finance", "central": false}, {"id": "razprsitev_virov_financiranja", "label": "Razpršitev virov financiranja državnega proračuna", "central": false}, {"id": "program_financiranja_proracuna", "label": "Program financiranja proračuna", "central": false}, {"id": "trzne_razmere", "label": "Razmere na finančnih trgih", "central": false}], "triplets": [{"subject_id": "republika_slovenija", "predicate": "izvedla", "object_id": "izdaja_sedemletne_obveznice", "evidence": "Slovenija je danes izdala sedemletno obveznico v višini 350 milijonov evrov s spremenljivo obrestno mero", "confidence": "high"}, {"subject_id": "republika_slovenija", "predicate": "pooblastila", "object_id": "otp_in_unicredit", "evidence": "Država je za organizacijo izdaje obveznice s spremenljivo obrestno mero... pooblastila OTP banko in UniCredit banko Slovenija", "confidence": "high"}, {"subject_id": "otp_in_unicredit", "predicate": "vodili", "object_id": "izdaja_sedemletne_obveznice", "evidence": "Za vodenje izdaje sta bili pooblaščeni OTP banka in UniCredit Banka Slovenija.", "confidence": "high"}, {"subject_id": "domaci_vlagatelji", "predicate": "vpisali", "object_id": "izdaja_sedemletne_obveznice", "evidence": "domači vlagatelji so vpisali približno 96 odstotkov obveznic", "confidence": "high"}, {"subject_id": "domaci_vlagatelji", "predicate": "izkazali močno", "object_id": "trzne_razmere", "evidence": "izdaja sledi interesu domačih bank po državnih vrednostnih papirjih s spremenljivo obrestno mero", "confidence": "medium"}, {"subject_id": "trzne_razmere", "predicate": "pogojevale", "object_id": "izdaja_sedemletne_obveznice", "evidence": "izvedba izdaje pričakuje v bližnji prihodnosti v odvisnosti od razmer na finančnih trgih", "confidence": "high"}, {"subject_id": "izdaja_sedemletne_obveznice", "predicate": "prispeva k", "object_id": "razprsitev_virov_financiranja", "evidence": "transakcija pa po navedbah Ministrstvo za finance prispeva k nadaljnji razpršitvi virov financiranja državnega proračuna.", "confidence": "high"}, {"subject_id": "ministrstvo_za_finance", "predicate": "napovedalo", "object_id": "izdaja_sedemletne_obveznice", "evidence": "so sporočili s finančnega ministrstva. Kot so zapisali, se izvedba izdaje pričakuje v bližnji prihodnosti", "confidence": "high"}, {"subject_id": "program_financiranja_proracuna", "predicate": "omejuje", "object_id": "republika_slovenija", "evidence": "V tem letu se lahko sicer država skladno s programom financiranja proračuna zadolži za največ nekaj manj kot 5,3 milijarde evrov.", "confidence": "high"}, {"subject_id": "izdaja_sedemletne_obveznice", "predicate": "povečana zaradi", "object_id": "domaci_vlagatelji", "evidence": "Ta je bila zaradi močnega interesa povečana s 250 na 350 milijonov evrov.", "confidence": "high"}, {"subject_id": "ministrstvo_za_finance", "predicate": "podelilo mandat", "object_id": "otp_in_unicredit", "evidence": "Ministrstvo za finance je mandat za organizacijo izdaje podelilo OTP banki in UniCredit Banki Slovenija", "confidence": "high"}, {"subject_id": "razprsitev_virov_financiranja", "predicate": "je cilj", "object_id": "program_financiranja_proracuna", "evidence": "izdaja... dopolnjuje nabor instrumentov financiranja državnega proračuna.", "confidence": "medium"}], "ui": {"title": "Vzročna mreža", "hint": "Klikni vozlišče ali povezavo za podrobnosti.", "entities_header": "Entitete", "central_badge": "centralna", "involves_header": "Sodeluje v {n} razmerjih", "select_hint": "Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.", "predicate": "predikat", "subject": "subjekt", "object": "objekt", "evidence": "dokaz", "confidence": "zaupanje", "high": "visoko", "medium": "srednje", "low": "nizko", "back": "Nazaj na vse entitete"}};
+
+const entityById = Object.fromEntries(DATA.entities.map(e => [e.id, e]));
+const tripletsByEntity = {};
+DATA.entities.forEach(e => tripletsByEntity[e.id] = []);
+DATA.triplets.forEach((t, idx) => {
+  if (tripletsByEntity[t.subject_id]) tripletsByEntity[t.subject_id].push({...t, idx, role: 'subject'});
+  if (tripletsByEntity[t.object_id])  tripletsByEntity[t.object_id].push({...t, idx, role: 'object'});
+});
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('selected','dimmed'));
+  document.querySelectorAll('.edge').forEach(e => e.classList.remove('highlight','dimmed'));
+  document.querySelectorAll('.entity-item').forEach(li => li.classList.remove('selected'));
+}
+
+function selectEntity(entityId) {
+  clearHighlights();
+  const sel = entityById[entityId];
+  if (!sel) return;
+
+  // Highlight the node
+  const node = document.getElementById('node-' + entityId);
+  if (node) node.classList.add('selected');
+  // Dim others
+  document.querySelectorAll('.node').forEach(n => {
+    if (n.dataset.entityId !== entityId) n.classList.add('dimmed');
+  });
+
+  // Highlight involved edges
+  const rels = tripletsByEntity[entityId] || [];
+  const involvedEdgeIdxs = new Set(rels.map(r => r.idx));
+  document.querySelectorAll('.edge').forEach(e => {
+    if (involvedEdgeIdxs.has(parseInt(e.dataset.tripletIdx))) e.classList.add('highlight');
+    else e.classList.add('dimmed');
+  });
+  // Un-dim the nodes at the ends of involved edges
+  rels.forEach(r => {
+    const otherId = r.role === 'subject' ? r.object_id : r.subject_id;
+    const otherNode = document.getElementById('node-' + otherId);
+    if (otherNode) otherNode.classList.remove('dimmed');
+  });
+
+  // Sidebar selection
+  document.querySelectorAll('.entity-item').forEach(li => {
+    if (li.dataset.entityId === entityId) li.classList.add('selected');
+  });
+
+  // Render detail panel
+  const detail = document.getElementById('detail');
+  detail.classList.remove('empty-state');
+  detail.classList.add('detail');
+  const centralBadge = sel.central ? ` <span class="badge" style="background:#c2410c;color:white;font-size:10px;padding:1px 6px;border-radius:999px;font-weight:600;text-transform:uppercase;">${DATA.ui.central_badge}</span>` : '';
+  let html = '';
+  html += `<button class="back" onclick="resetSelection()">← ${DATA.ui.back}</button>`;
+  html += `<h3>${escapeHtml(sel.label)}${centralBadge}</h3>`;
+  html += `<p class="meta">${DATA.ui.involves_header.replace('{n}', rels.length)}</p>`;
+  html += '<div class="relations">';
+  rels.forEach(r => {
+    const subjLabel = (entityById[r.subject_id] || {}).label || r.subject_id;
+    const objLabel  = (entityById[r.object_id]  || {}).label || r.object_id;
+    const selfId = entityId;
+    const sCls = r.subject_id === selfId ? ' class="self"' : '';
+    const oCls = r.object_id  === selfId ? ' class="self"' : '';
+    const confKey = (r.confidence || '').toLowerCase();
+    const confLabel = ({high: DATA.ui.high, medium: DATA.ui.medium, low: DATA.ui.low})[confKey] || r.confidence || '';
+    html += '<div class="relation highlight">';
+    html += `<div class="triple"><span${sCls}>${escapeHtml(subjLabel)}</span> <span class="predicate">${escapeHtml(r.predicate || '')}</span> <span${oCls}>${escapeHtml(objLabel)}</span></div>`;
+    if (r.evidence) html += `<div class="ev">„${escapeHtml(r.evidence)}"</div>`;
+    if (confKey)   html += `<span class="confidence ${confKey}">${DATA.ui.confidence}: ${escapeHtml(confLabel)}</span>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  detail.innerHTML = html;
+}
+
+function selectTriplet(idx) {
+  const t = DATA.triplets[idx];
+  if (!t) return;
+  // Select the subject entity but ALSO highlight only this edge
+  selectEntity(t.subject_id);
+  // Re-clear other involving edges and only keep the clicked one highlighted
+  document.querySelectorAll('.edge').forEach(e => {
+    e.classList.remove('highlight');
+    if (parseInt(e.dataset.tripletIdx) === idx) {
+      e.classList.add('highlight');
+      e.classList.remove('dimmed');
+    } else {
+      e.classList.add('dimmed');
+    }
+  });
+}
+
+function resetSelection() {
+  clearHighlights();
+  const detail = document.getElementById('detail');
+  detail.classList.add('empty-state');
+  detail.classList.remove('detail');
+  detail.innerHTML = `<p>${escapeHtml(DATA.ui.select_hint)}</p>`;
+}
+
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', e => {
+    e.stopPropagation();
+    selectEntity(n.dataset.entityId);
+  });
+});
+document.querySelectorAll('.edge').forEach(g => {
+  g.addEventListener('click', e => {
+    e.stopPropagation();
+    selectTriplet(parseInt(g.dataset.tripletIdx));
+  });
+});
+document.querySelectorAll('.entity-item').forEach(li => {
+  li.addEventListener('click', () => selectEntity(li.dataset.entityId));
+});
+document.querySelector('svg').addEventListener('click', () => resetSelection());
+</script>
+
+</body>
+</html>

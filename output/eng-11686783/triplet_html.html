@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<title>Vzročna mreža · eng-11686783</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.shell { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+.graph-pane { padding: 24px 12px 24px 24px; }
+header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+header h1 { margin: 0; font-size: 13px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; }
+header .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #94a3b8; }
+.hint { color: #64748b; font-size: 12px; margin: 0 0 12px; }
+
+.svg-wrap { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+svg { display: block; width: 100%; height: auto; }
+
+.node rect { fill: #1e3a5f; stroke: #0f172a; stroke-width: 0.5; cursor: pointer; transition: fill 0.15s; }
+.node.central rect { fill: #c2410c; }
+.node.selected rect { stroke: #fbbf24; stroke-width: 3; }
+.node.dimmed { opacity: 0.25; }
+.node-label { fill: #fff; font-size: 11px; font-weight: 600; text-anchor: middle; alignment-baseline: middle; pointer-events: none; }
+
+.edge path { fill: none; stroke: #94a3b8; stroke-width: 1.4; transition: stroke 0.15s, stroke-width 0.15s; cursor: pointer; }
+.edge.highlight path { stroke: #2563eb; stroke-width: 2.5; }
+.edge.dimmed path { opacity: 0.15; }
+.edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+.edge-label-wrap rect { fill: white; }
+.edge-label { fill: #475569; font-size: 9px; font-weight: 600; text-anchor: middle; letter-spacing: 0.04em; pointer-events: none; }
+.edge.highlight .edge-label { fill: #1d4ed8; }
+
+.sidebar { background: white; border-left: 1px solid #e2e8f0; padding: 24px 20px; overflow: auto; max-height: 100vh; position: sticky; top: 0; }
+.sidebar h2 { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.07em; text-transform: uppercase; margin: 0 0 12px; }
+.entity-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 4px; }
+.entity-list li { padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid transparent; transition: background 0.15s; display: flex; justify-content: space-between; gap: 6px; align-items: baseline; }
+.entity-list li:hover { background: #f1f5f9; }
+.entity-list li.selected { background: #eff6ff; border-color: #93c5fd; }
+.entity-list li.central { font-weight: 600; }
+.entity-list .badge { background: #c2410c; color: white; font-size: 10px; padding: 1px 6px; border-radius: 999px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.entity-list .count { color: #94a3b8; font-size: 11px; }
+
+.empty-state { color: #94a3b8; font-size: 12px; line-height: 1.5; }
+.detail .back { background: none; border: none; color: #2563eb; font-size: 12px; cursor: pointer; padding: 0; margin-bottom: 8px; }
+.detail .back:hover { text-decoration: underline; }
+.detail h3 { margin: 0 0 4px; font-size: 16px; }
+.detail .meta { color: #64748b; font-size: 12px; margin: 0 0 16px; }
+
+.relations { display: flex; flex-direction: column; gap: 10px; }
+.relation { padding: 10px 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #cbd5e1; font-size: 12px; }
+.relation.highlight { border-left-color: #2563eb; background: #eff6ff; }
+.relation .triple { font-size: 13px; }
+.relation .triple .predicate { color: #1d4ed8; font-weight: 600; padding: 0 4px; }
+.relation .triple .self { font-weight: 600; color: #0f172a; }
+.relation .ev { color: #475569; margin-top: 4px; font-style: italic; line-height: 1.4; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <main class="graph-pane">
+    <header>
+      <h1>Vzročna mreža</h1>
+      <span class="code">eng-11686783</span>
+    </header>
+    <p class="hint">Klikni vozlišče ali povezavo za podrobnosti.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 1562.8 400.0" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 9 3, 0 6" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <g class="edge" data-triplet-idx="0" id="edge-t0"><path d="M 180.27,144.01 C 215.79,144.01 256.83,144.01 293.39,144.01 L 304.58,144.01" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.27,144.01 C 215.79,144.01 256.83,144.01 293.39,144.01 L 304.58,144.01"/><g class="edge-label-wrap"><rect x="212.2" y="133.0" width="60.5" height="12" rx="3"/><text class="edge-label" x="242.5" y="142.0">PREDSTAVILA</text></g></g><g class="edge" data-triplet-idx="1" id="edge-t1"><path d="M 485.47,163.51 C 498.71,166.33 512.21,169.15 525.00,171.76 C 560.20,178.95 598.82,186.49 633.15,193.08 L 644.13,195.19" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 485.47,163.51 C 498.71,166.33 512.21,169.15 525.00,171.76 C 560.20,178.95 598.82,186.49 633.15,193.08 L 644.13,195.19"/><g class="edge-label-wrap"><rect x="512.5" y="167.0" width="104.5" height="12" rx="3"/><text class="edge-label" x="564.8" y="176.0">PREDVIDEVA LOKACIJO</text></g></g><g class="edge" data-triplet-idx="2" id="edge-t2"><path d="M 824.93,212.01 C 896.92,212.01 998.08,212.01 1072.90,212.01 L 1084.20,212.01" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 824.93,212.01 C 896.92,212.01 998.08,212.01 1072.90,212.01 L 1084.20,212.01"/><g class="edge-label-wrap"><rect x="899.5" y="201.0" width="110.0" height="12" rx="3"/><text class="edge-label" x="954.5" y="210.0">OMOGOČA PRIDOBIVANJE</text></g></g><g class="edge" data-triplet-idx="3" id="edge-t3"><path d="M 1264.80,197.24 C 1298.40,191.69 1336.80,185.33 1371.30,179.62 L 1382.40,177.79" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1264.80,197.24 C 1298.40,191.69 1336.80,185.33 1371.30,179.62 L 1382.40,177.79"/><g class="edge-label-wrap"><rect x="1304.4" y="176.5" width="38.5" height="12" rx="3"/><text class="edge-label" x="1323.7" y="185.5">OMOGOČA</text></g></g><g class="edge" data-triplet-idx="4" id="edge-t4"><path d="M 485.43,130.10 C 498.68,128.26 512.18,126.49 525.00,125.01 C 636.96,112.08 765.89,101.88 852.84,95.69 L 864.29,94.88" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 485.43,130.10 C 498.68,128.26 512.18,126.49 525.00,125.01 C 636.96,112.08 765.89,101.88 852.84,95.69 L 864.29,94.88"/><g class="edge-label-wrap"><rect x="619.8" y="105.5" width="110.0" height="12" rx="3"/><text class="edge-label" x="674.8" y="114.5">VKLJUČUJE TESTIRANJE</text></g></g><g class="edge" data-triplet-idx="5" id="edge-t5"><path d="M 1044.90,93.36 C 1123.80,98.24 1241.70,108.09 1342.80,127.01 C 1352.10,128.77 1361.80,130.89 1371.50,133.21 L 1382.40,135.90" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 1044.90,93.36 C 1123.80,98.24 1241.70,108.09 1342.80,127.01 C 1352.10,128.77 1361.80,130.89 1371.50,133.21 L 1382.40,135.90"/><g class="edge-label-wrap"><rect x="1194.4" y="115.0" width="38.5" height="12" rx="3"/><text class="edge-label" x="1213.7" y="124.0">OMOGOČA</text></g></g><g class="edge" data-triplet-idx="6" id="edge-t6"><path d="M 451.62,115.57 C 474.05,104.79 500.40,92.96 525.00,84.01 C 559.64,71.41 598.44,60.23 633.09,51.23 L 644.19,48.39" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 451.62,115.57 C 474.05,104.79 500.40,92.96 525.00,84.01 C 559.64,71.41 598.44,60.23 633.09,51.23 L 644.19,48.39"/><g class="edge-label-wrap"><rect x="545.5" y="75.0" width="38.5" height="12" rx="3"/><text class="edge-label" x="564.8" y="84.0">OMOGOČA</text></g></g><g class="edge" data-triplet-idx="7" id="edge-t7"><path d="M 644.14,31.92 C 607.12,34.30 563.85,38.08 525.00,44.01 C 409.37,61.67 278.84,93.38 191.41,116.37 L 180.43,119.27" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 644.14,31.92 C 607.12,34.30 563.85,38.08 525.00,44.01 C 409.37,61.67 278.84,93.38 191.41,116.37 L 180.43,119.27"/><g class="edge-label-wrap"><rect x="393.0" y="75.0" width="38.5" height="12" rx="3"/><text class="edge-label" x="412.2" y="84.0">ZAHTEVA</text></g></g><g class="edge" data-triplet-idx="8" id="edge-t8"><path d="M 180.37,273.92 C 240.64,279.76 322.01,286.01 394.00,286.01 C 394.00,286.01 394.00,286.01 1175.50,286.01 C 1268.40,286.01 1366.10,233.76 1422.80,197.37 L 1432.20,191.23" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.37,273.92 C 240.64,279.76 322.01,286.01 394.00,286.01 C 394.00,286.01 394.00,286.01 1175.50,286.01 C 1268.40,286.01 1366.10,233.76 1422.80,197.37 L 1432.20,191.23"/><g class="edge-label-wrap"><rect x="753.9" y="202.5" width="55.0" height="12" rx="3"/><text class="edge-label" x="781.4" y="211.5">NAPOVEDUJE</text></g></g><g class="edge" data-triplet-idx="9" id="edge-t9"><path d="M 162.81,235.57 C 207.45,217.89 265.01,195.10 311.53,176.67 L 322.18,172.45" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 162.81,235.57 C 207.45,217.89 265.01,195.10 311.53,176.67 L 322.18,172.45"/><g class="edge-label-wrap"><rect x="217.8" y="193.0" width="49.5" height="12" rx="3"/><text class="edge-label" x="242.5" y="202.0">KOMENTIRA</text></g></g><g class="edge" data-triplet-idx="10" id="edge-t10"><path d="M 485.41,145.59 C 684.30,149.10 1162.30,157.55 1371.20,161.24 L 1382.40,161.43" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 485.41,145.59 C 684.30,149.10 1162.30,157.55 1371.20,161.24 L 1382.40,161.43"/><g class="edge-label-wrap"><rect x="911.9" y="142.5" width="44.0" height="12" rx="3"/><text class="edge-label" x="933.9" y="151.5">CILJA NA</text></g></g><g class="edge" data-triplet-idx="11" id="edge-t11"><path d="M 180.34,169.26 C 218.44,178.96 263.58,189.07 305.00,194.76 C 416.36,210.06 545.40,213.31 632.54,213.41 L 644.02,213.40" marker-end="url(#arrowhead)"/><path class="edge-hit" d="M 180.34,169.26 C 218.44,178.96 263.58,189.07 305.00,194.76 C 416.36,210.06 545.40,213.31 632.54,213.41 L 644.02,213.40"/><g class="edge-label-wrap"><rect x="395.8" y="167.0" width="33.0" height="12" rx="3"/><text class="edge-label" x="412.2" y="176.0">IZVAJA</text></g></g>
+        <g class="node" data-entity-id="nasa" id="node-nasa"><rect x="0.0" y="116.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="148.0">Nasa</text></g><g class="node central" data-entity-id="nacrt_za_izgradnjo_baze" id="node-nacrt_za_izgradnjo_baze"><rect x="305.0" y="116.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="395.0" y="140.0">Načrt za izgradnjo</text><text class="node-label" x="395.0" y="156.0">baze na Luni</text></g><g class="node" data-entity-id="juzni_pol_lune" id="node-juzni_pol_lune"><rect x="644.5" y="184.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="734.5" y="216.0">Južni pol Lune</text></g><g class="node" data-entity-id="soncna_energija" id="node-soncna_energija"><rect x="1084.5" y="184.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1174.5" y="216.0">Sončna energija</text></g><g class="node" data-entity-id="jedrska_energija" id="node-jedrska_energija"><rect x="864.5" y="61.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="954.5" y="85.0">Izkoriščanje</text><text class="node-label" x="954.5" y="101.0">jedrske energije</text></g><g class="node" data-entity-id="misija_na_mars" id="node-misija_na_mars"><rect x="644.5" y="0.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="734.5" y="32.0">Potovanje na Mars</text></g><g class="node" data-entity-id="jared_isaacman" id="node-jared_isaacman"><rect x="0.0" y="236.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="90.0" y="268.0">Jared Isaacman</text></g><g class="node" data-entity-id="stalna_prisotnost_ljudi" id="node-stalna_prisotnost_ljudi"><rect x="1382.8" y="135.0" width="180" height="56" rx="6" ry="6"/><text class="node-label" x="1472.8" y="159.0">Stalna prisotnost</text><text class="node-label" x="1472.8" y="175.0">ljudi na Luni</text></g>
+      </svg>
+    </div>
+  </main>
+  <aside class="sidebar"><h2>Entitete (8)</h2><ul class="entity-list" id="entity-list"><li class="entity-item" data-entity-id="nasa"><span>Nasa </span><span class="count">3</span></li><li class="entity-item central" data-entity-id="nacrt_za_izgradnjo_baze"><span>Načrt za izgradnjo baze na Luni <span class="badge">centralna</span></span><span class="count">6</span></li><li class="entity-item" data-entity-id="juzni_pol_lune"><span>Južni pol Lune </span><span class="count">3</span></li><li class="entity-item" data-entity-id="soncna_energija"><span>Sončna energija </span><span class="count">2</span></li><li class="entity-item" data-entity-id="jedrska_energija"><span>Izkoriščanje jedrske energije </span><span class="count">2</span></li><li class="entity-item" data-entity-id="misija_na_mars"><span>Potovanje na Mars </span><span class="count">2</span></li><li class="entity-item" data-entity-id="jared_isaacman"><span>Jared Isaacman </span><span class="count">2</span></li><li class="entity-item" data-entity-id="stalna_prisotnost_ljudi"><span>Stalna prisotnost ljudi na Luni </span><span class="count">4</span></li></ul><div id="detail" class="empty-state">Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.</div></aside>
+</div>
+
+<script>
+const DATA = {"entities": [{"id": "nasa", "label": "Nasa", "central": false}, {"id": "nacrt_za_izgradnjo_baze", "label": "Načrt za izgradnjo baze na Luni", "central": true}, {"id": "juzni_pol_lune", "label": "Južni pol Lune", "central": false}, {"id": "soncna_energija", "label": "Sončna energija", "central": false}, {"id": "jedrska_energija", "label": "Izkoriščanje jedrske energije", "central": false}, {"id": "misija_na_mars", "label": "Potovanje na Mars", "central": false}, {"id": "jared_isaacman", "label": "Jared Isaacman", "central": false}, {"id": "stalna_prisotnost_ljudi", "label": "Stalna prisotnost ljudi na Luni", "central": false}], "triplets": [{"subject_id": "nasa", "predicate": "predstavila", "object_id": "nacrt_za_izgradnjo_baze", "evidence": "Ameriška vesoljska agencija Nasa je v torek predstavila načrt za izgradnjo baze na Luni", "confidence": "high"}, {"subject_id": "nacrt_za_izgradnjo_baze", "predicate": "predvideva lokacijo", "object_id": "juzni_pol_lune", "evidence": "Bazo nameravajo postaviti na južnem polu Lune", "confidence": "high"}, {"subject_id": "juzni_pol_lune", "predicate": "omogoča pridobivanje", "object_id": "soncna_energija", "evidence": "Te razmere so ugodnejše za pridobivanje sončne energije", "confidence": "high"}, {"subject_id": "soncna_energija", "predicate": "omogoča", "object_id": "stalna_prisotnost_ljudi", "evidence": "Te razmere so ugodnejše za pridobivanje sončne energije in omogočajo stabilne temperature za izvajanje operacij na površini.", "confidence": "medium"}, {"subject_id": "nacrt_za_izgradnjo_baze", "predicate": "vključuje testiranje", "object_id": "jedrska_energija", "evidence": "testirali tehnologije, ki bi utrle pot tamkajšnjemu izkoriščanju jedrske energije.", "confidence": "high"}, {"subject_id": "jedrska_energija", "predicate": "omogoča", "object_id": "stalna_prisotnost_ljudi", "evidence": "testirali tehnologije, ki bi utrle pot tamkajšnjemu izkoriščanju jedrske energije.", "confidence": "medium"}, {"subject_id": "nacrt_za_izgradnjo_baze", "predicate": "omogoča", "object_id": "misija_na_mars", "evidence": "razvijati tehnologije, potrebne za prihodnje misije v vesolju, vključno s potovanjem na Mars.", "confidence": "high"}, {"subject_id": "misija_na_mars", "predicate": "zahteva", "object_id": "nasa", "evidence": "Nasa namerava tam izvajati znanstvene poskuse in razvijati tehnologije, potrebne za prihodnje misije v vesolju, vključno s potovanjem na Mars.", "confidence": "medium"}, {"subject_id": "jared_isaacman", "predicate": "napoveduje", "object_id": "stalna_prisotnost_ljudi", "evidence": "kako se Amerika vrača na Luno, tokrat za stalno", "confidence": "high"}, {"subject_id": "jared_isaacman", "predicate": "komentira", "object_id": "nacrt_za_izgradnjo_baze", "evidence": "Ob predstavitvi načrta za gradnjo baze je direktor Nase Jared Isaacman dejal", "confidence": "high"}, {"subject_id": "nacrt_za_izgradnjo_baze", "predicate": "cilja na", "object_id": "stalna_prisotnost_ljudi", "evidence": "V tretji fazi od leta 2032 je načrtovana stalna prisotnost ljudi na Luni", "confidence": "high"}, {"subject_id": "nasa", "predicate": "izvaja", "object_id": "juzni_pol_lune", "evidence": "Bazo namerava Nasa zgraditi v bližini južnega pola Lune", "confidence": "high"}], "ui": {"title": "Vzročna mreža", "hint": "Klikni vozlišče ali povezavo za podrobnosti.", "entities_header": "Entitete", "central_badge": "centralna", "involves_header": "Sodeluje v {n} razmerjih", "select_hint": "Izberi entiteto na sliki ali na seznamu, da prikažeš njene povezave.", "predicate": "predikat", "subject": "subjekt", "object": "objekt", "evidence": "dokaz", "confidence": "zaupanje", "high": "visoko", "medium": "srednje", "low": "nizko", "back": "Nazaj na vse entitete"}};
+
+const entityById = Object.fromEntries(DATA.entities.map(e => [e.id, e]));
+const tripletsByEntity = {};
+DATA.entities.forEach(e => tripletsByEntity[e.id] = []);
+DATA.triplets.forEach((t, idx) => {
+  if (tripletsByEntity[t.subject_id]) tripletsByEntity[t.subject_id].push({...t, idx, role: 'subject'});
+  if (tripletsByEntity[t.object_id])  tripletsByEntity[t.object_id].push({...t, idx, role: 'object'});
+});
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function clearHighlights() {
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('selected','dimmed'));
+  document.querySelectorAll('.edge').forEach(e => e.classList.remove('highlight','dimmed'));
+  document.querySelectorAll('.entity-item').forEach(li => li.classList.remove('selected'));
+}
+
+function selectEntity(entityId) {
+  clearHighlights();
+  const sel = entityById[entityId];
+  if (!sel) return;
+
+  // Highlight the node
+  const node = document.getElementById('node-' + entityId);
+  if (node) node.classList.add('selected');
+  // Dim others
+  document.querySelectorAll('.node').forEach(n => {
+    if (n.dataset.entityId !== entityId) n.classList.add('dimmed');
+  });
+
+  // Highlight involved edges
+  const rels = tripletsByEntity[entityId] || [];
+  const involvedEdgeIdxs = new Set(rels.map(r => r.idx));
+  document.querySelectorAll('.edge').forEach(e => {
+    if (involvedEdgeIdxs.has(parseInt(e.dataset.tripletIdx))) e.classList.add('highlight');
+    else e.classList.add('dimmed');
+  });
+  // Un-dim the nodes at the ends of involved edges
+  rels.forEach(r => {
+    const otherId = r.role === 'subject' ? r.object_id : r.subject_id;
+    const otherNode = document.getElementById('node-' + otherId);
+    if (otherNode) otherNode.classList.remove('dimmed');
+  });
+
+  // Sidebar selection
+  document.querySelectorAll('.entity-item').forEach(li => {
+    if (li.dataset.entityId === entityId) li.classList.add('selected');
+  });
+
+  // Render detail panel
+  const detail = document.getElementById('detail');
+  detail.classList.remove('empty-state');
+  detail.classList.add('detail');
+  const centralBadge = sel.central ? ` <span class="badge" style="background:#c2410c;color:white;font-size:10px;padding:1px 6px;border-radius:999px;font-weight:600;text-transform:uppercase;">${DATA.ui.central_badge}</span>` : '';
+  let html = '';
+  html += `<button class="back" onclick="resetSelection()">← ${DATA.ui.back}</button>`;
+  html += `<h3>${escapeHtml(sel.label)}${centralBadge}</h3>`;
+  html += `<p class="meta">${DATA.ui.involves_header.replace('{n}', rels.length)}</p>`;
+  html += '<div class="relations">';
+  rels.forEach(r => {
+    const subjLabel = (entityById[r.subject_id] || {}).label || r.subject_id;
+    const objLabel  = (entityById[r.object_id]  || {}).label || r.object_id;
+    const selfId = entityId;
+    const sCls = r.subject_id === selfId ? ' class="self"' : '';
+    const oCls = r.object_id  === selfId ? ' class="self"' : '';
+    const confKey = (r.confidence || '').toLowerCase();
+    const confLabel = ({high: DATA.ui.high, medium: DATA.ui.medium, low: DATA.ui.low})[confKey] || r.confidence || '';
+    html += '<div class="relation highlight">';
+    html += `<div class="triple"><span${sCls}>${escapeHtml(subjLabel)}</span> <span class="predicate">${escapeHtml(r.predicate || '')}</span> <span${oCls}>${escapeHtml(objLabel)}</span></div>`;
+    if (r.evidence) html += `<div class="ev">„${escapeHtml(r.evidence)}"</div>`;
+    if (confKey)   html += `<span class="confidence ${confKey}">${DATA.ui.confidence}: ${escapeHtml(confLabel)}</span>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  detail.innerHTML = html;
+}
+
+function selectTriplet(idx) {
+  const t = DATA.triplets[idx];
+  if (!t) return;
+  // Select the subject entity but ALSO highlight only this edge
+  selectEntity(t.subject_id);
+  // Re-clear other involving edges and only keep the clicked one highlighted
+  document.querySelectorAll('.edge').forEach(e => {
+    e.classList.remove('highlight');
+    if (parseInt(e.dataset.tripletIdx) === idx) {
+      e.classList.add('highlight');
+      e.classList.remove('dimmed');
+    } else {
+      e.classList.add('dimmed');
+    }
+  });
+}
+
+function resetSelection() {
+  clearHighlights();
+  const detail = document.getElementById('detail');
+  detail.classList.add('empty-state');
+  detail.classList.remove('detail');
+  detail.innerHTML = `<p>${escapeHtml(DATA.ui.select_hint)}</p>`;
+}
+
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', e => {
+    e.stopPropagation();
+    selectEntity(n.dataset.entityId);
+  });
+});
+document.querySelectorAll('.edge').forEach(g => {
+  g.addEventListener('click', e => {
+    e.stopPropagation();
+    selectTriplet(parseInt(g.dataset.tripletIdx));
+  });
+});
+document.querySelectorAll('.entity-item').forEach(li => {
+  li.addEventListener('click', () => selectEntity(li.dataset.entityId));
+});
+document.querySelector('svg').addEventListener('click', () => resetSelection());
+</script>
+
+</body>
+</html>
