@@ -1,0 +1,116 @@
+**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic based on the provided text.
+
+### 1. Visual Style & Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+* **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+* **Claims/Events:** Muted Grey or subtle Teal.
+* **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+* **Highlights:** Use a single accent color (e.g., Burnt Orange) only for the most critical central node.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Processing Rules
+Analyze the provided text to extract a Knowledge Graph:
+* **Nodes:** Extract key **Entities** (People, Countries, Organizations) and **Key Claims/Events**. Enclose node text in clean rectangular or pill-shaped containers.
+* **Links:** Identify **Causal Relations** connecting these nodes.
+* **Labels:** Every link must have a text label (2-3 words max) describing the causal relations between nodes.
+* **Logic:** Ensure the visual flow represents the causal chain (Cause → Effect).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the extracted causal network (DO NOT generate any additional text).
+
+### 4. Input Text
+
+Praga, 27. maja (STA) - Število držav, ki sodeluje v češki pobudi za preskrbo Ukrajine z artilerijskim strelivom, se je prepolovilo z 18 na devet, odkar se je premier Andrej Babiš decembra lani vrnil na položaj z obljubo, da Češka v pobudo ne bo več vlagala lastnega denarja, je v torek ...
+
+"Pobuda še vedno deluje, vendar je nova težava v tem, da finančno prispeva le okoli devet držav članic. (...) Ta pobuda je Ukrajincem zagotavljala do 50 odstotkov vsega streliva velikega kalibra, zato je ni mogoče zlahka nadomestiti," je za britanski časnik Financial Times dejal češki predsednik Petr Pavel.
+
+Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.
+
+Pavel sicer ni razkril, katere države so nedavno izstopile iz pobude.
+
+Zahodni vojaški uradnik je medtem po poročanju Financial Timesa pojasnil, da "nekatere države zdaj menijo, da je čudno plačevati za nekaj, česar vodilni politiki vodilne države ne podpirajo zadosti".
+
+Češka je nakup topniških izstrelkov za Ukrajino v tretjih državah predlagala v začetku leta 2024 kot odgovor na pomanjkanje proizvodnih zmogljivosti v EU-ju.
+
+Od takrat se je pobudi pridružilo več držav, med njimi tudi Slovenija, Ukrajini pa so dobavili že več kot štiri milijone kosov streliva.
+
+STA na odgovor ministrstva za obrambo o sodelovanju Slovenije v pobudi še čaka.
+
+Babiš je med volilno kampanjo večkrat kritiziral pobudo. Po izvolitvi na položaj predsednika vlade pa je dejal, da bo Praga še naprej izvajala pobudo, a da bo delovala v vlogi koordinatorja in po novem v pobudo ne bo vlagala lastnega denarja.
+
+Češki premier je za Financial Times povedal, da njegova vlada omejena javna sredstva namenja prednostno češkim državljanom, saj se gospodinjstva zaradi konflikta na Bližnjem vzhodu soočajo z visokimi stroški energentov. "Denarja nimamo, zato prejemamo sredstva od drugih držav in nato dostavljamo (strelivo)," je dodal.
+
+z odgovorom ministrstva glede sodelovanja Slovenije v pobudi v 1., 6. in 7. odstavku Praga/Ljubljana, 27. maja (STA) - Število držav, ki sodelujejo v češki pobudi za preskrbo Ukrajine z artilerijskim strelivom, se je prepolovilo z 18 na devet, odkar se je premier Andrej Babiš vrnil na položaj ...
+
+"Pobuda še vedno deluje, vendar je nova težava v tem, da finančno prispeva le okoli devet držav članic. (...) Ta pobuda je Ukrajincem zagotavljala do 50 odstotkov vsega streliva velikega kalibra, zato je ni mogoče zlahka nadomestiti," je za Financial Times povedal češki predsednik Petr Pavel. Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.
+
+Pavel sicer ni razkril, katere države so nedavno izstopile iz pobude. Zahodni vojaški uradnik je medtem pojasnil, da "nekatere države sedaj menijo, da je čudno plačevati za nekaj, česar vodilni politiki vodilne države ne podpirajo zadosti".
+
+Češka je nakup artilerijskih izstrelkov za Ukrajino v tretjih državah predlagala v začetku leta 2024 kot odgovor na pomanjkanje proizvodnih zmogljivosti v EU. Od takrat se je pobudi pridružilo več držav, med njimi tudi Slovenija, Ukrajini pa so dobavili že več kot štiri milijone kosov streliva.
+
+STA na odgovor ministrstva za obrambo o sodelovanju Slovenije v pobudi še čaka.
+
+Babiš je med volilno kampanjo večkrat kritiziral pobudo. Po izvolitvi na položaj predsednika vlade pa je dejal, da bo Praga še naprej izvajala pobudo, a da bo delovala v vlogi koordinatorja in po novem v pobudo ne bo vlagala lastnega denarja.
+
+Češki premier je za Financial Times povedal, da njegova vlada omejena javna sredstva namenja prednostno češkim državljanom, saj se gospodinjstva zaradi konflikta na Bližnjem vzhodu spopadajo z visokimi stroški energentov. "Denarja nimamo, zato prejemamo sredstva od drugih držav in nato dostavljamo (strelivo)," je dodal.
+
+"Pobuda še vedno deluje, vendar je nova težava v tem, da finančno prispeva le okoli devet držav članic. (...) Ta pobuda je Ukrajincem zagotavljala do 50 odstotkov vsega streliva velikega kalibra, zato je ni mogoče zlahka nadomestiti," je za britanski časnik Financial Times dejal češki predsednik Petr Pavel.
+
+Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.
+
+Pavel ni razkril, katere države so nedavno izstopile iz pobude.
+
+Zahodni vojaški uradnik je po poročanju Financial Timesa pojasnil, da "nekatere države zdaj menijo, da je čudno plačevati za nekaj, česar vodilni politiki vodilne države ne podpirajo zadosti".
+
+Češka je nakup topniških izstrelkov za Ukrajino v tretjih državah predlagala na začetku leta 2024 kot odgovor na pomanjkanje proizvodnih zmogljivosti v EU-ju.
+
+Od takrat se je pobudi pridružilo več držav, med njimi tudi Slovenija, Ukrajini pa so dobavili že več kot štiri milijone kosov streliva.
+
+Na ministrstvu za obrambo so danes za STA pojasnili, da Slovenija sicer letos Ukrajini v okviru češke pobude ni prispevala finančnih sredstev, a da to ne pomeni, da je iz nje izstopila. "Še naprej bomo Ukrajini pomagali skladno z njihovimi potrebami in našimi razpoložljivimi sredstvi," so zatrdili.
+
+Ob tem so navedli, da je Slovenija v letih 2024 in 2025 v pobudo prispevala skupno tri milijone evrov, pomoč članic EU in zaveznic v Natu za Ukrajino pa da poteka na različne načine in prek različnih pobud. "Države se o pomoči Ukrajini odločajo na podlagi lastnih virov in sredstev," so dodali.
+
+Babiš je med volilno kampanjo večkrat kritiziral pobudo. Po izvolitvi na položaj predsednika vlade je dejal, da bo Praga še naprej izvajala pobudo, a da bo delovala v vlogi koordinatorja in po novem v pobudo ne bo vlagala lastnega denarja.
+
+Češki premier je za Financial Times povedal, da njegova vlada omejena javna sredstva namenja prednostno češkim državljanom, saj se gospodinjstva zaradi spora na Bližnjem vzhodu spopadajo z visokimi stroški energentov. "Denarja nimamo, zato prejemamo sredstva od drugih držav in nato dostavljamo (strelivo)," je dodal.
+
+O tem je v torek poročal Financial Times. Na slovenskem ministrstvu za obrambo pa so potrdili, da Slovenija ostaja del pobude. "Pobuda še vedno deluje, vendar je nova težava v tem, da finančno prispeva le okoli devet držav članic. (...) Ta pobuda je Ukrajincem zagotavljala do 50 odstotkov vsega streliva velikega kalibra, zato je ni mogoče zlahka nadomestiti," je za časnik Financial Times (FT) povedal češki predsednik Petr Pavel.
+
+Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.
+
+Pavel ni razkril, katere države so nedavno izstopile iz pobude. Zahodni vojaški uradnik je medtem po poročanju Financial Timesa pojasnil, da "nekatere države sedaj menijo, da je čudno plačevati za nekaj, česar vodilni politiki vodilne države ne podpirajo zadosti".
+
+Češka je nakup artilerijskih izstrelkov za Ukrajino v tretjih državah predlagala v začetku leta 2024 kot odgovor na pomanjkanje proizvodnih zmogljivosti v EU. Od takrat se je pobudi pridružilo več držav, med njimi Slovenija, Ukrajini pa so dobavili že več kot štiri milijone kosov streliva.
+
+Na ministrstvu za obrambo so danes pojasnili, da Slovenija sicer letos Ukrajini v okviru češke pobude ni prispevala finančnih sredstev, a da to ne pomeni, da je iz nje izstopila. "Še naprej bomo Ukrajini pomagali skladno z njihovimi potrebami in našimi razpoložljivimi sredstvi," so zatrdili.
+
+Ob tem so navedli, da je Slovenija v letih 2024 in 2025 v pobudo prispevala skupno tri milijone evrov, pomoč članic EU in zaveznic v Natu za Ukrajino pa da poteka na različne načine in prek različnih pobud. "Države se o pomoči Ukrajini odločajo na podlagi lastnih virov in sredstev," so dodali.
+
+Babiš je med volilno kampanjo večkrat kritiziral pobudo. Po izvolitvi na položaj predsednika vlade pa je dejal, da bo Praga še naprej izvajala pobudo, a da bo delovala v vlogi koordinatorja in po novem v pobudo ne bo vlagala lastnega denarja.
+
+Češki premier je za Financial Times povedal, da njegova vlada omejena javna sredstva namenja prednostno češkim državljanom, saj se gospodinjstva zaradi konflikta na Bližnjem vzhodu soočajo z visokimi stroški energentov. "Denarja nimamo, zato prejemamo sredstva od drugih držav in nato dostavljamo (strelivo)," je dodal.
+
+Praga, 27. maja (STA) Število držav, ki sodeluje v češki pobudi za preskrbo Ukrajine z artilerijskim strelivom, se je prepolovilo z 18 na devet, odkar se je premier Andrej Babiš decembra lani vrnil na položaj z obljubo, da Češka v pobudo ne bo več vlagala lastnega denarja, je včeraj ...
+
+Praga/Ljubljana, 27. maja (STA) Število držav, ki sodelujejo v češki pobudi za preskrbo Ukrajine z artilerijskim strelivom, se je prepolovilo z 18 na devet, odkar se je premier Andrej Babiš vrnil na položaj z obljubo, da Češka v pobudo ne bo več vlagala lastnega denarja, je v torek poročal ...
+
+"Pobuda še vedno deluje, vendar je nova težava v tem, da finančno prispeva le okoli devet držav članic. (...) Ta pobuda je Ukrajincem zagotavljala do 50 odstotkov vsega streliva velikega kalibra, zato je ni mogoče zlahka nadomestiti," je za Financial Times povedal češki predsednik Petr Pavel.
+
+Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.
+
+Pavel sicer ni razkril, katere države so nedavno izstopile iz pobude. Zahodni vojaški uradnik je medtem po poročanju Financial Timesa pojasnil, da "nekatere države sedaj menijo, da je čudno plačevati za nekaj, česar vodilni politiki vodilne države ne podpirajo zadosti".
+
+Praga/Ljubljana, 27. maja - Število držav, ki sodelujejo v češki pobudi za preskrbo Ukrajine z artilerijskim strelivom, se je prepolovilo z 18 na devet, odkar se je premier Andrej Babiš vrnil na položaj z obljubo, da Češka v pobudo ne bo več vlagala lastnega denarja, je v torek poročal ...

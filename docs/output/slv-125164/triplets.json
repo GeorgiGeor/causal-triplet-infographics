@@ -1,0 +1,123 @@
+{
+  "entities": [
+    {
+      "id": "kpk",
+      "label": "Komisija za preprečevanje korupcije",
+      "central": false
+    },
+    {
+      "id": "zadeva_karigador",
+      "label": "Zadeva Karigador",
+      "central": true
+    },
+    {
+      "id": "robert_golob",
+      "label": "Robert Golob",
+      "central": false
+    },
+    {
+      "id": "dopolnjeni_osnutek_ugotovitev",
+      "label": "Dopolnjeni osnutek ugotovitev",
+      "central": false
+    },
+    {
+      "id": "tomaz_subotic",
+      "label": "Tomaž Subotič",
+      "central": false
+    },
+    {
+      "id": "stojan_zdolsek",
+      "label": "Stojan Zdolšek",
+      "central": false
+    },
+    {
+      "id": "nasprotje_interesov",
+      "label": "Nasprotje interesov",
+      "central": false
+    },
+    {
+      "id": "dopustovanje_v_karigadorju",
+      "label": "Dopustovanje v hiši poslovneža",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "kpk",
+      "predicate": "sprejela",
+      "object_id": "dopolnjeni_osnutek_ugotovitev",
+      "evidence": "KPK je v postopku ugotavljanja nasprotja interesov pri odhajajočem premierju Robertu Golobu v zadevi Karigador sprejela drugi osnutek ugotovitev",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "dopolnjeni_osnutek_ugotovitev",
+      "predicate": "naj bi obremenjeval",
+      "object_id": "robert_golob",
+      "evidence": "Neuradno naj bi bili za Goloba obremenjujoči.",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "dopolnjeni_osnutek_ugotovitev",
+      "predicate": "vsebuje dokaze o",
+      "object_id": "nasprotje_interesov",
+      "evidence": "Na KPK so dodali tudi dodatne dokaze v breme Goloba. Po informacijah POP TV novi dokazi kažejo na to, kako tesen je odnos med Golobom in Subotičem in zakaj bi se Golob moral izločiti iz odločanja o tem kadrovanju.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "dopustovanje_v_karigadorju",
+      "predicate": "sprožilo",
+      "object_id": "zadeva_karigador",
+      "evidence": "Gre sicer za t. i. afero Karigador. Golob je namreč s takratno partnerko Tino Gaber poleti 2023 večkrat dopustoval v hiši poslovneža Subotiča.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "robert_golob",
+      "predicate": "ni se izločil",
+      "object_id": "nasprotje_interesov",
+      "evidence": "KPK je v omenjeni zadevi preverjala, ali se je Golob kot predsednik vlade s tem, ko se na dveh sejah ni izločil iz glasovanja o imenovanju poslovneža Tomaža Subotiča... znašel v okoliščinah, ki predstavljajo nasprotje interesov.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "stojan_zdolsek",
+      "predicate": "zanika relevantnost",
+      "object_id": "dopolnjeni_osnutek_ugotovitev",
+      "evidence": "Sam sicer v njem ne vidi nobenih novih relevantnih dokazov.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "stojan_zdolsek",
+      "predicate": "zastopa",
+      "object_id": "robert_golob",
+      "evidence": "Golobov odvetnik Stojan Zdolšek je za POP TV potrdil, da so osnutek prejeli",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "tomaz_subotic",
+      "predicate": "odstopil zaradi",
+      "object_id": "zadeva_karigador",
+      "evidence": "Po razkritjih je Subotič odstopil z mesta predsednika sveta celjske bolnišnice",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "robert_golob",
+      "predicate": "imenoval",
+      "object_id": "tomaz_subotic",
+      "evidence": "glasovanja o imenovanju poslovneža Tomaža Subotiča v svet celjske bolnišnice in ljubljanske psihiatrične klinike",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "kpk",
+      "predicate": "preverja",
+      "object_id": "zadeva_karigador",
+      "evidence": "KPK je v omenjeni zadevi preverjala, ali se je Golob kot predsednik vlade... znašel v okoliščinah, ki predstavljajo nasprotje interesov.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "dopustovanje_v_karigadorju",
+      "predicate": "vključuje",
+      "object_id": "tomaz_subotic",
+      "evidence": "Golob je namreč s takratno partnerko Tino Gaber poleti 2023 večkrat dopustoval v hiši poslovneža Subotiča.",
+      "confidence": "high"
+    }
+  ]
+}

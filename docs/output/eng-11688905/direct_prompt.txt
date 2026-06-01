@@ -1,0 +1,84 @@
+**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic based on the provided text.
+
+### 1. Visual Style & Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+* **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+* **Claims/Events:** Muted Grey or subtle Teal.
+* **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+* **Highlights:** Use a single accent color (e.g., Burnt Orange) only for the most critical central node.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Processing Rules
+Analyze the provided text to extract a Knowledge Graph:
+* **Nodes:** Extract key **Entities** (People, Countries, Organizations) and **Key Claims/Events**. Enclose node text in clean rectangular or pill-shaped containers.
+* **Links:** Identify **Causal Relations** connecting these nodes.
+* **Labels:** Every link must have a text label (2-3 words max) describing the causal relations between nodes.
+* **Logic:** Ensure the visual flow represents the causal chain (Cause → Effect).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the extracted causal network (DO NOT generate any additional text).
+
+### 4. Input Text
+
+Budimpešta, 27. maja (STA) - Madžarski poslanci so danes z veliko večino glasovali za preklic namere o izstopu Madžarske iz Mednarodnega kazenskega sodišča (ICC), ki jo je lani sprejela prejšnja vlada pod vodstvom Viktorja Orbana, poroča francoska tiskovna agencija AFP. 199-članski ...
+
+199-članski parlament je z 133 glasovi za, 37 proti in petimi vzdržanimi uradno razveljavil zakon o umiku Madžarske iz ICC.
+
+Predlog zakona o preklicu izstopa iz ICC je v ponedeljek v parlamentarno obravnavo vložila vlada premierja Petra Magyarja. Da bi stopil v veljavo, ga mora podpisati predsednik države Tamas Sulyok, sicer zaveznik Orbana.
+
+Namero o izstopu države iz ICC je Orban napovedal aprila lani ob obisku izraelskega premierja Benjamina Netanjahuja v Budimpešti. Za slednjega je ICC izdal nalog za prijetje zaradi dejanj v vojni v Gazi, obtožnica ga bremeni vojnih zločinov in zločinov proti človečnosti.
+
+Madžarski parlament je nato zakon, s katerim se je začel postopek umika Madžarske iz ICC, sprejel maja lani.
+
+Sodišče ICC s sedežem v Haagu je bilo ustanovljeno leta 2002. Pristojno je za pregon posameznikov, odgovornih za najhujše zločine, ko jih države same ne želijo ali ne morejo preganjati. Ima 125 članic, med katerimi med drugim ni ZDA, Kitajske, Rusije in Izraela. Najostreje ukrepanju ICC nasprotujejo v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom, vključno s Slovenko Beti Hohler, ki je bila članica panela, ki je odobril izdajo naloga za prijetje Netanjahuja.
+
+Predlog zakona o preklicu izstopa iz ICC je vložila vlada Petra Magyarja. Da bi stopil v veljavo, ga mora podpisati predsednik države, sicer zaveznik Orbana.
+
+Madžarski poslanci so danes z veliko večino glasovali za preklic namere o izstopu Madžarske iz Mednarodnega kazenskega sodišča (ICC), ki jo je lani sprejela prejšnja vlada pod vodstvom Viktorja Orbana, poroča francoska tiskovna agencija AFP.
+
+199-članski parlament je z 133 glasovi za, 37 proti in petimi vzdržanimi uradno razveljavil zakon o umiku Madžarske iz ICC.
+
+Predlog zakona o preklicu izstopa iz ICC je v ponedeljek v parlamentarno obravnavo vložila vlada premierja Petra Magyarja. Da bi stopil v veljavo, ga mora podpisati predsednik države Tamas Sulyok, sicer zaveznik Orbana.
+
+Namero o izstopu države iz ICC je Orban napovedal aprila lani ob obisku izraelskega premierja Benjamina Netanjahuja v Budimpešti. Za slednjega je ICC izdal nalog za prijetje zaradi dejanj v vojni v Gazi, obtožnica ga bremeni vojnih zločinov in zločinov proti človečnosti.
+
+Madžarski parlament je nato zakon, s katerim se je začel postopek umika Madžarske iz ICC, sprejel maja lani.
+
+Sodišče ICC s sedežem v Haagu je bilo ustanovljeno leta 2002. Pristojno je za pregon posameznikov, odgovornih za najhujše zločine, ko jih države same ne želijo ali ne morejo preganjati. Ima 125 članic, med katerimi med drugim ni ZDA, Kitajske, Rusije in Izraela. Najostreje ukrepanju ICC nasprotujejo v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom, vključno s Slovenko Beti Hohler, ki je bila članica panela, ki je odobril izdajo naloga za prijetje Netanjahuja.
+
+199-članski parlament je z 133 glasovi za, 37 proti in petimi vzdržanimi uradno razveljavil zakon o umiku Madžarske iz ICC-ja.
+
+Predlog zakona o preklicu izstopa iz mednarodnega sodišča je v ponedeljek v parlamentarno obravnavo vložila vlada premierja Petra Magyarja. Da bi začel veljati, ga mora podpisati predsednik države Tamas Sulyok, sicer zaveznik Orbana.
+
+Namero o izstopu države iz ICC-ja je Orban napovedal aprila lani ob obisku izraelskega premierja Benjamina Netanjahuja v Budimpešti. Za Netanjahuja je namreč ICC izdal nalog za aretacijo zaradi dejanj v Gazi, obtožnica ga bremeni vojnih zločinov in zločinov proti človečnosti.
+
+Madžarski parlament je nato zakon, s katerim se je začel postopek umika Madžarske iz ICC-ja, sprejel maja lani.
+
+Sodišče ICC s sedežem v Haagu je bilo ustanovljeno leta 2002. Pristojno je za pregon posameznikov, odgovornih za najhujše zločine, ko jih države same ne želijo ali ne morejo preganjati.
+
+Ima 125 članic, med katerimi med drugim ni ZDA, Kitajske, Rusije in Izraela. Najostreje ukrepanju ICC-ja nasprotujejo v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom, vključno s slovensko državljanko Beti Hohler, ki je bila članica panela, ki je odobril izdajo naloga za prijetje Netanjahuja.
+
+Budimpešta, 27. maja (STA) Madžarski poslanci so danes z veliko večino glasovali za preklic namere o izstopu Madžarske iz Mednarodnega kazenskega sodišča, ki jo je lani sprejela prejšnja vlada pod vodstvom Viktorja Orbana. 199-članski parlament je z 133 glasovi za, 37 proti in petimi ...
+
+Madžarski parlament je nato zakon, s katerim se je začel postopek umika Madžarske iz ICC, sprejel maja lani.
+
+Sodišče ICC s sedežem v Haagu je bilo ustanovljeno leta 2002. Pristojno je za pregon posameznikov, odgovornih za najhujše zločine, ko jih države same ne želijo ali ne morejo preganjati. Ima 125 članic, med katerimi med drugim ni ZDA, Kitajske, Rusije in Izraela. Najostreje ukrepanju ICC nasprotujejo v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom, vključno s Slovenko Beti Hohler, ki je bila članica panela, ki je odobril izdajo naloga za prijetje Netanjahuja.
+
+Novi madžarski premier Peter Magyar že s prvimi dejanji odpravlja sporne odločitve šestnajstletne vladavine Viktorja Orbana. Verjetno najbolj zgovoren primer je današnja odločitev madžarskega parlamenta, da država znova pristopi k mednarodnemu kazenskemu sodišču (ICC).
+
+Za umik s seznama podpornic sodišča se je Orbanova vlada odločila lani spomladi, pred obiskom izraelskega premierja Benjamina Netanjahuja na Madžarskem, ki ga ICC išče zaradi vojnih zločinov v Gazi. Orbanova vlada je s tem tlakovala pot varnemu prihodu Netanjahuja na Madžarsko, saj bi sicer bila primorana osumljenca prijeti in poslati v Haag.
+
+Toda Orban takrat tega ni nameraval storiti, zato so za umik našli "argumentacijo", da je ICC postal politično sodišče. Povsem drugače so položaj ocenili v vladajoči stranki Tisza premierja Magyarja. "V interesu mednarodnega miru in varnosti ter za zaščito človekovih pravic je nujno, da se tiste, ki so zagrešili najhujše mednarodne zločine, privede pred mednarodno sodišče," so zapisali v sprejetem zakonu, s katerim se Madžarska vrača med podpornice ICC. Izraelski premier Benjamin Netanjahu se mora tako spet bati aretacije na Madžarskem, če bi stopil na njeno ozemlje.

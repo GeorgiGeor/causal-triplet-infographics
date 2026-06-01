@@ -1,0 +1,200 @@
+Read the news articles below and produce two outputs as a single strict JSON object.
+
+The supplied articles are written in **Slovenian**. Your entire output — every `label`, every `evidence` field — MUST be in Slovenian. Do not translate proper nouns, institution names, predicates, or quoted spans into any other language. The `id` field is the only field that stays in lowercase ASCII snake_case.
+
+(1) An `entities` list of 6-10 central actors, institutions, countries, policies, events, conditions, or **mechanism states** (e.g. "barriers down", "red light", "fourth-day deadline") that appear across the articles. Each entity has:
+    - `id` (snake_case stable identifier, unique within this output, ASCII)
+    - `label` (human-readable name in Slovenian, shown in the rendered graph)
+    - `central` (boolean — exactly ONE entity must have central=true; this is the focal subject of the news story)
+
+(2) A `triplets` list of 10-15 directed causal or explanatory relations between those entities. Each triplet has:
+    - `subject_id` (must match an entity id)
+    - `predicate` (1-3 word specific verb in Slovenian — e.g. raises, triggers, blames, criticizes, excludes, enables, requires, resigns from, proposes, motivates, leads to, results in, reinforces, undermines, vetoes)
+    - `object_id` (must match an entity id)
+    - `evidence` (short DIRECT QUOTE from the article in Slovenian supporting the relation — do NOT translate or paraphrase to a different language)
+    - `confidence` ("low" | "medium" | "high")
+
+Hard constraints:
+- **Language lock**: every `label`, every `predicate`, every `evidence` must be in Slovenian. No translation.
+- **No direction redundancy**: do NOT include two triplets expressing the same fact in opposite directions (e.g. `train → collides_with → van` AND `van → results_in → collision` AND `train → results_in → collision` is three triplets for one fact — keep only ONE). Pick the single most informative orientation.
+- **Predicate-object type consistency**: communicative predicates (*announces, reports, confirms, criticizes, warns, blames, threatens*) take a STATEMENT or EVENT as object, never a person. If the natural object is a person, either rewrite the predicate (`kills`, `succeeds`, `criticizes_for_X`) or introduce a separate node for the statement/event (e.g. `mohamed_odeh_death`) and use it as the object.
+- **Event reification — never make a person the direct cause or effect of another event**: when a causal relation originates from or results in an EVENT, ACTION, or STATE that involves a person (a death, killing, attack, ruling, resignation, an event that triggers a protest), create a DEDICATED entity node for that event/state and attach the causal edge to it — do NOT attach the causal verb to the person. A person's *death* causes consequences, the person does not. E.g. NOT `ales_sutar → povzročil → protest` but introduce `smrt_aleša_šutarja` and write `smrt_aleša_šutarja → sprožila → protest`.
+- **Attribution / hedging for contested claims**: when a relation is contested, alleged, or attributed to a specific party (the defense, a single witness, one news source) rather than established fact, do NOT state it flat. Fold the attribution/uncertainty INTO the predicate string using Slovenian markers — for Slovenian use "naj bi …", "domnevno …", or "po navedbah <vir> …". This is especially important for accusations and claims that assign blame. E.g. NOT `ales_sutar → izzval → samire_siljic` but `ales_sutar → naj bi izzval (po navedbah obrambe) → samire_siljic`.
+- **Causal mechanism over commentary**: for incident, accident, or policy stories, AT LEAST 30% of triplets must describe the CAUSAL MECHANISM — conditions, contributing factors, sequences that led to the central event. Pure reaction triplets (`expresses_condolences`, `announces`, `praises`) are capped at 3 per event total.
+- **Specific predicates**: banned generic verbs: "affects", "relates to", "is associated with", "involves", "concerns", "deals with".
+- The directed graph induced by the triplets MUST be connected when treated as undirected. No isolated entities. No disconnected chains.
+- Every non-central entity must participate in at least 2 triplets. The central entity may participate in more.
+- Every triplet must be grounded in the supplied articles. Do NOT introduce background knowledge or facts not stated or strongly implied in the text.
+- Return ONLY the JSON object. No prose, no markdown fences, no commentary.
+
+All examples below use a FICTIONAL, illustrative scenario (a made-up country "Vendia", its minister, a dam) purely to show the rules. They are NOT from the supplied articles — never copy these entities, names, or wordings into your output; extract only what the supplied articles support.
+
+DIRECTION EXAMPLE — correct vs wrong:
+  Fictional article: "Minister Adler confirmed that twelve people died in the dam failure."
+  WRONG: {"subject_id":"dam_failure","predicate":"causes","object_id":"minister_adler", ...}     ← the failure does not cause the minister
+  WRONG: {"subject_id":"minister_adler","predicate":"confirms","object_id":"minister_adler", ...}  ← invalid; self-loop
+  RIGHT: {"subject_id":"minister_adler","predicate":"confirms casualties of","object_id":"dam_failure", ...}  ← minister confirms (re: the failure)
+
+EVENT-REIFICATION EXAMPLE — put the event, not the person, on the causal edge:
+  Fictional article: "The mayor's resignation triggered early elections in Vendia."
+  WRONG: {"subject_id":"mayor","predicate":"triggers","object_id":"early_elections", ...}  ← the person did not trigger the elections
+  RIGHT: add an entity {"id":"mayor_resignation","label":"<the resignation, in source language>"} then
+         {"subject_id":"mayor_resignation","predicate":"triggers","object_id":"early_elections", ...}  ← the resignation triggered them
+
+ATTRIBUTION EXAMPLE — hedge contested/attributed claims in the predicate:
+  Fictional article: "The operator's lawyer argued that heavy rainfall, not negligence, caused the dam failure."
+  WRONG: {"subject_id":"rainfall","predicate":"causes","object_id":"dam_failure", ...}  ← states one party's contested claim as established fact
+  RIGHT: {"subject_id":"rainfall","predicate":"allegedly caused (per the operator)","object_id":"dam_failure", ...}  ← marked as a contested, attributed claim
+  (In Slovenian, render such hedges as "naj bi …" / "domnevno …" / "po navedbah <vir> …".)
+
+Output schema:
+{
+  "entities": [
+    {"id": "eu", "label": "Evropska unija", "central": false},
+    {"id": "carbon_tax", "label": "Ogljični davek", "central": true}
+  ],
+  "triplets": [
+    {
+      "subject_id": "eu",
+      "predicate": "uvaja",
+      "object_id": "carbon_tax",
+      "evidence": "EU je uradno sprejela mehanizem za ogljični davek dne...",
+      "confidence": "high"
+    }
+  ]
+}
+
+ARTICLES (in Slovenian):
+
+Article 1 - STA:
+Title: Obtoženemu napada na Aleša Šutarja po priznanju krivde šest let in devet mesecev zapora
+Novo mesto, 26. maja (STA) - Obtoženi napada na Novomeščana Aleša Šutarja Samire Šiljić je na sodišču po sporazumu, ki ga je sklenil s tožilstvom, priznal krivdo. Sodišče mu je za napad izreklo šest let in tri mesece zapora, ker pa je imel pred tem dve pogojni obsodbi, je slednji ...
+
+Article 2 - Nova24TV:
+Title: Nizka kazen za morilca Aleša Šutarja - slaba popotnica za reševanje romske problematike | Nova24TV
+Nizka kazen za morilca Aleša Šutarja ni najboljše sporočilo za reševanje tovrstne problematike v prihodnje, je novomeški župan Gregor Macedoni komentiral obsodbo morilca Samireja Šiljića, odgovornega za smrt Aleša Šutarja.
+
+Obtoženi napada na Novomeščana Aleša Šutarja Samire Šiljić je na sodišču po sporazumu, ki ga je sklenil s tožilstvom, priznal krivdo. Sodišče mu je za napad izreklo šest let in tri mesece zapora, ker pa je imel pred tem dve pogojni obsodbi, je slednji prekinilo in mu izreklo enotno kazen šest let in devet mesecev zapora. Šiljić dejanje obžaluje.
+
+"Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval," je pred sodbo, ki jo je izrekel sodnik novomeškega okrožnega sodišča Peter Žnidaršič, dejal obdolženi.
+
+Morilec tudi oproščen stroškov postopka
+
+V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim. Sporazum po njegovi oceni sledi sodni praksi, čeprav bi bila kazen morda nekoliko nižja, če ne bi bil primer tako medijsko in sicer odmeven, je dejal. Če pa bi steklo sojenje in bi obdolženca spoznal za krivega, bi mu izrekel približno enako kazen, je dodal.
+
+Priznanje krivde je sicer sprejel, ker ga potrjujejo dokazi, in zato ne dvomi, da je Šiljić pravi storilec. "Imamo cel kup prič. Šest jih je povedalo, da je bil Šiljić tisti, ki je pritekel, Šutarja udaril in odšel," je dejal. Sodni izvedenci so sicer potrdili, da je šlo za zelo močan udarec, je dodal.
+
+Ker Šiljić nima dohodkov in ker bo naslednja leta v zaporu, ga je sodnik na predlog zagovornika Dušana Medveda oprostil stroškov postopka, do pravnomočnosti sodbe, na katero je sicer še možna pritožba, pa mu je podaljšal pripor. Medved je ob tem na sodišče že vložil prošnjo, da začne Šiljić kazen zapora prestajati še pred samo pravnomočnostjo sodbe.
+
+Article 3 - Reporter.si:
+Title: Šutarjev morilec na sodišču: Res mi je žal za to, kar se je zgodilo
+Sodišče mu je za napad izreklo šest let in tri mesece zapora, ker pa je imel pred tem dve pogojni obsodbi, je slednji prekinilo in mu izreklo enotno kazen šest let in devet mesecev zapora. Šiljić dejanje obžaluje.
+
+"Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval," je pred sodbo, ki jo je izrekel sodnik novomeškega okrožnega sodišča Peter Žnidaršič, dejal obdolženi.
+
+V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim. Sporazum po njegovi oceni sledi sodni praksi, čeprav bi bila kazen morda nekoliko nižja, če ne bi bil primer tako medijsko in sicer odmeven, je dejal. Če pa bi steklo sojenje in bi obdolženca spoznal za krivega, bi mu izrekel približno enako kazen, je dodal.
+
+Priznanje krivde je sicer sprejel, ker ga potrjujejo dokazi, in zato ne dvomi, da je Šiljić pravi storilec. "Imamo cel kup prič. Šest jih je povedalo, da je bil Šiljić tisti, ki je pritekel, Šutarja udaril in odšel," je dejal. Sodni izvedenci so sicer potrdili, da je šlo za zelo močan udarec, je dodal.
+
+Ker Šiljić nima dohodkov in ker bo naslednja leta v zaporu, ga je sodnik na predlog zagovornika Dušana Medveda oprostil stroškov postopka, do pravnomočnosti sodbe, na katero je sicer še možna pritožba, pa mu je podaljšal pripor. Medved je ob tem na sodišče že vložil prošnjo, da začne Šiljić kazen zapora prestajati še pred samo pravnomočnostjo sodbe.
+
+Article 4 - Svet24:
+Title: FOTO: Šiljiću šest let in devet mesecev zapora: "Obžalujem, kar sem storil"
+Na Okrožnem sodišču v Novem mestu je bil danes predobravnavni narok za obtoženega povzročitve smrti 48-letnega Novomeščana Aleša Šutarja 25. oktobra lani. Obtoženi 21-letni Samire Šiljić iz romskega naselja Mihovica pri Šentjerneju je, kot smo poročali, s tožilstvom sklenil sporazum o priznanju krivde, zato je današnji dan minil v pričakovanju formalnega izreka kazenske sankcije.
+
+Za smrtni udarec je Šiljić dobil na 6 let in 3 mesece zapora. Ker pa je pred tem že imel dve pogojni kazni, mu ju je moralo sodišče preklicati, enotna kazen pa se glasi 6 let in 9 mesecev zapora.
+
+Šiljiću je tožilstvo očitalo, da je pred klubom LokalPatriot v središču Novega mesta Šutarja, ko je zvečer pred klub prišel iskat sina, napadel in udaril, zaradi česar je ta padel in z glavo udaril ob tla. Poškodbe glave so bile tako hude, da je še isti dan umrl.
+
+"Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval," je pred sodbo, ki jo je izrekel sodnik novomeškega okrožnega sodišča Peter Žnidaršič, dejal obdolženi.
+
+Za očitano kaznivo dejanje povzročitve posebno hude telesne poškodbe, ki ima za posledico smrt, kazenski zakonik sicer predvideva od treh do 15 let zapora. Ker je Šiljić s tožilstvom sklenil sporazum o priznanju krivde, najvišje možne kazni ni bilo pričakovati.
+
+V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim. Sporazum po njegovi oceni sledi sodni praksi, čeprav bi bila kazen morda nekoliko nižja, če ne bi bil primer tako medijsko in sicer odmeven, je dejal. Če pa bi steklo sojenje in bi obdolženca spoznal za krivega, bi mu izrekel približno enako kazen, je dodal.
+
+Priznanje krivde je sicer sprejel, ker ga potrjujejo dokazi, in zato ne dvomi, da je Šiljić pravi storilec. "Imamo cel kup prič. Šest jih je povedalo, da je bil Šiljić tisti, ki je pritekel, Šutarja udaril in odšel," je dejal. Sodni izvedenci so sicer potrdili, da je šlo za zelo močan udarec, je dodal.
+
+Ker Šiljić nima dohodkov in ker bo naslednja leta v zaporu, ga je sodnik na predlog zagovornika Dušana Medveda oprostil stroškov postopka, do pravnomočnosti sodbe, na katero je sicer še možna pritožba, pa mu je podaljšal pripor. Medved je ob tem na sodišče že vložil prošnjo, da začne Šiljić kazen zapora prestajati še pred samo pravnomočnostjo sodbe.
+
+Šutarjeva smrt je oktobra lani sprožila protest, na katerem je okoli 10.000 ljudi v Novem mestu protestiralo proti nereševanju romskih vprašanj, čemur je nato sledilo sprejetje t. i. Šutarjevega zakona, ki zadeva tudi romska vprašanja.
+
+Article 5 - Primorske Novice:
+Title: Obtoženi napada na Aleša Šutarja priznal krivdo, obsojen na šest let in devet mesecev zapora
+NOVO MESTO * "Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval," je pred sodbo, ki jo je izrekel sodnik novomeškega okrožnega sodišča Peter Žnidaršič, dejal obdolženi Samire Šiljić.
+
+V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim. Sporazum po njegovi oceni sledi sodni praksi, čeprav bi bila kazen morda nekoliko nižja, če ne bi bil primer tako medijsko in sicer odmeven, je dejal. Če pa bi steklo sojenje in bi obdolženca spoznal za krivega, bi mu izrekel približno enako kazen, je dodal.
+
+Priznanje krivde je sicer sprejel, ker ga potrjujejo dokazi, in zato ne dvomi, da je Šiljić pravi storilec. "Imamo cel kup prič. Šest jih je povedalo, da je bil Šiljić tisti, ki je pritekel, Šutarja udaril in odšel," je dejal. Sodni izvedenci so potrdili, da je šlo za zelo močan udarec, je dodal.
+
+Ker Šiljić nima dohodkov in ker bo naslednja leta v zaporu, ga je sodnik na predlog zagovornika Dušana Medveda oprostil stroškov postopka, do pravnomočnosti sodbe, na katero je še možna pritožba, pa mu je podaljšal pripor. Medved je ob tem na sodišče že vložil prošnjo, da začne Šiljić kazen zapora prestajati še pred pravnomočnostjo sodbe.
+
+Article 6 - dolenjskilist:
+Title: FOTO: Šiljiću šest let in devet mesecev zapora: "Obžalujem, kar sem storil" - Dolenjski list
+Na vaš e-naslov smo poslali sporočilo s potrditveno povezavo.
+
+Na Okrožnem sodišču v Novem mestu je bil danes predobravnavni narok za obtoženega povzročitve smrti 48-letnega Novomeščana Aleša Šutarja 25. oktobra lani. Obtoženi 21-letni Samire Šiljić iz romskega naselja Mihovica pri Šentjerneju je, kot smo poročali, s tožilstvom sklenil sporazum o priznanju krivde, zato je današnji dan minil v pričakovanju formalnega izreka kazenske sankcije.
+
+Za smrtni udarec je Šiljić dobil na 6 let in 3 mesece zapora. Ker pa je pred tem že imel dve pogojni kazni, mu ju je moralo sodišče preklicati, enotna kazen pa se glasi 6 let in 9 mesecev zapora.
+
+Šiljiću je tožilstvo očitalo, da je pred klubom LokalPatriot v središču Novega mesta Šutarja, ko je zvečer pred klub prišel iskat sina, napadel in udaril, zaradi česar je ta padel in z glavo udaril ob tla. Poškodbe glave so bile tako hude, da je še isti dan umrl.
+
+"Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval," je pred sodbo, ki jo je izrekel sodnik novomeškega okrožnega sodišča Peter Žnidaršič, dejal obdolženi.
+
+Sodba
+
+Za očitano kaznivo dejanje povzročitve posebno hude telesne poškodbe, ki ima za posledico smrt, kazenski zakonik sicer predvideva od treh do 15 let zapora. Ker je Šiljić s tožilstvom sklenil sporazum o priznanju krivde, najvišje možne kazni ni bilo pričakovati.
+
+V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim. Sporazum po njegovi oceni sledi sodni praksi, čeprav bi bila kazen morda nekoliko nižja, če ne bi bil primer tako medijsko in sicer odmeven, je dejal. Če pa bi steklo sojenje in bi obdolženca spoznal za krivega, bi mu izrekel približno enako kazen, je dodal.
+
+Priznanje krivde je sicer sprejel, ker ga potrjujejo dokazi, in zato ne dvomi, da je Šiljić pravi storilec. "Imamo cel kup prič. Šest jih je povedalo, da je bil Šiljić tisti, ki je pritekel, Šutarja udaril in odšel," je dejal. Sodni izvedenci so sicer potrdili, da je šlo za zelo močan udarec, je dodal.
+
+Ker Šiljić nima dohodkov in ker bo naslednja leta v zaporu, ga je sodnik na predlog zagovornika Dušana Medveda oprostil stroškov postopka, do pravnomočnosti sodbe, na katero je sicer še možna pritožba, pa mu je podaljšal pripor. Medved je ob tem na sodišče že vložil prošnjo, da začne Šiljić kazen zapora prestajati še pred samo pravnomočnostjo sodbe.
+
+Policija je sicer sprva v zvezi z napadom, kot je znano, prijela Šiljićevega bratranca Sabrijana Jurkoviča, a ga je sodišče po zaslišanju prič izpustilo iz pripora. Kmalu zatem je odredilo pripor za Šiljića. Do petka se tožilstvo še ni odločilo, ali je Šiljićev bratranec še med osumljenimi ali ne.
+
+Tragedija je zaznamovala Slovenijo
+
+Šutarjeva smrt je oktobra lani sprožila protest, na katerem je okoli 10.000 ljudi v Novem mestu protestiralo proti nereševanju romskih vprašanj, čemur je nato sledilo sprejetje t. i. Šutarjevega zakona, ki zadeva tudi romska vprašanja.
+
+Article 7 - Slovenske Novice:
+Title: Šutarjevega morilca na sodišču branili, da je žrtev smrt izzivala, župan brez zadržkov: "Kazen je občutno prenizka"
+Sodišče je Samiru Šiljiću za napad izreklo šest let in tri mesece zapora, ker pa je imel pred tem dve pogojni obsodbi, je slednji prekinilo in mu izreklo enotno kazen šest let in devet mesecev zapora. Šiljić dejanje obžaluje. "Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval," je pred sodbo, ki jo je izrekel sodnik novomeškega okrožnega sodišča Peter Žnidaršič, dejal obdolženi.
+
+V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim. Sporazum po njegovi oceni sledi sodni praksi, čeprav bi bila kazen morda nekoliko nižja, če ne bi bil primer tako medijsko in sicer odmeven, je dejal. Če pa bi steklo sojenje in bi obdolženca spoznal za krivega, bi mu izrekel približno enako kazen, je dodal. Priznanje krivde je sprejel, ker ga potrjujejo dokazi, in zato ne dvomi, da je Šiljić pravi storilec. "Imamo cel kup prič. Šest jih je povedalo, da je bil Šiljić tisti, ki je pritekel, Šutarja udaril in odšel," je dejal. Sodni izvedenci so sicer potrdili, da je šlo za močan udarec, je dodal.
+
+Ker Šiljić nima dohodkov in ker bo naslednja leta v zaporu, ga je sodnik na predlog zagovornika Dušana Medveda oprostil stroškov postopka, do pravnomočnosti sodbe, na katero je sicer še možna pritožba, pa mu je tudi podaljšal pripor. Medved je ob tem na sodišče vložil prošnjo, da začne Šiljić kazen zapora prestajati še pred samo pravnomočnostjo sodbe.
+
+Tožilka Nada Črnugelj je v zaključni besedi povedala, da je pri predlogu za višino kazni kot olajševalno okoliščino upoštevala obdolženčevo mladost, ima namreč 20 let, in razburjenost "zaradi določenih okoliščin" na Šutarjevi strani. Upoštevala je tudi dejstvo, da je šlo zgolj za en udarec s pestjo v obraz, ki se praviloma ne konča tako tragično, kot se je v tem primeru. Oteževalna okoliščina pa so bili Šiljićeva predkaznovanost in dejstvo, da je kaznivo dejanje storil v preizkusnih dobah dveh pogojnih obsodb (za poškodovanje tuje stvari in lahke telesne poškodbe) ter v času prostega izhoda iz Prevzgojnega doma Radeče. Kot oteževalno okoliščino je tudi štela, da je Šiljić dejanje storil v javnosti ob prisotnosti več deset ljudi in varnostnika ter da je po dogodku pobegnil.
+
+Šiljićev zagovornik Medved je v zaključni besedi ponovil, da obdolženi dejanje obžaluje, vseeno pa je ocenil, da krivda ni bila v celoti na njegovi strani in da je šlo tudi za splet nesrečnih okoliščin. "Dogodek bi bil lahko zaključen tudi kot navaden pretep, saj je šlo za hipno in nepremišljeno, z adrenalinom spodbujeno ravnanje, ko je obdolženi želel le pomagati in zaščititi svojega sorodnika in obenem prijatelja, ki se je zapletel v konflikt s pokojnim Šutarjem," je dejal.
+
+Po njegovih besedah kljub spoštovanju do pokojnega tudi ni mogoče mimo tega, da je dogodek izzval Šutar. "Zabava v lokalu se je takrat zaključevala in vse bi se mirno izšlo, če se ne bi Šutar s svojim določeno agresivnim verbalnim ravnanjem zapletel z bratrancem obdolženca. Mogoč
+
+Article 8 - STA:
+Title: Obtoženemu napada na Aleša Šutarja po priznanju krivde šest let in devet mesecev zapora (dopolnjeno)
+z dodatnimi informacijami od 6. odstavka Novo mesto, 26. maja (STA) - Obtoženi napada na Novomeščana Aleša Šutarja Samire Šiljić je na sodišču po sporazumu, ki ga je sklenil s tožilstvom, priznal krivdo. Sodišče mu je za napad izreklo šest let in tri mesece zapora, ker pa je imel pred ...
+
+Article 9 - STA:
+Title: Obtoženemu napada na Aleša Šutarja po priznanju krivde šest let in devet mesecev zapora
+Novo mesto, 26. maja (STA) Obtoženi napada na Novomeščana Aleša Šutarja Samire Šiljić je na novomeškem sodišču po sporazumu, ki ga je sklenil s tožilstvom, priznal krivdo. Sodišče mu je za napad izreklo šest let in tri mesece zapora, ker pa je imel pred tem dve pogojni obsodbi, je ...
+
+Article 10 - Tednik Demokracija:
+Title: Obtoženemu napada na Aleša Šutarja po priznanju krivde šest let in devet mesecev zapora
+"Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval," je pred sodbo, ki jo je izrekel sodnik novomeškega okrožnega sodišča Peter Žnidaršič, dejal obdolženi.
+
+V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim. Sporazum po njegovi oceni sledi sodni praksi, čeprav bi bila kazen morda nekoliko nižja, če ne bi bil primer tako medijsko in sicer odmeven, je dejal. Če pa bi steklo sojenje in bi obdolženca spoznal za krivega, bi mu izrekel približno enako kazen, je dodal.
+
+Priznanje krivde je sprejel, ker ga potrjujejo dokazi, in zato ne dvomi, da je Šiljić pravi storilec. "Imamo cel kup prič. Šest jih je povedalo, da je bil Šiljić tisti, ki je pritekel, Šutarja udaril in odšel," je dejal. Sodni izvedenci so sicer potrdili, da je šlo za močan udarec, je dodal.
+
+Ker Šiljić nima dohodkov in ker bo naslednja leta v zaporu, ga je sodnik na predlog zagovornika Dušana Medveda oprostil stroškov postopka, do pravnomočnosti sodbe, na katero je sicer še možna pritožba, pa mu je tudi podaljšal pripor. Medved je ob tem na sodišče vložil prošnjo, da začne Šiljić kazen zapora prestajati še pred samo pravnomočnostjo sodbe.
+
+Tožilka Nada Črnugelj je v zaključni besedi povedala, da je pri predlogu za višino kazni kot olajševalno okoliščino upoštevala obdolženčevo mladost, ima namreč 20 let, in razburjenost "zaradi določenih okoliščin" na Šutarjevi strani. Upoštevala je tudi dejstvo, da je šlo zgolj za en udarec s pestjo v obraz, ki se praviloma ne konča tako tragično, kot se je v tem primeru.
+
+Oteževalna okoliščina pa so bili Šiljićeva predkaznovanost in dejstvo, da je kaznivo dejanje storil v preizkusnih dobah dveh pogojnih obsodb (za poškodovanje tuje stvari in lahke telesne poškodbe) ter v času prostega izhoda iz Prevzgojnega doma Radeče. Kot oteževalno okoliščino je tudi štela, da je Šiljić dejanje storil v javnosti ob prisotnosti več deset ljudi in varnostnika ter da je po dogodku pobegnil.
+
+Šiljićev zagovornik Medved je v zaključni besedi ponovil, da obdolženi dejanje obžaluje, vseeno pa je ocenil, da krivda ni bila v celoti na njegovi strani in da je šlo tudi za splet nesrečnih okoliščin. "Dogodek bi bil lahko zaključen tudi kot navaden pretep, saj je šlo za hipno in nepremišljeno, z adrenalinom spodbujeno ravnanje, ko je obdolženi želel le pomagati in zaščititi svojega sorodnika in obenem prijatelja, ki se je zapletel v konflikt s pokojnim Šutarjem," je dejal.
+
+Po njegovih besedah kljub spoštovanju do pokojnega tudi ni mogoče mimo tega, da je dogodek izzval Šutar. "Zabava v lokalu se je takrat zaključevala in vse bi se mirno izšlo, če se ne bi Šutar s svojim določeno agresivnim verbalnim ravnanjem zapletel z bratrancem obdolženca. Mogoče bi se zadeva drugače razpletla tudi, če ne bi imel Šutar v organizmu določenih snovi," je dejal.
+
+Sodnik pa se ni strinjal, da udarec ni bil tako močan in da bi se lahko vse skupaj razpletlo tudi drugače. "Izvedenci so ugo
+

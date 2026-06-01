@@ -1,0 +1,39 @@
+{
+  "ui_language": "sl",
+  "generated_title": "Samire Šiljić obsojen na zaporno kazen zaradi povzročitve smrti Aleša Šutarja",
+  "event_overview": {
+    "title": "Samire Šiljić obsojen na zaporno kazen zaradi povzročitve smrti Aleša Šutarja",
+    "summary": "Na Okrožnem sodišču v Novem mestu je bil Samire Šiljić obsojen na enotno zaporno kazen šestih let in devetih mesecev zaradi napada, ki je povzročil smrt 48-letnega Aleša Šutarja. Obtoženec je s tožilstvom sklenil sporazum o priznanju krivde za dejanje, ki se je zgodilo oktobra lani pred klubom LokalPatriot. Sodnik Peter Žnidaršič je pri izreku kazni upošteval sporazum in predhodne pogojne obsodbe, ki jih je Šiljić kršil v času dogodka.\n\nDogodek je sprožil močan odziv javnosti in proteste v Novem mestu, kjer se je zbralo okoli 10.000 ljudi. Tragedija je privedla do političnih razprav o romski problematiki in sprejetja t. i. Šutarjevega zakona. Čeprav je obramba izpostavljala splet nesrečnih okoliščin in predhodni verbalni konflikt, so izvedenci potrdili, da je šlo za izjemno močan udarec, ki je bil za žrtev usoden.",
+    "key_points": [
+      "Samire Šiljić je priznal krivdo za povzročitev posebno hude telesne poškodbe s smrtnim izidom.",
+      "Sodišče je izreklo kazen 6 let in 3 mesece za napad, skupaj s preklicanimi pogojnimi obsodbami pa 6 let in 9 mesecev zapora.",
+      "Žrtev, Aleš Šutar, je umrl zaradi posledic močnega udarca in padca na tlakovana tla pred klubom LokalPatriot.",
+      "Policija je sprva napačno osumila in priprla Šiljićevega bratranca Sabrijana Jurkoviča.",
+      "Tožilstvo je kot olajševalno okoliščino upoštevalo obtoženčevo mladost (20 let), kot oteževalno pa predkaznovanost.",
+      "Župan Gregor Macedoni je izrečeno kazen ocenil kot nizko in slabo sporočilo za prihodnost.",
+      "Obsojenec je bil oproščen stroškov postopka zaradi pomanjkanja lastnih dohodkov."
+    ],
+    "timeline": [
+      {
+        "date": "25. oktober lani",
+        "description": "Samire Šiljić pred klubom LokalPatriot udari Aleša Šutarja, ki zaradi poškodb glave umre še isti dan."
+      },
+      {
+        "date": "Konec oktobra lani",
+        "description": "Kriminalisti sprva osumijo in priprejo Sabrijana Jurkoviča."
+      },
+      {
+        "date": "December lani",
+        "description": "Jurkoviča izpustijo na prostost, preiskava se usmeri proti Šiljiću, ki mu odredijo pripor."
+      },
+      {
+        "date": "Maj (pred sodbo)",
+        "description": "Šiljić s tožilstvom sklene sporazum o priznanju krivde."
+      },
+      {
+        "date": "26. maj",
+        "description": "Okrožno sodišče v Novem mestu izreče sodbo in enotno kazen 6 let in 9 mesecev zapora."
+      }
+    ]
+  }
+}

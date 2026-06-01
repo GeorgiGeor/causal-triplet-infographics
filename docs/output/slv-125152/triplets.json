@@ -1,0 +1,130 @@
+{
+  "entities": [
+    {
+      "id": "samire_siljic",
+      "label": "Samire Šiljić",
+      "central": false
+    },
+    {
+      "id": "napad_na_alesa_sutarja",
+      "label": "Napad na Aleša Šutarja",
+      "central": true
+    },
+    {
+      "id": "smrt_alesa_sutarja",
+      "label": "Smrt Aleša Šutarja",
+      "central": false
+    },
+    {
+      "id": "sporazum_o_priznanju_krivde",
+      "label": "Sporazum o priznanju krivde",
+      "central": false
+    },
+    {
+      "id": "sodba_sest_let_in_devet_mesecev",
+      "label": "Sodba na 6 let in 9 mesecev zapora",
+      "central": false
+    },
+    {
+      "id": "protest_v_novem_mestu",
+      "label": "Protest v Novem mestu",
+      "central": false
+    },
+    {
+      "id": "sutarjev_zakon",
+      "label": "Šutarjev zakon",
+      "central": false
+    },
+    {
+      "id": "agresivno_verbalno_ravnanje",
+      "label": "Agresivno verbalno ravnanje Šutarja",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "samire_siljic",
+      "predicate": "izvedel",
+      "object_id": "napad_na_alesa_sutarja",
+      "evidence": "Šiljiću je tožilstvo očitalo, da je pred klubom LokalPatriot v središču Novega mesta Šutarja... napadel in udaril",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "napad_na_alesa_sutarja",
+      "predicate": "povzročil",
+      "object_id": "smrt_alesa_sutarja",
+      "evidence": "napadel in udaril, zaradi česar je ta padel in z glavo udaril ob tla. Poškodbe glave so bile tako hude, da je še isti dan umrl.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "samire_siljic",
+      "predicate": "sklenil",
+      "object_id": "sporazum_o_priznanju_krivde",
+      "evidence": "Samire Šiljić je na sodišču po sporazumu, ki ga je sklenil s tožilstvom, priznal krivdo.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "sporazum_o_priznanju_krivde",
+      "predicate": "določil višino",
+      "object_id": "sodba_sest_let_in_devet_mesecev",
+      "evidence": "V obrazložitvi sodbe je sodnik povedal, da je bil pri izreku kazni vezan na sporazum med tožilstvom in obdolženim.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "smrt_alesa_sutarja",
+      "predicate": "sprožila",
+      "object_id": "protest_v_novem_mestu",
+      "evidence": "Šutarjeva smrt je oktobra lani sprožila protest, na katerem je okoli 10.000 ljudi v Novem mestu protestiralo",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "protest_v_novem_mestu",
+      "predicate": "vodil do",
+      "object_id": "sutarjev_zakon",
+      "evidence": "protestiralo proti nereševanju romskih vprašanj, čemur je nato sledilo sprejetje t. i. Šutarjevega zakona",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "smrt_alesa_sutarja",
+      "predicate": "botrovala sprejetju",
+      "object_id": "sutarjev_zakon",
+      "evidence": "Šutarjeva smrt je oktobra lani sprožila protest... čemur je nato sledilo sprejetje t. i. Šutarjevega zakona",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "agresivno_verbalno_ravnanje",
+      "predicate": "naj bi izzvalo (po navedbah obrambe)",
+      "object_id": "napad_na_alesa_sutarja",
+      "evidence": "vse bi se mirno izšlo, če se ne bi Šutar s svojim določeno agresivnim verbalnim ravnanjem zapletel z bratrancem obdolženca.",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "agresivno_verbalno_ravnanje",
+      "predicate": "naj bi povzročilo (po navedbah obrambe)",
+      "object_id": "smrt_alesa_sutarja",
+      "evidence": "tudi ni mogoče mimo tega, da je dogodek izzval Šutar. 'Zabava v lokalu se je takrat zaključevala in vse bi se mirno izšlo, če se ne bi Šutar s svojim določeno agresivnim verbalnim ravnanjem zapletel'",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "napad_na_alesa_sutarja",
+      "predicate": "rezultiral v",
+      "object_id": "sodba_sest_let_in_devet_mesecev",
+      "evidence": "Sodišče mu je za napad izreklo šest let in tri mesece zapora... mu izreklo enotno kazen šest let in devet mesecev zapora.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "samire_siljic",
+      "predicate": "obžaluje",
+      "object_id": "smrt_alesa_sutarja",
+      "evidence": "Res mi je žal za to, kar se je zgodilo. Obžalujem, kar sem storil in bom to tudi vedno obžaloval",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "sporazum_o_priznanju_krivde",
+      "predicate": "preprečil",
+      "object_id": "napad_na_alesa_sutarja",
+      "evidence": "Ker je Šiljić s tožilstvom sklenil sporazum o priznanju krivde, najvišje možne kazni ni bilo pričakovati.",
+      "confidence": "low"
+    }
+  ]
+}

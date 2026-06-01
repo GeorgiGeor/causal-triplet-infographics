@@ -1,0 +1,130 @@
+{
+  "entities": [
+    {
+      "id": "spremembe_pravil_zzzs",
+      "label": "Spremembe pravil obveznega zdravstvenega zavarovanja",
+      "central": true
+    },
+    {
+      "id": "zzzs",
+      "label": "Zavod za zdravstveno zavarovanje Slovenije",
+      "central": false
+    },
+    {
+      "id": "osebni_zdravnik",
+      "label": "Osebni zdravnik",
+      "central": false
+    },
+    {
+      "id": "obvezni_osebni_pregled",
+      "label": "Obvezni osebni pregled pri zdravniku",
+      "central": false
+    },
+    {
+      "id": "zadrzanje_nadomestila_place",
+      "label": "Zadržanje nadomestila plače",
+      "central": false
+    },
+    {
+      "id": "izgubljeni_delovni_dnevi",
+      "label": "Izgubljeni delovni dnevi",
+      "central": false
+    },
+    {
+      "id": "delodajalci",
+      "label": "Delodajalci",
+      "central": false
+    },
+    {
+      "id": "neupostevanje_rezimov_gibanja",
+      "label": "Neupoštevanje režimov gibanja",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "zzzs",
+      "predicate": "sprejel",
+      "object_id": "spremembe_pravil_zzzs",
+      "evidence": "Zavod za zdravstveno zavarovanje RS (ZZZS) sprejel še drugi paket sprememb.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "spremembe_pravil_zzzs",
+      "predicate": "zahtevajo",
+      "object_id": "obvezni_osebni_pregled",
+      "evidence": "Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "obvezni_osebni_pregled",
+      "predicate": "mora opraviti",
+      "object_id": "osebni_zdravnik",
+      "evidence": "Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "obvezni_osebni_pregled",
+      "predicate": "preprečuje",
+      "object_id": "zadrzanje_nadomestila_place",
+      "evidence": "Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "zzzs",
+      "predicate": "odloča o",
+      "object_id": "zadrzanje_nadomestila_place",
+      "evidence": "bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "neupostevanje_rezimov_gibanja",
+      "predicate": "vpliva na",
+      "object_id": "zadrzanje_nadomestila_place",
+      "evidence": "Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "spremembe_pravil_zzzs",
+      "predicate": "zmanjšujejo število",
+      "object_id": "izgubljeni_delovni_dnevi",
+      "evidence": "prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "izgubljeni_delovni_dnevi",
+      "predicate": "prinašajo prihranek za",
+      "object_id": "delodajalci",
+      "evidence": "v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "spremembe_pravil_zzzs",
+      "predicate": "razbremenjujejo",
+      "object_id": "osebni_zdravnik",
+      "evidence": "v tem primeru lahko sporoči odsotnost, ko se vrne domov, že isti dan in tudi v tem primeru, to je novost in razbremenitev za družinske zdravnike",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "spremembe_pravil_zzzs",
+      "predicate": "uvajajo sankcije za",
+      "object_id": "neupostevanje_rezimov_gibanja",
+      "evidence": "takrat z interventnim zakonom, ki je prinesel zlasti strožje sankcije v primeru kršitev navodil za ravnanje",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "zzzs",
+      "predicate": "beleži manj",
+      "object_id": "izgubljeni_delovni_dnevi",
+      "evidence": "Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "spremembe_pravil_zzzs",
+      "predicate": "koristijo za",
+      "object_id": "delodajalci",
+      "evidence": "da seveda staleže odpirajo odgovorno, skrbno, ne samo do delodajalcev, do zdravstvene blagajne, ampak predvsem tudi do pacientov",
+      "confidence": "medium"
+    }
+  ]
+}

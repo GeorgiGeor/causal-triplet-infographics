@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Seminar comparison &middot; all events</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.container { max-width: 1600px; margin: 0 auto; padding: 32px 24px 80px; }
+h1 { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+.subtitle { color: #64748b; font-size: 14px; margin: 0 0 24px; }
+.nav { display: flex; gap: 12px; font-size: 13px; margin-bottom: 24px; }
+.nav a { color: #2563eb; text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.event-card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; text-decoration: none; color: inherit; transition: transform 0.1s, box-shadow 0.1s; }
+.event-card:hover { box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08); transform: translateY(-1px); }
+.event-card .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #64748b; }
+.event-card .title { font-size: 14px; font-weight: 600; margin: 4px 0 10px; line-height: 1.3; }
+.event-card .meta { font-size: 11px; color: #94a3b8; display: flex; gap: 10px; }
+.event-card .thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; background: #f1f5f9; margin-bottom: 8px; }
+
+.columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+.col { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+.col-head { padding: 10px 14px; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; font-size: 12px; font-weight: 600; color: #475569; letter-spacing: 0.04em; text-transform: uppercase; }
+.col-head.direct { background: #dbeafe; color: #1d4ed8; }
+.col-head.triplet-image { background: #dcfce7; color: #15803d; }
+.col-head.triplet-html { background: #fef3c7; color: #b45309; }
+.col img, .col .placeholder { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: white; display: block; }
+.col .placeholder { display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 13px; }
+
+details { background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px; }
+details summary { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 14px; user-select: none; }
+details summary:hover { background: #f8fafc; }
+details[open] summary { border-bottom: 1px solid #e2e8f0; }
+.details-body { padding: 16px; max-height: 560px; overflow: auto; }
+
+.prompt-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.prompt-block h4 { font-size: 12px; font-weight: 600; color: #475569; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 6px; }
+.prompt-block pre { background: #0f172a; color: #e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; line-height: 1.5; padding: 12px; border-radius: 6px; max-height: 480px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+
+.article-list { display: flex; flex-direction: column; gap: 16px; }
+.article { border-left: 3px solid #cbd5e1; padding: 4px 14px; }
+.article .pub { font-size: 12px; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.04em; }
+.article .atitle { font-size: 14px; font-weight: 600; margin: 4px 0 6px; }
+.article .body { font-size: 12px; color: #334155; line-height: 1.55; white-space: pre-wrap; }
+
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; text-align: left; vertical-align: top; }
+th { font-weight: 600; color: #475569; background: #f8fafc; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+td.predicate { font-weight: 600; color: #1d4ed8; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+.central-badge { display: inline-block; padding: 1px 6px; font-size: 10px; border-radius: 999px; background: #c2410c; color: white; font-weight: 600; margin-left: 6px; }
+.evidence { color: #64748b; font-style: italic; font-size: 11px; }
+tr.dropped { background: #f8fafc; opacity: 0.6; }
+tr.dropped td.predicate { text-decoration: line-through; }
+.render-excluded { display: inline-block; margin-left: 6px; padding: 1px 6px; font-size: 9px; border-radius: 999px; background: #e2e8f0; color: #475569; font-weight: 600; white-space: nowrap; }
+.render-note { font-size: 11px; color: #64748b; margin: 0 0 8px; }
+
+.event-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0; font-size: 13px; }
+.event-nav a { color: #2563eb; text-decoration: none; }
+.event-nav a:hover { text-decoration: underline; }
+
+/* --- Scoring UI --- */
+.score-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px; margin: 24px 0; background: #fcfdff; }
+.score-card > h3 { margin: 0 0 4px; font-size: 15px; color: #0f172a; }
+.score-card .sc-sub { margin: 0 0 16px; font-size: 12px; color: #64748b; }
+.score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .score-grid { grid-template-columns: 1fr; } }
+.score-block { border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; background: white; }
+.score-block h4 { margin: 0 0 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+.score-block.triplets h4 { color: #7c3aed; }
+.score-block.direct h4 { color: #b91c1c; }
+.score-block.triplet_image h4 { color: #15803d; }
+.metric { margin-bottom: 12px; }
+.metric-label { font-size: 12px; color: #334155; margin-bottom: 5px; font-weight: 600; }
+.lk-hint { font-weight: 400; color: #94a3b8; margin-left: 6px; }
+.likert { display: flex; gap: 4px; }
+.lk { flex: 1; }
+.lk input { position: absolute; opacity: 0; pointer-events: none; }
+.lk span { display: block; text-align: center; padding: 6px 0; font-size: 13px; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; color: #475569; user-select: none; }
+.lk input:checked + span { background: #2563eb; color: white; border-color: #2563eb; font-weight: 700; }
+.lk:hover span { border-color: #2563eb; }
+.num { width: 64px; padding: 5px 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; }
+.suffix { color: #64748b; font-size: 12px; margin-left: 6px; }
+.metric.comment textarea { width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 8px; font-size: 12px; font-family: inherit; resize: vertical; }
+.objective-note { font-size: 11px; color: #64748b; margin: 0 0 10px; padding: 6px 10px; background: #f1f5f9; border-radius: 6px; }
+.score-bar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin: -8px 0 8px; background: #0f172a; color: #e2e8f0; border-radius: 10px; font-size: 12px; }
+.score-bar button { font: inherit; padding: 5px 12px; border-radius: 6px; border: 0; cursor: pointer; font-weight: 600; }
+.score-bar .exp { background: #22c55e; color: #052e16; }
+.score-bar .imp { background: #334155; color: #e2e8f0; }
+.score-bar .saved { margin-left: auto; color: #4ade80; opacity: 0; transition: opacity 0.3s; }
+.score-bar .saved.show { opacity: 1; }
+.score-bar input[type=file] { display: none; }
+.event-card.scored { box-shadow: inset 4px 0 0 #22c55e; }
+.event-card.scored .code::after { content: " ✓"; color: #16a34a; font-weight: 700; }
+.verdict-cell { white-space: nowrap; }
+.tr-verdict { font-size: 11px; padding: 3px 4px; border: 1px solid #cbd5e1; border-radius: 5px; max-width: 150px; }
+.tr-note { display: block; margin-top: 4px; width: 150px; font-size: 11px; padding: 3px 5px; border: 1px solid #e2e8f0; border-radius: 5px; }
+.score-bar .src { background: #1d4ed8; color: white; }
+
+/* --- Source-text reading panel --- */
+:root { --sp-width: min(620px, 46vw); }
+.source-panel { position: fixed; top: 0; right: 0; height: 100vh; width: var(--sp-width); background: white; border-left: 1px solid #e2e8f0; box-shadow: -6px 0 28px rgba(15,23,42,0.14); transform: translateX(100%); transition: transform 0.2s ease; z-index: 40; display: flex; flex-direction: column; }
+body.source-open .source-panel { transform: translateX(0); }
+.source-panel .sp-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #e2e8f0; font-weight: 600; font-size: 13px; background: #f8fafc; }
+.source-panel .sp-close { font: inherit; border: 0; background: #e2e8f0; color: #475569; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.source-panel .sp-body { padding: 16px; overflow-y: auto; flex: 1; }
+body.source-open .container { margin-right: var(--sp-width); max-width: none; transition: margin-right 0.2s ease; }
+@media (max-width: 1000px) { :root { --sp-width: 100vw; } body.source-open .container { margin-right: 0; } }
+.sp-search { display: flex; gap: 6px; align-items: center; padding: 8px 16px; border-bottom: 1px solid #e2e8f0; background: white; }
+.sp-search input { flex: 1; font-size: 12px; padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 6px; }
+.sp-search #sp-search-count { font-size: 11px; color: #64748b; white-space: nowrap; min-width: 56px; text-align: right; }
+.sp-search button { font-size: 12px; padding: 5px 9px; border: 1px solid #cbd5e1; border-radius: 6px; background: white; cursor: pointer; }
+mark.sp-hit { background: #fde68a; color: inherit; border-radius: 2px; }
+mark.sp-hit.cur { background: #f59e0b; color: white; }
+
+/* clickable renders */
+.col img.zoomable { cursor: zoom-in; }
+
+/* focus mode: big image + its rating block, left of the source panel */
+.focus-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 38; background: rgba(248,250,252,0.99); display: none; flex-direction: column; padding: 18px 22px; overflow-y: auto; }
+body.focus-open .focus-overlay { display: flex; }
+body.focus-open.source-open .focus-overlay { right: var(--sp-width); }
+.focus-overlay .fo-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.focus-overlay .fo-title { font-weight: 700; font-size: 16px; }
+.focus-overlay .fo-close { font: inherit; font-weight: 600; border: 0; background: #0f172a; color: white; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+.focus-overlay .fo-img { width: 100%; max-height: 52vh; object-fit: contain; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.focus-overlay .fo-cols { display: flex; gap: 18px; align-items: flex-start; margin-top: 14px; flex-wrap: wrap; }
+.focus-overlay .fo-score { flex: 1 1 340px; min-width: 300px; }
+.focus-overlay .fo-score .score-block { max-width: 520px; }
+.focus-overlay .fo-triplets { flex: 1 1 360px; min-width: 300px; display: none; background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; max-height: 60vh; overflow-y: auto; }
+body.focus-cond-triplet_image .focus-overlay .fo-triplets { display: block; }
+.fo-triplets h4 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: #15803d; }
+.fo-triplets .ftl-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+.fo-triplets .ftl-list li { font-size: 12px; line-height: 1.4; }
+.fo-triplets .ftl-list li.dropped { opacity: 0.55; }
+.fo-triplets .spo b { color: #0f172a; } .fo-triplets .spo i { color: #1d4ed8; font-style: normal; font-weight: 600; }
+.fo-triplets .re-control { display: flex; gap: 6px; margin-top: 4px; }
+.fo-triplets .re-verdict { font-size: 11px; padding: 3px 4px; border: 1px solid #cbd5e1; border-radius: 5px; }
+.fo-triplets .re-note { flex: 1; font-size: 11px; padding: 3px 6px; border: 1px solid #e2e8f0; border-radius: 5px; }
+.ftl-additions { margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 12px; }
+.ftl-additions .addition-row { display: flex; gap: 4px; margin-bottom: 6px; }
+.ftl-additions .addition-input { flex: 1; min-width: 0; font-size: 11px; padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 5px; }
+.ftl-additions .addition-rm { border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c; border-radius: 6px; cursor: pointer; padding: 0 8px; }
+.ftl-additions .add-btn { font-size: 12px; font-weight: 600; padding: 6px 12px; border: 1px dashed #16a34a; background: #f0fdf4; color: #15803d; border-radius: 6px; cursor: pointer; }
+@media (max-width: 1000px) { body.focus-open.source-open .focus-overlay { right: 0; } }
+
+/* --- Frozen (read-only published) view: render locked controls as static text/badges --- */
+body.frozen .score-bar .exp,
+body.frozen .score-bar .imp,
+body.frozen .score-bar .saved,
+body.frozen .add-btn,
+body.frozen .addition-rm { display: none; }
+body.frozen .score-bar::after { content: "read-only"; margin-left: auto; font-size: 11px; color: #94a3b8; }
+body.frozen #progress { display: none; }
+/* likert: show only the chosen value, as a static chip */
+body.frozen .likert .lk input:not(:checked) + span { display: none; }
+body.frozen .likert .lk input:checked + span { background: #2563eb; color: #fff; border-color: #2563eb; }
+body.frozen .likert:not(:has(input:checked))::before { content: "—"; color: #94a3b8; }
+/* dropdowns → plain text */
+body.frozen select { appearance: none; -webkit-appearance: none; border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: #0f172a; opacity: 1; }
+body.frozen select:disabled { color: #0f172a; }
+/* number/text/textarea → borderless static */
+body.frozen .num, body.frozen .addition-input, body.frozen .tr-note, body.frozen .re-note,
+body.frozen .metric.comment textarea { border: 0; background: none; padding: 0; resize: none; color: #334155; font-weight: 600; opacity: 1; }
+body.frozen .metric.comment textarea:disabled { color: #334155; }
+body.frozen input:disabled, body.frozen textarea:disabled, body.frozen select:disabled { -webkit-text-fill-color: currentColor; }
+</style>
+</head>
+<body class="frozen">
+<div class="container">
+  <h1>Seminar triplet comparison</h1>
+  <p class="subtitle">10 events &middot; three conditions per event (direct, triplet&rarr;image, triplet&rarr;HTML/CSS)</p>
+  <div class="score-bar"><strong>Scores</strong><button class="exp" onclick="exportScores()">⬇ Export JSON</button><label class="imp" style="cursor:pointer;padding:5px 12px;border-radius:6px;">⬆ Import<input type="file" accept="application/json" onchange="importScores(event)"></label><span class="saved" id="saved-ind">✓ saved</span></div>
+  <p class="subtitle" id="progress" style="margin-top:8px;"></p>
+  <div class="event-grid">
+    <a class="event-card" data-code="slv-125182" href="slv-125182.html"><img class="thumb" src="../output/slv-125182/triplet_image.webp" alt=""><div class="code">slv-125182</div><div class="title">Cigler Kralj: Če sklepa ne sprejmemo, kršimo ustavo. Opozicija: Gre za grobo zlorabo ustave.</div><div class="meta"><span>10 articles</span><span>8 entities</span><span>12 triplets</span></div></a><a class="event-card" data-code="slv-125164" href="slv-125164.html"><img class="thumb" src="../output/slv-125164/triplet_image.webp" alt=""><div class="code">slv-125164</div><div class="title">Neuradno: dokazi naj bi bili za Goloba obremenjujoči, KPK z dopolnjenim osnutkom ugotovitev v zadevi Karigador</div><div class="meta"><span>10 articles</span><span>8 entities</span><span>11 triplets</span></div></a><a class="event-card" data-code="slv-125162" href="slv-125162.html"><img class="thumb" src="../output/slv-125162/triplet_image.webp" alt=""><div class="code">slv-125162</div><div class="title">Slovenija v izdajo sedemletne obveznice</div><div class="meta"><span>10 articles</span><span>8 entities</span><span>12 triplets</span></div></a><a class="event-card" data-code="eng-11688905" href="eng-11688905.html"><img class="thumb" src="../output/eng-11688905/triplet_image.webp" alt=""><div class="code">eng-11688905</div><div class="title">Madžarski parlament izglasoval preklic izstopa države iz ICC</div><div class="meta"><span>7 articles</span><span>8 entities</span><span>10 triplets</span></div></a><a class="event-card" data-code="eng-11687250" href="eng-11687250.html"><img class="thumb" src="../output/eng-11687250/triplet_image.webp" alt=""><div class="code">eng-11687250</div><div class="title">Izraelska vojska naj bi ubila vodjo vojaškega krila Hamasa</div><div class="meta"><span>8 articles</span><span>8 entities</span><span>11 triplets</span></div></a><a class="event-card" data-code="slv-125190" href="slv-125190.html"><img class="thumb" src="../output/slv-125190/triplet_image.webp" alt=""><div class="code">slv-125190</div><div class="title">FT: Devet držav izstopilo iz češke pobude za dobavo streliva Ukrajini</div><div class="meta"><span>10 articles</span><span>8 entities</span><span>12 triplets</span></div></a><a class="event-card" data-code="slv-125180" href="slv-125180.html"><img class="thumb" src="../output/slv-125180/triplet_image.webp" alt=""><div class="code">slv-125180</div><div class="title">Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan. Kaj se zgodi, če tega ne naredite?</div><div class="meta"><span>10 articles</span><span>8 entities</span><span>12 triplets</span></div></a><a class="event-card" data-code="slv-125152" href="slv-125152.html"><img class="thumb" src="../output/slv-125152/triplet_image.webp" alt=""><div class="code">slv-125152</div><div class="title">Obtoženemu napada na Aleša Šutarja po priznanju krivde šest let in devet mesecev zapora</div><div class="meta"><span>10 articles</span><span>8 entities</span><span>12 triplets</span></div></a><a class="event-card" data-code="slv-125151" href="slv-125151.html"><img class="thumb" src="../output/slv-125151/triplet_image.webp" alt=""><div class="code">slv-125151</div><div class="title">Tragedija: vlak trčil v šolski avtobus, umrlo naj bi več ljudi</div><div class="meta"><span>10 articles</span><span>8 entities</span><span>11 triplets</span></div></a><a class="event-card" data-code="eng-11686783" href="eng-11686783.html"><img class="thumb" src="../output/eng-11686783/triplet_image.webp" alt=""><div class="code">eng-11686783</div><div class="title">Nasa predstavila načrt za izgradnjo baze na Luni</div><div class="meta"><span>5 articles</span><span>8 entities</span><span>12 triplets</span></div></a>
+  </div>
+</div>
+
+<script>
+(function(){
+  const KEY = "seminarScores";
+  function loadAll(){ try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e){ return {}; } }
+  window.exportScores = function(){
+    const ALL_EVENTS = ["slv-125182", "slv-125164", "slv-125162", "eng-11688905", "eng-11687250", "slv-125190", "slv-125180", "slv-125152", "slv-125151", "eng-11686783"];
+    const stored = loadAll();
+    const scores = {};
+    ALL_EVENTS.forEach(c => { scores[c] = stored[c] || {}; });
+    const payload = { _meta: { exported: new Date().toISOString(), rubric: "v1" }, scores: scores };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "seminar_scores.json"; a.click();
+    URL.revokeObjectURL(a.href);
+  };
+  window.importScores = function(ev){
+    const f = ev.target.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = function(){
+      try { const p = JSON.parse(r.result); localStorage.setItem(KEY, JSON.stringify(p.scores || p)); location.reload(); }
+      catch(e){ alert("Invalid JSON: " + e.message); }
+    };
+    r.readAsText(f);
+  };
+  document.addEventListener("DOMContentLoaded", function(){
+    const all = loadAll();
+    const cards = document.querySelectorAll(".event-card");
+    let n = 0;
+    cards.forEach(c => { if (all[c.getAttribute("data-code")]) { c.classList.add("scored"); n++; } });
+    const el = document.getElementById("progress");
+    if (el) el.textContent = n + " / " + cards.length + " events have scores saved in this browser";
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic from the entities and relations supplied below. You are NOT extracting a knowledge graph from raw text — the graph has already been extracted for you. Render it.
+
+### 1. Visual Style & Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+  * **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+  * **Claims/Events:** Muted Grey or subtle Teal.
+  * **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+  * **Highlights:** Apply Burnt Orange ONLY to the entity marked `central: true` in the supplied list.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Constraints (CRITICAL)
+You MUST use ONLY the entities and relations supplied below. You must NOT:
+- introduce any node that is not in the supplied entities list,
+- invent any directed edge that is not in the supplied relations list,
+- add background knowledge or implied context,
+- **translate, paraphrase, or rewrite** any supplied label or predicate. Render each node label and each edge predicate EXACTLY as supplied below, in the supplied language. If a label is "Osebni zdravniki", the node text must read "Osebni zdravniki", not "Personal Doctors" or "Family physician". Same for predicates.
+
+Render each entity as one node, using its `label` as the visible text (verbatim). Render each relation as one directed arrow whose label is the supplied predicate (verbatim, though you may apply TitleCase or uppercase styling for visual consistency).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the supplied causal network (DO NOT generate any additional text).
+
+### 4. Entities (use exactly these as nodes)
+
+- Zakon o interventnih ukrepih za razvoj Slovenije [CENTRAL — highlight in burnt orange]
+- Državni zbor
+- Sindikati
+- Pobuda za razpis naknadnega zakonodajnega referenduma
+- Ustava Republike Slovenije
+- Sklep o nedopustnosti referenduma
+- Davčne določbe v zakonu
+- Opozicijske stranke (SD, Levica, Vesna, Svoboda)
+
+### 5. Causal Relations (use exactly these as directed edges)
+
+- Sindikati → vložili → Pobuda za razpis naknadnega zakonodajnega referenduma
+- Pobuda za razpis naknadnega zakonodajnega referenduma → cilja na → Zakon o interventnih ukrepih za razvoj Slovenije
+- Državni zbor → potrdil → Sklep o nedopustnosti referenduma
+- Sklep o nedopustnosti referenduma → onemogoča → Pobuda za razpis naknadnega zakonodajnega referenduma
+- Davčne določbe v zakonu → onemogočajo (po ustavi) → Pobuda za razpis naknadnega zakonodajnega referenduma
+- Zakon o interventnih ukrepih za razvoj Slovenije → vsebuje → Davčne določbe v zakonu
+- Ustava Republike Slovenije → prepoveduje referendum o → Davčne določbe v zakonu
+- Sklep o nedopustnosti referenduma → naj bi kršil (po navedbah SD) → Ustava Republike Slovenije
+- Opozicijske stranke (SD, Levica, Vesna, Svoboda) → nasprotuje → Sklep o nedopustnosti referenduma
+- Opozicijske stranke (SD, Levica, Vesna, Svoboda) → kritizira → Zakon o interventnih ukrepih za razvoj Slovenije
+- Sindikati → napovedali ustavno presojo → Sklep o nedopustnosti referenduma
+- Državni zbor → razpravljal o → Zakon o interventnih ukrepih za razvoj Slovenije

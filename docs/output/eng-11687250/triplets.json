@@ -1,0 +1,123 @@
+{
+  "entities": [
+    {
+      "id": "mohamed_odeh",
+      "label": "Mohamed Odeh",
+      "central": false
+    },
+    {
+      "id": "smrt_mohameda_odeha",
+      "label": "Smrt Mohameda Odeha",
+      "central": true
+    },
+    {
+      "id": "izraelska_vojska",
+      "label": "Izraelska vojska",
+      "central": false
+    },
+    {
+      "id": "izrael_kac",
+      "label": "Izrael Kac",
+      "central": false
+    },
+    {
+      "id": "benjamin_netanjahu",
+      "label": "Benjamin Netanjahu",
+      "central": false
+    },
+    {
+      "id": "napad_7_oktobra",
+      "label": "Napad 7. oktobra 2023",
+      "central": false
+    },
+    {
+      "id": "ezedin_al_hadad",
+      "label": "Ezedin Al Hadad",
+      "central": false
+    },
+    {
+      "id": "hamas",
+      "label": "Hamas",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "izraelska_vojska",
+      "predicate": "naj bi ubila",
+      "object_id": "smrt_mohameda_odeha",
+      "evidence": "Izraelska vojska je v torkovem napadu ubila novega poveljnika vojaškega krila palestinskega islamističnega gibanja Hamas v Gazi Mohameda Odeha",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "izrael_kac",
+      "predicate": "sporočil",
+      "object_id": "smrt_mohameda_odeha",
+      "evidence": "je danes sporočil izraelski obrambni minister Izrael Kac.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "benjamin_netanjahu",
+      "predicate": "oznanil",
+      "object_id": "smrt_mohameda_odeha",
+      "evidence": "Napad na poveljnika vojaškega krila Hamasa sta pred tem v skupni izjavi oznanila izraelski premier Benjamin Netanjahu in obrambni minister Kac.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "mohamed_odeh",
+      "predicate": "naj bi vodil",
+      "object_id": "napad_7_oktobra",
+      "evidence": "Po navedbah Netanjahuja je Odeh vodil obveščevalno divizijo Hamasa v času napada 7. oktobra leta 2023.",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "napad_7_oktobra",
+      "predicate": "motivira",
+      "object_id": "izraelska_vojska",
+      "evidence": "Zavezali smo se, da bomo uničili vse, ki so vodili pokol 7. oktobra, in to bomo tudi storili",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "mohamed_odeh",
+      "predicate": "nasledil",
+      "object_id": "ezedin_al_hadad",
+      "evidence": "Po navedbah Izraela je Odeh nasledil prejšnjega vojaškega poveljnika Ezedina Al Hadada",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "izraelska_vojska",
+      "predicate": "ubila",
+      "object_id": "ezedin_al_hadad",
+      "evidence": "Ezedina Al Hadada, ki je bil ubit v izraelskem napadu 15. maja.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "hamas",
+      "predicate": "še ni potrdil",
+      "object_id": "smrt_mohameda_odeha",
+      "evidence": "Hamas medtem smrti poveljnika za zdaj še ni potrdil.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "izrael_kac",
+      "predicate": "napovedal uničenje",
+      "object_id": "hamas",
+      "evidence": "Zavezali smo se, da bomo uničili vse, ki so vodili pokol 7. oktobra",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "benjamin_netanjahu",
+      "predicate": "obtožuje",
+      "object_id": "mohamed_odeh",
+      "evidence": "Opisala sta ga kot enega od arhitektov napada na Izrael 7. oktobra 2023",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "hamas",
+      "predicate": "izvedel",
+      "object_id": "napad_7_oktobra",
+      "evidence": "vpletene v napad Hamasa 7. oktobra 2023",
+      "confidence": "high"
+    }
+  ]
+}

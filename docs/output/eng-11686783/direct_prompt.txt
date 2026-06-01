@@ -1,0 +1,86 @@
+**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic based on the provided text.
+
+### 1. Visual Style & Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+* **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+* **Claims/Events:** Muted Grey or subtle Teal.
+* **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+* **Highlights:** Use a single accent color (e.g., Burnt Orange) only for the most critical central node.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Processing Rules
+Analyze the provided text to extract a Knowledge Graph:
+* **Nodes:** Extract key **Entities** (People, Countries, Organizations) and **Key Claims/Events**. Enclose node text in clean rectangular or pill-shaped containers.
+* **Links:** Identify **Causal Relations** connecting these nodes.
+* **Labels:** Every link must have a text label (2-3 words max) describing the causal relations between nodes.
+* **Logic:** Ensure the visual flow represents the causal chain (Cause → Effect).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the extracted causal network (DO NOT generate any additional text).
+
+### 4. Input Text
+
+Washington, 27. maja (STA) - Ameriška vesoljska agencija Nasa je v torek predstavila načrt za izgradnjo baze na Luni, v skladu s katerim bi lahko že v šestih letih ljudje živeli in delali na Zemljinem naravnem satelitu, poroča nemška tiskovna agencija dpa. Bazo nameravajo postaviti na južnem ...
+
+WASHINGTON * Bazo nameravajo postaviti na južnem polu Lune, sčasoma pa bi se lahko raztezala na območju več sto kvadratnih kilometrov. Nasa namerava tam izvajati znanstvene poskuse in razvijati tehnologije, potrebne za prihodnje misije v vesolju, vključno s potovanjem na Mars.
+
+Načrt gradnje baze obsega tri faze. V prvi namerava Nasa med drugim izvajati robotske misije za raziskovanje površja Lune. Prva faza bi trajala do leta 2029, v tem času pa naj bi izvedli 25 izstrelitev in na Luni odložili štiri tone tovora, je v torek pojasnil Carlos Garcia-Galan, vodja Nasinega programa za gradnjo baze.
+
+Med letoma 2029 in 2032 bi v skladu z načrtom na Luni postavili prve bivalne prostore in testirali tehnologije, ki bi utrle pot tamkajšnjemu izkoriščanju jedrske energije.
+
+V tretji fazi od leta 2032 je načrtovana stalna prisotnost ljudi na Luni z rednimi menjavami posadk. To bi vključevalo večje bivalne module in zmogljivosti za obsežen povratni prevoz tovora brez posadke z lunine površine na Zemljo.
+
+Južni pol Lune, kjer namerava Nasa zgraditi bazo, velja za eno znanstveno najpomembnejših območij na Luni. Za razliko od nekaterih drugih delov je to območje izpostavljeno daljšemu obdobju svetlobe in krajšim obdobjem teme. Te razmere so ugodnejše za pridobivanje sončne energije in omogočajo stabilne temperature za izvajanje operacij na površini.
+
+Ob predstavitvi načrta za gradnjo baze je direktor Nase Jared Isaacman dejal, da je javnost navdušena nad "velikim povratkom" na Luno. "To pomeni, da ljudje znova gledajo navzgor, znova verjamejo v velike stvari in pozorno spremljajo, kako se Amerika vrača na Luno, tokrat za stalno," je dodal.
+
+Nasa je naznanila, da na južnem polu Lune nameravajo postaviti bazo, ki bi se sčasoma lahko raztezala na območju več sto kvadratnih kilometrov. Ameriška vesoljska agencija namerava tam izvajati znanstvene poskuse in razvijati tehnologije, potrebne za prihodnje misije v vesolju, vključno s potovanjem na Mars.
+
+Kot je dejal Carlos Garcia-Galan, vodja Nasinega programa za izgradnjo baze, načrt gradnje obsega tri faze. V prvi namerava Nasa med drugim izvajati robotske misije za raziskovanje površja Lune. Prva faza bi trajala do leta 2029, v tem času pa naj bi izvedli 25 izstrelitev in na Luni odložili štiri tone tovora.
+
+Med letoma 2029 in 2032 bi v skladu z načrtom na Luni postavili prve bivalne prostore in testirali tehnologije, ki bi utrle pot tamkajšnjemu izkoriščanju jedrske energije.
+
+V tretji fazi od leta 2032 je načrtovana stalna prisotnost ljudi na Luni z rednimi menjavami posadk. To bi vključevalo večje bivalne module in zmogljivosti za obsežen povratni prevoz tovora brez posadke z Lunine površine na Zemljo.
+
+Južni pol, kjer namerava Nasa zgraditi bazo, velja za eno znanstveno najpomembnejših območij Lune. Za razliko od nekaterih drugih delov je to območje izpostavljeno daljšemu obdobju svetlobe in krajšim obdobjem teme. Te razmere so ugodnejše za pridobivanje sončne energije in omogočajo stabilne temperature za izvajanje operacij na površini.
+
+Ob predstavitvi načrta za gradnjo baze je direktor Nase Jared Isaacman dejal, da je javnost navdušena nad "veliko vrnitvijo" na Luno. "To pomeni, da ljudje znova gledajo navzgor, znova verjamejo v velike stvari in pozorno spremljajo, kako se Amerika vrača na Luno, tokrat za stalno," je dodal.
+
+Ameriška vesoljska agencija Nasa je predstavila načrt za izgradnjo baze na Luni
+
+Ameriška vesoljska agencija Nasa je v torek predstavila načrt za izgradnjo baze na Luni, v skladu s katerim bi lahko že v šestih letih ljudje živeli in delali na Zemljinem naravnem satelitu, poroča nemška tiskovna agencija dpa.
+
+Bazo nameravajo postaviti na južnem polu Lune, sčasoma pa bi se lahko raztezala na območju več sto kvadratnih kilometrov. Nasa namerava tam izvajati znanstvene poskuse in razvijati tehnologije, potrebne za prihodnje misije v vesolju, vključno s potovanjem na Mars.
+
+Načrt gradnje baze obsega tri faze. V prvi namerava Nasa med drugim izvajati robotske misije za raziskovanje površja Lune. Prva faza bi trajala do leta 2029, v tem času pa naj bi izvedli 25 izstrelitev in na Luni odložili štiri tone tovora, je v torek pojasnil Carlos Garcia-Galan, vodja Nasinega programa za izgradnjo baze, poroča BBC.
+
+Med letoma 2029 in 2032 bi v skladu z načrtom na Luni postavili prve bivalne prostore in testirali tehnologije, ki bi utrle pot tamkajšnjemu izkoriščanju jedrske energije.
+
+"To pomeni, da ljudje znova gledajo navzgor, znova verjamejo v velike stvari in pozorno spremljajo, kako se Amerika vrača na Luno, tokrat za stalno."
+
+V tretji fazi od leta 2032 je načrtovana stalna prisotnost ljudi na Luni z rednimi menjavami posadk. To bi vključevalo večje bivalne module in zmogljivosti za obsežen povratni prevoz tovora brez posadke z lunine površine na Zemljo.
+
+Južni pol Lune, kjer namerava Nasa zgraditi bazo, velja za eno znanstveno najpomembnejših območij na Luni. Za razliko od nekaterih drugih delov je to območje izpostavljeno daljšemu obdobju svetlobe in krajšim obdobjem teme. Te razmere so ugodnejše za pridobivanje sončne energije in omogočajo stabilne temperature za izvajanje operacij na površini.
+
+Ob predstavitvi načrta za gradnjo baze je direktor Nase Jared Isaacman dejal, da je javnost navdušena nad "velikim povratkom" na Luno. "To pomeni, da ljudje znova gledajo navzgor, znova verjamejo v velike stvari in pozorno spremljajo, kako se Amerika vrača na Luno, tokrat za stalno," je dodal.
+
+V tej fazi naj bi izgradili večje bivalne module in zmogljivosti za obsežen povratni prevoz tovora brez posadke z Lunine površine na Zemljo.
+
+Bazo namerava Nasa zgraditi v bližini južnega pola Lune, ki velja za eno znanstveno najpomembnejših območij na našem naravnem satelitu.
+
+Za razliko od nekaterih drugih delov je to območje izpostavljeno daljšemu obdobju svetlobe in krajšim obdobjem teme. Te razmere so ugodnejše za pridobivanje sončne energije in omogočajo stabilne temperature za izvajanje operacij na površini.
+
+Poleg tega so tam našli tudi zaloge ledu, ki omogoča pridobivanje vode in kisika, pomembna za življenje posadk na Luni, in goriva za rakete.

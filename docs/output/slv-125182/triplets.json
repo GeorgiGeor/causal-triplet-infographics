@@ -1,0 +1,130 @@
+{
+  "entities": [
+    {
+      "id": "interventni_zakon",
+      "label": "Zakon o interventnih ukrepih za razvoj Slovenije",
+      "central": true
+    },
+    {
+      "id": "drzavni_zbor",
+      "label": "Državni zbor",
+      "central": false
+    },
+    {
+      "id": "sindikati",
+      "label": "Sindikati",
+      "central": false
+    },
+    {
+      "id": "pobuda_za_referendum",
+      "label": "Pobuda za razpis naknadnega zakonodajnega referenduma",
+      "central": false
+    },
+    {
+      "id": "ustava_rs",
+      "label": "Ustava Republike Slovenije",
+      "central": false
+    },
+    {
+      "id": "sklep_o_nedopustnosti",
+      "label": "Sklep o nedopustnosti referenduma",
+      "central": false
+    },
+    {
+      "id": "davcne_dolocbe",
+      "label": "Davčne določbe v zakonu",
+      "central": false
+    },
+    {
+      "id": "opozicija",
+      "label": "Opozicijske stranke (SD, Levica, Vesna, Svoboda)",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "sindikati",
+      "predicate": "vložili",
+      "object_id": "pobuda_za_referendum",
+      "evidence": "Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "pobuda_za_referendum",
+      "predicate": "cilja na",
+      "object_id": "interventni_zakon",
+      "evidence": "vložili pobudo za razpis naknadnega zakonodajnega referenduma ... o zakonu o interventnih ukrepih za razvoj Slovenije",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "drzavni_zbor",
+      "predicate": "potrdil",
+      "object_id": "sklep_o_nedopustnosti",
+      "evidence": "DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "sklep_o_nedopustnosti",
+      "predicate": "onemogoča",
+      "object_id": "pobuda_za_referendum",
+      "evidence": "DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "davcne_dolocbe",
+      "predicate": "onemogočajo (po ustavi)",
+      "object_id": "pobuda_za_referendum",
+      "evidence": "V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "interventni_zakon",
+      "predicate": "vsebuje",
+      "object_id": "davcne_dolocbe",
+      "evidence": "interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "ustava_rs",
+      "predicate": "prepoveduje referendum o",
+      "object_id": "davcne_dolocbe",
+      "evidence": "V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "sklep_o_nedopustnosti",
+      "predicate": "naj bi kršil (po navedbah SD)",
+      "object_id": "ustava_rs",
+      "evidence": "Gre za grobo zlorabo ustave, pa je sprejemu sklepa nasprotovala Meira Hot (SD).",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "opozicija",
+      "predicate": "nasprotuje",
+      "object_id": "sklep_o_nedopustnosti",
+      "evidence": "v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "opozicija",
+      "predicate": "kritizira",
+      "object_id": "interventni_zakon",
+      "evidence": "Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "sindikati",
+      "predicate": "napovedali ustavno presojo",
+      "object_id": "sklep_o_nedopustnosti",
+      "evidence": "DZ potrdil nedopustnost razpisa referenduma. Sindikati napovedali ustavno presojo.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "drzavni_zbor",
+      "predicate": "razpravljal o",
+      "object_id": "interventni_zakon",
+      "evidence": "Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili",
+      "confidence": "high"
+    }
+  ]
+}

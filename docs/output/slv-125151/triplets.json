@@ -1,0 +1,123 @@
+{
+  "entities": [
+    {
+      "id": "nesreca_v_buggenhoutu",
+      "label": "Trčenje vlaka in kombija v Buggenhoutu",
+      "central": true
+    },
+    {
+      "id": "spuscene_zapornice",
+      "label": "Spuščene zapornice",
+      "central": false
+    },
+    {
+      "id": "rdeca_luc",
+      "label": "Rdeča luč na prehodu",
+      "central": false
+    },
+    {
+      "id": "jean_luc_crucke",
+      "label": "Jean-Luc Crucke (minister za promet)",
+      "central": false
+    },
+    {
+      "id": "smrtne_zrtve",
+      "label": "Štiri smrtne žrtve",
+      "central": false
+    },
+    {
+      "id": "ursula_von_der_leyen",
+      "label": "Ursula von der Leyen",
+      "central": false
+    },
+    {
+      "id": "bernard_quintin",
+      "label": "Bernard Quintin (notranji minister)",
+      "central": false
+    },
+    {
+      "id": "infrabel",
+      "label": "Železniška družba Infrabel",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "spuscene_zapornice",
+      "predicate": "naj bi bile prisotne ob",
+      "object_id": "nesreca_v_buggenhoutu",
+      "evidence": "Posnetki kažejo, da so bile zapornice spuščene",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "rdeca_luc",
+      "predicate": "naj bi gorela ob",
+      "object_id": "nesreca_v_buggenhoutu",
+      "evidence": "luč na prehodu rdeča",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "nesreca_v_buggenhoutu",
+      "predicate": "terjala",
+      "object_id": "smrtne_zrtve",
+      "evidence": "Nesreča je terjala štiri smrtne žrtve",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "jean_luc_crucke",
+      "predicate": "potrdil",
+      "object_id": "smrtne_zrtve",
+      "evidence": "Belgijski minister za promet Jean-Luc Crucke je potrdil, da so umrle štiri osebe",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "jean_luc_crucke",
+      "predicate": "poročal o",
+      "object_id": "nesreca_v_buggenhoutu",
+      "evidence": "Crucke je po navedbah RTBF sporočil še, da na vlaku... ni bilo poškodovanih.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "infrabel",
+      "predicate": "navaja stanje",
+      "object_id": "spuscene_zapornice",
+      "evidence": "je za televizijo VRT povedal tiskovni predstavnik železniške družbe Infrabel",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "infrabel",
+      "predicate": "navaja stanje",
+      "object_id": "rdeca_luc",
+      "evidence": "je za televizijo VRT povedal tiskovni predstavnik železniške družbe Infrabel",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "bernard_quintin",
+      "predicate": "izrazil sožalje za",
+      "object_id": "nesreca_v_buggenhoutu",
+      "evidence": "Bernard Quintin... sta na omrežju X že izrazila sožalje žrtvam nesreče",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "bernard_quintin",
+      "predicate": "pohvalil reševalce po",
+      "object_id": "nesreca_v_buggenhoutu",
+      "evidence": "Zahvaljujem se našim reševalnim službam za njihovo hitro posredovanje na kraju nesreče",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "ursula_von_der_leyen",
+      "predicate": "izrekla sožalje za",
+      "object_id": "nesreca_v_buggenhoutu",
+      "evidence": "Izrekam iskreno sožalje družinam žrtev in njihovim bližnjim.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "ursula_von_der_leyen",
+      "predicate": "sožalje družinam",
+      "object_id": "smrtne_zrtve",
+      "evidence": "Izrekam iskreno sožalje družinam žrtev in njihovim bližnjim.",
+      "confidence": "high"
+    }
+  ]
+}

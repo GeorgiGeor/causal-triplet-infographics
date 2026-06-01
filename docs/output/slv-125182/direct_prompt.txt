@@ -1,0 +1,230 @@
+**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic based on the provided text.
+
+### 1. Visual Style & Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+* **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+* **Claims/Events:** Muted Grey or subtle Teal.
+* **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+* **Highlights:** Use a single accent color (e.g., Burnt Orange) only for the most critical central node.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Processing Rules
+Analyze the provided text to extract a Knowledge Graph:
+* **Nodes:** Extract key **Entities** (People, Countries, Organizations) and **Key Claims/Events**. Enclose node text in clean rectangular or pill-shaped containers.
+* **Links:** Identify **Causal Relations** connecting these nodes.
+* **Labels:** Every link must have a text label (2-3 words max) describing the causal relations between nodes.
+* **Logic:** Ensure the visual flow represents the causal chain (Cause → Effect).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the extracted causal network (DO NOT generate any additional text).
+
+### 4. Input Text
+
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. "Če tega sklepa ne sprejmemo, kršimo ustavo," je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. "Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve," je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resnica) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. "V poslanski skupini Resnica zato menimo, da morajo enaka pravila veljati za vse," je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+"Gre za grobo zlorabo ustave," je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Tudi Tina Brecelj (Levica Vesna) je dejala, da se z zakonom ogroža stabilnost javnih financ. "Referendum na ta zakon je pot, da se stabilnost javnih financ utrdi. Prav zato bi morala biti možnost neposrednega odločanja še toliko bolj varovana," je menila.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. "Zato težko govorimo o tem, da bi referendum ogrozil javne finance," je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. "Resnica je drugačna - dolgoročno bomo izgubili vsi," je opozorila.
+
+DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma.
+
+Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb v zakonu ni mogoč. Sklep je podprlo 48 poslancev, proti jih je bilo 35.
+
+Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volivcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. "Če tega sklepa ne sprejmemo, kršimo ustavo," je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. "Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve," je dejal.
+
+"Gre za grobo zlorabo ustave," pa je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. "Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete," je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.
+
+Ljubljana, 27. maja (STA) - DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb ...
+
+Poslanci so danes odločili, da o pred kratkim sprejetem zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče odločati na referendumu.
+
+Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter drugih rezov.
+
+Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volilcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. "Če tega sklepa ne sprejmemo, kršimo ustavo," je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. "Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve," je dejal.
+
+"Gre za grobo zlorabo ustave," je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. "Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete," je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.
+
+DZ je odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb v zakonu ni mogoč. Sklep je podprlo 48 poslancev, proti jih je bilo 35.
+
+Interventni zakon, ki so ga pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS, v luči grozeče energetske krize vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so danes na izredni seji DZ te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. "Če tega sklepa ne sprejmemo, kršimo ustavo," je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica.
+
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. "Če tega sklepa ne sprejmemo, kršimo ustavo," je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. "Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve," je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. "V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse," je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+"Gre za grobo zlorabo ustave," je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Tudi Tina Brecelj (Levica Vesna) je dejala, da se z zakonom ogroža stabilnost javnih financ. "Referendum na ta zakon je pot, da se stabilnost javnih financ utrdi. Prav zato bi morala biti možnost neposrednega odločanja še toliko bolj varovana," je menila.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. "Zato težko govorimo o tem, da bi referendum ogrozil javne finance," je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. "Resnica je drugačna - dolgoročno bomo izgubili vsi," je opozorila.
+
+Ljubljana, 27. maja (STA) - DZ danes na izredni seji odloča o predlogu sklepa, da o pred kratkim sprejetem zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče odločati na referendumu. Mnenja poslanskih skupin so deljena, prevladuje pa stališče, da razpis referenduma zaradi davčnih ...
+
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Cigler Kralj: Če tega sklepa ne sprejmemo, kršimo ustavo
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. "Če tega sklepa ne sprejmemo, kršimo ustavo," je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. "Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve," je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. "V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse," je dejala.
+
+Opozicija: Gre za grobo zlorabo ustave
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+"Gre za grobo zlorabo ustave," je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. "Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete," je dejala.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. "Zato težko govorimo o tem, da bi referendum ogrozil javne finance," je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. "Resnica je drugačna - dolgoročno bomo izgubili vsi," je opozorila.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+Sindikalne centrale: Ne strinjamo se z odločitvijo DZ-ja, zato bomo zahtevale ustavno presojo
+
+V sindikalnih centralah so v odzivu napisali, da z razočaranjem sprejemajo odločitev DZ-ja. "Po našem prepričanju zakon vsebuje številne vsebine, o katerih bi državljanke in državljani morali imeti pravico odločati neposredno, na referendumu, omnibus tehnika pa je bila zlorabljena za to, da se jim ta pravica odvzame. Sprašujemo se, kaj bi lahko bilo bolj primerno in pomembno za neposredno odločanje ljudstva, kot je to zakon, ki nakazuje nadaljnjo smer upravljanja države in ki, po lastnih besedah zagovornikov zakona, zadeva vsakogar?" so se vprašali.
+
+Ponovno so opozorili na "nesprejemljiv in nedopusten pritisk na sindikate, pobudnike referenduma, z novelo Zakona o delovnih razmerjih, ki ukinja obveznost delodajalcev, da zagotavljajo tehnični obračun članarine za sindikate". Ponovno so poudarili, da je članstvo v sindikatih v Sloveniji "že ves čas samostojne Slovenije popolnoma prostovoljno".
+
+"Poudarjamo, da že danes večina sindikatov omogoča tudi neposredno plačevanje članarine člana sindikatu, čeprav je dejstvo, da v veliki večini primerov obračun izvaja delodajalec. To, da delodajalec zagotavlja tehnični obračun članarine, pa ne pomeni, da delodajalec zagotavlja finančna sredstva za članarino sindikata ali da je članstvo v sindikatu obvezno. Članarino člani plačujejo iz svojih plač, delodajalec pa zagotavlja zgolj tehnični obračun te članarine," so zapisali.
+
+Ob tem so opozorili tudi na to, da so poskusi utišanja, ustrahovanja in slabljenja sindikatov v neposrednem nasprotju z usmeritvami Evropske komisije, Mednarodne organizacije dela, pa tudi domačih institucij, kot npr. UMAR, ki zagovarjajo krepitev socialnega dialoga, katerega predpogoj so močni in tudi finančno neodvisni socialni partnerji.
+
+"Predlog Zakona o delovnih razmerjih pomeni najslabšo možno popotnico za socialni dialog z novo vlado in vodi v nov, nepotreben konflikt, ki si ga sindikati ne želimo, se ga pa ne bojimo," so še sklenili.
+
+Pod izjavo so se podpisali Zveza svobodnih sindikatov Slovenije, Konfederacija sindikatov Slovenije Pergam, Konfederacija sindikatov javnega sektorja Slovenije, Konfederacija sindikatov 90 Slovenije, KNSS-Neodvisnost in Slovenska zveza sindikatov Alternativa.
+
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. "Če tega sklepa ne sprejmemo, kršimo ustavo," je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. "Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve," je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. "V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse," je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+"Gre za grobo zlorabo ustave," je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. "Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete," je dejala.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. "Zato težko govorimo o tem, da bi referendum ogrozil javne finance," je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. "Resnica je drugačna - dolgoročno bomo izgubili vsi," je opozorila.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so že napovedali vložitev pobude za ustavno presojo sklepa
+
+LJUBLJANA * Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov. Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volivcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. "Če tega sklepa ne sprejmemo, kršimo ustavo," je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. "Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve," je dejal.
+
+"Gre za grobo zlorabo ustave," pa je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. "Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete," je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.

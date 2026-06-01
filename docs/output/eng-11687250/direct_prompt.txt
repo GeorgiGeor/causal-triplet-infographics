@@ -1,0 +1,108 @@
+**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic based on the provided text.
+
+### 1. Visual Style & Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+* **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+* **Claims/Events:** Muted Grey or subtle Teal.
+* **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+* **Highlights:** Use a single accent color (e.g., Burnt Orange) only for the most critical central node.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Processing Rules
+Analyze the provided text to extract a Knowledge Graph:
+* **Nodes:** Extract key **Entities** (People, Countries, Organizations) and **Key Claims/Events**. Enclose node text in clean rectangular or pill-shaped containers.
+* **Links:** Identify **Causal Relations** connecting these nodes.
+* **Labels:** Every link must have a text label (2-3 words max) describing the causal relations between nodes.
+* **Logic:** Ensure the visual flow represents the causal chain (Cause → Effect).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the extracted causal network (DO NOT generate any additional text).
+
+### 4. Input Text
+
+Izraelska vojska je v torkovem napadu ubila novega poveljnika vojaškega krila palestinskega islamističnega gibanja Hamas v Gazi Mohameda Odeha, je danes sporočil izraelski obrambni minister Izrael Kac. Hamas medtem smrti poveljnika za zdaj še ni potrdil.
+
+Kot je na omrežju X zapisal Kac, so izraelske sile "eliminirale poveljnika oboroženega krila teroristične organizacije Hamas v Gazi in ga poslale, da se pridruži somišljenikom v globinah pekla". "Zavezali smo se, da bomo uničili vse, ki so vodili pokol 7. oktobra, in to bomo tudi storili," je dodal.
+
+Napad na poveljnika vojaškega krila Hamasa sta pred tem v skupni izjavi oznanila izraelski premier Benjamin Netanjahu in obrambni minister Kac. Opisala sta ga kot enega od arhitektov napada na Izrael 7. oktobra 2023 in navedla, da je odgovoren za umore, ugrabitve in napade na številne Izraelce.
+
+Netanjahu in Kac sta tudi zagrozila, da bo Izrael še naprej napadal vse vpletene v napad Hamasa 7. oktobra 2023, v katerem je bilo ubitih približno 1200 ljudi. V povračilnih izraelskih napadih in ofenzivi v Gazi pa je bilo po navedbah tamkajšnjih oblasti ubitih več kot 72.800 ljudi.
+
+Po navedbah Izraela je Odeh nasledil prejšnjega vojaškega poveljnika Ezedina Al Hadada, ki je bil ubit v izraelskem napadu 15. maja.
+
+Tel Aviv, 27. maja (STA) - Izraelska vojska je v torkovem napadu ubila novega poveljnika vojaškega krila palestinskega islamističnega gibanja Hamas v Gazi Mohameda Odeha, je danes sporočil izraelski obrambni minister Izrael Kac. Hamas medtem smrti poveljnika za zdaj še ni potrdil, poroča ...
+
+Tel Aviv, 27. maja (STA) Izraelska vojska je v včerajšnjem napadu ubila novega poveljnika vojaškega krila palestinskega gibanja Hamas v Gazi Mohameda Odeha, je danes sporočil izraelski obrambni minister Izrael Kac. Hamas medtem smrti poveljnika za zdaj še ni potrdil. Napad na Odeha sta pred tem ...
+
+Novi poveljnik vojaškega krila palestinskega islamističnega gibanja Hamas v Gazi Mohamed Odeh je bil po besedah izraelskega obrambnega ministra Izraela Kaca ubit v torkovem napadu. Sodeč po poročanju francoske tiskovne agencije AFP smrt poveljnika še ni bila potrjena s strani Hamasa.
+
+Izrael Kac je na družabnem omrežju X navedel, da so izraelske obrambne sile "eliminirale poveljnika oboroženega krila teroristične organizacije Hamas v Gazi in ga poslale, da se pridruži somišljenikom v globinah pekla". Ob tem pa je spomnil, da so se zavezali, da bodo uničili vse tiste, ki so sodelovali pri krvavem pokolu 7. oktobra. "To bomo tudi storili," je napovedal.
+
+Izraelski premier Benjamin Netanjahu in obrambni minister Kac sta napad na poveljnika vojaškega krila Hamasa Mohameda Odeha naznanila v skupni izjavi. Po navedbah STA sta poudarila, da gre v primeru Odeha za enega od arhitektov napada na Izrael 7. oktobra 2023 in dodala, da je odgovoren za umore, ugrabitve in napade na številne Izraelce.
+
+Po informacijah, posredovanih s strani Izraela, je Odeh nasledil prejšnjega vojaškega poveljnika Ezedina al Hadada, ki je bil eliminiran v napadu izraelskih sil 15. maja. V skupni izjavi sta Netanjahu in Kac še napovedala, da bodo nadaljevali z napadi na vse tiste, ki so bili vpleteni v napad Hamasa 7. oktobra 2023, v katerem je življenje izgubilo približno 1200 ljudi.
+
+Izraelski obrambni minister Izrael Kac je sporočil, da so izraelske sile "eliminirale poveljnika oboroženega krila teroristične organizacije Hamas v Gazi in ga poslale, da se pridruži somišljenikom v globinah pekla".
+
+"Zavezali smo se, da bomo uničili vse, ki so vodili pokol 7. oktobra, in to bomo tudi storili," je dodal.
+
+Kac in izraelski premier Benjamin Netanjahu, ki je na Mednarodnem kazenskem sodišču obtožen vojnih zločinov in zločinov proti človečnosti v Gazi, sta Odeha opisala kot enega od snovalcev napada na jugu Izraela 7. oktobra 2023 in navedla, da je odgovoren za umore, ugrabitve in napade na številne Izraelce.
+
+Hamas smrti poveljnika za zdaj še ni potrdil, poroča Al Džazira.
+
+Odeh je na položaju poveljnika Brigad Izedin Al Kasam, vojaškega krila Islamskega odporniškega gibanja (Hamas), nasledil prejšnjega vojaškega poveljnika Izedina Al Hadada, ki je bil ubit v izraelskem napadu 15. maja.
+
+Novico je danes sporočil izraelski obrambni minister Izrael Kac. Kot poroča francoska tiskovna agencija AFP, Hamas smrti poveljnika za zdaj še ni potrdil.
+
+Kac je na omrežju X zapisal, da so izraelske sile "eliminirale poveljnika oboroženega krila teroristične organizacije Hamas v Gazi in ga poslale, da se pridruži somišljenikom v globinah pekla. Zavezali smo se, da bomo uničili vse, ki so vodili pokol 7. oktobra, in to bomo tudi storili," je dodal.
+
+Napad na poveljnika vojaškega krila Hamasa sta že pred tem v skupni izjavi oznanila Kac in izraelski premier Benjamin Netanjahu. Opisala sta ga kot enega od arhitektov napada na Izrael 7. oktobra 2023 in navedla, da je odgovoren za umore, ugrabitve in napade na številne Izraelce.
+
+Po navedbah Izraela je Odeh nasledil prejšnjega vojaškega poveljnika Ezedina al Hadada, ki je bil ubit v izraelskem napadu 15. maja. Hamas te zamenjave sicer ni uradno potrdil.
+
+Netanjahu in Kac sta tudi zagrozila, da bo Izrael še naprej napadal vse vpletene v napad Hamasa 7. oktobra 2023, v katerem je bilo ubitih 1221 ljudi. "Prej ali slej bomo dobili vse," sta zapisala. V povračilnih izraelskih napadih in ofenzivi v Gazi je bilo po navedbah tamkajšnjih oblasti ubitih več kot 72.800 ljudi. Med Izraelom in Hamasom od oktobra lani sicer velja premirje, ki pa ga kršita obe strani.
+
+Izrael je napovedal tudi, da bo še okrepil napade na proiransko gibanje Hezbolah v Libanonu, čeprav naj bi prav tako veljala prekinitev ognja. Izraelska vojska je v torek izdala opozorila o evakuaciji za najmanj 50 mest in vasi na jugu in vzhodu Libanona. Hezbolah je sporočil, da se je spopadel z izraelskimi enotami, ki so vdrle v mesto Zavtar al Šarki. V torkovih napadih na jug Libanona je bilo ubitih 31 ljudi, med njimi najmanj štirje otroci in tri ženske, 40 pa je bilo ranjenih.
+
+Izraelski vojaški uradnik je za AFP povedal, da je Izrael kopenske operacije na jugu Libanona razširil preko tako imenovane rumene črte. Ta je del varovalnega pasu, ki ga je vzpostavil Izrael, in se razteza od pet do deset kilometrov znotraj južnega Libanona. Je tudi ločena od tako imenovane modre črte, ki so jo zarisali Združeni narodi in predstavlja de facto mejo med državama.
+
+Novi napadi na Libanon sledijo izjavi Netanjahuja, ki je vojski v ponedeljek odredil, naj okrepi ofenzivo, da bi uničili gibanje Hezbolah.
+
+Odeh je bil ubit, potem ko je vodenje Brigade Izedina al Kasama prevzel pred nekaj dnevi po smrti Izedina Al Hadada, ki je bil ubit v podobnem izraelskem napadu 15. maja.
+
+Izraelska vojska je sporočila, da je bil Odeh ubit v ciljno usmerjenem napadu v torek zvečer. Njegova družina je sporočila, da sta bila v napadu ubita tudi njegova žena in sin. Zdravstveni delavci v Gazi so navedli, da je bilo v napadu skupno ubitih šest ljudi.
+
+Izraelski obrambni minister Izrael Kac je sporočil, da so izraelske sile "eliminirale poveljnika oboroženega krila teroristične organizacije Hamas v Gazi in ga poslale, da se pridruži somišljenikom v globinah pekla".
+
+"Zavezali smo se, da bomo uničili vse, ki so vodili pokol 7. oktobra, in to bomo tudi storili," je dodal.
+
+Kac in izraelski premier Benjamin Netanjahu, ki je na Mednarodnem kazenskem sodišču obtožen vojnih zločinov in zločinov proti človečnosti v Gazi, sta Odeha opisala kot enega od snovalcev napada na jugu Izraela 7. oktobra 2023 in navedla, da je odgovoren za umore, ugrabitve in napade na številne Izraelce.
+
+Po navedbah Netanjahuja je Odeh vodil obveščevalno divizijo Hamasa v času napada 7. oktobra leta 2023.
+
+Eden od Odehovih sorodnikov Abu Al-Abd Odeh je za Reuters dejal, da izraelska kampanja ne bo ustavila upora Palestincev. "Ta pot se ne bo ustavila in boj palestinskega ljudstva se bo nadaljeval na vseh ravneh," je dejal v mošeji v mestu Gaza med pogrebom.
+
+Viri blizu Hamasa so povedali, da je bil Odeh morda zadnji preostali živeči član višjega vodstvenega sveta oboroženega krila palestinskega gibanja.
+
+Izrael je od začetka vojne v Gazi ubil na desetine voditeljev Hamasa in njegovih vojaških poveljnikov, pri čemer Netanjahu in predstavniki izraelskih oblasti ter vojske zatrjujejo, da bodo ubili ali prijeli vsakega, ki ga obtožujejo vpletenosti v napade.
+
+V izjavi po uboju Odeha je obrambni minister Kac dejal, da Hamas ne bo več izvajal civilnega ali vojaškega nadzora nad Gazo, načrt za to, kar je opisal kot "prostovoljna selitev" iz enklave, pa bo po njegovih besedah izveden "ob pravem času in na pravi način".
+
+Palestinci zavračajo vsakršen poskus, da bi jih razselili iz Gaze in takšne izjave vidijo kot nadaljevanje katastrofe "Nakba" iz leta 1948, ko je bilo med vojno ob nastanka Izraela pregnanih na stotine tisoč Palestincev.
+
+Od oktobrskega premirja je Izrael po podatkih zdravstvenih uradnikov v Gazi ubil približno 900 Palestincev.
+
+Jeruzalem, 27. maja (STA) - Izraelske sile so v torek napadle novega vodjo vojaškega krila Hamasa v Gazi Mohameda Odeha, sta v skupni izjavi sporočila premier Benjamin Netanjahu in obrambni minister Izrael Katz, vendar nista navedla ali so ga zadeli, poročajo agencije. Netanjahu in Katz sta Odeha ...

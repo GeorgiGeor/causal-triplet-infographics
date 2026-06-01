@@ -1,0 +1,216 @@
+Read the news articles below and produce two outputs as a single strict JSON object.
+
+The supplied articles are written in **Slovenian**. Your entire output — every `label`, every `evidence` field — MUST be in Slovenian. Do not translate proper nouns, institution names, predicates, or quoted spans into any other language. The `id` field is the only field that stays in lowercase ASCII snake_case.
+
+(1) An `entities` list of 6-10 central actors, institutions, countries, policies, events, conditions, or **mechanism states** (e.g. "barriers down", "red light", "fourth-day deadline") that appear across the articles. Each entity has:
+    - `id` (snake_case stable identifier, unique within this output, ASCII)
+    - `label` (human-readable name in Slovenian, shown in the rendered graph)
+    - `central` (boolean — exactly ONE entity must have central=true; this is the focal subject of the news story)
+
+(2) A `triplets` list of 10-15 directed causal or explanatory relations between those entities. Each triplet has:
+    - `subject_id` (must match an entity id)
+    - `predicate` (1-3 word specific verb in Slovenian — e.g. raises, triggers, blames, criticizes, excludes, enables, requires, resigns from, proposes, motivates, leads to, results in, reinforces, undermines, vetoes)
+    - `object_id` (must match an entity id)
+    - `evidence` (short DIRECT QUOTE from the article in Slovenian supporting the relation — do NOT translate or paraphrase to a different language)
+    - `confidence` ("low" | "medium" | "high")
+
+Hard constraints:
+- **Language lock**: every `label`, every `predicate`, every `evidence` must be in Slovenian. No translation.
+- **No direction redundancy**: do NOT include two triplets expressing the same fact in opposite directions (e.g. `train → collides_with → van` AND `van → results_in → collision` AND `train → results_in → collision` is three triplets for one fact — keep only ONE). Pick the single most informative orientation.
+- **Predicate-object type consistency**: communicative predicates (*announces, reports, confirms, criticizes, warns, blames, threatens*) take a STATEMENT or EVENT as object, never a person. If the natural object is a person, either rewrite the predicate (`kills`, `succeeds`, `criticizes_for_X`) or introduce a separate node for the statement/event (e.g. `mohamed_odeh_death`) and use it as the object.
+- **Event reification — never make a person the direct cause or effect of another event**: when a causal relation originates from or results in an EVENT, ACTION, or STATE that involves a person (a death, killing, attack, ruling, resignation, an event that triggers a protest), create a DEDICATED entity node for that event/state and attach the causal edge to it — do NOT attach the causal verb to the person. A person's *death* causes consequences, the person does not. E.g. NOT `ales_sutar → povzročil → protest` but introduce `smrt_aleša_šutarja` and write `smrt_aleša_šutarja → sprožila → protest`.
+- **Attribution / hedging for contested claims**: when a relation is contested, alleged, or attributed to a specific party (the defense, a single witness, one news source) rather than established fact, do NOT state it flat. Fold the attribution/uncertainty INTO the predicate string using Slovenian markers — for Slovenian use "naj bi …", "domnevno …", or "po navedbah <vir> …". This is especially important for accusations and claims that assign blame. E.g. NOT `ales_sutar → izzval → samire_siljic` but `ales_sutar → naj bi izzval (po navedbah obrambe) → samire_siljic`.
+- **Causal mechanism over commentary**: for incident, accident, or policy stories, AT LEAST 30% of triplets must describe the CAUSAL MECHANISM — conditions, contributing factors, sequences that led to the central event. Pure reaction triplets (`expresses_condolences`, `announces`, `praises`) are capped at 3 per event total.
+- **Specific predicates**: banned generic verbs: "affects", "relates to", "is associated with", "involves", "concerns", "deals with".
+- The directed graph induced by the triplets MUST be connected when treated as undirected. No isolated entities. No disconnected chains.
+- Every non-central entity must participate in at least 2 triplets. The central entity may participate in more.
+- Every triplet must be grounded in the supplied articles. Do NOT introduce background knowledge or facts not stated or strongly implied in the text.
+- Return ONLY the JSON object. No prose, no markdown fences, no commentary.
+
+All examples below use a FICTIONAL, illustrative scenario (a made-up country "Vendia", its minister, a dam) purely to show the rules. They are NOT from the supplied articles — never copy these entities, names, or wordings into your output; extract only what the supplied articles support.
+
+DIRECTION EXAMPLE — correct vs wrong:
+  Fictional article: "Minister Adler confirmed that twelve people died in the dam failure."
+  WRONG: {"subject_id":"dam_failure","predicate":"causes","object_id":"minister_adler", ...}     ← the failure does not cause the minister
+  WRONG: {"subject_id":"minister_adler","predicate":"confirms","object_id":"minister_adler", ...}  ← invalid; self-loop
+  RIGHT: {"subject_id":"minister_adler","predicate":"confirms casualties of","object_id":"dam_failure", ...}  ← minister confirms (re: the failure)
+
+EVENT-REIFICATION EXAMPLE — put the event, not the person, on the causal edge:
+  Fictional article: "The mayor's resignation triggered early elections in Vendia."
+  WRONG: {"subject_id":"mayor","predicate":"triggers","object_id":"early_elections", ...}  ← the person did not trigger the elections
+  RIGHT: add an entity {"id":"mayor_resignation","label":"<the resignation, in source language>"} then
+         {"subject_id":"mayor_resignation","predicate":"triggers","object_id":"early_elections", ...}  ← the resignation triggered them
+
+ATTRIBUTION EXAMPLE — hedge contested/attributed claims in the predicate:
+  Fictional article: "The operator's lawyer argued that heavy rainfall, not negligence, caused the dam failure."
+  WRONG: {"subject_id":"rainfall","predicate":"causes","object_id":"dam_failure", ...}  ← states one party's contested claim as established fact
+  RIGHT: {"subject_id":"rainfall","predicate":"allegedly caused (per the operator)","object_id":"dam_failure", ...}  ← marked as a contested, attributed claim
+  (In Slovenian, render such hedges as "naj bi …" / "domnevno …" / "po navedbah <vir> …".)
+
+Output schema:
+{
+  "entities": [
+    {"id": "eu", "label": "Evropska unija", "central": false},
+    {"id": "carbon_tax", "label": "Ogljični davek", "central": true}
+  ],
+  "triplets": [
+    {
+      "subject_id": "eu",
+      "predicate": "uvaja",
+      "object_id": "carbon_tax",
+      "evidence": "EU je uradno sprejela mehanizem za ogljični davek dne...",
+      "confidence": "high"
+    }
+  ]
+}
+
+ARTICLES (in Slovenian):
+
+Article 1 - Večer:
+Title: Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan. Kaj se zgodi, če tega ne naredite?
+Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. "Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada," je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. "Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje," je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so 
+
+Article 2 - Lokalec.si:
+Title: Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami.
+
+"Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada," je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. "Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje," je dejala Vodičar.
+
+Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je pouda
+
+Article 3 - RTV Slovenija:
+Title: Spremembe pravil ZZZS-ja: Bolniško odsotnost morajo od zdaj zaposleni zdravniku sporočiti isti dan
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. "Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada," je na novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. "Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje," je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS-ja, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugoto
+
+Article 4 - SiOL:
+Title: Od danes naprej veljajo nova pravila za bolniške
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. "Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada," je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. "Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje," je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 mi
+
+Article 5 - 24ur:
+Title: Zaposleni morajo zdravniku bolniško odsotnost sporočiti še isti dan
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. "Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje," je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+Article 6 - STA:
+Title: Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan
+Ljubljana, 27. maja (STA) - Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled ...
+
+Article 7 - Slovenske Novice:
+Title: Pozor, od danes veljajo nova pravila za bolniško! To morate storiti že prvi dan
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. "Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada," je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. "Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje," je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače. Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na
+
+Article 8 - Svet24:
+Title: Nova pravila pri sporočanju bolniške odsotnosti
+Z današnjim dnem so v veljavo stopila nova pravila obveznega zdravstvenega zavarovanja. Pacient bo moral biti bolj pozoren zlasti pri sporočanju bolniške odsotnosti. Da bo ostal doma, mora svojemu zdravniku sporočiti na prvi dan odsotnosti z dela oziroma prvi naslednji delovni dan ambulante.
+
+Pregled pri osebnem zdravniku je po novem obvezen vedno, ko tako odloči osebni zdravnik in pacienta pokliče na pregled, piše Slovenska tiskovna agencija. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. Pregled je potreben tudi, če je bil nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. "Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje," je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. "Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada," je razložila Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila Vodičar.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlj
+
+Article 9 - STA:
+Title: Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan (dopolnjeno)
+z dodatnimi izjavami v zadnjih petih odstavkih Ljubljana, 27. maja (STA) - Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. ...
+
+Article 10 - Žurnal24:
+Title: Pozor, od danes velike spremembe glede bolniških. ZZZS o tem, kaj prinašajo
+Sicer je do prvih sprememb prišlo že tik pred novih letom, takrat z interventnim zakonom, ki je prinesel zlasti strožje sankcije v primeru kršitev navodil za ravnanje, nekoliko bolj so zdaj urejene urejene laične kontrole in sprememba pri odhodu v tujino.
+
+Zdaj je Zavod za zdravstveno zavarovanje RS (ZZZS) sprejel še drugi paket sprememb. "Cilj je povečanje odgovornosti zavarovanih oseb pri odpiranju in podaljšanju bolniškega staleža, in na neki način pričakovanje do izbranih oseb in zdravnikov družinskih zdravnikov, pediatrov, da seveda staleže odpirajo odgovorno, skrbno, ne samo do delodajalcev, do zdravstvene blagajne, ampak predvsem tudi do pacientov," je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na ZZZS Ana Vodičar. "Eden od namenov teh sprememb je tudi bolj varna obravnava pacientov. V zadnjem post covid obdobju je obravnava na daljavo se znatno povečala. In zato želimo, da se medicina vrne v ambulante, absolutno ohranjamo vse prednosti obravnave zdravstvene na daljavo, ampak vendarle v določenih trenutkih ocenjujemo kot primerno, da se osebni pregled opravi," je pojasnila.
+
+Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oziroma najpozneje prvi naslednji delovni dan ambulante. Kot je znano, je bil dosedanji rok tri dni, ko je bilo treba sporočiti svojemu izbranemu osebnemu zdravniku, da ostajamo doma, da nismo zmožni za delo, sedaj se torej ta rok bistveno skrajšuje.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. "Ena sama možna izjema je, da pacient seveda tega ne stori isti dan, izrecno smo opredelili, da če se zgodi, da je seveda zavarovanec v bolnišnici ali v zdraviliškem zdravljenju, da seveda ni treba, da se potem iz bolnišnice ukvarja s tem, da sporoča svojo odsotnost družinskemu zdravniku, v tem primeru lahko sporoči odsotnost, ko se vrne domov, že isti dan in tudi v tem primeru, to je novost in razbremenitev za družinske zdravnike, bodo lahko to obdobje zadržanosti za nazaj pokrili kar sami družinski zdravniki. Nesporno je, če je bil nekdo hospitaliziran, seveda, da mu bolniški stalež pripada", je pojasnila Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj. "Recimo, da je res nekdo imel hudo zdravstveno stanje doma, pa tega ni mogel sporočiti pravočasno, in šele če bo ta pogoj izpolnjen, torej da je bil nekdo res iz opravičljivih razlogov, ni mogel pravočasno sporočiti razlogov za svojo odsotnost, bo potem samo imenovani zdravnik tor
+

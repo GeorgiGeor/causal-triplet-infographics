@@ -1,0 +1,39 @@
+{
+  "ui_language": "sl",
+  "generated_title": "Državni zbor zavrnil referendum o interventnem zakonu na zahtevo sindikatov",
+  "event_overview": {
+    "title": "Državni zbor zavrnil referendum o interventnem zakonu na zahtevo sindikatov",
+    "summary": "Državni zbor je na izredni seji z 48 glasovi za in 35 proti sprejel sklep, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Odločitev temelji na ustavni določbi, ki prepoveduje referendumsko odločanje o zakonih, ki urejajo davke in druge obvezne dajatve. Predlagatelji zakona iz vrst NSi, SLS, SDS in drugih strank so poudarili, da zakon prinaša nujne davčne razbremenitve in razvojne spodbude, medtem ko opozicija opozarja na zlorabo ustave in poglabljanje proračunskega primanjkljaja.\n\nSindikati so ob podpori civilne družbe zbrali več kot 47.000 podpisov za referendum, saj v zakonu vidijo grožnjo socialni državi in javnim financam. Po njihovem mnenju je bila t. i. omnibus tehnika uporabljena namerno, da bi se preprečilo neposredno odločanje ljudstva o pomembnih družbenih vprašanjih. Zaradi sprejetega sklepa o nedopustnosti referenduma so sindikalne centrale že napovedale vložitev pobude za ustavno presojo, saj verjamejo, da gre za kršitev demokratičnih standardov in socialnega dialoga.",
+    "key_points": [
+      "Državni zbor je s 48 glasovi za in 35 proti izglasoval nedopustnost referenduma o interventnem zakonu.",
+      "Glavni razlog za prepoved referenduma je ustavna omejitev glede zakonov o davkih in obveznih dajatvah.",
+      "Sindikati so zbrali 47.223 podpisov volivcev za razpis referenduma, a je bila njihova zahteva zavrnjena.",
+      "Zakon vključuje nižji DDV na živila, socialno kapico, nižjo obdavčitev najemnin in spremembe v zdravstvu.",
+      "Opozicijske stranke (SD, Levica, Svoboda) so opozorile na milijardni izpad v proračunu in zlorabo zakonodajnih postopkov.",
+      "Sindikati opozarjajo na ukinitev obveznega tehničnega obračuna članarine kot pritisk na njihovo delovanje.",
+      "Zaradi onemogočanja referenduma so sindikalne centrale napovedale pritožbo na Ustavno sodišče."
+    ],
+    "timeline": [
+      {
+        "date": "11. maj",
+        "description": "Državni zbor je sprejel zakon o interventnih ukrepih za razvoj Slovenije."
+      },
+      {
+        "date": "Prejšnji teden",
+        "description": "Sindikati so vložili pobudo za referendum s 47.223 podpisi volivcev."
+      },
+      {
+        "date": "27. maj",
+        "description": "Državni zbor je na izredni seji sprejel sklep o nedopustnosti referenduma."
+      },
+      {
+        "date": "Po seji DZ",
+        "description": "Sindikalne centrale so napovedale vložitev pobude za ustavno presojo sklepa."
+      },
+      {
+        "date": "Leto 2027",
+        "description": "Predviden odstop od omejevanja kratkoročnega oddajanja stanovanj po določbah zakona."
+      }
+    ]
+  }
+}

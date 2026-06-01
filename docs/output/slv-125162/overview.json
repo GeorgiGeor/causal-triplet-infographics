@@ -1,0 +1,43 @@
+{
+  "ui_language": "sl",
+  "generated_title": "Slovenija izdala za 350 milijonov evrov sedemletnih obveznic",
+  "event_overview": {
+    "title": "Slovenija izdala za 350 milijonov evrov sedemletnih obveznic",
+    "summary": "Slovenija je 27. maja uspešno izvedla izdajo nove sedemletne obveznice s spremenljivo obrestno mero v skupni vrednosti 350 milijonov evrov. Država je za organizacijo izdaje pooblastila OTP banko in UniCredit banko Slovenija, knjiga naročil pa se je odprla dopoldne z začetnim pribitkom 20 bazičnih točk nad šestmesečnim euriborjem. Zaradi močnega povpraševanja, ki je do 11. ure doseglo 375 milijonov evrov, je ministrstvo za finance prvotno načrtovani obseg izdaje povečalo z 250 na 350 milijonov evrov.\n\nPri izdaji so prevladovali domači vlagatelji, ki so vpisali kar 96 odstotkov celotne vrednosti, medtem ko so preostale štiri odstotke zakupili vlagatelji iz Avstrije. V strukturi kupcev so z 90-odstotnim deležem izstopale banke, sledile pa so jim zavarovalnice in investicijski skladi. Namen te transakcije je bila predvsem razpršitev virov financiranja državnega proračuna in prilagoditev ponudbe instrumentov interesu domačih finančnih institucij po naložbah, vezanih na gibanje obrestnih mer.",
+    "key_points": [
+      "Izdana je bila sedemletna obveznica RS100 s spremenljivo obrestno mero in zapadlostjo 29. maja 2033.",
+      "Skupna vrednost izdaje znaša 350 milijonov evrov, kar je več od prvotno načrtovanih 250 milijonov.",
+      "Domači vlagatelji, predvsem banke, so vpisali 96 odstotkov celotne izdaje.",
+      "Obrestna mera je določena kot pribitek 20 bazičnih točk nad šestmesečnim euriborjem.",
+      "Organizacijo izdaje sta vodili OTP banka in UniCredit banka Slovenija.",
+      "Slovenija se je v letošnjem letu skupno zadolžila že za več kot 3,5 milijarde evrov.",
+      "Letni program financiranja proračuna dovoljuje zadolževanje do višine 5,3 milijarde evrov."
+    ],
+    "timeline": [
+      {
+        "date": "Januar 2024",
+        "description": "Slovenija se zadolži za 1,75 milijarde evrov z izdajo 10-letne obveznice."
+      },
+      {
+        "date": "Februar 2024",
+        "description": "Dodatna izdaja 10-letne obveznice v višini 750 milijonov evrov."
+      },
+      {
+        "date": "Konec marca 2024",
+        "description": "Izdaja obveznic v juanih (500 mio EUR) in ljudskih obveznic (225 mio EUR)."
+      },
+      {
+        "date": "27. maj 2024, 08:45",
+        "description": "Odprtje knjige naročil za novo sedemletno obveznico s spremenljivo obrestno mero."
+      },
+      {
+        "date": "27. maj 2024, 11:00",
+        "description": "Povpraševanje preseže 375 milijonov evrov; država poveča obseg izdaje na 350 milijonov evrov."
+      },
+      {
+        "date": "29. maj 2033",
+        "description": "Datum zapadlosti danes izdane obveznice RS100."
+      }
+    ]
+  }
+}

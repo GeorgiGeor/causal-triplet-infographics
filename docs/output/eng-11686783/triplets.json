@@ -1,0 +1,130 @@
+{
+  "entities": [
+    {
+      "id": "nasa",
+      "label": "Nasa",
+      "central": false
+    },
+    {
+      "id": "nacrt_za_izgradnjo_baze",
+      "label": "Načrt za izgradnjo baze na Luni",
+      "central": true
+    },
+    {
+      "id": "juzni_pol_lune",
+      "label": "Južni pol Lune",
+      "central": false
+    },
+    {
+      "id": "soncna_energija",
+      "label": "Sončna energija",
+      "central": false
+    },
+    {
+      "id": "jedrska_energija",
+      "label": "Izkoriščanje jedrske energije",
+      "central": false
+    },
+    {
+      "id": "misija_na_mars",
+      "label": "Potovanje na Mars",
+      "central": false
+    },
+    {
+      "id": "jared_isaacman",
+      "label": "Jared Isaacman",
+      "central": false
+    },
+    {
+      "id": "stalna_prisotnost_ljudi",
+      "label": "Stalna prisotnost ljudi na Luni",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "nasa",
+      "predicate": "predstavila",
+      "object_id": "nacrt_za_izgradnjo_baze",
+      "evidence": "Ameriška vesoljska agencija Nasa je v torek predstavila načrt za izgradnjo baze na Luni",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "nacrt_za_izgradnjo_baze",
+      "predicate": "predvideva lokacijo",
+      "object_id": "juzni_pol_lune",
+      "evidence": "Bazo nameravajo postaviti na južnem polu Lune",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "juzni_pol_lune",
+      "predicate": "omogoča pridobivanje",
+      "object_id": "soncna_energija",
+      "evidence": "Te razmere so ugodnejše za pridobivanje sončne energije",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "soncna_energija",
+      "predicate": "omogoča",
+      "object_id": "stalna_prisotnost_ljudi",
+      "evidence": "Te razmere so ugodnejše za pridobivanje sončne energije in omogočajo stabilne temperature za izvajanje operacij na površini.",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "nacrt_za_izgradnjo_baze",
+      "predicate": "vključuje testiranje",
+      "object_id": "jedrska_energija",
+      "evidence": "testirali tehnologije, ki bi utrle pot tamkajšnjemu izkoriščanju jedrske energije.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "jedrska_energija",
+      "predicate": "omogoča",
+      "object_id": "stalna_prisotnost_ljudi",
+      "evidence": "testirali tehnologije, ki bi utrle pot tamkajšnjemu izkoriščanju jedrske energije.",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "nacrt_za_izgradnjo_baze",
+      "predicate": "omogoča",
+      "object_id": "misija_na_mars",
+      "evidence": "razvijati tehnologije, potrebne za prihodnje misije v vesolju, vključno s potovanjem na Mars.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "misija_na_mars",
+      "predicate": "zahteva",
+      "object_id": "nasa",
+      "evidence": "Nasa namerava tam izvajati znanstvene poskuse in razvijati tehnologije, potrebne za prihodnje misije v vesolju, vključno s potovanjem na Mars.",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "jared_isaacman",
+      "predicate": "napoveduje",
+      "object_id": "stalna_prisotnost_ljudi",
+      "evidence": "kako se Amerika vrača na Luno, tokrat za stalno",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "jared_isaacman",
+      "predicate": "komentira",
+      "object_id": "nacrt_za_izgradnjo_baze",
+      "evidence": "Ob predstavitvi načrta za gradnjo baze je direktor Nase Jared Isaacman dejal",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "nacrt_za_izgradnjo_baze",
+      "predicate": "cilja na",
+      "object_id": "stalna_prisotnost_ljudi",
+      "evidence": "V tretji fazi od leta 2032 je načrtovana stalna prisotnost ljudi na Luni",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "nasa",
+      "predicate": "izvaja",
+      "object_id": "juzni_pol_lune",
+      "evidence": "Bazo namerava Nasa zgraditi v bližini južnega pola Lune",
+      "confidence": "high"
+    }
+  ]
+}

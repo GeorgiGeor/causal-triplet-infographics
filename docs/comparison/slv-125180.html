@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>slv-125180 &middot; comparison</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.container { max-width: 1600px; margin: 0 auto; padding: 32px 24px 80px; }
+h1 { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+.subtitle { color: #64748b; font-size: 14px; margin: 0 0 24px; }
+.nav { display: flex; gap: 12px; font-size: 13px; margin-bottom: 24px; }
+.nav a { color: #2563eb; text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.event-card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; text-decoration: none; color: inherit; transition: transform 0.1s, box-shadow 0.1s; }
+.event-card:hover { box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08); transform: translateY(-1px); }
+.event-card .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #64748b; }
+.event-card .title { font-size: 14px; font-weight: 600; margin: 4px 0 10px; line-height: 1.3; }
+.event-card .meta { font-size: 11px; color: #94a3b8; display: flex; gap: 10px; }
+.event-card .thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; background: #f1f5f9; margin-bottom: 8px; }
+
+.columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+.col { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+.col-head { padding: 10px 14px; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; font-size: 12px; font-weight: 600; color: #475569; letter-spacing: 0.04em; text-transform: uppercase; }
+.col-head.direct { background: #dbeafe; color: #1d4ed8; }
+.col-head.triplet-image { background: #dcfce7; color: #15803d; }
+.col-head.triplet-html { background: #fef3c7; color: #b45309; }
+.col img, .col .placeholder { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: white; display: block; }
+.col .placeholder { display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 13px; }
+
+details { background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px; }
+details summary { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 14px; user-select: none; }
+details summary:hover { background: #f8fafc; }
+details[open] summary { border-bottom: 1px solid #e2e8f0; }
+.details-body { padding: 16px; max-height: 560px; overflow: auto; }
+
+.prompt-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.prompt-block h4 { font-size: 12px; font-weight: 600; color: #475569; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 6px; }
+.prompt-block pre { background: #0f172a; color: #e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; line-height: 1.5; padding: 12px; border-radius: 6px; max-height: 480px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+
+.article-list { display: flex; flex-direction: column; gap: 16px; }
+.article { border-left: 3px solid #cbd5e1; padding: 4px 14px; }
+.article .pub { font-size: 12px; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.04em; }
+.article .atitle { font-size: 14px; font-weight: 600; margin: 4px 0 6px; }
+.article .body { font-size: 12px; color: #334155; line-height: 1.55; white-space: pre-wrap; }
+
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; text-align: left; vertical-align: top; }
+th { font-weight: 600; color: #475569; background: #f8fafc; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+td.predicate { font-weight: 600; color: #1d4ed8; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+.central-badge { display: inline-block; padding: 1px 6px; font-size: 10px; border-radius: 999px; background: #c2410c; color: white; font-weight: 600; margin-left: 6px; }
+.evidence { color: #64748b; font-style: italic; font-size: 11px; }
+tr.dropped { background: #f8fafc; opacity: 0.6; }
+tr.dropped td.predicate { text-decoration: line-through; }
+.render-excluded { display: inline-block; margin-left: 6px; padding: 1px 6px; font-size: 9px; border-radius: 999px; background: #e2e8f0; color: #475569; font-weight: 600; white-space: nowrap; }
+.render-note { font-size: 11px; color: #64748b; margin: 0 0 8px; }
+
+.event-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0; font-size: 13px; }
+.event-nav a { color: #2563eb; text-decoration: none; }
+.event-nav a:hover { text-decoration: underline; }
+
+/* --- Scoring UI --- */
+.score-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px; margin: 24px 0; background: #fcfdff; }
+.score-card > h3 { margin: 0 0 4px; font-size: 15px; color: #0f172a; }
+.score-card .sc-sub { margin: 0 0 16px; font-size: 12px; color: #64748b; }
+.score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .score-grid { grid-template-columns: 1fr; } }
+.score-block { border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; background: white; }
+.score-block h4 { margin: 0 0 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+.score-block.triplets h4 { color: #7c3aed; }
+.score-block.direct h4 { color: #b91c1c; }
+.score-block.triplet_image h4 { color: #15803d; }
+.metric { margin-bottom: 12px; }
+.metric-label { font-size: 12px; color: #334155; margin-bottom: 5px; font-weight: 600; }
+.lk-hint { font-weight: 400; color: #94a3b8; margin-left: 6px; }
+.likert { display: flex; gap: 4px; }
+.lk { flex: 1; }
+.lk input { position: absolute; opacity: 0; pointer-events: none; }
+.lk span { display: block; text-align: center; padding: 6px 0; font-size: 13px; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; color: #475569; user-select: none; }
+.lk input:checked + span { background: #2563eb; color: white; border-color: #2563eb; font-weight: 700; }
+.lk:hover span { border-color: #2563eb; }
+.num { width: 64px; padding: 5px 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; }
+.suffix { color: #64748b; font-size: 12px; margin-left: 6px; }
+.metric.comment textarea { width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 8px; font-size: 12px; font-family: inherit; resize: vertical; }
+.objective-note { font-size: 11px; color: #64748b; margin: 0 0 10px; padding: 6px 10px; background: #f1f5f9; border-radius: 6px; }
+.score-bar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin: -8px 0 8px; background: #0f172a; color: #e2e8f0; border-radius: 10px; font-size: 12px; }
+.score-bar button { font: inherit; padding: 5px 12px; border-radius: 6px; border: 0; cursor: pointer; font-weight: 600; }
+.score-bar .exp { background: #22c55e; color: #052e16; }
+.score-bar .imp { background: #334155; color: #e2e8f0; }
+.score-bar .saved { margin-left: auto; color: #4ade80; opacity: 0; transition: opacity 0.3s; }
+.score-bar .saved.show { opacity: 1; }
+.score-bar input[type=file] { display: none; }
+.event-card.scored { box-shadow: inset 4px 0 0 #22c55e; }
+.event-card.scored .code::after { content: " ✓"; color: #16a34a; font-weight: 700; }
+.verdict-cell { white-space: nowrap; }
+.tr-verdict { font-size: 11px; padding: 3px 4px; border: 1px solid #cbd5e1; border-radius: 5px; max-width: 150px; }
+.tr-note { display: block; margin-top: 4px; width: 150px; font-size: 11px; padding: 3px 5px; border: 1px solid #e2e8f0; border-radius: 5px; }
+.score-bar .src { background: #1d4ed8; color: white; }
+
+/* --- Source-text reading panel --- */
+:root { --sp-width: min(620px, 46vw); }
+.source-panel { position: fixed; top: 0; right: 0; height: 100vh; width: var(--sp-width); background: white; border-left: 1px solid #e2e8f0; box-shadow: -6px 0 28px rgba(15,23,42,0.14); transform: translateX(100%); transition: transform 0.2s ease; z-index: 40; display: flex; flex-direction: column; }
+body.source-open .source-panel { transform: translateX(0); }
+.source-panel .sp-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #e2e8f0; font-weight: 600; font-size: 13px; background: #f8fafc; }
+.source-panel .sp-close { font: inherit; border: 0; background: #e2e8f0; color: #475569; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.source-panel .sp-body { padding: 16px; overflow-y: auto; flex: 1; }
+body.source-open .container { margin-right: var(--sp-width); max-width: none; transition: margin-right 0.2s ease; }
+@media (max-width: 1000px) { :root { --sp-width: 100vw; } body.source-open .container { margin-right: 0; } }
+.sp-search { display: flex; gap: 6px; align-items: center; padding: 8px 16px; border-bottom: 1px solid #e2e8f0; background: white; }
+.sp-search input { flex: 1; font-size: 12px; padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 6px; }
+.sp-search #sp-search-count { font-size: 11px; color: #64748b; white-space: nowrap; min-width: 56px; text-align: right; }
+.sp-search button { font-size: 12px; padding: 5px 9px; border: 1px solid #cbd5e1; border-radius: 6px; background: white; cursor: pointer; }
+mark.sp-hit { background: #fde68a; color: inherit; border-radius: 2px; }
+mark.sp-hit.cur { background: #f59e0b; color: white; }
+
+/* clickable renders */
+.col img.zoomable { cursor: zoom-in; }
+
+/* focus mode: big image + its rating block, left of the source panel */
+.focus-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 38; background: rgba(248,250,252,0.99); display: none; flex-direction: column; padding: 18px 22px; overflow-y: auto; }
+body.focus-open .focus-overlay { display: flex; }
+body.focus-open.source-open .focus-overlay { right: var(--sp-width); }
+.focus-overlay .fo-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.focus-overlay .fo-title { font-weight: 700; font-size: 16px; }
+.focus-overlay .fo-close { font: inherit; font-weight: 600; border: 0; background: #0f172a; color: white; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+.focus-overlay .fo-img { width: 100%; max-height: 52vh; object-fit: contain; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.focus-overlay .fo-cols { display: flex; gap: 18px; align-items: flex-start; margin-top: 14px; flex-wrap: wrap; }
+.focus-overlay .fo-score { flex: 1 1 340px; min-width: 300px; }
+.focus-overlay .fo-score .score-block { max-width: 520px; }
+.focus-overlay .fo-triplets { flex: 1 1 360px; min-width: 300px; display: none; background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; max-height: 60vh; overflow-y: auto; }
+body.focus-cond-triplet_image .focus-overlay .fo-triplets { display: block; }
+.fo-triplets h4 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: #15803d; }
+.fo-triplets .ftl-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+.fo-triplets .ftl-list li { font-size: 12px; line-height: 1.4; }
+.fo-triplets .ftl-list li.dropped { opacity: 0.55; }
+.fo-triplets .spo b { color: #0f172a; } .fo-triplets .spo i { color: #1d4ed8; font-style: normal; font-weight: 600; }
+.fo-triplets .re-control { display: flex; gap: 6px; margin-top: 4px; }
+.fo-triplets .re-verdict { font-size: 11px; padding: 3px 4px; border: 1px solid #cbd5e1; border-radius: 5px; }
+.fo-triplets .re-note { flex: 1; font-size: 11px; padding: 3px 6px; border: 1px solid #e2e8f0; border-radius: 5px; }
+.ftl-additions { margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 12px; }
+.ftl-additions .addition-row { display: flex; gap: 4px; margin-bottom: 6px; }
+.ftl-additions .addition-input { flex: 1; min-width: 0; font-size: 11px; padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 5px; }
+.ftl-additions .addition-rm { border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c; border-radius: 6px; cursor: pointer; padding: 0 8px; }
+.ftl-additions .add-btn { font-size: 12px; font-weight: 600; padding: 6px 12px; border: 1px dashed #16a34a; background: #f0fdf4; color: #15803d; border-radius: 6px; cursor: pointer; }
+@media (max-width: 1000px) { body.focus-open.source-open .focus-overlay { right: 0; } }
+
+/* --- Frozen (read-only published) view: render locked controls as static text/badges --- */
+body.frozen .score-bar .exp,
+body.frozen .score-bar .imp,
+body.frozen .score-bar .saved,
+body.frozen .add-btn,
+body.frozen .addition-rm { display: none; }
+body.frozen .score-bar::after { content: "read-only"; margin-left: auto; font-size: 11px; color: #94a3b8; }
+body.frozen #progress { display: none; }
+/* likert: show only the chosen value, as a static chip */
+body.frozen .likert .lk input:not(:checked) + span { display: none; }
+body.frozen .likert .lk input:checked + span { background: #2563eb; color: #fff; border-color: #2563eb; }
+body.frozen .likert:not(:has(input:checked))::before { content: "—"; color: #94a3b8; }
+/* dropdowns → plain text */
+body.frozen select { appearance: none; -webkit-appearance: none; border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: #0f172a; opacity: 1; }
+body.frozen select:disabled { color: #0f172a; }
+/* number/text/textarea → borderless static */
+body.frozen .num, body.frozen .addition-input, body.frozen .tr-note, body.frozen .re-note,
+body.frozen .metric.comment textarea { border: 0; background: none; padding: 0; resize: none; color: #334155; font-weight: 600; opacity: 1; }
+body.frozen .metric.comment textarea:disabled { color: #334155; }
+body.frozen input:disabled, body.frozen textarea:disabled, body.frozen select:disabled { -webkit-text-fill-color: currentColor; }
+</style>
+</head>
+<body class="frozen">
+<div class="container">
+  <div class="nav">
+    <a href="index.html">&larr; All events</a>
+    <span>&middot;</span>
+    <span>7 / 10</span>
+  </div>
+  <div class="score-bar"><strong>Scores</strong><button class="exp" onclick="exportScores()">⬇ Export JSON</button><label class="imp" style="cursor:pointer;padding:5px 12px;border-radius:6px;">⬆ Import<input type="file" accept="application/json" onchange="importScores(event)"></label><button class="src" onclick="toggleSource()">📄 Source text</button><span class="saved" id="saved-ind">✓ saved</span></div>
+  <h1>slv-125180</h1>
+  <p class="subtitle">Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan. Kaj se zgodi, če tega ne naredite?</p>
+
+  <div class="columns">
+    <div class="col">
+      <div class="col-head direct">Direct &mdash; text &rarr; image</div>
+      <img class="zoomable" data-cond="direct" title="Click to focus + rate" src="../output/slv-125180/direct.webp" alt="Direct baseline for slv-125180">
+    </div>
+    <div class="col">
+      <div class="col-head triplet-image">Triplet &rarr; image</div>
+      <img class="zoomable" data-cond="triplet_image" title="Click to focus + rate" src="../output/slv-125180/triplet_image.webp" alt="Triplet→image for slv-125180">
+    </div>
+    <div class="col">
+      <div class="col-head triplet-html">Triplet &rarr; HTML/CSS</div>
+      <a href="../output/slv-125180/triplet_html.html" target="_blank"><img src="../output/slv-125180/triplet_html.png" alt="HTML render for slv-125180"></a>
+    </div>
+  </div>
+
+  <div class="score-card" id="score-card" data-event="slv-125180" data-rendered="12"><h3>Evaluation</h3><p class="sc-sub">Faithfulness/clarity rate the final image (same basis for both pipelines). Edge fidelity &amp; unsupported additions are objective counts for the triplet→image render only. Autosaves in this browser; use Export for a JSON copy.</p><div class="score-grid"><div class="score-block triplets"><h4>Triplets (graph vs articles)</h4><p class="objective-note">Per-triplet correctness is rated in the <b>Extracted triplets</b> table below (one verdict per row). Coverage is the only event-level triplet score:</p><div class="metric"><div class="metric-label">Coverage (missing relations?)<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__triplets__coverage" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__triplets__coverage" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__triplets__coverage" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__triplets__coverage" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__triplets__coverage" value="5"><span>5</span></label></div></div><div class="metric comment"><textarea id="sc__triplets__comment" name="sc__triplets__comment" rows="2" placeholder="Comments…"></textarea></div></div><div class="score-block direct"><h4>Direct image</h4><div class="metric"><div class="metric-label">Faithfulness to articles<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="5"><span>5</span></label></div></div><div class="metric"><div class="metric-label">Relation clarity<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__direct__clarity" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__direct__clarity" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__direct__clarity" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__direct__clarity" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__direct__clarity" value="5"><span>5</span></label></div></div><p class="objective-note">Density (the triplet→image node count is known automatically):</p><div class="metric"><div class="metric-label">Nodes in image (count by eye)</div><input class="num" type="number" min="0" id="sc__direct__node_count" name="sc__direct__node_count"></div><div class="metric comment"><textarea id="sc__direct__comment" name="sc__direct__comment" rows="2" placeholder="Comments…"></textarea></div></div><div class="score-block triplet_image"><h4>Triplet → image</h4><div class="metric"><div class="metric-label">Faithfulness to articles<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="5"><span>5</span></label></div></div><div class="metric"><div class="metric-label">Relation clarity<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="5"><span>5</span></label></div></div><p class="objective-note">Per-edge render fidelity &amp; unsupported additions are rated in the fed-triplet list (click the image to open it).</p><div class="metric comment"><textarea id="sc__triplet_image__comment" name="sc__triplet_image__comment" rows="2" placeholder="Comments…"></textarea></div></div></div></div>
+
+  <details>
+    <summary>Prompts</summary>
+    <div class="details-body">
+      <div class="prompt-block">
+        <h4>Triplet extraction prompt &mdash; text &rarr; triplets (stage 1, both triplet conditions)</h4>
+        <pre>Read the news articles below and produce two outputs as a single strict JSON object.
+
+The supplied articles are written in **Slovenian**. Your entire output — every `label`, every `evidence` field — MUST be in Slovenian. Do not translate proper nouns, institution names, predicates, or quoted spans into any other language. The `id` field is the only field that stays in lowercase ASCII snake_case.
+
+(1) An `entities` list of 6-10 central actors, institutions, countries, policies, events, conditions, or **mechanism states** (e.g. &quot;barriers down&quot;, &quot;red light&quot;, &quot;fourth-day deadline&quot;) that appear across the articles. Each entity has:
+    - `id` (snake_case stable identifier, unique within this output, ASCII)
+    - `label` (human-readable name in Slovenian, shown in the rendered graph)
+    - `central` (boolean — exactly ONE entity must have central=true; this is the focal subject of the news story)
+
+(2) A `triplets` list of 10-15 directed causal or explanatory relations between those entities. Each triplet has:
+    - `subject_id` (must match an entity id)
+    - `predicate` (1-3 word specific verb in Slovenian — e.g. raises, triggers, blames, criticizes, excludes, enables, requires, resigns from, proposes, motivates, leads to, results in, reinforces, undermines, vetoes)
+    - `object_id` (must match an entity id)
+    - `evidence` (short DIRECT QUOTE from the article in Slovenian supporting the relation — do NOT translate or paraphrase to a different language)
+    - `confidence` (&quot;low&quot; | &quot;medium&quot; | &quot;high&quot;)
+
+Hard constraints:
+- **Language lock**: every `label`, every `predicate`, every `evidence` must be in Slovenian. No translation.
+- **No direction redundancy**: do NOT include two triplets expressing the same fact in opposite directions (e.g. `train → collides_with → van` AND `van → results_in → collision` AND `train → results_in → collision` is three triplets for one fact — keep only ONE). Pick the single most informative orientation.
+- **Predicate-object type consistency**: communicative predicates (*announces, reports, confirms, criticizes, warns, blames, threatens*) take a STATEMENT or EVENT as object, never a person. If the natural object is a person, either rewrite the predicate (`kills`, `succeeds`, `criticizes_for_X`) or introduce a separate node for the statement/event (e.g. `mohamed_odeh_death`) and use it as the object.
+- **Event reification — never make a person the direct cause or effect of another event**: when a causal relation originates from or results in an EVENT, ACTION, or STATE that involves a person (a death, killing, attack, ruling, resignation, an event that triggers a protest), create a DEDICATED entity node for that event/state and attach the causal edge to it — do NOT attach the causal verb to the person. A person&#x27;s *death* causes consequences, the person does not. E.g. NOT `ales_sutar → povzročil → protest` but introduce `smrt_aleša_šutarja` and write `smrt_aleša_šutarja → sprožila → protest`.
+- **Attribution / hedging for contested claims**: when a relation is contested, alleged, or attributed to a specific party (the defense, a single witness, one news source) rather than established fact, do NOT state it flat. Fold the attribution/uncertainty INTO the predicate string using Slovenian markers — for Slovenian use &quot;naj bi …&quot;, &quot;domnevno …&quot;, or &quot;po navedbah &lt;vir&gt; …&quot;. This is especially important for accusations and claims that assign blame. E.g. NOT `ales_sutar → izzval → samire_siljic` but `ales_sutar → naj bi izzval (po navedbah obrambe) → samire_siljic`.
+- **Causal mechanism over commentary**: for incident, accident, or policy stories, AT LEAST 30% of triplets must describe the CAUSAL MECHANISM — conditions, contributing factors, sequences that led to the central event. Pure reaction triplets (`expresses_condolences`, `announces`, `praises`) are capped at 3 per event total.
+- **Specific predicates**: banned generic verbs: &quot;affects&quot;, &quot;relates to&quot;, &quot;is associated with&quot;, &quot;involves&quot;, &quot;concerns&quot;, &quot;deals with&quot;.
+- The directed graph induced by the triplets MUST be connected when treated as undirected. No isolated entities. No disconnected chains.
+- Every non-central entity must participate in at least 2 triplets. The central entity may participate in more.
+- Every triplet must be grounded in the supplied articles. Do NOT introduce background knowledge or facts not stated or strongly implied in the text.
+- Return ONLY the JSON object. No prose, no markdown fences, no commentary.
+
+All examples below use a FICTIONAL, illustrative scenario (a made-up country &quot;Vendia&quot;, its minister, a dam) purely to show the rules. They are NOT from the supplied articles — never copy these entities, names, or wordings into your output; extract only what the supplied articles support.
+
+DIRECTION EXAMPLE — correct vs wrong:
+  Fictional article: &quot;Minister Adler confirmed that twelve people died in the dam failure.&quot;
+  WRONG: {&quot;subject_id&quot;:&quot;dam_failure&quot;,&quot;predicate&quot;:&quot;causes&quot;,&quot;object_id&quot;:&quot;minister_adler&quot;, ...}     ← the failure does not cause the minister
+  WRONG: {&quot;subject_id&quot;:&quot;minister_adler&quot;,&quot;predicate&quot;:&quot;confirms&quot;,&quot;object_id&quot;:&quot;minister_adler&quot;, ...}  ← invalid; self-loop
+  RIGHT: {&quot;subject_id&quot;:&quot;minister_adler&quot;,&quot;predicate&quot;:&quot;confirms casualties of&quot;,&quot;object_id&quot;:&quot;dam_failure&quot;, ...}  ← minister confirms (re: the failure)
+
+EVENT-REIFICATION EXAMPLE — put the event, not the person, on the causal edge:
+  Fictional article: &quot;The mayor&#x27;s resignation triggered early elections in Vendia.&quot;
+  WRONG: {&quot;subject_id&quot;:&quot;mayor&quot;,&quot;predicate&quot;:&quot;triggers&quot;,&quot;object_id&quot;:&quot;early_elections&quot;, ...}  ← the person did not trigger the elections
+  RIGHT: add an entity {&quot;id&quot;:&quot;mayor_resignation&quot;,&quot;label&quot;:&quot;&lt;the resignation, in source language&gt;&quot;} then
+         {&quot;subject_id&quot;:&quot;mayor_resignation&quot;,&quot;predicate&quot;:&quot;triggers&quot;,&quot;object_id&quot;:&quot;early_elections&quot;, ...}  ← the resignation triggered them
+
+ATTRIBUTION EXAMPLE — hedge contested/attributed claims in the predicate:
+  Fictional article: &quot;The operator&#x27;s lawyer argued that heavy rainfall, not negligence, caused the dam failure.&quot;
+  WRONG: {&quot;subject_id&quot;:&quot;rainfall&quot;,&quot;predicate&quot;:&quot;causes&quot;,&quot;object_id&quot;:&quot;dam_failure&quot;, ...}  ← states one party&#x27;s contested claim as established fact
+  RIGHT: {&quot;subject_id&quot;:&quot;rainfall&quot;,&quot;predicate&quot;:&quot;allegedly caused (per the operator)&quot;,&quot;object_id&quot;:&quot;dam_failure&quot;, ...}  ← marked as a contested, attributed claim
+  (In Slovenian, render such hedges as &quot;naj bi …&quot; / &quot;domnevno …&quot; / &quot;po navedbah &lt;vir&gt; …&quot;.)
+
+Output schema:
+{
+  &quot;entities&quot;: [
+    {&quot;id&quot;: &quot;eu&quot;, &quot;label&quot;: &quot;Evropska unija&quot;, &quot;central&quot;: false},
+    {&quot;id&quot;: &quot;carbon_tax&quot;, &quot;label&quot;: &quot;Ogljični davek&quot;, &quot;central&quot;: true}
+  ],
+  &quot;triplets&quot;: [
+    {
+      &quot;subject_id&quot;: &quot;eu&quot;,
+      &quot;predicate&quot;: &quot;uvaja&quot;,
+      &quot;object_id&quot;: &quot;carbon_tax&quot;,
+      &quot;evidence&quot;: &quot;EU je uradno sprejela mehanizem za ogljični davek dne...&quot;,
+      &quot;confidence&quot;: &quot;high&quot;
+    }
+  ]
+}
+
+ARTICLES (in Slovenian):
+
+Article 1 - Večer:
+Title: Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan. Kaj se zgodi, če tega ne naredite?
+Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so 
+
+Article 2 - Lokalec.si:
+Title: Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami.
+
+&quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je pouda
+
+Article 3 - RTV Slovenija:
+Title: Spremembe pravil ZZZS-ja: Bolniško odsotnost morajo od zdaj zaposleni zdravniku sporočiti isti dan
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS-ja, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugoto
+
+Article 4 - SiOL:
+Title: Od danes naprej veljajo nova pravila za bolniške
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 mi
+
+Article 5 - 24ur:
+Title: Zaposleni morajo zdravniku bolniško odsotnost sporočiti še isti dan
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+Article 6 - STA:
+Title: Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan
+Ljubljana, 27. maja (STA) - Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled ...
+
+Article 7 - Slovenske Novice:
+Title: Pozor, od danes veljajo nova pravila za bolniško! To morate storiti že prvi dan
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače. Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na
+
+Article 8 - Svet24:
+Title: Nova pravila pri sporočanju bolniške odsotnosti
+Z današnjim dnem so v veljavo stopila nova pravila obveznega zdravstvenega zavarovanja. Pacient bo moral biti bolj pozoren zlasti pri sporočanju bolniške odsotnosti. Da bo ostal doma, mora svojemu zdravniku sporočiti na prvi dan odsotnosti z dela oziroma prvi naslednji delovni dan ambulante.
+
+Pregled pri osebnem zdravniku je po novem obvezen vedno, ko tako odloči osebni zdravnik in pacienta pokliče na pregled, piše Slovenska tiskovna agencija. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. Pregled je potreben tudi, če je bil nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je razložila Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila Vodičar.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlj
+
+Article 9 - STA:
+Title: Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan (dopolnjeno)
+z dodatnimi izjavami v zadnjih petih odstavkih Ljubljana, 27. maja (STA) - Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. ...
+
+Article 10 - Žurnal24:
+Title: Pozor, od danes velike spremembe glede bolniških. ZZZS o tem, kaj prinašajo
+Sicer je do prvih sprememb prišlo že tik pred novih letom, takrat z interventnim zakonom, ki je prinesel zlasti strožje sankcije v primeru kršitev navodil za ravnanje, nekoliko bolj so zdaj urejene urejene laične kontrole in sprememba pri odhodu v tujino.
+
+Zdaj je Zavod za zdravstveno zavarovanje RS (ZZZS) sprejel še drugi paket sprememb. &quot;Cilj je povečanje odgovornosti zavarovanih oseb pri odpiranju in podaljšanju bolniškega staleža, in na neki način pričakovanje do izbranih oseb in zdravnikov družinskih zdravnikov, pediatrov, da seveda staleže odpirajo odgovorno, skrbno, ne samo do delodajalcev, do zdravstvene blagajne, ampak predvsem tudi do pacientov,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na ZZZS Ana Vodičar. &quot;Eden od namenov teh sprememb je tudi bolj varna obravnava pacientov. V zadnjem post covid obdobju je obravnava na daljavo se znatno povečala. In zato želimo, da se medicina vrne v ambulante, absolutno ohranjamo vse prednosti obravnave zdravstvene na daljavo, ampak vendarle v določenih trenutkih ocenjujemo kot primerno, da se osebni pregled opravi,&quot; je pojasnila.
+
+Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oziroma najpozneje prvi naslednji delovni dan ambulante. Kot je znano, je bil dosedanji rok tri dni, ko je bilo treba sporočiti svojemu izbranemu osebnemu zdravniku, da ostajamo doma, da nismo zmožni za delo, sedaj se torej ta rok bistveno skrajšuje.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Ena sama možna izjema je, da pacient seveda tega ne stori isti dan, izrecno smo opredelili, da če se zgodi, da je seveda zavarovanec v bolnišnici ali v zdraviliškem zdravljenju, da seveda ni treba, da se potem iz bolnišnice ukvarja s tem, da sporoča svojo odsotnost družinskemu zdravniku, v tem primeru lahko sporoči odsotnost, ko se vrne domov, že isti dan in tudi v tem primeru, to je novost in razbremenitev za družinske zdravnike, bodo lahko to obdobje zadržanosti za nazaj pokrili kar sami družinski zdravniki. Nesporno je, če je bil nekdo hospitaliziran, seveda, da mu bolniški stalež pripada&quot;, je pojasnila Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj. &quot;Recimo, da je res nekdo imel hudo zdravstveno stanje doma, pa tega ni mogel sporočiti pravočasno, in šele če bo ta pogoj izpolnjen, torej da je bil nekdo res iz opravičljivih razlogov, ni mogel pravočasno sporočiti razlogov za svojo odsotnost, bo potem samo imenovani zdravnik tor
+
+</pre>
+      </div>
+      <div class="prompt-tabs">
+        <div class="prompt-block">
+          <h4>Direct prompt &mdash; fed to Gemini 3 Pro Image Preview</h4>
+          <pre>**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic based on the provided text.
+
+### 1. Visual Style &amp; Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+* **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+* **Claims/Events:** Muted Grey or subtle Teal.
+* **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+* **Highlights:** Use a single accent color (e.g., Burnt Orange) only for the most critical central node.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Processing Rules
+Analyze the provided text to extract a Knowledge Graph:
+* **Nodes:** Extract key **Entities** (People, Countries, Organizations) and **Key Claims/Events**. Enclose node text in clean rectangular or pill-shaped containers.
+* **Links:** Identify **Causal Relations** connecting these nodes.
+* **Labels:** Every link must have a text label (2-3 words max) describing the causal relations between nodes.
+* **Logic:** Ensure the visual flow represents the causal chain (Cause → Effect).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the extracted causal network (DO NOT generate any additional text).
+
+### 4. Input Text
+
+Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami.
+
+&quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS-ja, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+Ljubljana, 27. maja (STA) - Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled ...
+
+Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače. Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+Z današnjim dnem so v veljavo stopila nova pravila obveznega zdravstvenega zavarovanja. Pacient bo moral biti bolj pozoren zlasti pri sporočanju bolniške odsotnosti. Da bo ostal doma, mora svojemu zdravniku sporočiti na prvi dan odsotnosti z dela oziroma prvi naslednji delovni dan ambulante.
+
+Pregled pri osebnem zdravniku je po novem obvezen vedno, ko tako odloči osebni zdravnik in pacienta pokliče na pregled, piše Slovenska tiskovna agencija. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. Pregled je potreben tudi, če je bil nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je razložila Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila Vodičar.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.
+
+z dodatnimi izjavami v zadnjih petih odstavkih Ljubljana, 27. maja (STA) - Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. ...
+
+Sicer je do prvih sprememb prišlo že tik pred novih letom, takrat z interventnim zakonom, ki je prinesel zlasti strožje sankcije v primeru kršitev navodil za ravnanje, nekoliko bolj so zdaj urejene urejene laične kontrole in sprememba pri odhodu v tujino.
+
+Zdaj je Zavod za zdravstveno zavarovanje RS (ZZZS) sprejel še drugi paket sprememb. &quot;Cilj je povečanje odgovornosti zavarovanih oseb pri odpiranju in podaljšanju bolniškega staleža, in na neki način pričakovanje do izbranih oseb in zdravnikov družinskih zdravnikov, pediatrov, da seveda staleže odpirajo odgovorno, skrbno, ne samo do delodajalcev, do zdravstvene blagajne, ampak predvsem tudi do pacientov,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na ZZZS Ana Vodičar. &quot;Eden od namenov teh sprememb je tudi bolj varna obravnava pacientov. V zadnjem post covid obdobju je obravnava na daljavo se znatno povečala. In zato želimo, da se medicina vrne v ambulante, absolutno ohranjamo vse prednosti obravnave zdravstvene na daljavo, ampak vendarle v določenih trenutkih ocenjujemo kot primerno, da se osebni pregled opravi,&quot; je pojasnila.
+
+Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oziroma najpozneje prvi naslednji delovni dan ambulante. Kot je znano, je bil dosedanji rok tri dni, ko je bilo treba sporočiti svojemu izbranemu osebnemu zdravniku, da ostajamo doma, da nismo zmožni za delo, sedaj se torej ta rok bistveno skrajšuje.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Ena sama možna izjema je, da pacient seveda tega ne stori isti dan, izrecno smo opredelili, da če se zgodi, da je seveda zavarovanec v bolnišnici ali v zdraviliškem zdravljenju, da seveda ni treba, da se potem iz bolnišnice ukvarja s tem, da sporoča svojo odsotnost družinskemu zdravniku, v tem primeru lahko sporoči odsotnost, ko se vrne domov, že isti dan in tudi v tem primeru, to je novost in razbremenitev za družinske zdravnike, bodo lahko to obdobje zadržanosti za nazaj pokrili kar sami družinski zdravniki. Nesporno je, če je bil nekdo hospitaliziran, seveda, da mu bolniški stalež pripada&quot;, je pojasnila Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj. &quot;Recimo, da je res nekdo imel hudo zdravstveno stanje doma, pa tega ni mogel sporočiti pravočasno, in šele če bo ta pogoj izpolnjen, torej da je bil nekdo res iz opravičljivih razlogov, ni mogel pravočasno sporočiti razlogov za svojo odsotnost, bo potem samo imenovani zdravnik torej ne več družinski zdravnik, lahko odobril, priznal bolniški stalež za nazaj,&quot; smo slišali na tiskovni konferenci ZZZS.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala. &quot;Če sem zelo konkretna, torej je nekdo v ponedeljek začel stalež in traja ta bolniški stalež že do četrtka in se potem zaključi, pregled ni nujen, če pa traja ta bolniški stalež še v petek in mogoče celo še potem naprej, pa je obvezno izvesti pregled pri osebnem zdravniku.&quot;
+
+Pregled je obvezen tudi pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. &quot;Da seveda osebni zdravnik pacienta pregleda, tudi zato seveda, da je ta predlog na zavod strokovno bolje pripravljen, bolje utemeljen,&quot; je povedala Vodičar.
+
+V primeru, da osebni pregled ne bo izveden, se bo družinski zdravnik odločil o bolniškem staležu samo na podlagi medicinske dokumentacije. &quot;Če je bil neupravičen prihod s strani pacienta, je po novem družinski zdravnik dolžan obvestiti našo območno enoto, saj predpisi določajo, da se v primeru neupravičenega prihoda na osebni pregled lahko zadrži nadomestilo plače.&quot;
+
+Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. &quot;Gre za takrat, ko je za to neki upravičljiv razlog, predvsem ko je zdravstveno stanje zavarovanca tako, da seveda je povsem nesmiselno, da se pregled opravi. V mislih imamo seveda neke večje operativne posege ali mogoče neke imobilizacije udov ali zdravljenje s kemoterapijo, to so taki, bi rekla, za paciente naporni dnevi, ko je zdravstvena dokumentacija povsem dovolj in seveda obisk pri družinskem zdravniku ne bo potreben.&quot;
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja.</pre>
+        </div>
+        <div class="prompt-block">
+          <h4>Triplet&rarr;image prompt &mdash; fed to Gemini 3 Pro Image Preview</h4>
+          <pre>**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic from the entities and relations supplied below. You are NOT extracting a knowledge graph from raw text — the graph has already been extracted for you. Render it.
+
+### 1. Visual Style &amp; Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+  * **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+  * **Claims/Events:** Muted Grey or subtle Teal.
+  * **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+  * **Highlights:** Apply Burnt Orange ONLY to the entity marked `central: true` in the supplied list.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Constraints (CRITICAL)
+You MUST use ONLY the entities and relations supplied below. You must NOT:
+- introduce any node that is not in the supplied entities list,
+- invent any directed edge that is not in the supplied relations list,
+- add background knowledge or implied context,
+- **translate, paraphrase, or rewrite** any supplied label or predicate. Render each node label and each edge predicate EXACTLY as supplied below, in the supplied language. If a label is &quot;Osebni zdravniki&quot;, the node text must read &quot;Osebni zdravniki&quot;, not &quot;Personal Doctors&quot; or &quot;Family physician&quot;. Same for predicates.
+
+Render each entity as one node, using its `label` as the visible text (verbatim). Render each relation as one directed arrow whose label is the supplied predicate (verbatim, though you may apply TitleCase or uppercase styling for visual consistency).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the supplied causal network (DO NOT generate any additional text).
+
+### 4. Entities (use exactly these as nodes)
+
+- Spremembe pravil obveznega zdravstvenega zavarovanja [CENTRAL — highlight in burnt orange]
+- Zavod za zdravstveno zavarovanje Slovenije
+- Osebni zdravnik
+- Obvezni osebni pregled pri zdravniku
+- Zadržanje nadomestila plače
+- Izgubljeni delovni dnevi
+- Delodajalci
+- Neupoštevanje režimov gibanja
+
+### 5. Causal Relations (use exactly these as directed edges)
+
+- Zavod za zdravstveno zavarovanje Slovenije → sprejel → Spremembe pravil obveznega zdravstvenega zavarovanja
+- Spremembe pravil obveznega zdravstvenega zavarovanja → zahtevajo → Obvezni osebni pregled pri zdravniku
+- Obvezni osebni pregled pri zdravniku → mora opraviti → Osebni zdravnik
+- Obvezni osebni pregled pri zdravniku → preprečuje → Zadržanje nadomestila plače
+- Zavod za zdravstveno zavarovanje Slovenije → odloča o → Zadržanje nadomestila plače
+- Neupoštevanje režimov gibanja → vpliva na → Zadržanje nadomestila plače
+- Spremembe pravil obveznega zdravstvenega zavarovanja → zmanjšujejo število → Izgubljeni delovni dnevi
+- Izgubljeni delovni dnevi → prinašajo prihranek za → Delodajalci
+- Spremembe pravil obveznega zdravstvenega zavarovanja → razbremenjujejo → Osebni zdravnik
+- Spremembe pravil obveznega zdravstvenega zavarovanja → uvajajo sankcije za → Neupoštevanje režimov gibanja
+- Zavod za zdravstveno zavarovanje Slovenije → beleži manj → Izgubljeni delovni dnevi
+- Spremembe pravil obveznega zdravstvenega zavarovanja → koristijo za → Delodajalci
+</pre>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details open>
+    <summary>Extracted triplets</summary>
+    <div class="details-body">
+      <h4 style='margin:0 0 10px; font-size:13px; color:#475569;'>Entities (8)</h4><table><thead><tr><th>id</th><th>label</th></tr></thead><tbody><tr><td><code>spremembe_pravil_zzzs</code></td><td>Spremembe pravil obveznega zdravstvenega zavarovanja<span class="central-badge">central</span></td></tr><tr><td><code>zzzs</code></td><td>Zavod za zdravstveno zavarovanje Slovenije</td></tr><tr><td><code>osebni_zdravnik</code></td><td>Osebni zdravnik</td></tr><tr><td><code>obvezni_osebni_pregled</code></td><td>Obvezni osebni pregled pri zdravniku</td></tr><tr><td><code>zadrzanje_nadomestila_place</code></td><td>Zadržanje nadomestila plače</td></tr><tr><td><code>izgubljeni_delovni_dnevi</code></td><td>Izgubljeni delovni dnevi</td></tr><tr><td><code>delodajalci</code></td><td>Delodajalci</td></tr><tr><td><code>neupostevanje_rezimov_gibanja</code></td><td>Neupoštevanje režimov gibanja</td></tr></tbody></table><h4 style='margin:18px 0 10px; font-size:13px; color:#475569;'>Triplets (12)</h4><table class="triplets-table"><thead><tr><th>subject</th><th>predicate</th><th>object</th><th>conf</th><th>evidence</th><th>rating</th></tr></thead><tbody><tr data-tidx="0" data-s="zzzs" data-p="sprejel" data-o="spremembe_pravil_zzzs"><td>Zavod za zdravstveno zavarovanje Slovenije</td><td class="predicate">sprejel</td><td>Spremembe pravil obveznega zdravstvenega zavarovanja</td><td><span class="confidence high">high</span></td><td class="evidence">Zavod za zdravstveno zavarovanje RS (ZZZS) sprejel še drugi paket sprememb.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="0"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="0" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="1" data-s="spremembe_pravil_zzzs" data-p="zahtevajo" data-o="obvezni_osebni_pregled"><td>Spremembe pravil obveznega zdravstvenega zavarovanja</td><td class="predicate">zahtevajo</td><td>Obvezni osebni pregled pri zdravniku</td><td><span class="confidence high">high</span></td><td class="evidence">Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="1"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="1" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="2" data-s="obvezni_osebni_pregled" data-p="mora opraviti" data-o="osebni_zdravnik"><td>Obvezni osebni pregled pri zdravniku</td><td class="predicate">mora opraviti</td><td>Osebni zdravnik</td><td><span class="confidence high">high</span></td><td class="evidence">Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="2"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="2" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="3" data-s="obvezni_osebni_pregled" data-p="preprečuje" data-o="zadrzanje_nadomestila_place"><td>Obvezni osebni pregled pri zdravniku</td><td class="predicate">preprečuje</td><td>Zadržanje nadomestila plače</td><td><span class="confidence high">high</span></td><td class="evidence">Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="3"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="3" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="4" data-s="zzzs" data-p="odloča o" data-o="zadrzanje_nadomestila_place"><td>Zavod za zdravstveno zavarovanje Slovenije</td><td class="predicate">odloča o</td><td>Zadržanje nadomestila plače</td><td><span class="confidence high">high</span></td><td class="evidence">bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="4"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="4" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="5" data-s="neupostevanje_rezimov_gibanja" data-p="vpliva na" data-o="zadrzanje_nadomestila_place"><td>Neupoštevanje režimov gibanja</td><td class="predicate">vpliva na</td><td>Zadržanje nadomestila plače</td><td><span class="confidence high">high</span></td><td class="evidence">Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="5"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="5" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="6" data-s="spremembe_pravil_zzzs" data-p="zmanjšujejo število" data-o="izgubljeni_delovni_dnevi"><td>Spremembe pravil obveznega zdravstvenega zavarovanja</td><td class="predicate">zmanjšujejo število</td><td>Izgubljeni delovni dnevi</td><td><span class="confidence high">high</span></td><td class="evidence">prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="6"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="6" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="7" data-s="izgubljeni_delovni_dnevi" data-p="prinašajo prihranek za" data-o="delodajalci"><td>Izgubljeni delovni dnevi</td><td class="predicate">prinašajo prihranek za</td><td>Delodajalci</td><td><span class="confidence high">high</span></td><td class="evidence">v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="7"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="7" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="8" data-s="spremembe_pravil_zzzs" data-p="razbremenjujejo" data-o="osebni_zdravnik"><td>Spremembe pravil obveznega zdravstvenega zavarovanja</td><td class="predicate">razbremenjujejo</td><td>Osebni zdravnik</td><td><span class="confidence medium">medium</span></td><td class="evidence">v tem primeru lahko sporoči odsotnost, ko se vrne domov, že isti dan in tudi v tem primeru, to je novost in razbremenitev za družinske zdravnike</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="8"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="8" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="9" data-s="spremembe_pravil_zzzs" data-p="uvajajo sankcije za" data-o="neupostevanje_rezimov_gibanja"><td>Spremembe pravil obveznega zdravstvenega zavarovanja</td><td class="predicate">uvajajo sankcije za</td><td>Neupoštevanje režimov gibanja</td><td><span class="confidence high">high</span></td><td class="evidence">takrat z interventnim zakonom, ki je prinesel zlasti strožje sankcije v primeru kršitev navodil za ravnanje</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="9"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="9" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="10" data-s="zzzs" data-p="beleži manj" data-o="izgubljeni_delovni_dnevi"><td>Zavod za zdravstveno zavarovanje Slovenije</td><td class="predicate">beleži manj</td><td>Izgubljeni delovni dnevi</td><td><span class="confidence high">high</span></td><td class="evidence">Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="10"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="10" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="11" data-s="spremembe_pravil_zzzs" data-p="koristijo za" data-o="delodajalci"><td>Spremembe pravil obveznega zdravstvenega zavarovanja</td><td class="predicate">koristijo za</td><td>Delodajalci</td><td><span class="confidence medium">medium</span></td><td class="evidence">da seveda staleže odpirajo odgovorno, skrbno, ne samo do delodajalcev, do zdravstvene blagajne, ampak predvsem tudi do pacientov</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="11"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="11" type="text" placeholder="note / what was wrong…"></td></tr></tbody></table>
+    </div>
+  </details>
+
+  <div class="event-nav">
+    <a href="slv-125190.html">&larr; slv-125190</a>
+    <a href="slv-125152.html">slv-125152 &rarr;</a>
+  </div>
+</div>
+<div class="focus-overlay" id="focus-overlay">
+  <div class="fo-head"><span class="fo-title" id="fo-title"></span>
+    <button class="fo-close" onclick="closeFocus()" title="Close (Esc)">✕ Close</button></div>
+  <img class="fo-img" id="fo-img" alt="focused render">
+  <div class="fo-cols">
+    <div class="fo-score" id="fo-score"></div>
+    <div class="fo-triplets"><h4>Triplets fed to the image (12 fed / 12 total) — mark how each was drawn</h4><ol class="ftl-list"><li data-tidx="0" data-s="zzzs" data-p="sprejel" data-o="spremembe_pravil_zzzs" title="Zavod za zdravstveno zavarovanje RS (ZZZS) sprejel še drugi paket sprememb."><span class="spo"><b>Zavod za zdravstveno zavarovanje Slovenije</b> <i>sprejel</i> <b>Spremembe pravil obveznega zdravstvenega zavarovanja</b></span><span class="re-control"><select class="re-verdict" data-tidx="0"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="0" type="text" placeholder="note…"></span></li><li data-tidx="1" data-s="spremembe_pravil_zzzs" data-p="zahtevajo" data-o="obvezni_osebni_pregled" title="Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža."><span class="spo"><b>Spremembe pravil obveznega zdravstvenega zavarovanja</b> <i>zahtevajo</i> <b>Obvezni osebni pregled pri zdravniku</b></span><span class="re-control"><select class="re-verdict" data-tidx="1"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="1" type="text" placeholder="note…"></span></li><li data-tidx="2" data-s="obvezni_osebni_pregled" data-p="mora opraviti" data-o="osebni_zdravnik" title="Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti."><span class="spo"><b>Obvezni osebni pregled pri zdravniku</b> <i>mora opraviti</i> <b>Osebni zdravnik</b></span><span class="re-control"><select class="re-verdict" data-tidx="2"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="2" type="text" placeholder="note…"></span></li><li data-tidx="3" data-s="obvezni_osebni_pregled" data-p="preprečuje" data-o="zadrzanje_nadomestila_place" title="Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače."><span class="spo"><b>Obvezni osebni pregled pri zdravniku</b> <i>preprečuje</i> <b>Zadržanje nadomestila plače</b></span><span class="re-control"><select class="re-verdict" data-tidx="3"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="3" type="text" placeholder="note…"></span></li><li data-tidx="4" data-s="zzzs" data-p="odloča o" data-o="zadrzanje_nadomestila_place" title="bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače."><span class="spo"><b>Zavod za zdravstveno zavarovanje Slovenije</b> <i>odloča o</i> <b>Zadržanje nadomestila plače</b></span><span class="re-control"><select class="re-verdict" data-tidx="4"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="4" type="text" placeholder="note…"></span></li><li data-tidx="5" data-s="neupostevanje_rezimov_gibanja" data-p="vpliva na" data-o="zadrzanje_nadomestila_place" title="Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja"><span class="spo"><b>Neupoštevanje režimov gibanja</b> <i>vpliva na</i> <b>Zadržanje nadomestila plače</b></span><span class="re-control"><select class="re-verdict" data-tidx="5"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="5" type="text" placeholder="note…"></span></li><li data-tidx="6" data-s="spremembe_pravil_zzzs" data-p="zmanjšujejo število" data-o="izgubljeni_delovni_dnevi" title="prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani"><span class="spo"><b>Spremembe pravil obveznega zdravstvenega zavarovanja</b> <i>zmanjšujejo število</i> <b>Izgubljeni delovni dnevi</b></span><span class="re-control"><select class="re-verdict" data-tidx="6"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="6" type="text" placeholder="note…"></span></li><li data-tidx="7" data-s="izgubljeni_delovni_dnevi" data-p="prinašajo prihranek za" data-o="delodajalci" title="v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce."><span class="spo"><b>Izgubljeni delovni dnevi</b> <i>prinašajo prihranek za</i> <b>Delodajalci</b></span><span class="re-control"><select class="re-verdict" data-tidx="7"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="7" type="text" placeholder="note…"></span></li><li data-tidx="8" data-s="spremembe_pravil_zzzs" data-p="razbremenjujejo" data-o="osebni_zdravnik" title="v tem primeru lahko sporoči odsotnost, ko se vrne domov, že isti dan in tudi v tem primeru, to je novost in razbremenitev za družinske zdravnike"><span class="spo"><b>Spremembe pravil obveznega zdravstvenega zavarovanja</b> <i>razbremenjujejo</i> <b>Osebni zdravnik</b></span><span class="re-control"><select class="re-verdict" data-tidx="8"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="8" type="text" placeholder="note…"></span></li><li data-tidx="9" data-s="spremembe_pravil_zzzs" data-p="uvajajo sankcije za" data-o="neupostevanje_rezimov_gibanja" title="takrat z interventnim zakonom, ki je prinesel zlasti strožje sankcije v primeru kršitev navodil za ravnanje"><span class="spo"><b>Spremembe pravil obveznega zdravstvenega zavarovanja</b> <i>uvajajo sankcije za</i> <b>Neupoštevanje režimov gibanja</b></span><span class="re-control"><select class="re-verdict" data-tidx="9"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="9" type="text" placeholder="note…"></span></li><li data-tidx="10" data-s="zzzs" data-p="beleži manj" data-o="izgubljeni_delovni_dnevi" title="Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani"><span class="spo"><b>Zavod za zdravstveno zavarovanje Slovenije</b> <i>beleži manj</i> <b>Izgubljeni delovni dnevi</b></span><span class="re-control"><select class="re-verdict" data-tidx="10"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="10" type="text" placeholder="note…"></span></li><li data-tidx="11" data-s="spremembe_pravil_zzzs" data-p="koristijo za" data-o="delodajalci" title="da seveda staleže odpirajo odgovorno, skrbno, ne samo do delodajalcev, do zdravstvene blagajne, ampak predvsem tudi do pacientov"><span class="spo"><b>Spremembe pravil obveznega zdravstvenega zavarovanja</b> <i>koristijo za</i> <b>Delodajalci</b></span><span class="re-control"><select class="re-verdict" data-tidx="11"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="11" type="text" placeholder="note…"></span></li></ol><div class="ftl-additions"><h4>Unsupported additions — extra subject·predicate·object in the image, not in the graph</h4><div id="additions-list"></div><button type="button" class="add-btn" onclick="addAddition()">+ add unsupported triplet</button></div></div>
+  </div>
+</div>
+<aside class="source-panel" aria-label="Source articles">
+  <div class="sp-head"><span>Source articles (10)</span>
+    <button class="sp-close" onclick="closeSource()" title="Close">✕</button></div>
+  <div class="sp-search">
+    <input type="text" id="sp-search-input" placeholder="Search source… (⌘/Ctrl+F)" autocomplete="off">
+    <span id="sp-search-count"></span>
+    <button onclick="spSearchPrev()" title="Previous">↑</button>
+    <button onclick="spSearchNext()" title="Next">↓</button>
+  </div>
+  <div class="sp-body"><div class="article-list"><div class="article"><div class="pub">Večer</div><div class="atitle">Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan. Kaj se zgodi, če tega ne naredite?</div><div class="body">Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.</div></div><div class="article"><div class="pub">Lokalec.si</div><div class="atitle">Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan</div><div class="body">Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami.
+
+&quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.</div></div><div class="article"><div class="pub">RTV Slovenija</div><div class="atitle">Spremembe pravil ZZZS-ja: Bolniško odsotnost morajo od zdaj zaposleni zdravniku sporočiti isti dan</div><div class="body">V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS-ja, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.</div></div><div class="article"><div class="pub">SiOL</div><div class="atitle">Od danes naprej veljajo nova pravila za bolniške</div><div class="body">Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled pri osebnemu zdravniku pa je po novem obvezen najpozneje četrti dan odsotnosti.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.</div></div><div class="article"><div class="pub">24ur</div><div class="atitle">Zaposleni morajo zdravniku bolniško odsotnost sporočiti še isti dan</div><div class="body">Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh.
+
+Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.</div></div><div class="article"><div class="pub">STA</div><div class="atitle">Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan</div><div class="body">Ljubljana, 27. maja (STA) - Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante. Pregled ...</div></div><div class="article"><div class="pub">Slovenske Novice</div><div class="atitle">Pozor, od danes veljajo nova pravila za bolniško! To morate storiti že prvi dan</div><div class="body">Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. najpozneje prvi naslednji delovni dan ambulante.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije Ana Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. Pregled je potreben tudi, če bo nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je dejala Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače. Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.</div></div><div class="article"><div class="pub">Svet24</div><div class="atitle">Nova pravila pri sporočanju bolniške odsotnosti</div><div class="body">Z današnjim dnem so v veljavo stopila nova pravila obveznega zdravstvenega zavarovanja. Pacient bo moral biti bolj pozoren zlasti pri sporočanju bolniške odsotnosti. Da bo ostal doma, mora svojemu zdravniku sporočiti na prvi dan odsotnosti z dela oziroma prvi naslednji delovni dan ambulante.
+
+Pregled pri osebnem zdravniku je po novem obvezen vedno, ko tako odloči osebni zdravnik in pacienta pokliče na pregled, piše Slovenska tiskovna agencija. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala, ter pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. Pregled je potreben tudi, če je bil nekdo v zadnjih treh mesecih odsoten več kot dvakrat, četudi je šlo za krajšo odsotnost. &quot;Tukaj smo sledili tudi stroki, ki opozarja, da se včasih za kratkimi, a pogostimi bolniškimi staleži, lahko skriva resnejše zdravstveno stanje,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na Zavodu za zdravstveno zavarovanje Slovenije (ZZZS) Ana Vodičar.
+
+Če osebni pregled ne bo opravljen, bo zdravnik o bolniškem staležu odločil na podlagi medicinske dokumentacije. Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. Kadar pa bolnik ne bo opravil pregleda in za to ne bo imel opravičljivih razlogov, bo moral zdravnik o tem obvestiti območno enoto ZZZS, ki bo odločala o zadržanju nadomestila plače.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Nesporno je, če je bil nekdo hospitaliziran, da mu bolniški stalež pripada,&quot; je razložila Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj, je pojasnila Vodičar.
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja. Trenutno imajo odprtih približno 30 postopkov, kjer se presoja, ali gre za kršitev, kršitev pa so doslej ugotovili v štirih primerih.</div></div><div class="article"><div class="pub">STA</div><div class="atitle">Bolniško odsotnost morajo odslej zaposleni zdravniku sporočiti isti dan (dopolnjeno)</div><div class="body">z dodatnimi izjavami v zadnjih petih odstavkih Ljubljana, 27. maja (STA) - Danes so stopile v veljavo spremembe pravil obveznega zdravstvenega zavarovanja, ki se večinoma nanašajo na bolniški stalež. Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oz. ...</div></div><div class="article"><div class="pub">Žurnal24</div><div class="atitle">Pozor, od danes velike spremembe glede bolniških. ZZZS o tem, kaj prinašajo</div><div class="body">Sicer je do prvih sprememb prišlo že tik pred novih letom, takrat z interventnim zakonom, ki je prinesel zlasti strožje sankcije v primeru kršitev navodil za ravnanje, nekoliko bolj so zdaj urejene urejene laične kontrole in sprememba pri odhodu v tujino.
+
+Zdaj je Zavod za zdravstveno zavarovanje RS (ZZZS) sprejel še drugi paket sprememb. &quot;Cilj je povečanje odgovornosti zavarovanih oseb pri odpiranju in podaljšanju bolniškega staleža, in na neki način pričakovanje do izbranih oseb in zdravnikov družinskih zdravnikov, pediatrov, da seveda staleže odpirajo odgovorno, skrbno, ne samo do delodajalcev, do zdravstvene blagajne, ampak predvsem tudi do pacientov,&quot; je na današnji novinarski konferenci povedala vodja področja za odločanje o pravicah in za medicinske pripomočke na ZZZS Ana Vodičar. &quot;Eden od namenov teh sprememb je tudi bolj varna obravnava pacientov. V zadnjem post covid obdobju je obravnava na daljavo se znatno povečala. In zato želimo, da se medicina vrne v ambulante, absolutno ohranjamo vse prednosti obravnave zdravstvene na daljavo, ampak vendarle v določenih trenutkih ocenjujemo kot primerno, da se osebni pregled opravi,&quot; je pojasnila.
+
+Zaposleni morajo odslej bolniško odsotnost osebnemu zdravniku sporočiti isti dan oziroma najpozneje prvi naslednji delovni dan ambulante. Kot je znano, je bil dosedanji rok tri dni, ko je bilo treba sporočiti svojemu izbranemu osebnemu zdravniku, da ostajamo doma, da nismo zmožni za delo, sedaj se torej ta rok bistveno skrajšuje.
+
+V primeru bolnišničnega ali zdraviliškega zdravljenja je treba odsotnost sporočiti ob prihodu domov, družinski zdravniki pa bodo lahko to obdobje zadržanosti od dela zabeležili sami. &quot;Ena sama možna izjema je, da pacient seveda tega ne stori isti dan, izrecno smo opredelili, da če se zgodi, da je seveda zavarovanec v bolnišnici ali v zdraviliškem zdravljenju, da seveda ni treba, da se potem iz bolnišnice ukvarja s tem, da sporoča svojo odsotnost družinskemu zdravniku, v tem primeru lahko sporoči odsotnost, ko se vrne domov, že isti dan in tudi v tem primeru, to je novost in razbremenitev za družinske zdravnike, bodo lahko to obdobje zadržanosti za nazaj pokrili kar sami družinski zdravniki. Nesporno je, če je bil nekdo hospitaliziran, seveda, da mu bolniški stalež pripada&quot;, je pojasnila Vodičar.
+
+Če zavarovanec začasne zadržanosti ne sporoči, pravila določajo, da osebni zdravnik bolniškega staleža ne more podeliti za nazaj, ampak samo za naprej. Osebni zdravnik bo lahko ob utemeljenih razlogih odstopil predlog na ZZZS, imenovani zdravnik pa bo preučil, ali so bile podane posebne okoliščine, ki utemeljujejo zamudo. Če bo ta pogoj izpolnjen, bo lahko imenovani zdravnik priznal bolniški stalež za nazaj. &quot;Recimo, da je res nekdo imel hudo zdravstveno stanje doma, pa tega ni mogel sporočiti pravočasno, in šele če bo ta pogoj izpolnjen, torej da je bil nekdo res iz opravičljivih razlogov, ni mogel pravočasno sporočiti razlogov za svojo odsotnost, bo potem samo imenovani zdravnik torej ne več družinski zdravnik, lahko odobril, priznal bolniški stalež za nazaj,&quot; smo slišali na tiskovni konferenci ZZZS.
+
+Druga pomembna novost pa je obvezni pregled pri zdravniku za odpiranje in podaljšanje staleža. Pregled je obvezen vedno, ko tako meni osebni zdravnik in pacienta pokliče na pregled. Obvezen je tudi najpozneje četrti dan bolniške odsotnosti, če se bo še nadaljevala. &quot;Če sem zelo konkretna, torej je nekdo v ponedeljek začel stalež in traja ta bolniški stalež že do četrtka in se potem zaključi, pregled ni nujen, če pa traja ta bolniški stalež še v petek in mogoče celo še potem naprej, pa je obvezno izvesti pregled pri osebnem zdravniku.&quot;
+
+Pregled je obvezen tudi pred prvim predlogom imenovanemu zdravniku za odločanje o nadaljnji bolniški odsotnosti, torej po 30 delovnih dneh. &quot;Da seveda osebni zdravnik pacienta pregleda, tudi zato seveda, da je ta predlog na zavod strokovno bolje pripravljen, bolje utemeljen,&quot; je povedala Vodičar.
+
+V primeru, da osebni pregled ne bo izveden, se bo družinski zdravnik odločil o bolniškem staležu samo na podlagi medicinske dokumentacije. &quot;Če je bil neupravičen prihod s strani pacienta, je po novem družinski zdravnik dolžan obvestiti našo območno enoto, saj predpisi določajo, da se v primeru neupravičenega prihoda na osebni pregled lahko zadrži nadomestilo plače.&quot;
+
+Osebni pregled ni obvezen, kadar ima bolnik za to opravičljiv razlog, ali v primeru nevarnosti prenosa okužb. &quot;Gre za takrat, ko je za to neki upravičljiv razlog, predvsem ko je zdravstveno stanje zavarovanca tako, da seveda je povsem nesmiselno, da se pregled opravi. V mislih imamo seveda neke večje operativne posege ali mogoče neke imobilizacije udov ali zdravljenje s kemoterapijo, to so taki, bi rekla, za paciente naporni dnevi, ko je zdravstvena dokumentacija povsem dovolj in seveda obisk pri družinskem zdravniku ne bo potreben.&quot;
+
+Na pravico do neto nadomestila lahko vpliva tudi opravljanje pridobitnega dela med začasno zadržanostjo od dela ali neupoštevanje režimov gibanja med bolniško odsotnostjo. Pri neupoštevanju določenega režima gibanja je predvidena izjema za prvo kršitev v obdobju petih let, ko se zavarovancu nadomestilo ne odvzame.
+
+Po besedah Vodičar prvi paket zaostritev glede bolniškega staleža, ki velja od 1. januarja, že kaže učinke. Od januarja do vključno aprila letos beležijo 314.000 izgubljenih delovnih dni v breme ZZZS manj kot lani, kar je približno 28 milijonov izdatkov za nadomestila manj, v breme delodajalcev pa beležijo več kot 509.500 izgubljenih delovnih dni manj kot lani, kar je približno 40 milijonov evrov prihranka za delodajalce.
+
+ZZZS v zadnjem času opravlja tudi več laičnih kontrol na terenu. Do konca aprila so jih izvedli 2900, ugotovljen delež kršitev pa je nižji kot v lanskem letu, in sicer so lani kršitve ugotovili v 5,4 odstotka primerih, letos pa v štirih odstotkih primerov. Vodičar je poudarila, da gre za kršitve, ki so jih ugotovili laični kontrolorji, vsako pa nato pregleda še imenovani zdravnik. Zavarovanci imajo namreč tri dni časa, da na ZZZS javijo razlog izostanka od doma v času obiska laičnega kontrolorja.</div></div></div></div>
+</aside>
+
+<script>
+(function(){
+  const EVENT = "slv-125180";
+  const RENDERED = 12;
+  const NODE_TOTAL = 8;
+  const FROZEN = {"triplets": {"coverage": "4", "comment": "", "per_triplet": [{"idx": 0, "subject_id": "zzzs", "predicate": "sprejel", "object_id": "spremembe_pravil_zzzs", "verdict": "correct", "note": ""}, {"idx": 1, "subject_id": "spremembe_pravil_zzzs", "predicate": "zahtevajo", "object_id": "obvezni_osebni_pregled", "verdict": "correct", "note": ""}, {"idx": 2, "subject_id": "obvezni_osebni_pregled", "predicate": "mora opraviti", "object_id": "osebni_zdravnik", "verdict": "correct", "note": ""}, {"idx": 3, "subject_id": "obvezni_osebni_pregled", "predicate": "prepre\u010duje", "object_id": "zadrzanje_nadomestila_place", "verdict": "correct", "note": ""}, {"idx": 4, "subject_id": "zzzs", "predicate": "odlo\u010da o", "object_id": "zadrzanje_nadomestila_place", "verdict": "correct", "note": ""}, {"idx": 5, "subject_id": "neupostevanje_rezimov_gibanja", "predicate": "vpliva na", "object_id": "zadrzanje_nadomestila_place", "verdict": "correct", "note": ""}, {"idx": 6, "subject_id": "spremembe_pravil_zzzs", "predicate": "zmanj\u0161ujejo \u0161tevilo", "object_id": "izgubljeni_delovni_dnevi", "verdict": "correct", "note": ""}, {"idx": 7, "subject_id": "izgubljeni_delovni_dnevi", "predicate": "prina\u0161ajo prihranek za", "object_id": "delodajalci", "verdict": "awkward_wording", "note": ""}, {"idx": 8, "subject_id": "spremembe_pravil_zzzs", "predicate": "razbremenjujejo", "object_id": "osebni_zdravnik", "verdict": "misleading", "note": ""}, {"idx": 9, "subject_id": "spremembe_pravil_zzzs", "predicate": "uvajajo sankcije za", "object_id": "neupostevanje_rezimov_gibanja", "verdict": "imprecise", "note": ""}, {"idx": 10, "subject_id": "zzzs", "predicate": "bele\u017ei manj", "object_id": "izgubljeni_delovni_dnevi", "verdict": "correct", "note": ""}, {"idx": 11, "subject_id": "spremembe_pravil_zzzs", "predicate": "koristijo za", "object_id": "delodajalci", "verdict": "correct", "note": ""}]}, "direct": {"faithfulness": "4", "clarity": "3", "comment": "Extremely dense graph", "node_count": "40"}, "triplet_image": {"faithfulness": "3", "clarity": "2", "comment": "Mixed up edges ruin usefulness", "per_edge": [{"idx": 0, "subject_id": "zzzs", "predicate": "sprejel", "object_id": "spremembe_pravil_zzzs", "render": "yes", "note": ""}, {"idx": 1, "subject_id": "spremembe_pravil_zzzs", "predicate": "zahtevajo", "object_id": "obvezni_osebni_pregled", "render": "yes", "note": ""}, {"idx": 2, "subject_id": "obvezni_osebni_pregled", "predicate": "mora opraviti", "object_id": "osebni_zdravnik", "render": "yes", "note": ""}, {"idx": 3, "subject_id": "obvezni_osebni_pregled", "predicate": "prepre\u010duje", "object_id": "zadrzanje_nadomestila_place", "render": "wrong_connection", "note": "goes to delodajalci instead"}, {"idx": 4, "subject_id": "zzzs", "predicate": "odlo\u010da o", "object_id": "zadrzanje_nadomestila_place", "render": "yes", "note": ""}, {"idx": 5, "subject_id": "neupostevanje_rezimov_gibanja", "predicate": "vpliva na", "object_id": "zadrzanje_nadomestila_place", "render": "yes", "note": ""}, {"idx": 6, "subject_id": "spremembe_pravil_zzzs", "predicate": "zmanj\u0161ujejo \u0161tevilo", "object_id": "izgubljeni_delovni_dnevi", "render": "yes", "note": ""}, {"idx": 7, "subject_id": "izgubljeni_delovni_dnevi", "predicate": "prina\u0161ajo prihranek za", "object_id": "delodajalci", "render": "yes", "note": ""}, {"idx": 8, "subject_id": "spremembe_pravil_zzzs", "predicate": "razbremenjujejo", "object_id": "osebni_zdravnik", "render": "wrong_connection", "note": "object is delodajalci instead of spremembe"}, {"idx": 9, "subject_id": "spremembe_pravil_zzzs", "predicate": "uvajajo sankcije za", "object_id": "neupostevanje_rezimov_gibanja", "render": "yes", "note": ""}, {"idx": 10, "subject_id": "zzzs", "predicate": "bele\u017ei manj", "object_id": "izgubljeni_delovni_dnevi", "render": "wrong_connection", "note": "goes to obvezni osebni pregled instead of izgubljeni dni"}, {"idx": 11, "subject_id": "spremembe_pravil_zzzs", "predicate": "koristijo za", "object_id": "delodajalci", "render": "yes", "note": ""}], "additions": [], "edge_total": 12, "node_total": 8}};   // when set, a baked-in scores object → read-only view
+  const KEY = "seminarScores";
+  const FIELDS = {
+    triplets: ["coverage","comment"],
+    direct: ["faithfulness","clarity","comment","node_count"],
+    triplet_image: ["faithfulness","clarity","comment"]
+  };
+  function loadAll(){ try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e){ return {}; } }
+  function fieldName(b,m){ return "sc__"+b+"__"+m; }
+  function readField(name){
+    const r = document.querySelector('input[type=radio][name="'+CSS.escape(name)+'"]:checked');
+    if (r) return r.value;
+    const el = document.getElementById(name);
+    return el ? el.value : "";
+  }
+  function setField(name, val){
+    if (val === undefined || val === null || val === "") return;
+    const radios = document.querySelectorAll('input[type=radio][name="'+CSS.escape(name)+'"]');
+    if (radios.length){ radios.forEach(r => { if (r.value === String(val)) r.checked = true; }); return; }
+    const el = document.getElementById(name);
+    if (el) el.value = val;
+  }
+  function collectPerTriplet(){
+    const rows = [];
+    document.querySelectorAll('tr[data-tidx]').forEach(tr => {
+      const idx = tr.getAttribute('data-tidx');
+      const verdict = tr.querySelector('.tr-verdict');
+      const note = tr.querySelector('.tr-note');
+      const v = verdict ? verdict.value : "";
+      const n = note ? note.value : "";
+      if (v || n) rows.push({ idx: Number(idx), subject_id: tr.getAttribute('data-s'),
+        predicate: tr.getAttribute('data-p'), object_id: tr.getAttribute('data-o'),
+        verdict: v, note: n });
+    });
+    return rows;
+  }
+  function restorePerTriplet(rows){
+    if (!rows) return;
+    rows.forEach(r => {
+      const tr = document.querySelector('tr[data-tidx="'+r.idx+'"]');
+      if (!tr) return;
+      const verdict = tr.querySelector('.tr-verdict');
+      const note = tr.querySelector('.tr-note');
+      if (verdict && r.verdict) verdict.value = r.verdict;
+      if (note && r.note) note.value = r.note;
+    });
+  }
+  // Per-edge render fidelity (how the image drew each FED triplet) + free-text
+  // unsupported additions, both collected from the focus fed-triplet list.
+  function collectPerEdge(){
+    const rows = [];
+    document.querySelectorAll('.ftl-list li[data-tidx]').forEach(li => {
+      const sel = li.querySelector('.re-verdict');
+      const note = li.querySelector('.re-note');
+      const v = sel ? sel.value : "";
+      const n = note ? note.value : "";
+      if (v || n) rows.push({ idx: Number(li.getAttribute('data-tidx')),
+        subject_id: li.getAttribute('data-s'), predicate: li.getAttribute('data-p'),
+        object_id: li.getAttribute('data-o'), render: v, note: n });
+    });
+    return rows;
+  }
+  function restorePerEdge(rows){
+    if (!rows) return;
+    rows.forEach(r => {
+      const li = document.querySelector('.ftl-list li[data-tidx="'+r.idx+'"]');
+      if (!li) return;
+      const sel = li.querySelector('.re-verdict');
+      const note = li.querySelector('.re-note');
+      if (sel && r.render) sel.value = r.render;
+      if (note && r.note) note.value = r.note;
+    });
+  }
+  // Each unsupported addition is itself a subject·predicate·object triplet
+  // (an extra relation the image drew that isn't in the fed graph). A lone
+  // invented node can be entered as subject only.
+  function additionRow(value){
+    value = value || {};
+    const div = document.createElement('div');
+    div.className = 'addition-row';
+    function mk(key, ph){
+      const i = document.createElement('input');
+      i.type = 'text'; i.className = 'addition-input'; i.dataset.key = key; i.placeholder = ph;
+      if (value[key]) i.value = value[key];
+      return i;
+    }
+    const s = mk('subject', 'subject'), p = mk('predicate', 'predicate'), o = mk('object', 'object');
+    const rm = document.createElement('button');
+    rm.type = 'button'; rm.className = 'addition-rm'; rm.textContent = '✕';
+    rm.onclick = function(){ div.remove(); save(); };
+    div.appendChild(s); div.appendChild(p); div.appendChild(o); div.appendChild(rm);
+    return div;
+  }
+  window.addAddition = function(value){
+    const list = document.getElementById('additions-list');
+    if (!list) return;
+    const row = additionRow(typeof value === 'object' ? value : undefined);
+    list.appendChild(row);
+    if (!value) row.querySelector('input').focus();
+  };
+  function collectAdditions(){
+    const rows = [];
+    document.querySelectorAll('#additions-list .addition-row').forEach(r => {
+      const get = k => { const el = r.querySelector('.addition-input[data-key="'+k+'"]'); return el ? el.value.trim() : ''; };
+      const s = get('subject'), p = get('predicate'), o = get('object');
+      if (s || p || o) rows.push({ subject: s, predicate: p, object: o });
+    });
+    return rows;
+  }
+  function restoreAdditions(arr){
+    const list = document.getElementById('additions-list');
+    if (!list) return;
+    list.innerHTML = "";
+    (arr || []).forEach(v => {
+      if (typeof v === 'string') v = { subject: v, predicate: '', object: '' };
+      list.appendChild(additionRow(v));
+    });
+  }
+  function collect(){
+    const out = {};
+    for (const b in FIELDS){ out[b] = {}; FIELDS[b].forEach(m => { out[b][m] = readField(fieldName(b,m)); }); }
+    out.triplets.per_triplet = collectPerTriplet();
+    out.triplet_image.per_edge = collectPerEdge();
+    out.triplet_image.additions = collectAdditions();
+    out.triplet_image.edge_total = RENDERED;
+    out.triplet_image.node_total = NODE_TOTAL;
+    return out;
+  }
+  let savedTimer = null;
+  function save(){
+    const all = loadAll();
+    all[EVENT] = collect();
+    localStorage.setItem(KEY, JSON.stringify(all));
+    const ind = document.getElementById("saved-ind");
+    if (ind){ ind.classList.add("show"); clearTimeout(savedTimer); savedTimer = setTimeout(()=>ind.classList.remove("show"), 1200); }
+  }
+  function restore(){
+    const e = FROZEN || loadAll()[EVENT]; if (!e) return;
+    for (const b in FIELDS){ if (!e[b]) continue; FIELDS[b].forEach(m => setField(fieldName(b,m), e[b][m])); }
+    if (e.triplets) restorePerTriplet(e.triplets.per_triplet);
+    if (e.triplet_image){ restorePerEdge(e.triplet_image.per_edge); restoreAdditions(e.triplet_image.additions); }
+  }
+  function freeze(){
+    // Read-only: lock every control and drop edit affordances.
+    document.body.classList.add("frozen");
+    document.querySelectorAll("#score-card, .triplets-table, .focus-overlay, .ftl-additions")
+      .forEach(scope => scope.querySelectorAll("input, select, textarea, button")
+        .forEach(el => { el.disabled = true; el.setAttribute("tabindex", "-1"); }));
+  }
+  window.exportScores = function(){
+    const ALL_EVENTS = ["slv-125182", "slv-125164", "slv-125162", "eng-11688905", "eng-11687250", "slv-125190", "slv-125180", "slv-125152", "slv-125151", "eng-11686783"];
+    const stored = loadAll();
+    const scores = {};
+    ALL_EVENTS.forEach(c => { scores[c] = stored[c] || {}; });
+    const payload = { _meta: { exported: new Date().toISOString(), rubric: "v1" }, scores: scores };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "seminar_scores.json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+  window.importScores = function(ev){
+    const f = ev.target.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = function(){
+      try {
+        const parsed = JSON.parse(r.result);
+        const scores = parsed.scores || parsed;
+        localStorage.setItem(KEY, JSON.stringify(scores));
+        location.reload();
+      } catch(e){ alert("Invalid JSON: " + e.message); }
+    };
+    r.readAsText(f);
+  };
+  // Source-text reading panel (persists open/closed across event navigation)
+  const SRC_KEY = "sourcePanelOpen";
+  window.toggleSource = function(){
+    const open = document.body.classList.toggle("source-open");
+    try { localStorage.setItem(SRC_KEY, open ? "1" : "0"); } catch(e){}
+  };
+  window.closeSource = function(){
+    document.body.classList.remove("source-open");
+    try { localStorage.setItem(SRC_KEY, "0"); } catch(e){}
+  };
+
+  // Focus mode: click an image → big image top-left + its rating block below,
+  // source panel open on the right. The score-block is MOVED (not copied) so
+  // the inputs stay single-source and keep autosaving.
+  let focusReturn = null;
+  const FOCUS_TITLES = { direct: "Direct — text → image", triplet_image: "Triplet → image" };
+  window.openFocus = function(cond){
+    const img = document.querySelector('.col img[data-cond="'+cond+'"]');
+    if (!img) return;
+    document.getElementById("fo-title").textContent = FOCUS_TITLES[cond] || cond;
+    document.getElementById("fo-img").src = img.getAttribute("src");
+    const block = document.querySelector(".score-block." + cond);
+    const holder = document.getElementById("fo-score");
+    holder.innerHTML = "";
+    if (block){
+      focusReturn = { node: block, parent: block.parentNode, next: block.nextSibling };
+      holder.appendChild(block);
+    } else { focusReturn = null; }
+    document.body.classList.remove("focus-cond-direct", "focus-cond-triplet_image");
+    document.body.classList.add("focus-open", "source-open", "focus-cond-" + cond);
+    try { localStorage.setItem(SRC_KEY, "1"); } catch(e){}
+  };
+  window.closeFocus = function(){
+    if (focusReturn){ focusReturn.parent.insertBefore(focusReturn.node, focusReturn.next); focusReturn = null; }
+    document.body.classList.remove("focus-open", "focus-cond-direct", "focus-cond-triplet_image");
+  };
+
+  // Source-panel in-place search (highlight + cycle through matches).
+  let spHits = [], spIdx = -1;
+  function spBody(){ return document.querySelector(".source-panel .sp-body"); }
+  function spClear(body){
+    body.querySelectorAll("mark.sp-hit").forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    body.normalize();
+  }
+  window.spSearch = function(){
+    const body = spBody(); if (!body) return;
+    const q = document.getElementById("sp-search-input").value;
+    spClear(body); spHits = []; spIdx = -1;
+    const countEl = document.getElementById("sp-search-count");
+    if (!q){ countEl.textContent = ""; return; }
+    const ql = q.toLowerCase();
+    const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT, null);
+    const nodes = []; let nn; while ((nn = walker.nextNode())) nodes.push(nn);
+    nodes.forEach(node => {
+      const text = node.nodeValue, lower = text.toLowerCase();
+      if (!lower.includes(ql)) return;
+      const frag = document.createDocumentFragment(); let i = 0, idx;
+      while ((idx = lower.indexOf(ql, i)) !== -1){
+        if (idx > i) frag.appendChild(document.createTextNode(text.slice(i, idx)));
+        const mark = document.createElement("mark"); mark.className = "sp-hit";
+        mark.textContent = text.slice(idx, idx + q.length);
+        frag.appendChild(mark); spHits.push(mark); i = idx + q.length;
+      }
+      if (i < text.length) frag.appendChild(document.createTextNode(text.slice(i)));
+      node.parentNode.replaceChild(frag, node);
+    });
+    if (spHits.length) spGo(0);
+    else countEl.textContent = "no matches";
+  };
+  function spGo(i){
+    if (!spHits.length) return;
+    if (spIdx >= 0 && spHits[spIdx]) spHits[spIdx].classList.remove("cur");
+    spIdx = (i + spHits.length) % spHits.length;
+    const m = spHits[spIdx]; m.classList.add("cur"); m.scrollIntoView({ block: "center" });
+    document.getElementById("sp-search-count").textContent = (spIdx + 1) + " / " + spHits.length;
+  }
+  window.spSearchNext = function(){ spGo(spIdx + 1); };
+  window.spSearchPrev = function(){ spGo(spIdx - 1); };
+
+  document.addEventListener("DOMContentLoaded", function(){
+    restore();
+    if (localStorage.getItem(SRC_KEY) === "1") document.body.classList.add("source-open");
+    document.querySelectorAll('.col img[data-cond]').forEach(img => {
+      img.addEventListener("click", () => window.openFocus(img.getAttribute("data-cond")));
+    });
+    const si = document.getElementById("sp-search-input");
+    if (si){
+      let t; si.addEventListener("input", () => { clearTimeout(t); t = setTimeout(window.spSearch, 120); });
+      si.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); e.shiftKey ? spSearchPrev() : spSearchNext(); } });
+    }
+    document.addEventListener("keydown", function(e){
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "f"){
+        e.preventDefault();
+        document.body.classList.add("source-open");
+        try { localStorage.setItem(SRC_KEY, "1"); } catch(err){}
+        const inp = document.getElementById("sp-search-input");
+        if (inp){ inp.focus(); inp.select(); }
+      } else if (e.key === "Escape"){
+        if (document.body.classList.contains("focus-open")) window.closeFocus();
+      }
+    });
+    if (FROZEN){ freeze(); return; }
+    // Listen at document level so the Evaluation card, the per-triplet controls,
+    // and the moved score-block (in focus overlay) all trigger autosave.
+    document.addEventListener("input", function(e){ if (e.target.closest("#score-card, .triplets-table, .focus-overlay")) save(); });
+    document.addEventListener("change", function(e){ if (e.target.closest("#score-card, .triplets-table, .focus-overlay")) save(); });
+  });
+})();
+</script>
+
+</body>
+</html>

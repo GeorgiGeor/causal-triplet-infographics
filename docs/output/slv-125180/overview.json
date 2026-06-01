@@ -1,0 +1,35 @@
+{
+  "ui_language": "sl",
+  "generated_title": "ZZZS uvaja strožja pravila za bolniški stalež in obvezne osebne preglede",
+  "event_overview": {
+    "title": "ZZZS uvaja strožja pravila za bolniški stalež in obvezne osebne preglede",
+    "summary": "Z 27. majem so stopile v veljavo pomembne spremembe pravil obveznega zdravstvenega zavarovanja, ki bistveno skrajšujejo roke za prijavo bolniške odsotnosti. Zaposleni morajo odslej osebnega zdravnika o bolezni obvestiti že isti dan oziroma najpozneje prvi naslednji delovni dan ambulante, namesto prejšnjega tridnevnega roka. Glavni cilj ukrepov je zmanjšanje absentizma in vrnitev medicine v ambulante, saj se je v obdobju po pandemiji znatno povečalo število obravnav na daljavo.\n\nPoleg hitrejšega obveščanja pravila uvajajo obvezen osebni pregled pri zdravniku najpozneje četrti dan bolniške odsotnosti, če se ta nadaljuje, ter ob pogostih kratkotrajnih odsotnostih. ZZZS poroča, da so že prvi ukrepi iz začetka leta prinesli znatne prihranke, saj so v prvih štirih mesecih zabeležili več kot 800.000 manj izgubljenih delovnih dni, kar predstavlja približno 68 milijonov evrov prihranka za zdravstveno blagajno in delodajalce.",
+    "key_points": [
+      "Bolniško odsotnost je treba zdravniku sporočiti isti dan ali prvi naslednji delovni dan ambulante.",
+      "Osebni pregled pri zdravniku postaja obvezen najpozneje četrti dan trajajoče bolniške odsotnosti.",
+      "Zdravnik za nazaj ne more več samostojno odpreti bolniškega staleža brez odobritve imenovanega zdravnika ZZZS.",
+      "Pregled je obvezen tudi, če je bil zavarovanec v zadnjih treh mesecih odsoten več kot dvakrat.",
+      "Neupravičena neudeležba na osebnem pregledu lahko vodi do zadržanja nadomestila plače.",
+      "Uvedene so izjeme za hospitalizirane bolnike, nalezljive bolezni in težja zdravstvena stanja.",
+      "Z julijem bo zaživela informacijska podpora za obveščanje o režimih gibanja prek portala e-zvem."
+    ],
+    "timeline": [
+      {
+        "date": "1. januar",
+        "description": "Uveljavitev prvega paketa ukrepov za obvladovanje absentizma in določitev režimov gibanja."
+      },
+      {
+        "date": "Januar - April",
+        "description": "Zabeleženih 314.000 manj izgubljenih delovnih dni v breme ZZZS in 2.900 laičnih kontrol na terenu."
+      },
+      {
+        "date": "27. maj",
+        "description": "Uveljavitev novih pravil o takojšnjem obveščanju in obveznih osebnih pregledih."
+      },
+      {
+        "date": "1. julij",
+        "description": "Predviden začetek delovanja informacijske rešitve za obveščanje o režimih gibanja prek portala e-zvem."
+      }
+    ]
+  }
+}

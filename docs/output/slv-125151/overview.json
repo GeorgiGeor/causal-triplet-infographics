@@ -1,0 +1,39 @@
+{
+  "ui_language": "sl",
+  "generated_title": "Trčenje vlaka in šolskega kombija v Buggenhoutu terjalo štiri smrtne žrtve",
+  "event_overview": {
+    "title": "Trčenje vlaka in šolskega kombija v Buggenhoutu terjalo štiri smrtne žrtve",
+    "summary": "V severnobelgijskem kraju Buggenhout je v jutranjih urah 26. maja prišlo do tragične prometne nesreče, ko je potniški vlak na nivojskem prehodu trčil v kombi, ki je prevažal otroke s posebnimi potrebami. V nesreči so umrle štiri osebe, med njimi dva otroka, stara 12 in 15 let, voznik kombija ter spremljevalec. Še pet oseb je bilo poškodovanih, medtem ko med približno 100 potniki na vlaku ni bilo poškodb.\n\nPrve ugotovitve preiskave in posnetki kažejo, da so bile v času nesreče zapornice na prehodu spuščene, gorela pa je tudi rdeča luč. Strojevodji vlaka kljub zaviranju ni uspelo preprečiti silovitega trčenja. Na dogodek so se odzvali najvišji belgijski predstavniki in predsednica Evropske komisije Ursula von der Leyen, ki so izrazili sožalje svojcem žrtev in pohvalili hitro posredovanje reševalnih služb.",
+    "key_points": [
+      "V nesreči so umrli štirje ljudje: dva otroka (12 in 15 let), voznik kombija in spremljevalec.",
+      "Kombi je prevažal skupno sedem otrok s posebnimi potrebami, pet oseb je poškodovanih.",
+      "Nesreča se je zgodila na nivojskem prehodu kljub spuščenim zapornicam in rdeči luči.",
+      "Na potniškem vlaku je bilo v času trčenja okoli 100 potnikov, nihče od njih ni bil poškodovan.",
+      "Prizorišče nesreče je kraj Buggenhout, ki leži med Brusljem, Antwerpnom in Gentom.",
+      "Preiskavo o natančnih okoliščinah dogodka sta prevzela policija in tožilstvo.",
+      "Sožalje so izrekli belgijski ministri in predsednica Evropske komisije Ursula von der Leyen."
+    ],
+    "timeline": [
+      {
+        "date": "26. maj, 08:08",
+        "description": "Prišlo je do trčenja med vlakom in šolskim kombijem na prehodu v Buggenhoutu."
+      },
+      {
+        "date": "26. maj, dopoldne",
+        "description": "Reševalne službe so posredovale na kraju, minister Jean-Luc Crucke je potrdil štiri smrtne žrtve."
+      },
+      {
+        "date": "26. maj, popoldne",
+        "description": "Lokalne oblasti so na novinarski konferenci potrdile število poškodovanih in potek reševanja."
+      },
+      {
+        "date": "26. maj, popoldne",
+        "description": "Tiskovni predstavnik Infrabela je na podlagi posnetkov potrdil, da so bile zapornice v času nesreče spuščene."
+      },
+      {
+        "date": "26. maj, popoldne",
+        "description": "Ursula von der Leyen in belgijski ministri so podali uradne izjave sožalja."
+      }
+    ]
+  }
+}

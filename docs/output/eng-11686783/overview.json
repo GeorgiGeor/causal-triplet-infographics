@@ -1,0 +1,31 @@
+{
+  "ui_language": "sl",
+  "generated_title": "Nasa razkrila trifazni načrt za izgradnjo stalne baze na južnem polu Lune",
+  "event_overview": {
+    "title": "Nasa razkrila trifazni načrt za izgradnjo stalne baze na južnem polu Lune",
+    "summary": "Ameriška vesoljska agencija Nasa je predstavila ambiciozen načrt za vzpostavitev stalne človeške prisotnosti na Luni. Projekt, ki ga vodi Carlos Garcia-Galan, predvideva izgradnjo baze na znanstveno pomembnem južnem polu, kjer ugodne svetlobne razmere in prisotnost ledu omogočajo dolgotrajno bivanje ter pridobivanje ključnih virov, kot so voda, kisik in raketno gorivo.\n\nNačrt je razdeljen na tri ključne faze, ki se bodo zvrstile do leta 2032 in dlje. Cilj agencije ni le vrnitev ljudi na Luno, temveč vzpostavitev raziskovalnega središča, ki bo služilo kot odskočna deska za prihodnje misije v globoko vesolje, vključno s potovanjem na Mars. Direktor Nase Jared Isaacman je ob tem poudaril pomen stalne ameriške prisotnosti na Luninem površju.",
+    "key_points": [
+      "Nasa načrtuje postavitev baze na južnem polu Lune, ki bi se lahko raztezala na več sto kvadratnih kilometrih.",
+      "Izgradnja bo potekala v treh fazah, pri čemer se prva faza z robotskimi misijami zaključi leta 2029.",
+      "Med letoma 2029 in 2032 je predvidena postavitev bivalnih prostorov in testiranje jedrske energije.",
+      "Od leta 2032 dalje načrtujejo stalno prisotnost ljudi z rednimi menjavami posadk in prevozi tovora.",
+      "Južni pol je izbran zaradi daljših obdobij svetlobe, stabilnih temperatur in najdb zalog ledu.",
+      "Projekt bo služil kot tehnološki poligon za prihodnje človeške misije na planet Mars.",
+      "V prvi fazi je predvidenih 25 izstrelitev, s katerimi bodo na Luno dostavili štiri tone tovora."
+    ],
+    "timeline": [
+      {
+        "date": "Do leta 2029",
+        "description": "Prva faza: izvedba 25 robotskih misij za raziskovanje površja in dostava štirih ton tovora."
+      },
+      {
+        "date": "2029–2032",
+        "description": "Druga faza: postavitev prvih bivalnih prostorov in testiranje tehnologij za izkoriščanje jedrske energije."
+      },
+      {
+        "date": "Od leta 2032 dalje",
+        "description": "Tretja faza: vzpostavitev stalne prisotnosti ljudi, večjih bivalnih modulov in rednega transporta tovora na Zemljo."
+      }
+    ]
+  }
+}

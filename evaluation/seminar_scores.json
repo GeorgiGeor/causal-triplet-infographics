@@ -1,0 +1,2092 @@
+{
+  "_meta": {
+    "exported": "2026-06-01T03:49:35.270Z",
+    "rubric": "v1"
+  },
+  "scores": {
+    "slv-125182": {
+      "triplets": {
+        "coverage": "5",
+        "comment": "very good",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "sindikati",
+            "predicate": "vložili",
+            "object_id": "pobuda_za_referendum",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "pobuda_za_referendum",
+            "predicate": "cilja na",
+            "object_id": "interventni_zakon",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "drzavni_zbor",
+            "predicate": "potrdil",
+            "object_id": "sklep_o_nedopustnosti",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "sklep_o_nedopustnosti",
+            "predicate": "onemogoča",
+            "object_id": "pobuda_za_referendum",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "davcne_dolocbe",
+            "predicate": "onemogočajo (po ustavi)",
+            "object_id": "pobuda_za_referendum",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "interventni_zakon",
+            "predicate": "vsebuje",
+            "object_id": "davcne_dolocbe",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "ustava_rs",
+            "predicate": "prepoveduje referendum o",
+            "object_id": "davcne_dolocbe",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "sklep_o_nedopustnosti",
+            "predicate": "naj bi kršil (po navedbah SD)",
+            "object_id": "ustava_rs",
+            "verdict": "misleading",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "opozicija",
+            "predicate": "nasprotuje",
+            "object_id": "sklep_o_nedopustnosti",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "opozicija",
+            "predicate": "kritizira",
+            "object_id": "interventni_zakon",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "sindikati",
+            "predicate": "napovedali ustavno presojo",
+            "object_id": "sklep_o_nedopustnosti",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "drzavni_zbor",
+            "predicate": "razpravljal o",
+            "object_id": "interventni_zakon",
+            "verdict": "imprecise",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "4",
+        "clarity": "3",
+        "comment": "",
+        "node_count": "17"
+      },
+      "triplet_image": {
+        "faithfulness": "4",
+        "clarity": "3",
+        "comment": "Good triplets but wrong renders make it mediocre",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "sindikati",
+            "predicate": "vložili",
+            "object_id": "pobuda_za_referendum",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "pobuda_za_referendum",
+            "predicate": "cilja na",
+            "object_id": "interventni_zakon",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "drzavni_zbor",
+            "predicate": "potrdil",
+            "object_id": "sklep_o_nedopustnosti",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "sklep_o_nedopustnosti",
+            "predicate": "onemogoča",
+            "object_id": "pobuda_za_referendum",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "davcne_dolocbe",
+            "predicate": "onemogočajo (po ustavi)",
+            "object_id": "pobuda_za_referendum",
+            "render": "wrong_connection",
+            "note": "connects to drzavni zbor instead pobuda za razpis"
+          },
+          {
+            "idx": 5,
+            "subject_id": "interventni_zakon",
+            "predicate": "vsebuje",
+            "object_id": "davcne_dolocbe",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "ustava_rs",
+            "predicate": "prepoveduje referendum o",
+            "object_id": "davcne_dolocbe",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "sklep_o_nedopustnosti",
+            "predicate": "naj bi kršil (po navedbah SD)",
+            "object_id": "ustava_rs",
+            "render": "wrong_connection",
+            "note": "drzavni zbor instead of sklep o nedopustnosti referendum"
+          },
+          {
+            "idx": 8,
+            "subject_id": "opozicija",
+            "predicate": "nasprotuje",
+            "object_id": "sklep_o_nedopustnosti",
+            "render": "wrong_connection",
+            "note": "goes to zakon instead of sklep"
+          },
+          {
+            "idx": 9,
+            "subject_id": "opozicija",
+            "predicate": "kritizira",
+            "object_id": "interventni_zakon",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "sindikati",
+            "predicate": "napovedali ustavno presojo",
+            "object_id": "sklep_o_nedopustnosti",
+            "render": "wrong_connection",
+            "note": "goes to zakon o intevent instead of sklep"
+          },
+          {
+            "idx": 11,
+            "subject_id": "drzavni_zbor",
+            "predicate": "razpravljal o",
+            "object_id": "interventni_zakon",
+            "render": "yes",
+            "note": ""
+          }
+        ],
+        "additions": [],
+        "edge_total": 12,
+        "node_total": 8
+      }
+    },
+    "slv-125164": {
+      "triplets": {
+        "coverage": "3",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "kpk",
+            "predicate": "sprejela",
+            "object_id": "dopolnjeni_osnutek_ugotovitev",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "dopolnjeni_osnutek_ugotovitev",
+            "predicate": "naj bi obremenjeval",
+            "object_id": "robert_golob",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "dopolnjeni_osnutek_ugotovitev",
+            "predicate": "vsebuje dokaze o",
+            "object_id": "nasprotje_interesov",
+            "verdict": "correct",
+            "note": "a bit strong wording"
+          },
+          {
+            "idx": 3,
+            "subject_id": "dopustovanje_v_karigadorju",
+            "predicate": "sprožilo",
+            "object_id": "zadeva_karigador",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "robert_golob",
+            "predicate": "ni se izločil",
+            "object_id": "nasprotje_interesov",
+            "verdict": "misleading",
+            "note": "he didn't forfeit vote"
+          },
+          {
+            "idx": 5,
+            "subject_id": "stojan_zdolsek",
+            "predicate": "zanika relevantnost",
+            "object_id": "dopolnjeni_osnutek_ugotovitev",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "stojan_zdolsek",
+            "predicate": "zastopa",
+            "object_id": "robert_golob",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "tomaz_subotic",
+            "predicate": "odstopil zaradi",
+            "object_id": "zadeva_karigador",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "robert_golob",
+            "predicate": "imenoval",
+            "object_id": "tomaz_subotic",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "kpk",
+            "predicate": "preverja",
+            "object_id": "zadeva_karigador",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "dopustovanje_v_karigadorju",
+            "predicate": "vključuje",
+            "object_id": "tomaz_subotic",
+            "verdict": "misleading",
+            "note": "he is the poslovnez"
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "4",
+        "clarity": "2",
+        "comment": "Not clear that this is about golob and subotic, odvetnik node is misleading. not clear taht koncna odlocitev kpk still hasn't happened",
+        "node_count": "16"
+      },
+      "triplet_image": {
+        "faithfulness": "2",
+        "clarity": "2",
+        "comment": "Many wrong and misleading connections, not clear who was vacationing, that tomaz is the poslovnez",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "kpk",
+            "predicate": "sprejela",
+            "object_id": "dopolnjeni_osnutek_ugotovitev",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "dopolnjeni_osnutek_ugotovitev",
+            "predicate": "naj bi obremenjeval",
+            "object_id": "robert_golob",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "dopolnjeni_osnutek_ugotovitev",
+            "predicate": "vsebuje dokaze o",
+            "object_id": "nasprotje_interesov",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "dopustovanje_v_karigadorju",
+            "predicate": "sprožilo",
+            "object_id": "zadeva_karigador",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "robert_golob",
+            "predicate": "ni se izločil",
+            "object_id": "nasprotje_interesov",
+            "render": "wrong_direction",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "stojan_zdolsek",
+            "predicate": "zanika relevantnost",
+            "object_id": "dopolnjeni_osnutek_ugotovitev",
+            "render": "omitted",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "stojan_zdolsek",
+            "predicate": "zastopa",
+            "object_id": "robert_golob",
+            "render": "yes",
+            "note": "p looks corrupted"
+          },
+          {
+            "idx": 7,
+            "subject_id": "tomaz_subotic",
+            "predicate": "odstopil zaradi",
+            "object_id": "zadeva_karigador",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "robert_golob",
+            "predicate": "imenoval",
+            "object_id": "tomaz_subotic",
+            "render": "wrong_connection",
+            "note": "it is Tomaz Subotic imenoval Nasprotje interesov in image"
+          },
+          {
+            "idx": 9,
+            "subject_id": "kpk",
+            "predicate": "preverja",
+            "object_id": "zadeva_karigador",
+            "render": "wrong_connection",
+            "note": "it is KPK preverja dopustovanje v hisi poslovneza"
+          },
+          {
+            "idx": 10,
+            "subject_id": "dopustovanje_v_karigadorju",
+            "predicate": "vključuje",
+            "object_id": "tomaz_subotic",
+            "render": "wrong_connection",
+            "note": "it is vklucuje stojan zdolsek"
+          }
+        ],
+        "additions": [],
+        "edge_total": 11,
+        "node_total": 8
+      }
+    },
+    "slv-125162": {
+      "triplets": {
+        "coverage": "3",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "republika_slovenija",
+            "predicate": "izvedla",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "republika_slovenija",
+            "predicate": "pooblastila",
+            "object_id": "otp_in_unicredit",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "otp_in_unicredit",
+            "predicate": "vodili",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "domaci_vlagatelji",
+            "predicate": "vpisali",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "verdict": "misleading",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "domaci_vlagatelji",
+            "predicate": "izkazali močno",
+            "object_id": "trzne_razmere",
+            "verdict": "wrong_endpoints",
+            "note": "and incomplete predicate"
+          },
+          {
+            "idx": 5,
+            "subject_id": "trzne_razmere",
+            "predicate": "pogojevale",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "izdaja_sedemletne_obveznice",
+            "predicate": "prispeva k",
+            "object_id": "razprsitev_virov_financiranja",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "ministrstvo_za_finance",
+            "predicate": "napovedalo",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "program_financiranja_proracuna",
+            "predicate": "omejuje",
+            "object_id": "republika_slovenija",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "izdaja_sedemletne_obveznice",
+            "predicate": "povečana zaradi",
+            "object_id": "domaci_vlagatelji",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "ministrstvo_za_finance",
+            "predicate": "podelilo mandat",
+            "object_id": "otp_in_unicredit",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "razprsitev_virov_financiranja",
+            "predicate": "je cilj",
+            "object_id": "program_financiranja_proracuna",
+            "verdict": "misleading",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "5",
+        "clarity": "5",
+        "comment": "",
+        "node_count": "17"
+      },
+      "triplet_image": {
+        "faithfulness": "2",
+        "clarity": "2",
+        "comment": "sparse nodes and error ridden connections",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "republika_slovenija",
+            "predicate": "izvedla",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "render": "wrong_connection",
+            "note": "goes to ministrstvo instead of izdaja"
+          },
+          {
+            "idx": 1,
+            "subject_id": "republika_slovenija",
+            "predicate": "pooblastila",
+            "object_id": "otp_in_unicredit",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "otp_in_unicredit",
+            "predicate": "vodili",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "render": "wrong_direction",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "domaci_vlagatelji",
+            "predicate": "vpisali",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "domaci_vlagatelji",
+            "predicate": "izkazali močno",
+            "object_id": "trzne_razmere",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "trzne_razmere",
+            "predicate": "pogojevale",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "izdaja_sedemletne_obveznice",
+            "predicate": "prispeva k",
+            "object_id": "razprsitev_virov_financiranja",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "ministrstvo_za_finance",
+            "predicate": "napovedalo",
+            "object_id": "izdaja_sedemletne_obveznice",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "program_financiranja_proracuna",
+            "predicate": "omejuje",
+            "object_id": "republika_slovenija",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "izdaja_sedemletne_obveznice",
+            "predicate": "povečana zaradi",
+            "object_id": "domaci_vlagatelji",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "ministrstvo_za_finance",
+            "predicate": "podelilo mandat",
+            "object_id": "otp_in_unicredit",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "razprsitev_virov_financiranja",
+            "predicate": "je cilj",
+            "object_id": "program_financiranja_proracuna",
+            "render": "wrong_direction",
+            "note": ""
+          }
+        ],
+        "additions": [],
+        "edge_total": 12,
+        "node_total": 8
+      }
+    },
+    "eng-11688905": {
+      "triplets": {
+        "coverage": "4",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "madzarski_parlament",
+            "predicate": "izglasoval",
+            "object_id": "preklic_izstopa_iz_icc",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "vlada_petra_magyarja",
+            "predicate": "vložila",
+            "object_id": "preklic_izstopa_iz_icc",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "tamas_sulyok",
+            "predicate": "mora podpisati",
+            "object_id": "preklic_izstopa_iz_icc",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "madzarski_parlament",
+            "predicate": "razveljavil",
+            "object_id": "zakon_o_umiku_iz_icc",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "nalog_za_prijetje_netanjahuja",
+            "predicate": "naj bi spodbudil",
+            "object_id": "zakon_o_umiku_iz_icc",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "mednarodno_kazensko_sodisce",
+            "predicate": "izdalo",
+            "object_id": "nalog_za_prijetje_netanjahuja",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "zda",
+            "predicate": "nasprotujejo",
+            "object_id": "mednarodno_kazensko_sodisce",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "zda",
+            "predicate": "uvedle sankcije proti",
+            "object_id": "mednarodno_kazensko_sodisce",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "vlada_petra_magyarja",
+            "predicate": "odpravlja",
+            "object_id": "zakon_o_umiku_iz_icc",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "tamas_sulyok",
+            "predicate": "je zaveznik",
+            "object_id": "zakon_o_umiku_iz_icc",
+            "verdict": "imprecise",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "5",
+        "clarity": "5",
+        "comment": "",
+        "node_count": "15"
+      },
+      "triplet_image": {
+        "faithfulness": "3",
+        "clarity": "2",
+        "comment": "",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "madzarski_parlament",
+            "predicate": "izglasoval",
+            "object_id": "preklic_izstopa_iz_icc",
+            "render": "wrong_connection",
+            "note": "goes to vlada instead of preklic"
+          },
+          {
+            "idx": 1,
+            "subject_id": "vlada_petra_magyarja",
+            "predicate": "vložila",
+            "object_id": "preklic_izstopa_iz_icc",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "tamas_sulyok",
+            "predicate": "mora podpisati",
+            "object_id": "preklic_izstopa_iz_icc",
+            "render": "wrong_connection",
+            "note": "goes to vlada instead of preklic, ghost arrow to preklic"
+          },
+          {
+            "idx": 3,
+            "subject_id": "madzarski_parlament",
+            "predicate": "razveljavil",
+            "object_id": "zakon_o_umiku_iz_icc",
+            "render": "wrong_connection",
+            "note": "goes to preklic instead of zakon"
+          },
+          {
+            "idx": 4,
+            "subject_id": "nalog_za_prijetje_netanjahuja",
+            "predicate": "naj bi spodbudil",
+            "object_id": "zakon_o_umiku_iz_icc",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "mednarodno_kazensko_sodisce",
+            "predicate": "izdalo",
+            "object_id": "nalog_za_prijetje_netanjahuja",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "zda",
+            "predicate": "nasprotujejo",
+            "object_id": "mednarodno_kazensko_sodisce",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "zda",
+            "predicate": "uvedle sankcije proti",
+            "object_id": "mednarodno_kazensko_sodisce",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "vlada_petra_magyarja",
+            "predicate": "odpravlja",
+            "object_id": "zakon_o_umiku_iz_icc",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "tamas_sulyok",
+            "predicate": "je zaveznik",
+            "object_id": "zakon_o_umiku_iz_icc",
+            "render": "yes",
+            "note": ""
+          }
+        ],
+        "additions": [
+          {
+            "subject": "Tamas Sulyok",
+            "predicate": "_",
+            "object": "Preklic izstopa iz ICC"
+          }
+        ],
+        "edge_total": 10,
+        "node_total": 8
+      }
+    },
+    "eng-11687250": {
+      "triplets": {
+        "coverage": "3",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "izraelska_vojska",
+            "predicate": "naj bi ubila",
+            "object_id": "smrt_mohameda_odeha",
+            "verdict": "awkward_wording",
+            "note": "Very weird naj bi ubila smrt"
+          },
+          {
+            "idx": 1,
+            "subject_id": "izrael_kac",
+            "predicate": "sporočil",
+            "object_id": "smrt_mohameda_odeha",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "benjamin_netanjahu",
+            "predicate": "oznanil",
+            "object_id": "smrt_mohameda_odeha",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "mohamed_odeh",
+            "predicate": "naj bi vodil",
+            "object_id": "napad_7_oktobra",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "napad_7_oktobra",
+            "predicate": "motivira",
+            "object_id": "izraelska_vojska",
+            "verdict": "awkward_wording",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "mohamed_odeh",
+            "predicate": "nasledil",
+            "object_id": "ezedin_al_hadad",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "izraelska_vojska",
+            "predicate": "ubila",
+            "object_id": "ezedin_al_hadad",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "hamas",
+            "predicate": "še ni potrdil",
+            "object_id": "smrt_mohameda_odeha",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "izrael_kac",
+            "predicate": "napovedal uničenje",
+            "object_id": "hamas",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "benjamin_netanjahu",
+            "predicate": "obtožuje",
+            "object_id": "mohamed_odeh",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "hamas",
+            "predicate": "izvedel",
+            "object_id": "napad_7_oktobra",
+            "verdict": "correct",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "3",
+        "clarity": "3",
+        "comment": "Weird connections, like izrael izvede izraelska vojska, netanyahu statement mixed up with hezbollah continuation",
+        "node_count": "18"
+      },
+      "triplet_image": {
+        "faithfulness": "3",
+        "clarity": "2",
+        "comment": "blurred lines, redundant lines, too brief predicates",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "izraelska_vojska",
+            "predicate": "naj bi ubila",
+            "object_id": "smrt_mohameda_odeha",
+            "render": "yes",
+            "note": "has duplicate which goes to mohamed but is probably from ezedin"
+          },
+          {
+            "idx": 1,
+            "subject_id": "izrael_kac",
+            "predicate": "sporočil",
+            "object_id": "smrt_mohameda_odeha",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "benjamin_netanjahu",
+            "predicate": "oznanil",
+            "object_id": "smrt_mohameda_odeha",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "mohamed_odeh",
+            "predicate": "naj bi vodil",
+            "object_id": "napad_7_oktobra",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "napad_7_oktobra",
+            "predicate": "motivira",
+            "object_id": "izraelska_vojska",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "mohamed_odeh",
+            "predicate": "nasledil",
+            "object_id": "ezedin_al_hadad",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "izraelska_vojska",
+            "predicate": "ubila",
+            "object_id": "ezedin_al_hadad",
+            "render": "wrong_connection",
+            "note": "goes to mohamed"
+          },
+          {
+            "idx": 7,
+            "subject_id": "hamas",
+            "predicate": "še ni potrdil",
+            "object_id": "smrt_mohameda_odeha",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "izrael_kac",
+            "predicate": "napovedal uničenje",
+            "object_id": "hamas",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "benjamin_netanjahu",
+            "predicate": "obtožuje",
+            "object_id": "mohamed_odeh",
+            "render": "wrong_connection",
+            "note": "goes to hamas"
+          },
+          {
+            "idx": 10,
+            "subject_id": "hamas",
+            "predicate": "izvedel",
+            "object_id": "napad_7_oktobra",
+            "render": "yes",
+            "note": "label is too close to other line"
+          }
+        ],
+        "additions": [
+          {
+            "subject": "Mohamed Odeh",
+            "predicate": "izvedel",
+            "object": "Smrt Mohameda Odeha"
+          }
+        ],
+        "edge_total": 11,
+        "node_total": 8
+      }
+    },
+    "slv-125190": {
+      "triplets": {
+        "coverage": "4",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "pomanjkanje_proizvodnih_zmogljivosti_eu",
+            "predicate": "sprožilo",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "andrej_babis",
+            "predicate": "omejuje financiranje",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "verdict": "imprecise",
+            "note": "he is limiting check financing"
+          },
+          {
+            "idx": 2,
+            "subject_id": "andrej_babis",
+            "predicate": "utemeljuje z",
+            "object_id": "visoki_stroski_energentov",
+            "verdict": "awkward_wording",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "visoki_stroski_energentov",
+            "predicate": "povzročajo pomanjkanje",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "verdict": "unsupported",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "andrej_babis",
+            "predicate": "naj bi povzročil",
+            "object_id": "izstop_devetih_drzav",
+            "verdict": "misleading",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "izstop_devetih_drzav",
+            "predicate": "ogroža",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "petr_pavel",
+            "predicate": "opozarja na",
+            "object_id": "izstop_devetih_drzav",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "petr_pavel",
+            "predicate": "predlaga razpravo na",
+            "object_id": "vrh_nato_v_ankari",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "vrh_nato_v_ankari",
+            "predicate": "bo obravnaval",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "slovenija",
+            "predicate": "ostaja v",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "slovenija",
+            "predicate": "ni prispevala v",
+            "object_id": "izstop_devetih_drzav",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "pomanjkanje_proizvodnih_zmogljivosti_eu",
+            "predicate": "onemogoča nadomestitev",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "verdict": "unsupported",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "3",
+        "clarity": "3",
+        "comment": "date of return is 2025 not 2023",
+        "node_count": "11"
+      },
+      "triplet_image": {
+        "faithfulness": "3",
+        "clarity": "3",
+        "comment": "",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "pomanjkanje_proizvodnih_zmogljivosti_eu",
+            "predicate": "sprožilo",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "andrej_babis",
+            "predicate": "omejuje financiranje",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "andrej_babis",
+            "predicate": "utemeljuje z",
+            "object_id": "visoki_stroski_energentov",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "visoki_stroski_energentov",
+            "predicate": "povzročajo pomanjkanje",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "render": "wrong_connection",
+            "note": "Goes to izstop instead of ceska"
+          },
+          {
+            "idx": 4,
+            "subject_id": "andrej_babis",
+            "predicate": "naj bi povzročil",
+            "object_id": "izstop_devetih_drzav",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "izstop_devetih_drzav",
+            "predicate": "ogroža",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "petr_pavel",
+            "predicate": "opozarja na",
+            "object_id": "izstop_devetih_drzav",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "petr_pavel",
+            "predicate": "predlaga razpravo na",
+            "object_id": "vrh_nato_v_ankari",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "vrh_nato_v_ankari",
+            "predicate": "bo obravnaval",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "slovenija",
+            "predicate": "ostaja v",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "slovenija",
+            "predicate": "ni prispevala v",
+            "object_id": "izstop_devetih_drzav",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "pomanjkanje_proizvodnih_zmogljivosti_eu",
+            "predicate": "onemogoča nadomestitev",
+            "object_id": "ceska_pobuda_za_strelivo",
+            "render": "yes",
+            "note": ""
+          }
+        ],
+        "additions": [],
+        "edge_total": 12,
+        "node_total": 8
+      }
+    },
+    "slv-125180": {
+      "triplets": {
+        "coverage": "4",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "zzzs",
+            "predicate": "sprejel",
+            "object_id": "spremembe_pravil_zzzs",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "zahtevajo",
+            "object_id": "obvezni_osebni_pregled",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "obvezni_osebni_pregled",
+            "predicate": "mora opraviti",
+            "object_id": "osebni_zdravnik",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "obvezni_osebni_pregled",
+            "predicate": "preprečuje",
+            "object_id": "zadrzanje_nadomestila_place",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "zzzs",
+            "predicate": "odloča o",
+            "object_id": "zadrzanje_nadomestila_place",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "neupostevanje_rezimov_gibanja",
+            "predicate": "vpliva na",
+            "object_id": "zadrzanje_nadomestila_place",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "zmanjšujejo število",
+            "object_id": "izgubljeni_delovni_dnevi",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "izgubljeni_delovni_dnevi",
+            "predicate": "prinašajo prihranek za",
+            "object_id": "delodajalci",
+            "verdict": "awkward_wording",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "razbremenjujejo",
+            "object_id": "osebni_zdravnik",
+            "verdict": "misleading",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "uvajajo sankcije za",
+            "object_id": "neupostevanje_rezimov_gibanja",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "zzzs",
+            "predicate": "beleži manj",
+            "object_id": "izgubljeni_delovni_dnevi",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "koristijo za",
+            "object_id": "delodajalci",
+            "verdict": "correct",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "4",
+        "clarity": "3",
+        "comment": "Extremely dense graph",
+        "node_count": "40"
+      },
+      "triplet_image": {
+        "faithfulness": "3",
+        "clarity": "2",
+        "comment": "Mixed up edges ruin usefulness",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "zzzs",
+            "predicate": "sprejel",
+            "object_id": "spremembe_pravil_zzzs",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "zahtevajo",
+            "object_id": "obvezni_osebni_pregled",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "obvezni_osebni_pregled",
+            "predicate": "mora opraviti",
+            "object_id": "osebni_zdravnik",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "obvezni_osebni_pregled",
+            "predicate": "preprečuje",
+            "object_id": "zadrzanje_nadomestila_place",
+            "render": "wrong_connection",
+            "note": "goes to delodajalci instead"
+          },
+          {
+            "idx": 4,
+            "subject_id": "zzzs",
+            "predicate": "odloča o",
+            "object_id": "zadrzanje_nadomestila_place",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "neupostevanje_rezimov_gibanja",
+            "predicate": "vpliva na",
+            "object_id": "zadrzanje_nadomestila_place",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "zmanjšujejo število",
+            "object_id": "izgubljeni_delovni_dnevi",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "izgubljeni_delovni_dnevi",
+            "predicate": "prinašajo prihranek za",
+            "object_id": "delodajalci",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "razbremenjujejo",
+            "object_id": "osebni_zdravnik",
+            "render": "wrong_connection",
+            "note": "object is delodajalci instead of spremembe"
+          },
+          {
+            "idx": 9,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "uvajajo sankcije za",
+            "object_id": "neupostevanje_rezimov_gibanja",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "zzzs",
+            "predicate": "beleži manj",
+            "object_id": "izgubljeni_delovni_dnevi",
+            "render": "wrong_connection",
+            "note": "goes to obvezni osebni pregled instead of izgubljeni dni"
+          },
+          {
+            "idx": 11,
+            "subject_id": "spremembe_pravil_zzzs",
+            "predicate": "koristijo za",
+            "object_id": "delodajalci",
+            "render": "yes",
+            "note": ""
+          }
+        ],
+        "additions": [],
+        "edge_total": 12,
+        "node_total": 8
+      }
+    },
+    "slv-125152": {
+      "triplets": {
+        "coverage": "3",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "samire_siljic",
+            "predicate": "izvedel",
+            "object_id": "napad_na_alesa_sutarja",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "napad_na_alesa_sutarja",
+            "predicate": "povzročil",
+            "object_id": "smrt_alesa_sutarja",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "samire_siljic",
+            "predicate": "sklenil",
+            "object_id": "sporazum_o_priznanju_krivde",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "sporazum_o_priznanju_krivde",
+            "predicate": "določil višino",
+            "object_id": "sodba_sest_let_in_devet_mesecev",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "smrt_alesa_sutarja",
+            "predicate": "sprožila",
+            "object_id": "protest_v_novem_mestu",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "protest_v_novem_mestu",
+            "predicate": "vodil do",
+            "object_id": "sutarjev_zakon",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "smrt_alesa_sutarja",
+            "predicate": "botrovala sprejetju",
+            "object_id": "sutarjev_zakon",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "agresivno_verbalno_ravnanje",
+            "predicate": "naj bi izzvalo (po navedbah obrambe)",
+            "object_id": "napad_na_alesa_sutarja",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "agresivno_verbalno_ravnanje",
+            "predicate": "naj bi povzročilo (po navedbah obrambe)",
+            "object_id": "smrt_alesa_sutarja",
+            "verdict": "misleading",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "napad_na_alesa_sutarja",
+            "predicate": "rezultiral v",
+            "object_id": "sodba_sest_let_in_devet_mesecev",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "samire_siljic",
+            "predicate": "obžaluje",
+            "object_id": "smrt_alesa_sutarja",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "sporazum_o_priznanju_krivde",
+            "predicate": "preprečil",
+            "object_id": "napad_na_alesa_sutarja",
+            "verdict": "unsupported",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "4",
+        "clarity": "4",
+        "comment": "",
+        "node_count": "18"
+      },
+      "triplet_image": {
+        "faithfulness": "4",
+        "clarity": "4",
+        "comment": "",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "samire_siljic",
+            "predicate": "izvedel",
+            "object_id": "napad_na_alesa_sutarja",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "napad_na_alesa_sutarja",
+            "predicate": "povzročil",
+            "object_id": "smrt_alesa_sutarja",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "samire_siljic",
+            "predicate": "sklenil",
+            "object_id": "sporazum_o_priznanju_krivde",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "sporazum_o_priznanju_krivde",
+            "predicate": "določil višino",
+            "object_id": "sodba_sest_let_in_devet_mesecev",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "smrt_alesa_sutarja",
+            "predicate": "sprožila",
+            "object_id": "protest_v_novem_mestu",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "protest_v_novem_mestu",
+            "predicate": "vodil do",
+            "object_id": "sutarjev_zakon",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "smrt_alesa_sutarja",
+            "predicate": "botrovala sprejetju",
+            "object_id": "sutarjev_zakon",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "agresivno_verbalno_ravnanje",
+            "predicate": "naj bi izzvalo (po navedbah obrambe)",
+            "object_id": "napad_na_alesa_sutarja",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "agresivno_verbalno_ravnanje",
+            "predicate": "naj bi povzročilo (po navedbah obrambe)",
+            "object_id": "smrt_alesa_sutarja",
+            "render": "yes",
+            "note": "doubled notation on arrow"
+          },
+          {
+            "idx": 9,
+            "subject_id": "napad_na_alesa_sutarja",
+            "predicate": "rezultiral v",
+            "object_id": "sodba_sest_let_in_devet_mesecev",
+            "render": "yes",
+            "note": "missing notation"
+          },
+          {
+            "idx": 10,
+            "subject_id": "samire_siljic",
+            "predicate": "obžaluje",
+            "object_id": "smrt_alesa_sutarja",
+            "render": "yes",
+            "note": ""
+          }
+        ],
+        "additions": [],
+        "edge_total": 11,
+        "node_total": 8
+      }
+    },
+    "slv-125151": {
+      "triplets": {
+        "coverage": "4",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "spuscene_zapornice",
+            "predicate": "naj bi bile prisotne ob",
+            "object_id": "nesreca_v_buggenhoutu",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "rdeca_luc",
+            "predicate": "naj bi gorela ob",
+            "object_id": "nesreca_v_buggenhoutu",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "nesreca_v_buggenhoutu",
+            "predicate": "terjala",
+            "object_id": "smrtne_zrtve",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "jean_luc_crucke",
+            "predicate": "potrdil",
+            "object_id": "smrtne_zrtve",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "jean_luc_crucke",
+            "predicate": "poročal o",
+            "object_id": "nesreca_v_buggenhoutu",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "infrabel",
+            "predicate": "navaja stanje",
+            "object_id": "spuscene_zapornice",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "infrabel",
+            "predicate": "navaja stanje",
+            "object_id": "rdeca_luc",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "bernard_quintin",
+            "predicate": "izrazil sožalje za",
+            "object_id": "nesreca_v_buggenhoutu",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "bernard_quintin",
+            "predicate": "pohvalil reševalce po",
+            "object_id": "nesreca_v_buggenhoutu",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "ursula_von_der_leyen",
+            "predicate": "izrekla sožalje za",
+            "object_id": "nesreca_v_buggenhoutu",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "ursula_von_der_leyen",
+            "predicate": "sožalje družinam",
+            "object_id": "smrtne_zrtve",
+            "verdict": "correct",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "4",
+        "clarity": "4",
+        "comment": "",
+        "node_count": "13"
+      },
+      "triplet_image": {
+        "faithfulness": "4",
+        "clarity": "5",
+        "comment": "good coverage and good render, likely due to it being limited event with clear directionality",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "spuscene_zapornice",
+            "predicate": "naj bi bile prisotne ob",
+            "object_id": "nesreca_v_buggenhoutu",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "rdeca_luc",
+            "predicate": "naj bi gorela ob",
+            "object_id": "nesreca_v_buggenhoutu",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "nesreca_v_buggenhoutu",
+            "predicate": "terjala",
+            "object_id": "smrtne_zrtve",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "jean_luc_crucke",
+            "predicate": "potrdil",
+            "object_id": "smrtne_zrtve",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "jean_luc_crucke",
+            "predicate": "poročal o",
+            "object_id": "nesreca_v_buggenhoutu",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "infrabel",
+            "predicate": "navaja stanje",
+            "object_id": "spuscene_zapornice",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "infrabel",
+            "predicate": "navaja stanje",
+            "object_id": "rdeca_luc",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "bernard_quintin",
+            "predicate": "izrazil sožalje za",
+            "object_id": "nesreca_v_buggenhoutu",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "bernard_quintin",
+            "predicate": "pohvalil reševalce po",
+            "object_id": "nesreca_v_buggenhoutu",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "ursula_von_der_leyen",
+            "predicate": "izrekla sožalje za",
+            "object_id": "nesreca_v_buggenhoutu",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "ursula_von_der_leyen",
+            "predicate": "sožalje družinam",
+            "object_id": "smrtne_zrtve",
+            "render": "yes",
+            "note": ""
+          }
+        ],
+        "additions": [],
+        "edge_total": 11,
+        "node_total": 8
+      }
+    },
+    "eng-11686783": {
+      "triplets": {
+        "coverage": "4",
+        "comment": "",
+        "per_triplet": [
+          {
+            "idx": 0,
+            "subject_id": "nasa",
+            "predicate": "predstavila",
+            "object_id": "nacrt_za_izgradnjo_baze",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "nacrt_za_izgradnjo_baze",
+            "predicate": "predvideva lokacijo",
+            "object_id": "juzni_pol_lune",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "juzni_pol_lune",
+            "predicate": "omogoča pridobivanje",
+            "object_id": "soncna_energija",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "soncna_energija",
+            "predicate": "omogoča",
+            "object_id": "stalna_prisotnost_ljudi",
+            "verdict": "misleading",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "nacrt_za_izgradnjo_baze",
+            "predicate": "vključuje testiranje",
+            "object_id": "jedrska_energija",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "jedrska_energija",
+            "predicate": "omogoča",
+            "object_id": "stalna_prisotnost_ljudi",
+            "verdict": "misleading",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "nacrt_za_izgradnjo_baze",
+            "predicate": "omogoča",
+            "object_id": "misija_na_mars",
+            "verdict": "imprecise",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "misija_na_mars",
+            "predicate": "zahteva",
+            "object_id": "nasa",
+            "verdict": "unsupported",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "jared_isaacman",
+            "predicate": "napoveduje",
+            "object_id": "stalna_prisotnost_ljudi",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "jared_isaacman",
+            "predicate": "komentira",
+            "object_id": "nacrt_za_izgradnjo_baze",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "nacrt_za_izgradnjo_baze",
+            "predicate": "cilja na",
+            "object_id": "stalna_prisotnost_ljudi",
+            "verdict": "correct",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "nasa",
+            "predicate": "izvaja",
+            "object_id": "juzni_pol_lune",
+            "verdict": "redundant",
+            "note": ""
+          }
+        ]
+      },
+      "direct": {
+        "faithfulness": "5",
+        "clarity": "4",
+        "comment": "",
+        "node_count": "19"
+      },
+      "triplet_image": {
+        "faithfulness": "3",
+        "clarity": "3",
+        "comment": "",
+        "per_edge": [
+          {
+            "idx": 0,
+            "subject_id": "nasa",
+            "predicate": "predstavila",
+            "object_id": "nacrt_za_izgradnjo_baze",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 1,
+            "subject_id": "nacrt_za_izgradnjo_baze",
+            "predicate": "predvideva lokacijo",
+            "object_id": "juzni_pol_lune",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 2,
+            "subject_id": "juzni_pol_lune",
+            "predicate": "omogoča pridobivanje",
+            "object_id": "soncna_energija",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 3,
+            "subject_id": "soncna_energija",
+            "predicate": "omogoča",
+            "object_id": "stalna_prisotnost_ljudi",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 4,
+            "subject_id": "nacrt_za_izgradnjo_baze",
+            "predicate": "vključuje testiranje",
+            "object_id": "jedrska_energija",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 5,
+            "subject_id": "jedrska_energija",
+            "predicate": "omogoča",
+            "object_id": "stalna_prisotnost_ljudi",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 6,
+            "subject_id": "nacrt_za_izgradnjo_baze",
+            "predicate": "omogoča",
+            "object_id": "misija_na_mars",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 7,
+            "subject_id": "misija_na_mars",
+            "predicate": "zahteva",
+            "object_id": "nasa",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 8,
+            "subject_id": "jared_isaacman",
+            "predicate": "napoveduje",
+            "object_id": "stalna_prisotnost_ljudi",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 9,
+            "subject_id": "jared_isaacman",
+            "predicate": "komentira",
+            "object_id": "nacrt_za_izgradnjo_baze",
+            "render": "yes",
+            "note": ""
+          },
+          {
+            "idx": 10,
+            "subject_id": "nacrt_za_izgradnjo_baze",
+            "predicate": "cilja na",
+            "object_id": "stalna_prisotnost_ljudi",
+            "render": "omitted",
+            "note": ""
+          },
+          {
+            "idx": 11,
+            "subject_id": "nasa",
+            "predicate": "izvaja",
+            "object_id": "juzni_pol_lune",
+            "render": "yes",
+            "note": "The juzni pol lune node is present 2 times"
+          }
+        ],
+        "additions": [],
+        "edge_total": 12,
+        "node_total": 8
+      }
+    }
+  }
+}

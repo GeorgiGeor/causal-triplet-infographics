@@ -1,0 +1,130 @@
+{
+  "entities": [
+    {
+      "id": "republika_slovenija",
+      "label": "Republika Slovenija",
+      "central": false
+    },
+    {
+      "id": "izdaja_sedemletne_obveznice",
+      "label": "Izdaja nove sedemletne obveznice",
+      "central": true
+    },
+    {
+      "id": "otp_in_unicredit",
+      "label": "OTP banka in UniCredit banka Slovenija",
+      "central": false
+    },
+    {
+      "id": "domaci_vlagatelji",
+      "label": "Domači vlagatelji",
+      "central": false
+    },
+    {
+      "id": "ministrstvo_za_finance",
+      "label": "Ministrstvo za finance",
+      "central": false
+    },
+    {
+      "id": "razprsitev_virov_financiranja",
+      "label": "Razpršitev virov financiranja državnega proračuna",
+      "central": false
+    },
+    {
+      "id": "program_financiranja_proracuna",
+      "label": "Program financiranja proračuna",
+      "central": false
+    },
+    {
+      "id": "trzne_razmere",
+      "label": "Razmere na finančnih trgih",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "republika_slovenija",
+      "predicate": "izvedla",
+      "object_id": "izdaja_sedemletne_obveznice",
+      "evidence": "Slovenija je danes izdala sedemletno obveznico v višini 350 milijonov evrov s spremenljivo obrestno mero",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "republika_slovenija",
+      "predicate": "pooblastila",
+      "object_id": "otp_in_unicredit",
+      "evidence": "Država je za organizacijo izdaje obveznice s spremenljivo obrestno mero... pooblastila OTP banko in UniCredit banko Slovenija",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "otp_in_unicredit",
+      "predicate": "vodili",
+      "object_id": "izdaja_sedemletne_obveznice",
+      "evidence": "Za vodenje izdaje sta bili pooblaščeni OTP banka in UniCredit Banka Slovenija.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "domaci_vlagatelji",
+      "predicate": "vpisali",
+      "object_id": "izdaja_sedemletne_obveznice",
+      "evidence": "domači vlagatelji so vpisali približno 96 odstotkov obveznic",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "domaci_vlagatelji",
+      "predicate": "izkazali močno",
+      "object_id": "trzne_razmere",
+      "evidence": "izdaja sledi interesu domačih bank po državnih vrednostnih papirjih s spremenljivo obrestno mero",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "trzne_razmere",
+      "predicate": "pogojevale",
+      "object_id": "izdaja_sedemletne_obveznice",
+      "evidence": "izvedba izdaje pričakuje v bližnji prihodnosti v odvisnosti od razmer na finančnih trgih",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "izdaja_sedemletne_obveznice",
+      "predicate": "prispeva k",
+      "object_id": "razprsitev_virov_financiranja",
+      "evidence": "transakcija pa po navedbah Ministrstvo za finance prispeva k nadaljnji razpršitvi virov financiranja državnega proračuna.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "ministrstvo_za_finance",
+      "predicate": "napovedalo",
+      "object_id": "izdaja_sedemletne_obveznice",
+      "evidence": "so sporočili s finančnega ministrstva. Kot so zapisali, se izvedba izdaje pričakuje v bližnji prihodnosti",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "program_financiranja_proracuna",
+      "predicate": "omejuje",
+      "object_id": "republika_slovenija",
+      "evidence": "V tem letu se lahko sicer država skladno s programom financiranja proračuna zadolži za največ nekaj manj kot 5,3 milijarde evrov.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "izdaja_sedemletne_obveznice",
+      "predicate": "povečana zaradi",
+      "object_id": "domaci_vlagatelji",
+      "evidence": "Ta je bila zaradi močnega interesa povečana s 250 na 350 milijonov evrov.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "ministrstvo_za_finance",
+      "predicate": "podelilo mandat",
+      "object_id": "otp_in_unicredit",
+      "evidence": "Ministrstvo za finance je mandat za organizacijo izdaje podelilo OTP banki in UniCredit Banki Slovenija",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "razprsitev_virov_financiranja",
+      "predicate": "je cilj",
+      "object_id": "program_financiranja_proracuna",
+      "evidence": "izdaja... dopolnjuje nabor instrumentov financiranja državnega proračuna.",
+      "confidence": "medium"
+    }
+  ]
+}

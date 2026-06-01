@@ -1,0 +1,39 @@
+{
+  "ui_language": "sl",
+  "generated_title": "Madžarski parlament preklical izstop države iz Mednarodnega kazenskega sodišča",
+  "event_overview": {
+    "title": "Madžarski parlament preklical izstop države iz Mednarodnega kazenskega sodišča",
+    "summary": "Madžarski poslanci so s 133 glasovi za in 37 proti izglasovali preklic namere o izstopu države iz Mednarodnega kazenskega sodišča (ICC). Predlog zakona je v parlamentarno obravnavo vložila nova vlada pod vodstvom premierja Petra Magyarja, s čimer je bila razveljavljena odločitev prejšnje vlade Viktorja Orbana iz maja lani. Za dokončno uveljavitev zakona je potreben še podpis predsednika države Tamasa Sulyoka.\n\nPrejšnja vlada je postopek umika sprožila v času obiska izraelskega premierja Benjamina Netanjahuja, za katerega je ICC izdal nalog za prijetje zaradi obtožb o vojnih zločinih v Gazi. Z novo odločitvijo se Madžarska vrača med 125 držav članic sodišča, kar pomeni, da bi bila država ob morebitnem obisku Netanjahuja ponovno dolžna izvesti aretacijo in ga izročiti sodišču v Haagu.",
+    "key_points": [
+      "Parlament je s 133 glasovi za razveljavil zakon o umiku Madžarske iz ICC.",
+      "Predlog za vrnitev k ICC je podala nova vlada premierja Petra Magyarja.",
+      "Prejšnja vlada Viktorja Orbana je izstop utemeljevala s politizacijo sodišča.",
+      "Odločitev o izstopu je bila prvotno sprejeta za zaščito Benjamina Netanjahuja pred aretacijo.",
+      "Zakon mora za uveljavitev podpisati predsednik države Tamas Sulyok.",
+      "ICC je pristojen za pregon najhujših zločinov, ko države tega ne želijo ali ne morejo storiti.",
+      "ZDA ostajajo oster nasprotnik ICC in so uvedle sankcije proti njegovim sodnikom, vključno s Slovenko Beti Hohler."
+    ],
+    "timeline": [
+      {
+        "date": "April lani",
+        "description": "Viktor Orban ob obisku Benjamina Netanjahuja napove namero o izstopu iz ICC."
+      },
+      {
+        "date": "Maj lani",
+        "description": "Madžarski parlament sprejme zakon o začetku postopka umika iz Mednarodnega kazenskega sodišča."
+      },
+      {
+        "date": "Ponedeljek (pred 27. majem)",
+        "description": "Vlada Petra Magyarja vloži predlog zakona o preklicu izstopa v parlamentarno obravnavo."
+      },
+      {
+        "date": "27. maj",
+        "description": "Poslanci z veliko večino izglasujejo preklic namere o izstopu iz ICC."
+      },
+      {
+        "date": "Prihodnost",
+        "description": "Predsednik države Tamas Sulyok mora podpisati zakon za njegovo dokončno uveljavitev."
+      }
+    ]
+  }
+}

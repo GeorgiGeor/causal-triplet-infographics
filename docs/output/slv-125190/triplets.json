@@ -1,0 +1,130 @@
+{
+  "entities": [
+    {
+      "id": "ceska_pobuda_za_strelivo",
+      "label": "Češka pobuda za preskrbo Ukrajine z artilerijskim strelivom",
+      "central": true
+    },
+    {
+      "id": "andrej_babis",
+      "label": "Andrej Babiš",
+      "central": false
+    },
+    {
+      "id": "pomanjkanje_proizvodnih_zmogljivosti_eu",
+      "label": "Pomanjkanje proizvodnih zmogljivosti v EU",
+      "central": false
+    },
+    {
+      "id": "izstop_devetih_drzav",
+      "label": "Izstop devetih držav iz pobude",
+      "central": false
+    },
+    {
+      "id": "visoki_stroski_energentov",
+      "label": "Visoki stroški energentov",
+      "central": false
+    },
+    {
+      "id": "petr_pavel",
+      "label": "Petr Pavel",
+      "central": false
+    },
+    {
+      "id": "slovenija",
+      "label": "Slovenija",
+      "central": false
+    },
+    {
+      "id": "vrh_nato_v_ankari",
+      "label": "Vrh zveze Nato v Ankari",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "pomanjkanje_proizvodnih_zmogljivosti_eu",
+      "predicate": "sprožilo",
+      "object_id": "ceska_pobuda_za_strelivo",
+      "evidence": "Češka je nakup topniških izstrelkov za Ukrajino v tretjih državah predlagala v začetku leta 2024 kot odgovor na pomanjkanje proizvodnih zmogljivosti v EU-ju.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "andrej_babis",
+      "predicate": "omejuje financiranje",
+      "object_id": "ceska_pobuda_za_strelivo",
+      "evidence": "odkar se je premier Andrej Babiš decembra lani vrnil na položaj z obljubo, da Češka v pobudo ne bo več vlagala lastnega denarja",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "andrej_babis",
+      "predicate": "utemeljuje z",
+      "object_id": "visoki_stroski_energentov",
+      "evidence": "Češki premier je za Financial Times povedal, da njegova vlada omejena javna sredstva namenja prednostno češkim državljanom, saj se gospodinjstva zaradi konflikta na Bližnjem vzhodu soočajo z visokimi stroški energentov.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "visoki_stroski_energentov",
+      "predicate": "povzročajo pomanjkanje",
+      "object_id": "ceska_pobuda_za_strelivo",
+      "evidence": "Denarja nimamo, zato prejemamo sredstva od drugih držav in nato dostavljamo (strelivo)",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "andrej_babis",
+      "predicate": "naj bi povzročil",
+      "object_id": "izstop_devetih_drzav",
+      "evidence": "Število držav, ki sodeluje v češki pobudi za preskrbo Ukrajine z artilerijskim strelivom, se je prepolovilo z 18 na devet, odkar se je premier Andrej Babiš decembra lani vrnil na položaj",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "izstop_devetih_drzav",
+      "predicate": "ogroža",
+      "object_id": "ceska_pobuda_za_strelivo",
+      "evidence": "Pobuda še vedno deluje, vendar je nova težava v tem, da finančno prispeva le okoli devet držav članic.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "petr_pavel",
+      "predicate": "opozarja na",
+      "object_id": "izstop_devetih_drzav",
+      "evidence": "Pavel sicer ni razkril, katere države so nedavno izstopile iz pobude.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "petr_pavel",
+      "predicate": "predlaga razpravo na",
+      "object_id": "vrh_nato_v_ankari",
+      "evidence": "Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "vrh_nato_v_ankari",
+      "predicate": "bo obravnaval",
+      "object_id": "ceska_pobuda_za_strelivo",
+      "evidence": "Dodal je, da bi morala biti prihodnost pobude ena od tem julijskega vrha zveze Nato v Ankari.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "slovenija",
+      "predicate": "ostaja v",
+      "object_id": "ceska_pobuda_za_strelivo",
+      "evidence": "Na ministrstvu za obrambo so danes za STA pojasnili, da Slovenija sicer letos Ukrajini v okviru češke pobude ni prispevala finančnih sredstev, a da to ne pomeni, da je iz nje izstopila.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "slovenija",
+      "predicate": "ni prispevala v",
+      "object_id": "izstop_devetih_drzav",
+      "evidence": "Slovenija sicer letos Ukrajini v okviru češke pobude ni prispevala finančnih sredstev, a da to ne pomeni, da je iz nje izstopila.",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "pomanjkanje_proizvodnih_zmogljivosti_eu",
+      "predicate": "onemogoča nadomestitev",
+      "object_id": "ceska_pobuda_za_strelivo",
+      "evidence": "Ta pobuda je Ukrajincem zagotavljala do 50 odstotkov vsega streliva velikega kalibra, zato je ni mogoče zlahka nadomestiti",
+      "confidence": "medium"
+    }
+  ]
+}

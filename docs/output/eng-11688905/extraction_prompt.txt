@@ -1,0 +1,132 @@
+Read the news articles below and produce two outputs as a single strict JSON object.
+
+The supplied articles are written in **Slovenian**. Your entire output — every `label`, every `evidence` field — MUST be in Slovenian. Do not translate proper nouns, institution names, predicates, or quoted spans into any other language. The `id` field is the only field that stays in lowercase ASCII snake_case.
+
+(1) An `entities` list of 6-10 central actors, institutions, countries, policies, events, conditions, or **mechanism states** (e.g. "barriers down", "red light", "fourth-day deadline") that appear across the articles. Each entity has:
+    - `id` (snake_case stable identifier, unique within this output, ASCII)
+    - `label` (human-readable name in Slovenian, shown in the rendered graph)
+    - `central` (boolean — exactly ONE entity must have central=true; this is the focal subject of the news story)
+
+(2) A `triplets` list of 10-15 directed causal or explanatory relations between those entities. Each triplet has:
+    - `subject_id` (must match an entity id)
+    - `predicate` (1-3 word specific verb in Slovenian — e.g. raises, triggers, blames, criticizes, excludes, enables, requires, resigns from, proposes, motivates, leads to, results in, reinforces, undermines, vetoes)
+    - `object_id` (must match an entity id)
+    - `evidence` (short DIRECT QUOTE from the article in Slovenian supporting the relation — do NOT translate or paraphrase to a different language)
+    - `confidence` ("low" | "medium" | "high")
+
+Hard constraints:
+- **Language lock**: every `label`, every `predicate`, every `evidence` must be in Slovenian. No translation.
+- **No direction redundancy**: do NOT include two triplets expressing the same fact in opposite directions (e.g. `train → collides_with → van` AND `van → results_in → collision` AND `train → results_in → collision` is three triplets for one fact — keep only ONE). Pick the single most informative orientation.
+- **Predicate-object type consistency**: communicative predicates (*announces, reports, confirms, criticizes, warns, blames, threatens*) take a STATEMENT or EVENT as object, never a person. If the natural object is a person, either rewrite the predicate (`kills`, `succeeds`, `criticizes_for_X`) or introduce a separate node for the statement/event (e.g. `mohamed_odeh_death`) and use it as the object.
+- **Event reification — never make a person the direct cause or effect of another event**: when a causal relation originates from or results in an EVENT, ACTION, or STATE that involves a person (a death, killing, attack, ruling, resignation, an event that triggers a protest), create a DEDICATED entity node for that event/state and attach the causal edge to it — do NOT attach the causal verb to the person. A person's *death* causes consequences, the person does not. E.g. NOT `ales_sutar → povzročil → protest` but introduce `smrt_aleša_šutarja` and write `smrt_aleša_šutarja → sprožila → protest`.
+- **Attribution / hedging for contested claims**: when a relation is contested, alleged, or attributed to a specific party (the defense, a single witness, one news source) rather than established fact, do NOT state it flat. Fold the attribution/uncertainty INTO the predicate string using Slovenian markers — for Slovenian use "naj bi …", "domnevno …", or "po navedbah <vir> …". This is especially important for accusations and claims that assign blame. E.g. NOT `ales_sutar → izzval → samire_siljic` but `ales_sutar → naj bi izzval (po navedbah obrambe) → samire_siljic`.
+- **Causal mechanism over commentary**: for incident, accident, or policy stories, AT LEAST 30% of triplets must describe the CAUSAL MECHANISM — conditions, contributing factors, sequences that led to the central event. Pure reaction triplets (`expresses_condolences`, `announces`, `praises`) are capped at 3 per event total.
+- **Specific predicates**: banned generic verbs: "affects", "relates to", "is associated with", "involves", "concerns", "deals with".
+- The directed graph induced by the triplets MUST be connected when treated as undirected. No isolated entities. No disconnected chains.
+- Every non-central entity must participate in at least 2 triplets. The central entity may participate in more.
+- Every triplet must be grounded in the supplied articles. Do NOT introduce background knowledge or facts not stated or strongly implied in the text.
+- Return ONLY the JSON object. No prose, no markdown fences, no commentary.
+
+All examples below use a FICTIONAL, illustrative scenario (a made-up country "Vendia", its minister, a dam) purely to show the rules. They are NOT from the supplied articles — never copy these entities, names, or wordings into your output; extract only what the supplied articles support.
+
+DIRECTION EXAMPLE — correct vs wrong:
+  Fictional article: "Minister Adler confirmed that twelve people died in the dam failure."
+  WRONG: {"subject_id":"dam_failure","predicate":"causes","object_id":"minister_adler", ...}     ← the failure does not cause the minister
+  WRONG: {"subject_id":"minister_adler","predicate":"confirms","object_id":"minister_adler", ...}  ← invalid; self-loop
+  RIGHT: {"subject_id":"minister_adler","predicate":"confirms casualties of","object_id":"dam_failure", ...}  ← minister confirms (re: the failure)
+
+EVENT-REIFICATION EXAMPLE — put the event, not the person, on the causal edge:
+  Fictional article: "The mayor's resignation triggered early elections in Vendia."
+  WRONG: {"subject_id":"mayor","predicate":"triggers","object_id":"early_elections", ...}  ← the person did not trigger the elections
+  RIGHT: add an entity {"id":"mayor_resignation","label":"<the resignation, in source language>"} then
+         {"subject_id":"mayor_resignation","predicate":"triggers","object_id":"early_elections", ...}  ← the resignation triggered them
+
+ATTRIBUTION EXAMPLE — hedge contested/attributed claims in the predicate:
+  Fictional article: "The operator's lawyer argued that heavy rainfall, not negligence, caused the dam failure."
+  WRONG: {"subject_id":"rainfall","predicate":"causes","object_id":"dam_failure", ...}  ← states one party's contested claim as established fact
+  RIGHT: {"subject_id":"rainfall","predicate":"allegedly caused (per the operator)","object_id":"dam_failure", ...}  ← marked as a contested, attributed claim
+  (In Slovenian, render such hedges as "naj bi …" / "domnevno …" / "po navedbah <vir> …".)
+
+Output schema:
+{
+  "entities": [
+    {"id": "eu", "label": "Evropska unija", "central": false},
+    {"id": "carbon_tax", "label": "Ogljični davek", "central": true}
+  ],
+  "triplets": [
+    {
+      "subject_id": "eu",
+      "predicate": "uvaja",
+      "object_id": "carbon_tax",
+      "evidence": "EU je uradno sprejela mehanizem za ogljični davek dne...",
+      "confidence": "high"
+    }
+  ]
+}
+
+ARTICLES (in Slovenian):
+
+Article 1 - STA:
+Title: Madžarski parlament izglasoval preklic izstopa države iz ICC
+Budimpešta, 27. maja (STA) - Madžarski poslanci so danes z veliko večino glasovali za preklic namere o izstopu Madžarske iz Mednarodnega kazenskega sodišča (ICC), ki jo je lani sprejela prejšnja vlada pod vodstvom Viktorja Orbana, poroča francoska tiskovna agencija AFP. 199-članski ...
+
+Article 2 - SiOL:
+Title: Madžarski parlament zaustavil Orbanovo namero
+199-članski parlament je z 133 glasovi za, 37 proti in petimi vzdržanimi uradno razveljavil zakon o umiku Madžarske iz ICC.
+
+Predlog zakona o preklicu izstopa iz ICC je v ponedeljek v parlamentarno obravnavo vložila vlada premierja Petra Magyarja. Da bi stopil v veljavo, ga mora podpisati predsednik države Tamas Sulyok, sicer zaveznik Orbana.
+
+Namero o izstopu države iz ICC je Orban napovedal aprila lani ob obisku izraelskega premierja Benjamina Netanjahuja v Budimpešti. Za slednjega je ICC izdal nalog za prijetje zaradi dejanj v vojni v Gazi, obtožnica ga bremeni vojnih zločinov in zločinov proti človečnosti.
+
+Madžarski parlament je nato zakon, s katerim se je začel postopek umika Madžarske iz ICC, sprejel maja lani.
+
+Sodišče ICC s sedežem v Haagu je bilo ustanovljeno leta 2002. Pristojno je za pregon posameznikov, odgovornih za najhujše zločine, ko jih države same ne želijo ali ne morejo preganjati. Ima 125 članic, med katerimi med drugim ni ZDA, Kitajske, Rusije in Izraela. Najostreje ukrepanju ICC nasprotujejo v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom, vključno s Slovenko Beti Hohler, ki je bila članica panela, ki je odobril izdajo naloga za prijetje Netanjahuja.
+
+Article 3 - Delo:
+Title: Z veliko večino madžarski parlament izglasoval preklic izstopa iz ICC
+Predlog zakona o preklicu izstopa iz ICC je vložila vlada Petra Magyarja. Da bi stopil v veljavo, ga mora podpisati predsednik države, sicer zaveznik Orbana.
+
+Madžarski poslanci so danes z veliko večino glasovali za preklic namere o izstopu Madžarske iz Mednarodnega kazenskega sodišča (ICC), ki jo je lani sprejela prejšnja vlada pod vodstvom Viktorja Orbana, poroča francoska tiskovna agencija AFP.
+
+199-članski parlament je z 133 glasovi za, 37 proti in petimi vzdržanimi uradno razveljavil zakon o umiku Madžarske iz ICC.
+
+Predlog zakona o preklicu izstopa iz ICC je v ponedeljek v parlamentarno obravnavo vložila vlada premierja Petra Magyarja. Da bi stopil v veljavo, ga mora podpisati predsednik države Tamas Sulyok, sicer zaveznik Orbana.
+
+Namero o izstopu države iz ICC je Orban napovedal aprila lani ob obisku izraelskega premierja Benjamina Netanjahuja v Budimpešti. Za slednjega je ICC izdal nalog za prijetje zaradi dejanj v vojni v Gazi, obtožnica ga bremeni vojnih zločinov in zločinov proti človečnosti.
+
+Madžarski parlament je nato zakon, s katerim se je začel postopek umika Madžarske iz ICC, sprejel maja lani.
+
+Sodišče ICC s sedežem v Haagu je bilo ustanovljeno leta 2002. Pristojno je za pregon posameznikov, odgovornih za najhujše zločine, ko jih države same ne želijo ali ne morejo preganjati. Ima 125 članic, med katerimi med drugim ni ZDA, Kitajske, Rusije in Izraela. Najostreje ukrepanju ICC nasprotujejo v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom, vključno s Slovenko Beti Hohler, ki je bila članica panela, ki je odobril izdajo naloga za prijetje Netanjahuja.
+
+Article 4 - RTV Slovenija:
+Title: Madžarski parlament izglasoval preklic namere o izstopu Madžarske iz ICC-ja
+199-članski parlament je z 133 glasovi za, 37 proti in petimi vzdržanimi uradno razveljavil zakon o umiku Madžarske iz ICC-ja.
+
+Predlog zakona o preklicu izstopa iz mednarodnega sodišča je v ponedeljek v parlamentarno obravnavo vložila vlada premierja Petra Magyarja. Da bi začel veljati, ga mora podpisati predsednik države Tamas Sulyok, sicer zaveznik Orbana.
+
+Namero o izstopu države iz ICC-ja je Orban napovedal aprila lani ob obisku izraelskega premierja Benjamina Netanjahuja v Budimpešti. Za Netanjahuja je namreč ICC izdal nalog za aretacijo zaradi dejanj v Gazi, obtožnica ga bremeni vojnih zločinov in zločinov proti človečnosti.
+
+Madžarski parlament je nato zakon, s katerim se je začel postopek umika Madžarske iz ICC-ja, sprejel maja lani.
+
+Sodišče ICC s sedežem v Haagu je bilo ustanovljeno leta 2002. Pristojno je za pregon posameznikov, odgovornih za najhujše zločine, ko jih države same ne želijo ali ne morejo preganjati.
+
+Ima 125 članic, med katerimi med drugim ni ZDA, Kitajske, Rusije in Izraela. Najostreje ukrepanju ICC-ja nasprotujejo v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom, vključno s slovensko državljanko Beti Hohler, ki je bila članica panela, ki je odobril izdajo naloga za prijetje Netanjahuja.
+
+Article 5 - STA:
+Title: Madžarski parlament izglasoval preklic izstopa države iz ICC
+Budimpešta, 27. maja (STA) Madžarski poslanci so danes z veliko večino glasovali za preklic namere o izstopu Madžarske iz Mednarodnega kazenskega sodišča, ki jo je lani sprejela prejšnja vlada pod vodstvom Viktorja Orbana. 199-članski parlament je z 133 glasovi za, 37 proti in petimi ...
+
+Article 6 - N1:
+Title: Razveljavljen še en Orbanov ukrep: Madžarska ostaja članica ICC
+Madžarski parlament je nato zakon, s katerim se je začel postopek umika Madžarske iz ICC, sprejel maja lani.
+
+Sodišče ICC s sedežem v Haagu je bilo ustanovljeno leta 2002. Pristojno je za pregon posameznikov, odgovornih za najhujše zločine, ko jih države same ne želijo ali ne morejo preganjati. Ima 125 članic, med katerimi med drugim ni ZDA, Kitajske, Rusije in Izraela. Najostreje ukrepanju ICC nasprotujejo v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom, vključno s Slovenko Beti Hohler, ki je bila članica panela, ki je odobril izdajo naloga za prijetje Netanjahuja.
+
+Article 7 - Dnevnik:
+Title: Netanjahu se mora na Madžarskem spet bati aretacije
+Novi madžarski premier Peter Magyar že s prvimi dejanji odpravlja sporne odločitve šestnajstletne vladavine Viktorja Orbana. Verjetno najbolj zgovoren primer je današnja odločitev madžarskega parlamenta, da država znova pristopi k mednarodnemu kazenskemu sodišču (ICC).
+
+Za umik s seznama podpornic sodišča se je Orbanova vlada odločila lani spomladi, pred obiskom izraelskega premierja Benjamina Netanjahuja na Madžarskem, ki ga ICC išče zaradi vojnih zločinov v Gazi. Orbanova vlada je s tem tlakovala pot varnemu prihodu Netanjahuja na Madžarsko, saj bi sicer bila primorana osumljenca prijeti in poslati v Haag.
+
+Toda Orban takrat tega ni nameraval storiti, zato so za umik našli "argumentacijo", da je ICC postal politično sodišče. Povsem drugače so položaj ocenili v vladajoči stranki Tisza premierja Magyarja. "V interesu mednarodnega miru in varnosti ter za zaščito človekovih pravic je nujno, da se tiste, ki so zagrešili najhujše mednarodne zločine, privede pred mednarodno sodišče," so zapisali v sprejetem zakonu, s katerim se Madžarska vrača med podpornice ICC. Izraelski premier Benjamin Netanjahu se mora tako spet bati aretacije na Madžarskem, če bi stopil na njeno ozemlje.
+

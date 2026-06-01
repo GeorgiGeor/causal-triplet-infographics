@@ -1,0 +1,1251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>slv-125182 &middot; comparison</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+.container { max-width: 1600px; margin: 0 auto; padding: 32px 24px 80px; }
+h1 { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+.subtitle { color: #64748b; font-size: 14px; margin: 0 0 24px; }
+.nav { display: flex; gap: 12px; font-size: 13px; margin-bottom: 24px; }
+.nav a { color: #2563eb; text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.event-card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; text-decoration: none; color: inherit; transition: transform 0.1s, box-shadow 0.1s; }
+.event-card:hover { box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08); transform: translateY(-1px); }
+.event-card .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #64748b; }
+.event-card .title { font-size: 14px; font-weight: 600; margin: 4px 0 10px; line-height: 1.3; }
+.event-card .meta { font-size: 11px; color: #94a3b8; display: flex; gap: 10px; }
+.event-card .thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; background: #f1f5f9; margin-bottom: 8px; }
+
+.columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+.col { background: white; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+.col-head { padding: 10px 14px; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; font-size: 12px; font-weight: 600; color: #475569; letter-spacing: 0.04em; text-transform: uppercase; }
+.col-head.direct { background: #dbeafe; color: #1d4ed8; }
+.col-head.triplet-image { background: #dcfce7; color: #15803d; }
+.col-head.triplet-html { background: #fef3c7; color: #b45309; }
+.col img, .col .placeholder { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: white; display: block; }
+.col .placeholder { display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 13px; }
+
+details { background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px; }
+details summary { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 14px; user-select: none; }
+details summary:hover { background: #f8fafc; }
+details[open] summary { border-bottom: 1px solid #e2e8f0; }
+.details-body { padding: 16px; max-height: 560px; overflow: auto; }
+
+.prompt-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.prompt-block h4 { font-size: 12px; font-weight: 600; color: #475569; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 6px; }
+.prompt-block pre { background: #0f172a; color: #e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; line-height: 1.5; padding: 12px; border-radius: 6px; max-height: 480px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+
+.article-list { display: flex; flex-direction: column; gap: 16px; }
+.article { border-left: 3px solid #cbd5e1; padding: 4px 14px; }
+.article .pub { font-size: 12px; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.04em; }
+.article .atitle { font-size: 14px; font-weight: 600; margin: 4px 0 6px; }
+.article .body { font-size: 12px; color: #334155; line-height: 1.55; white-space: pre-wrap; }
+
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; text-align: left; vertical-align: top; }
+th { font-weight: 600; color: #475569; background: #f8fafc; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+td.predicate { font-weight: 600; color: #1d4ed8; }
+.confidence { display: inline-block; padding: 1px 8px; font-size: 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.confidence.high { background: #dcfce7; color: #166534; }
+.confidence.medium { background: #fef3c7; color: #92400e; }
+.confidence.low { background: #fee2e2; color: #991b1b; }
+.central-badge { display: inline-block; padding: 1px 6px; font-size: 10px; border-radius: 999px; background: #c2410c; color: white; font-weight: 600; margin-left: 6px; }
+.evidence { color: #64748b; font-style: italic; font-size: 11px; }
+tr.dropped { background: #f8fafc; opacity: 0.6; }
+tr.dropped td.predicate { text-decoration: line-through; }
+.render-excluded { display: inline-block; margin-left: 6px; padding: 1px 6px; font-size: 9px; border-radius: 999px; background: #e2e8f0; color: #475569; font-weight: 600; white-space: nowrap; }
+.render-note { font-size: 11px; color: #64748b; margin: 0 0 8px; }
+
+.event-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0; font-size: 13px; }
+.event-nav a { color: #2563eb; text-decoration: none; }
+.event-nav a:hover { text-decoration: underline; }
+
+/* --- Scoring UI --- */
+.score-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px; margin: 24px 0; background: #fcfdff; }
+.score-card > h3 { margin: 0 0 4px; font-size: 15px; color: #0f172a; }
+.score-card .sc-sub { margin: 0 0 16px; font-size: 12px; color: #64748b; }
+.score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .score-grid { grid-template-columns: 1fr; } }
+.score-block { border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; background: white; }
+.score-block h4 { margin: 0 0 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+.score-block.triplets h4 { color: #7c3aed; }
+.score-block.direct h4 { color: #b91c1c; }
+.score-block.triplet_image h4 { color: #15803d; }
+.metric { margin-bottom: 12px; }
+.metric-label { font-size: 12px; color: #334155; margin-bottom: 5px; font-weight: 600; }
+.lk-hint { font-weight: 400; color: #94a3b8; margin-left: 6px; }
+.likert { display: flex; gap: 4px; }
+.lk { flex: 1; }
+.lk input { position: absolute; opacity: 0; pointer-events: none; }
+.lk span { display: block; text-align: center; padding: 6px 0; font-size: 13px; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; color: #475569; user-select: none; }
+.lk input:checked + span { background: #2563eb; color: white; border-color: #2563eb; font-weight: 700; }
+.lk:hover span { border-color: #2563eb; }
+.num { width: 64px; padding: 5px 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; }
+.suffix { color: #64748b; font-size: 12px; margin-left: 6px; }
+.metric.comment textarea { width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 8px; font-size: 12px; font-family: inherit; resize: vertical; }
+.objective-note { font-size: 11px; color: #64748b; margin: 0 0 10px; padding: 6px 10px; background: #f1f5f9; border-radius: 6px; }
+.score-bar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin: -8px 0 8px; background: #0f172a; color: #e2e8f0; border-radius: 10px; font-size: 12px; }
+.score-bar button { font: inherit; padding: 5px 12px; border-radius: 6px; border: 0; cursor: pointer; font-weight: 600; }
+.score-bar .exp { background: #22c55e; color: #052e16; }
+.score-bar .imp { background: #334155; color: #e2e8f0; }
+.score-bar .saved { margin-left: auto; color: #4ade80; opacity: 0; transition: opacity 0.3s; }
+.score-bar .saved.show { opacity: 1; }
+.score-bar input[type=file] { display: none; }
+.event-card.scored { box-shadow: inset 4px 0 0 #22c55e; }
+.event-card.scored .code::after { content: " ✓"; color: #16a34a; font-weight: 700; }
+.verdict-cell { white-space: nowrap; }
+.tr-verdict { font-size: 11px; padding: 3px 4px; border: 1px solid #cbd5e1; border-radius: 5px; max-width: 150px; }
+.tr-note { display: block; margin-top: 4px; width: 150px; font-size: 11px; padding: 3px 5px; border: 1px solid #e2e8f0; border-radius: 5px; }
+.score-bar .src { background: #1d4ed8; color: white; }
+
+/* --- Source-text reading panel --- */
+:root { --sp-width: min(620px, 46vw); }
+.source-panel { position: fixed; top: 0; right: 0; height: 100vh; width: var(--sp-width); background: white; border-left: 1px solid #e2e8f0; box-shadow: -6px 0 28px rgba(15,23,42,0.14); transform: translateX(100%); transition: transform 0.2s ease; z-index: 40; display: flex; flex-direction: column; }
+body.source-open .source-panel { transform: translateX(0); }
+.source-panel .sp-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #e2e8f0; font-weight: 600; font-size: 13px; background: #f8fafc; }
+.source-panel .sp-close { font: inherit; border: 0; background: #e2e8f0; color: #475569; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.source-panel .sp-body { padding: 16px; overflow-y: auto; flex: 1; }
+body.source-open .container { margin-right: var(--sp-width); max-width: none; transition: margin-right 0.2s ease; }
+@media (max-width: 1000px) { :root { --sp-width: 100vw; } body.source-open .container { margin-right: 0; } }
+.sp-search { display: flex; gap: 6px; align-items: center; padding: 8px 16px; border-bottom: 1px solid #e2e8f0; background: white; }
+.sp-search input { flex: 1; font-size: 12px; padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 6px; }
+.sp-search #sp-search-count { font-size: 11px; color: #64748b; white-space: nowrap; min-width: 56px; text-align: right; }
+.sp-search button { font-size: 12px; padding: 5px 9px; border: 1px solid #cbd5e1; border-radius: 6px; background: white; cursor: pointer; }
+mark.sp-hit { background: #fde68a; color: inherit; border-radius: 2px; }
+mark.sp-hit.cur { background: #f59e0b; color: white; }
+
+/* clickable renders */
+.col img.zoomable { cursor: zoom-in; }
+
+/* focus mode: big image + its rating block, left of the source panel */
+.focus-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 38; background: rgba(248,250,252,0.99); display: none; flex-direction: column; padding: 18px 22px; overflow-y: auto; }
+body.focus-open .focus-overlay { display: flex; }
+body.focus-open.source-open .focus-overlay { right: var(--sp-width); }
+.focus-overlay .fo-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.focus-overlay .fo-title { font-weight: 700; font-size: 16px; }
+.focus-overlay .fo-close { font: inherit; font-weight: 600; border: 0; background: #0f172a; color: white; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+.focus-overlay .fo-img { width: 100%; max-height: 52vh; object-fit: contain; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.focus-overlay .fo-cols { display: flex; gap: 18px; align-items: flex-start; margin-top: 14px; flex-wrap: wrap; }
+.focus-overlay .fo-score { flex: 1 1 340px; min-width: 300px; }
+.focus-overlay .fo-score .score-block { max-width: 520px; }
+.focus-overlay .fo-triplets { flex: 1 1 360px; min-width: 300px; display: none; background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; max-height: 60vh; overflow-y: auto; }
+body.focus-cond-triplet_image .focus-overlay .fo-triplets { display: block; }
+.fo-triplets h4 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: #15803d; }
+.fo-triplets .ftl-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+.fo-triplets .ftl-list li { font-size: 12px; line-height: 1.4; }
+.fo-triplets .ftl-list li.dropped { opacity: 0.55; }
+.fo-triplets .spo b { color: #0f172a; } .fo-triplets .spo i { color: #1d4ed8; font-style: normal; font-weight: 600; }
+.fo-triplets .re-control { display: flex; gap: 6px; margin-top: 4px; }
+.fo-triplets .re-verdict { font-size: 11px; padding: 3px 4px; border: 1px solid #cbd5e1; border-radius: 5px; }
+.fo-triplets .re-note { flex: 1; font-size: 11px; padding: 3px 6px; border: 1px solid #e2e8f0; border-radius: 5px; }
+.ftl-additions { margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 12px; }
+.ftl-additions .addition-row { display: flex; gap: 4px; margin-bottom: 6px; }
+.ftl-additions .addition-input { flex: 1; min-width: 0; font-size: 11px; padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 5px; }
+.ftl-additions .addition-rm { border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c; border-radius: 6px; cursor: pointer; padding: 0 8px; }
+.ftl-additions .add-btn { font-size: 12px; font-weight: 600; padding: 6px 12px; border: 1px dashed #16a34a; background: #f0fdf4; color: #15803d; border-radius: 6px; cursor: pointer; }
+@media (max-width: 1000px) { body.focus-open.source-open .focus-overlay { right: 0; } }
+
+/* --- Frozen (read-only published) view: render locked controls as static text/badges --- */
+body.frozen .score-bar .exp,
+body.frozen .score-bar .imp,
+body.frozen .score-bar .saved,
+body.frozen .add-btn,
+body.frozen .addition-rm { display: none; }
+body.frozen .score-bar::after { content: "read-only"; margin-left: auto; font-size: 11px; color: #94a3b8; }
+body.frozen #progress { display: none; }
+/* likert: show only the chosen value, as a static chip */
+body.frozen .likert .lk input:not(:checked) + span { display: none; }
+body.frozen .likert .lk input:checked + span { background: #2563eb; color: #fff; border-color: #2563eb; }
+body.frozen .likert:not(:has(input:checked))::before { content: "—"; color: #94a3b8; }
+/* dropdowns → plain text */
+body.frozen select { appearance: none; -webkit-appearance: none; border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: #0f172a; opacity: 1; }
+body.frozen select:disabled { color: #0f172a; }
+/* number/text/textarea → borderless static */
+body.frozen .num, body.frozen .addition-input, body.frozen .tr-note, body.frozen .re-note,
+body.frozen .metric.comment textarea { border: 0; background: none; padding: 0; resize: none; color: #334155; font-weight: 600; opacity: 1; }
+body.frozen .metric.comment textarea:disabled { color: #334155; }
+body.frozen input:disabled, body.frozen textarea:disabled, body.frozen select:disabled { -webkit-text-fill-color: currentColor; }
+</style>
+</head>
+<body class="frozen">
+<div class="container">
+  <div class="nav">
+    <a href="index.html">&larr; All events</a>
+    <span>&middot;</span>
+    <span>1 / 10</span>
+  </div>
+  <div class="score-bar"><strong>Scores</strong><button class="exp" onclick="exportScores()">⬇ Export JSON</button><label class="imp" style="cursor:pointer;padding:5px 12px;border-radius:6px;">⬆ Import<input type="file" accept="application/json" onchange="importScores(event)"></label><button class="src" onclick="toggleSource()">📄 Source text</button><span class="saved" id="saved-ind">✓ saved</span></div>
+  <h1>slv-125182</h1>
+  <p class="subtitle">Cigler Kralj: Če sklepa ne sprejmemo, kršimo ustavo. Opozicija: Gre za grobo zlorabo ustave.</p>
+
+  <div class="columns">
+    <div class="col">
+      <div class="col-head direct">Direct &mdash; text &rarr; image</div>
+      <img class="zoomable" data-cond="direct" title="Click to focus + rate" src="../output/slv-125182/direct.webp" alt="Direct baseline for slv-125182">
+    </div>
+    <div class="col">
+      <div class="col-head triplet-image">Triplet &rarr; image</div>
+      <img class="zoomable" data-cond="triplet_image" title="Click to focus + rate" src="../output/slv-125182/triplet_image.webp" alt="Triplet→image for slv-125182">
+    </div>
+    <div class="col">
+      <div class="col-head triplet-html">Triplet &rarr; HTML/CSS</div>
+      <a href="../output/slv-125182/triplet_html.html" target="_blank"><img src="../output/slv-125182/triplet_html.png" alt="HTML render for slv-125182"></a>
+    </div>
+  </div>
+
+  <div class="score-card" id="score-card" data-event="slv-125182" data-rendered="12"><h3>Evaluation</h3><p class="sc-sub">Faithfulness/clarity rate the final image (same basis for both pipelines). Edge fidelity &amp; unsupported additions are objective counts for the triplet→image render only. Autosaves in this browser; use Export for a JSON copy.</p><div class="score-grid"><div class="score-block triplets"><h4>Triplets (graph vs articles)</h4><p class="objective-note">Per-triplet correctness is rated in the <b>Extracted triplets</b> table below (one verdict per row). Coverage is the only event-level triplet score:</p><div class="metric"><div class="metric-label">Coverage (missing relations?)<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__triplets__coverage" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__triplets__coverage" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__triplets__coverage" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__triplets__coverage" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__triplets__coverage" value="5"><span>5</span></label></div></div><div class="metric comment"><textarea id="sc__triplets__comment" name="sc__triplets__comment" rows="2" placeholder="Comments…"></textarea></div></div><div class="score-block direct"><h4>Direct image</h4><div class="metric"><div class="metric-label">Faithfulness to articles<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__direct__faithfulness" value="5"><span>5</span></label></div></div><div class="metric"><div class="metric-label">Relation clarity<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__direct__clarity" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__direct__clarity" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__direct__clarity" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__direct__clarity" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__direct__clarity" value="5"><span>5</span></label></div></div><p class="objective-note">Density (the triplet→image node count is known automatically):</p><div class="metric"><div class="metric-label">Nodes in image (count by eye)</div><input class="num" type="number" min="0" id="sc__direct__node_count" name="sc__direct__node_count"></div><div class="metric comment"><textarea id="sc__direct__comment" name="sc__direct__comment" rows="2" placeholder="Comments…"></textarea></div></div><div class="score-block triplet_image"><h4>Triplet → image</h4><div class="metric"><div class="metric-label">Faithfulness to articles<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__triplet_image__faithfulness" value="5"><span>5</span></label></div></div><div class="metric"><div class="metric-label">Relation clarity<span class="lk-hint">1–5</span></div><div class="likert"><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="1"><span>1</span></label><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="2"><span>2</span></label><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="3"><span>3</span></label><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="4"><span>4</span></label><label class="lk"><input type="radio" name="sc__triplet_image__clarity" value="5"><span>5</span></label></div></div><p class="objective-note">Per-edge render fidelity &amp; unsupported additions are rated in the fed-triplet list (click the image to open it).</p><div class="metric comment"><textarea id="sc__triplet_image__comment" name="sc__triplet_image__comment" rows="2" placeholder="Comments…"></textarea></div></div></div></div>
+
+  <details>
+    <summary>Prompts</summary>
+    <div class="details-body">
+      <div class="prompt-block">
+        <h4>Triplet extraction prompt &mdash; text &rarr; triplets (stage 1, both triplet conditions)</h4>
+        <pre>Read the news articles below and produce two outputs as a single strict JSON object.
+
+The supplied articles are written in **Slovenian**. Your entire output — every `label`, every `evidence` field — MUST be in Slovenian. Do not translate proper nouns, institution names, predicates, or quoted spans into any other language. The `id` field is the only field that stays in lowercase ASCII snake_case.
+
+(1) An `entities` list of 6-10 central actors, institutions, countries, policies, events, conditions, or **mechanism states** (e.g. &quot;barriers down&quot;, &quot;red light&quot;, &quot;fourth-day deadline&quot;) that appear across the articles. Each entity has:
+    - `id` (snake_case stable identifier, unique within this output, ASCII)
+    - `label` (human-readable name in Slovenian, shown in the rendered graph)
+    - `central` (boolean — exactly ONE entity must have central=true; this is the focal subject of the news story)
+
+(2) A `triplets` list of 10-15 directed causal or explanatory relations between those entities. Each triplet has:
+    - `subject_id` (must match an entity id)
+    - `predicate` (1-3 word specific verb in Slovenian — e.g. raises, triggers, blames, criticizes, excludes, enables, requires, resigns from, proposes, motivates, leads to, results in, reinforces, undermines, vetoes)
+    - `object_id` (must match an entity id)
+    - `evidence` (short DIRECT QUOTE from the article in Slovenian supporting the relation — do NOT translate or paraphrase to a different language)
+    - `confidence` (&quot;low&quot; | &quot;medium&quot; | &quot;high&quot;)
+
+Hard constraints:
+- **Language lock**: every `label`, every `predicate`, every `evidence` must be in Slovenian. No translation.
+- **No direction redundancy**: do NOT include two triplets expressing the same fact in opposite directions (e.g. `train → collides_with → van` AND `van → results_in → collision` AND `train → results_in → collision` is three triplets for one fact — keep only ONE). Pick the single most informative orientation.
+- **Predicate-object type consistency**: communicative predicates (*announces, reports, confirms, criticizes, warns, blames, threatens*) take a STATEMENT or EVENT as object, never a person. If the natural object is a person, either rewrite the predicate (`kills`, `succeeds`, `criticizes_for_X`) or introduce a separate node for the statement/event (e.g. `mohamed_odeh_death`) and use it as the object.
+- **Event reification — never make a person the direct cause or effect of another event**: when a causal relation originates from or results in an EVENT, ACTION, or STATE that involves a person (a death, killing, attack, ruling, resignation, an event that triggers a protest), create a DEDICATED entity node for that event/state and attach the causal edge to it — do NOT attach the causal verb to the person. A person&#x27;s *death* causes consequences, the person does not. E.g. NOT `ales_sutar → povzročil → protest` but introduce `smrt_aleša_šutarja` and write `smrt_aleša_šutarja → sprožila → protest`.
+- **Attribution / hedging for contested claims**: when a relation is contested, alleged, or attributed to a specific party (the defense, a single witness, one news source) rather than established fact, do NOT state it flat. Fold the attribution/uncertainty INTO the predicate string using Slovenian markers — for Slovenian use &quot;naj bi …&quot;, &quot;domnevno …&quot;, or &quot;po navedbah &lt;vir&gt; …&quot;. This is especially important for accusations and claims that assign blame. E.g. NOT `ales_sutar → izzval → samire_siljic` but `ales_sutar → naj bi izzval (po navedbah obrambe) → samire_siljic`.
+- **Causal mechanism over commentary**: for incident, accident, or policy stories, AT LEAST 30% of triplets must describe the CAUSAL MECHANISM — conditions, contributing factors, sequences that led to the central event. Pure reaction triplets (`expresses_condolences`, `announces`, `praises`) are capped at 3 per event total.
+- **Specific predicates**: banned generic verbs: &quot;affects&quot;, &quot;relates to&quot;, &quot;is associated with&quot;, &quot;involves&quot;, &quot;concerns&quot;, &quot;deals with&quot;.
+- The directed graph induced by the triplets MUST be connected when treated as undirected. No isolated entities. No disconnected chains.
+- Every non-central entity must participate in at least 2 triplets. The central entity may participate in more.
+- Every triplet must be grounded in the supplied articles. Do NOT introduce background knowledge or facts not stated or strongly implied in the text.
+- Return ONLY the JSON object. No prose, no markdown fences, no commentary.
+
+All examples below use a FICTIONAL, illustrative scenario (a made-up country &quot;Vendia&quot;, its minister, a dam) purely to show the rules. They are NOT from the supplied articles — never copy these entities, names, or wordings into your output; extract only what the supplied articles support.
+
+DIRECTION EXAMPLE — correct vs wrong:
+  Fictional article: &quot;Minister Adler confirmed that twelve people died in the dam failure.&quot;
+  WRONG: {&quot;subject_id&quot;:&quot;dam_failure&quot;,&quot;predicate&quot;:&quot;causes&quot;,&quot;object_id&quot;:&quot;minister_adler&quot;, ...}     ← the failure does not cause the minister
+  WRONG: {&quot;subject_id&quot;:&quot;minister_adler&quot;,&quot;predicate&quot;:&quot;confirms&quot;,&quot;object_id&quot;:&quot;minister_adler&quot;, ...}  ← invalid; self-loop
+  RIGHT: {&quot;subject_id&quot;:&quot;minister_adler&quot;,&quot;predicate&quot;:&quot;confirms casualties of&quot;,&quot;object_id&quot;:&quot;dam_failure&quot;, ...}  ← minister confirms (re: the failure)
+
+EVENT-REIFICATION EXAMPLE — put the event, not the person, on the causal edge:
+  Fictional article: &quot;The mayor&#x27;s resignation triggered early elections in Vendia.&quot;
+  WRONG: {&quot;subject_id&quot;:&quot;mayor&quot;,&quot;predicate&quot;:&quot;triggers&quot;,&quot;object_id&quot;:&quot;early_elections&quot;, ...}  ← the person did not trigger the elections
+  RIGHT: add an entity {&quot;id&quot;:&quot;mayor_resignation&quot;,&quot;label&quot;:&quot;&lt;the resignation, in source language&gt;&quot;} then
+         {&quot;subject_id&quot;:&quot;mayor_resignation&quot;,&quot;predicate&quot;:&quot;triggers&quot;,&quot;object_id&quot;:&quot;early_elections&quot;, ...}  ← the resignation triggered them
+
+ATTRIBUTION EXAMPLE — hedge contested/attributed claims in the predicate:
+  Fictional article: &quot;The operator&#x27;s lawyer argued that heavy rainfall, not negligence, caused the dam failure.&quot;
+  WRONG: {&quot;subject_id&quot;:&quot;rainfall&quot;,&quot;predicate&quot;:&quot;causes&quot;,&quot;object_id&quot;:&quot;dam_failure&quot;, ...}  ← states one party&#x27;s contested claim as established fact
+  RIGHT: {&quot;subject_id&quot;:&quot;rainfall&quot;,&quot;predicate&quot;:&quot;allegedly caused (per the operator)&quot;,&quot;object_id&quot;:&quot;dam_failure&quot;, ...}  ← marked as a contested, attributed claim
+  (In Slovenian, render such hedges as &quot;naj bi …&quot; / &quot;domnevno …&quot; / &quot;po navedbah &lt;vir&gt; …&quot;.)
+
+Output schema:
+{
+  &quot;entities&quot;: [
+    {&quot;id&quot;: &quot;eu&quot;, &quot;label&quot;: &quot;Evropska unija&quot;, &quot;central&quot;: false},
+    {&quot;id&quot;: &quot;carbon_tax&quot;, &quot;label&quot;: &quot;Ogljični davek&quot;, &quot;central&quot;: true}
+  ],
+  &quot;triplets&quot;: [
+    {
+      &quot;subject_id&quot;: &quot;eu&quot;,
+      &quot;predicate&quot;: &quot;uvaja&quot;,
+      &quot;object_id&quot;: &quot;carbon_tax&quot;,
+      &quot;evidence&quot;: &quot;EU je uradno sprejela mehanizem za ogljični davek dne...&quot;,
+      &quot;confidence&quot;: &quot;high&quot;
+    }
+  ]
+}
+
+ARTICLES (in Slovenian):
+
+Article 1 - RTV Slovenija:
+Title: Cigler Kralj: Če sklepa ne sprejmemo, kršimo ustavo. Opozicija: Gre za grobo zlorabo ustave.
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resnica) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resnica zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa 
+
+Article 2 - Večer:
+Title: DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu
+DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma.
+
+Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb v zakonu ni mogoč. Sklep je podprlo 48 poslancev, proti jih je bilo 35.
+
+Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volivcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; pa je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse.
+
+Article 3 - STA:
+Title: DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu
+Ljubljana, 27. maja (STA) - DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb ...
+
+Article 4 - Dnevnik:
+Title: DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu
+Poslanci so danes odločili, da o pred kratkim sprejetem zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče odločati na referendumu.
+
+Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter drugih rezov.
+
+Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volilcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila i
+
+Article 5 - 24ur:
+Title: Referendumska pobuda sindikatov padla v državnem zboru
+DZ je odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb v zakonu ni mogoč. Sklep je podprlo 48 poslancev, proti jih je bilo 35.
+
+Interventni zakon, ki so ga pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS, v luči grozeče energetske krize vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so danes na izredni seji DZ te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica.
+
+Article 6 - RTV Slovenija:
+Title: DZ potrdil nedopustnost razpisa referenduma o intervencijskem zakonu
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sk
+
+Article 7 - STA:
+Title: V DZ različna mnenja glede razpisa referenduma o interventnem zakonu
+Ljubljana, 27. maja (STA) - DZ danes na izredni seji odloča o predlogu sklepa, da o pred kratkim sprejetem zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče odločati na referendumu. Mnenja poslanskih skupin so deljena, prevladuje pa stališče, da razpis referenduma zaradi davčnih ...
+
+Article 8 - RTV Slovenija:
+Title: DZ potrdil nedopustnost razpisa referenduma. Sindikati napovedali ustavno presojo.
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Cigler Kralj: Če tega sklepa ne sprejmemo, kršimo ustavo
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Opozicija: Gre za grobo zlorabo ustave
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi refer
+
+Article 9 - RTV Slovenija:
+Title: DZ potrdil nedopustnost referenduma o intervencijskem zakonu. Sindikati napovedali ustavno presojo.
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sk
+
+Article 10 - Primorske Novice:
+Title: DZ zavrnil možnost referenduma o interventnem zakonu
+LJUBLJANA * Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov. Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volivcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; pa je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pr
+
+</pre>
+      </div>
+      <div class="prompt-tabs">
+        <div class="prompt-block">
+          <h4>Direct prompt &mdash; fed to Gemini 3 Pro Image Preview</h4>
+          <pre>**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic based on the provided text.
+
+### 1. Visual Style &amp; Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+* **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+* **Claims/Events:** Muted Grey or subtle Teal.
+* **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+* **Highlights:** Use a single accent color (e.g., Burnt Orange) only for the most critical central node.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Processing Rules
+Analyze the provided text to extract a Knowledge Graph:
+* **Nodes:** Extract key **Entities** (People, Countries, Organizations) and **Key Claims/Events**. Enclose node text in clean rectangular or pill-shaped containers.
+* **Links:** Identify **Causal Relations** connecting these nodes.
+* **Labels:** Every link must have a text label (2-3 words max) describing the causal relations between nodes.
+* **Logic:** Ensure the visual flow represents the causal chain (Cause → Effect).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the extracted causal network (DO NOT generate any additional text).
+
+### 4. Input Text
+
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resnica) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resnica zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Tudi Tina Brecelj (Levica Vesna) je dejala, da se z zakonom ogroža stabilnost javnih financ. &quot;Referendum na ta zakon je pot, da se stabilnost javnih financ utrdi. Prav zato bi morala biti možnost neposrednega odločanja še toliko bolj varovana,&quot; je menila.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. &quot;Zato težko govorimo o tem, da bi referendum ogrozil javne finance,&quot; je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. &quot;Resnica je drugačna - dolgoročno bomo izgubili vsi,&quot; je opozorila.
+
+DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma.
+
+Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb v zakonu ni mogoč. Sklep je podprlo 48 poslancev, proti jih je bilo 35.
+
+Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volivcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; pa je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.
+
+Ljubljana, 27. maja (STA) - DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb ...
+
+Poslanci so danes odločili, da o pred kratkim sprejetem zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče odločati na referendumu.
+
+Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter drugih rezov.
+
+Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volilcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.
+
+DZ je odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb v zakonu ni mogoč. Sklep je podprlo 48 poslancev, proti jih je bilo 35.
+
+Interventni zakon, ki so ga pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS, v luči grozeče energetske krize vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so danes na izredni seji DZ te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica.
+
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Tudi Tina Brecelj (Levica Vesna) je dejala, da se z zakonom ogroža stabilnost javnih financ. &quot;Referendum na ta zakon je pot, da se stabilnost javnih financ utrdi. Prav zato bi morala biti možnost neposrednega odločanja še toliko bolj varovana,&quot; je menila.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. &quot;Zato težko govorimo o tem, da bi referendum ogrozil javne finance,&quot; je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. &quot;Resnica je drugačna - dolgoročno bomo izgubili vsi,&quot; je opozorila.
+
+Ljubljana, 27. maja (STA) - DZ danes na izredni seji odloča o predlogu sklepa, da o pred kratkim sprejetem zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče odločati na referendumu. Mnenja poslanskih skupin so deljena, prevladuje pa stališče, da razpis referenduma zaradi davčnih ...
+
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Cigler Kralj: Če tega sklepa ne sprejmemo, kršimo ustavo
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Opozicija: Gre za grobo zlorabo ustave
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. &quot;Zato težko govorimo o tem, da bi referendum ogrozil javne finance,&quot; je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. &quot;Resnica je drugačna - dolgoročno bomo izgubili vsi,&quot; je opozorila.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+Sindikalne centrale: Ne strinjamo se z odločitvijo DZ-ja, zato bomo zahtevale ustavno presojo
+
+V sindikalnih centralah so v odzivu napisali, da z razočaranjem sprejemajo odločitev DZ-ja. &quot;Po našem prepričanju zakon vsebuje številne vsebine, o katerih bi državljanke in državljani morali imeti pravico odločati neposredno, na referendumu, omnibus tehnika pa je bila zlorabljena za to, da se jim ta pravica odvzame. Sprašujemo se, kaj bi lahko bilo bolj primerno in pomembno za neposredno odločanje ljudstva, kot je to zakon, ki nakazuje nadaljnjo smer upravljanja države in ki, po lastnih besedah zagovornikov zakona, zadeva vsakogar?&quot; so se vprašali.
+
+Ponovno so opozorili na &quot;nesprejemljiv in nedopusten pritisk na sindikate, pobudnike referenduma, z novelo Zakona o delovnih razmerjih, ki ukinja obveznost delodajalcev, da zagotavljajo tehnični obračun članarine za sindikate&quot;. Ponovno so poudarili, da je članstvo v sindikatih v Sloveniji &quot;že ves čas samostojne Slovenije popolnoma prostovoljno&quot;.
+
+&quot;Poudarjamo, da že danes večina sindikatov omogoča tudi neposredno plačevanje članarine člana sindikatu, čeprav je dejstvo, da v veliki večini primerov obračun izvaja delodajalec. To, da delodajalec zagotavlja tehnični obračun članarine, pa ne pomeni, da delodajalec zagotavlja finančna sredstva za članarino sindikata ali da je članstvo v sindikatu obvezno. Članarino člani plačujejo iz svojih plač, delodajalec pa zagotavlja zgolj tehnični obračun te članarine,&quot; so zapisali.
+
+Ob tem so opozorili tudi na to, da so poskusi utišanja, ustrahovanja in slabljenja sindikatov v neposrednem nasprotju z usmeritvami Evropske komisije, Mednarodne organizacije dela, pa tudi domačih institucij, kot npr. UMAR, ki zagovarjajo krepitev socialnega dialoga, katerega predpogoj so močni in tudi finančno neodvisni socialni partnerji.
+
+&quot;Predlog Zakona o delovnih razmerjih pomeni najslabšo možno popotnico za socialni dialog z novo vlado in vodi v nov, nepotreben konflikt, ki si ga sindikati ne želimo, se ga pa ne bojimo,&quot; so še sklenili.
+
+Pod izjavo so se podpisali Zveza svobodnih sindikatov Slovenije, Konfederacija sindikatov Slovenije Pergam, Konfederacija sindikatov javnega sektorja Slovenije, Konfederacija sindikatov 90 Slovenije, KNSS-Neodvisnost in Slovenska zveza sindikatov Alternativa.
+
+Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. &quot;Zato težko govorimo o tem, da bi referendum ogrozil javne finance,&quot; je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. &quot;Resnica je drugačna - dolgoročno bomo izgubili vsi,&quot; je opozorila.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so že napovedali vložitev pobude za ustavno presojo sklepa
+
+LJUBLJANA * Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov. Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volivcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; pa je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.</pre>
+        </div>
+        <div class="prompt-block">
+          <h4>Triplet&rarr;image prompt &mdash; fed to Gemini 3 Pro Image Preview</h4>
+          <pre>**Role:** Expert Data Journalist and Information Designer.
+**Task:** Generate a high-definition, publication-ready causal network infographic from the entities and relations supplied below. You are NOT extracting a knowledge graph from raw text — the graph has already been extracted for you. Render it.
+
+### 1. Visual Style &amp; Layout (Strict Adherence)
+* **Aesthetic:** Tier-1 Publication Style (similar to The Economist or Bloomberg visual data). Clean, very extensive in information content, professional, information rich, and trustworthy.
+* **Medium:** Flat vector illustration with high contrast.
+* **Background:** Pure white (#FFFFFF) for maximum legibility.
+* **Typography:** Modern Sans-Serif (e.g., Roboto, Helvetica style). **CRITICAL:** All text must be perfectly legible, sharp, and horizontally aligned where possible.
+* **Structure:** A directed network graph (node-link diagram) flowing logically (e.g., left-to-right or top-to-bottom).
+* **Color Palette:**
+  * **Entities (People/Orgs/Places):** Navy Blue or Deep Slate.
+  * **Claims/Events:** Muted Grey or subtle Teal.
+  * **Causal Links (Arrows):** Distinct, thin black or dark grey lines with clear arrowheads.
+  * **Highlights:** Apply Burnt Orange ONLY to the entity marked `central: true` in the supplied list.
+* **Node Icons:** Each node MUST include a small, relevant icon or symbol:
+  - Countries: National flag or recognizable emblem
+  - Organizations: Logo or institutional symbol (e.g., EU stars)
+  - Financial concepts: Currency symbols, money bags, coins
+  - Military/Defense: Weapons, shields, aircraft silhouettes
+  - Outcomes/Goals: Checkmarks, targets, arrows
+  - Events/Actions: Contextually appropriate symbols
+  Icons should be placed ABOVE the text label (centered), sized proportionally (≈20-25% of node height).
+
+### 2. Content Constraints (CRITICAL)
+You MUST use ONLY the entities and relations supplied below. You must NOT:
+- introduce any node that is not in the supplied entities list,
+- invent any directed edge that is not in the supplied relations list,
+- add background knowledge or implied context,
+- **translate, paraphrase, or rewrite** any supplied label or predicate. Render each node label and each edge predicate EXACTLY as supplied below, in the supplied language. If a label is &quot;Osebni zdravniki&quot;, the node text must read &quot;Osebni zdravniki&quot;, not &quot;Personal Doctors&quot; or &quot;Family physician&quot;. Same for predicates.
+
+Render each entity as one node, using its `label` as the visible text (verbatim). Render each relation as one directed arrow whose label is the supplied predicate (verbatim, though you may apply TitleCase or uppercase styling for visual consistency).
+
+### 3. Output Instruction
+Generate the content in professional Slovenian language. Generate the infographic image now. The image must be high-resolution (2K), containing *only* the infographic with the supplied causal network (DO NOT generate any additional text).
+
+### 4. Entities (use exactly these as nodes)
+
+- Zakon o interventnih ukrepih za razvoj Slovenije [CENTRAL — highlight in burnt orange]
+- Državni zbor
+- Sindikati
+- Pobuda za razpis naknadnega zakonodajnega referenduma
+- Ustava Republike Slovenije
+- Sklep o nedopustnosti referenduma
+- Davčne določbe v zakonu
+- Opozicijske stranke (SD, Levica, Vesna, Svoboda)
+
+### 5. Causal Relations (use exactly these as directed edges)
+
+- Sindikati → vložili → Pobuda za razpis naknadnega zakonodajnega referenduma
+- Pobuda za razpis naknadnega zakonodajnega referenduma → cilja na → Zakon o interventnih ukrepih za razvoj Slovenije
+- Državni zbor → potrdil → Sklep o nedopustnosti referenduma
+- Sklep o nedopustnosti referenduma → onemogoča → Pobuda za razpis naknadnega zakonodajnega referenduma
+- Davčne določbe v zakonu → onemogočajo (po ustavi) → Pobuda za razpis naknadnega zakonodajnega referenduma
+- Zakon o interventnih ukrepih za razvoj Slovenije → vsebuje → Davčne določbe v zakonu
+- Ustava Republike Slovenije → prepoveduje referendum o → Davčne določbe v zakonu
+- Sklep o nedopustnosti referenduma → naj bi kršil (po navedbah SD) → Ustava Republike Slovenije
+- Opozicijske stranke (SD, Levica, Vesna, Svoboda) → nasprotuje → Sklep o nedopustnosti referenduma
+- Opozicijske stranke (SD, Levica, Vesna, Svoboda) → kritizira → Zakon o interventnih ukrepih za razvoj Slovenije
+- Sindikati → napovedali ustavno presojo → Sklep o nedopustnosti referenduma
+- Državni zbor → razpravljal o → Zakon o interventnih ukrepih za razvoj Slovenije
+</pre>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details open>
+    <summary>Extracted triplets</summary>
+    <div class="details-body">
+      <h4 style='margin:0 0 10px; font-size:13px; color:#475569;'>Entities (8)</h4><table><thead><tr><th>id</th><th>label</th></tr></thead><tbody><tr><td><code>interventni_zakon</code></td><td>Zakon o interventnih ukrepih za razvoj Slovenije<span class="central-badge">central</span></td></tr><tr><td><code>drzavni_zbor</code></td><td>Državni zbor</td></tr><tr><td><code>sindikati</code></td><td>Sindikati</td></tr><tr><td><code>pobuda_za_referendum</code></td><td>Pobuda za razpis naknadnega zakonodajnega referenduma</td></tr><tr><td><code>ustava_rs</code></td><td>Ustava Republike Slovenije</td></tr><tr><td><code>sklep_o_nedopustnosti</code></td><td>Sklep o nedopustnosti referenduma</td></tr><tr><td><code>davcne_dolocbe</code></td><td>Davčne določbe v zakonu</td></tr><tr><td><code>opozicija</code></td><td>Opozicijske stranke (SD, Levica, Vesna, Svoboda)</td></tr></tbody></table><h4 style='margin:18px 0 10px; font-size:13px; color:#475569;'>Triplets (12)</h4><table class="triplets-table"><thead><tr><th>subject</th><th>predicate</th><th>object</th><th>conf</th><th>evidence</th><th>rating</th></tr></thead><tbody><tr data-tidx="0" data-s="sindikati" data-p="vložili" data-o="pobuda_za_referendum"><td>Sindikati</td><td class="predicate">vložili</td><td>Pobuda za razpis naknadnega zakonodajnega referenduma</td><td><span class="confidence high">high</span></td><td class="evidence">Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="0"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="0" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="1" data-s="pobuda_za_referendum" data-p="cilja na" data-o="interventni_zakon"><td>Pobuda za razpis naknadnega zakonodajnega referenduma</td><td class="predicate">cilja na</td><td>Zakon o interventnih ukrepih za razvoj Slovenije</td><td><span class="confidence high">high</span></td><td class="evidence">vložili pobudo za razpis naknadnega zakonodajnega referenduma ... o zakonu o interventnih ukrepih za razvoj Slovenije</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="1"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="1" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="2" data-s="drzavni_zbor" data-p="potrdil" data-o="sklep_o_nedopustnosti"><td>Državni zbor</td><td class="predicate">potrdil</td><td>Sklep o nedopustnosti referenduma</td><td><span class="confidence high">high</span></td><td class="evidence">DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="2"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="2" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="3" data-s="sklep_o_nedopustnosti" data-p="onemogoča" data-o="pobuda_za_referendum"><td>Sklep o nedopustnosti referenduma</td><td class="predicate">onemogoča</td><td>Pobuda za razpis naknadnega zakonodajnega referenduma</td><td><span class="confidence high">high</span></td><td class="evidence">DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="3"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="3" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="4" data-s="davcne_dolocbe" data-p="onemogočajo (po ustavi)" data-o="pobuda_za_referendum"><td>Davčne določbe v zakonu</td><td class="predicate">onemogočajo (po ustavi)</td><td>Pobuda za razpis naknadnega zakonodajnega referenduma</td><td><span class="confidence high">high</span></td><td class="evidence">V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="4"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="4" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="5" data-s="interventni_zakon" data-p="vsebuje" data-o="davcne_dolocbe"><td>Zakon o interventnih ukrepih za razvoj Slovenije</td><td class="predicate">vsebuje</td><td>Davčne določbe v zakonu</td><td><span class="confidence high">high</span></td><td class="evidence">interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="5"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="5" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="6" data-s="ustava_rs" data-p="prepoveduje referendum o" data-o="davcne_dolocbe"><td>Ustava Republike Slovenije</td><td class="predicate">prepoveduje referendum o</td><td>Davčne določbe v zakonu</td><td><span class="confidence high">high</span></td><td class="evidence">V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="6"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="6" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="7" data-s="sklep_o_nedopustnosti" data-p="naj bi kršil (po navedbah SD)" data-o="ustava_rs"><td>Sklep o nedopustnosti referenduma</td><td class="predicate">naj bi kršil (po navedbah SD)</td><td>Ustava Republike Slovenije</td><td><span class="confidence medium">medium</span></td><td class="evidence">Gre za grobo zlorabo ustave, pa je sprejemu sklepa nasprotovala Meira Hot (SD).</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="7"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="7" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="8" data-s="opozicija" data-p="nasprotuje" data-o="sklep_o_nedopustnosti"><td>Opozicijske stranke (SD, Levica, Vesna, Svoboda)</td><td class="predicate">nasprotuje</td><td>Sklep o nedopustnosti referenduma</td><td><span class="confidence high">high</span></td><td class="evidence">v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="8"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="8" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="9" data-s="opozicija" data-p="kritizira" data-o="interventni_zakon"><td>Opozicijske stranke (SD, Levica, Vesna, Svoboda)</td><td class="predicate">kritizira</td><td>Zakon o interventnih ukrepih za razvoj Slovenije</td><td><span class="confidence high">high</span></td><td class="evidence">Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="9"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="9" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="10" data-s="sindikati" data-p="napovedali ustavno presojo" data-o="sklep_o_nedopustnosti"><td>Sindikati</td><td class="predicate">napovedali ustavno presojo</td><td>Sklep o nedopustnosti referenduma</td><td><span class="confidence high">high</span></td><td class="evidence">DZ potrdil nedopustnost razpisa referenduma. Sindikati napovedali ustavno presojo.</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="10"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="10" type="text" placeholder="note / what was wrong…"></td></tr><tr data-tidx="11" data-s="drzavni_zbor" data-p="razpravljal o" data-o="interventni_zakon"><td>Državni zbor</td><td class="predicate">razpravljal o</td><td>Zakon o interventnih ukrepih za razvoj Slovenije</td><td><span class="confidence high">high</span></td><td class="evidence">Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili</td><td class="verdict-cell"><select class="tr-verdict" data-tidx="11"><option value="">— rate —</option><option value="correct">✓ correct</option><optgroup label="Minor (imperfect but acceptable)"><option value="misleading">misleading</option><option value="awkward_wording">awkward / unclear wording</option><option value="imprecise">imprecise / oversimplified</option></optgroup><optgroup label="Error (wrong)"><option value="wrong_direction">wrong direction</option><option value="wrong_predicate">wrong predicate</option><option value="wrong_endpoints">wrong subject/object</option><option value="unsupported">unsupported / hallucinated</option><option value="redundant">redundant</option></optgroup><option value="other">other (see note)</option></select><input class="tr-note" data-tidx="11" type="text" placeholder="note / what was wrong…"></td></tr></tbody></table>
+    </div>
+  </details>
+
+  <div class="event-nav">
+    <span></span>
+    <a href="slv-125164.html">slv-125164 &rarr;</a>
+  </div>
+</div>
+<div class="focus-overlay" id="focus-overlay">
+  <div class="fo-head"><span class="fo-title" id="fo-title"></span>
+    <button class="fo-close" onclick="closeFocus()" title="Close (Esc)">✕ Close</button></div>
+  <img class="fo-img" id="fo-img" alt="focused render">
+  <div class="fo-cols">
+    <div class="fo-score" id="fo-score"></div>
+    <div class="fo-triplets"><h4>Triplets fed to the image (12 fed / 12 total) — mark how each was drawn</h4><ol class="ftl-list"><li data-tidx="0" data-s="sindikati" data-p="vložili" data-o="pobuda_za_referendum" title="Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe"><span class="spo"><b>Sindikati</b> <i>vložili</i> <b>Pobuda za razpis naknadnega zakonodajnega referenduma</b></span><span class="re-control"><select class="re-verdict" data-tidx="0"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="0" type="text" placeholder="note…"></span></li><li data-tidx="1" data-s="pobuda_za_referendum" data-p="cilja na" data-o="interventni_zakon" title="vložili pobudo za razpis naknadnega zakonodajnega referenduma ... o zakonu o interventnih ukrepih za razvoj Slovenije"><span class="spo"><b>Pobuda za razpis naknadnega zakonodajnega referenduma</b> <i>cilja na</i> <b>Zakon o interventnih ukrepih za razvoj Slovenije</b></span><span class="re-control"><select class="re-verdict" data-tidx="1"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="1" type="text" placeholder="note…"></span></li><li data-tidx="2" data-s="drzavni_zbor" data-p="potrdil" data-o="sklep_o_nedopustnosti" title="DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma."><span class="spo"><b>Državni zbor</b> <i>potrdil</i> <b>Sklep o nedopustnosti referenduma</b></span><span class="re-control"><select class="re-verdict" data-tidx="2"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="2" type="text" placeholder="note…"></span></li><li data-tidx="3" data-s="sklep_o_nedopustnosti" data-p="onemogoča" data-o="pobuda_za_referendum" title="DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu"><span class="spo"><b>Sklep o nedopustnosti referenduma</b> <i>onemogoča</i> <b>Pobuda za razpis naknadnega zakonodajnega referenduma</b></span><span class="re-control"><select class="re-verdict" data-tidx="3"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="3" type="text" placeholder="note…"></span></li><li data-tidx="4" data-s="davcne_dolocbe" data-p="onemogočajo (po ustavi)" data-o="pobuda_za_referendum" title="V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah"><span class="spo"><b>Davčne določbe v zakonu</b> <i>onemogočajo (po ustavi)</i> <b>Pobuda za razpis naknadnega zakonodajnega referenduma</b></span><span class="re-control"><select class="re-verdict" data-tidx="4"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="4" type="text" placeholder="note…"></span></li><li data-tidx="5" data-s="interventni_zakon" data-p="vsebuje" data-o="davcne_dolocbe" title="interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov"><span class="spo"><b>Zakon o interventnih ukrepih za razvoj Slovenije</b> <i>vsebuje</i> <b>Davčne določbe v zakonu</b></span><span class="re-control"><select class="re-verdict" data-tidx="5"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="5" type="text" placeholder="note…"></span></li><li data-tidx="6" data-s="ustava_rs" data-p="prepoveduje referendum o" data-o="davcne_dolocbe" title="V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah"><span class="spo"><b>Ustava Republike Slovenije</b> <i>prepoveduje referendum o</i> <b>Davčne določbe v zakonu</b></span><span class="re-control"><select class="re-verdict" data-tidx="6"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="6" type="text" placeholder="note…"></span></li><li data-tidx="7" data-s="sklep_o_nedopustnosti" data-p="naj bi kršil (po navedbah SD)" data-o="ustava_rs" title="Gre za grobo zlorabo ustave, pa je sprejemu sklepa nasprotovala Meira Hot (SD)."><span class="spo"><b>Sklep o nedopustnosti referenduma</b> <i>naj bi kršil (po navedbah SD)</i> <b>Ustava Republike Slovenije</b></span><span class="re-control"><select class="re-verdict" data-tidx="7"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="7" type="text" placeholder="note…"></span></li><li data-tidx="8" data-s="opozicija" data-p="nasprotuje" data-o="sklep_o_nedopustnosti" title="v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno."><span class="spo"><b>Opozicijske stranke (SD, Levica, Vesna, Svoboda)</b> <i>nasprotuje</i> <b>Sklep o nedopustnosti referenduma</b></span><span class="re-control"><select class="re-verdict" data-tidx="8"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="8" type="text" placeholder="note…"></span></li><li data-tidx="9" data-s="opozicija" data-p="kritizira" data-o="interventni_zakon" title="Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse."><span class="spo"><b>Opozicijske stranke (SD, Levica, Vesna, Svoboda)</b> <i>kritizira</i> <b>Zakon o interventnih ukrepih za razvoj Slovenije</b></span><span class="re-control"><select class="re-verdict" data-tidx="9"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="9" type="text" placeholder="note…"></span></li><li data-tidx="10" data-s="sindikati" data-p="napovedali ustavno presojo" data-o="sklep_o_nedopustnosti" title="DZ potrdil nedopustnost razpisa referenduma. Sindikati napovedali ustavno presojo."><span class="spo"><b>Sindikati</b> <i>napovedali ustavno presojo</i> <b>Sklep o nedopustnosti referenduma</b></span><span class="re-control"><select class="re-verdict" data-tidx="10"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="10" type="text" placeholder="note…"></span></li><li data-tidx="11" data-s="drzavni_zbor" data-p="razpravljal o" data-o="interventni_zakon" title="Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili"><span class="spo"><b>Državni zbor</b> <i>razpravljal o</i> <b>Zakon o interventnih ukrepih za razvoj Slovenije</b></span><span class="re-control"><select class="re-verdict" data-tidx="11"><option value="">— drawn? —</option><option value="yes">✓ correctly drawn</option><option value="wrong_direction">wrong direction</option><option value="wrong_connection">wrong connection</option><option value="omitted">omitted</option><option value="other">other (note)</option></select><input class="re-note" data-tidx="11" type="text" placeholder="note…"></span></li></ol><div class="ftl-additions"><h4>Unsupported additions — extra subject·predicate·object in the image, not in the graph</h4><div id="additions-list"></div><button type="button" class="add-btn" onclick="addAddition()">+ add unsupported triplet</button></div></div>
+  </div>
+</div>
+<aside class="source-panel" aria-label="Source articles">
+  <div class="sp-head"><span>Source articles (10)</span>
+    <button class="sp-close" onclick="closeSource()" title="Close">✕</button></div>
+  <div class="sp-search">
+    <input type="text" id="sp-search-input" placeholder="Search source… (⌘/Ctrl+F)" autocomplete="off">
+    <span id="sp-search-count"></span>
+    <button onclick="spSearchPrev()" title="Previous">↑</button>
+    <button onclick="spSearchNext()" title="Next">↓</button>
+  </div>
+  <div class="sp-body"><div class="article-list"><div class="article"><div class="pub">RTV Slovenija</div><div class="atitle">Cigler Kralj: Če sklepa ne sprejmemo, kršimo ustavo. Opozicija: Gre za grobo zlorabo ustave.</div><div class="body">Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resnica) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resnica zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Tudi Tina Brecelj (Levica Vesna) je dejala, da se z zakonom ogroža stabilnost javnih financ. &quot;Referendum na ta zakon je pot, da se stabilnost javnih financ utrdi. Prav zato bi morala biti možnost neposrednega odločanja še toliko bolj varovana,&quot; je menila.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. &quot;Zato težko govorimo o tem, da bi referendum ogrozil javne finance,&quot; je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. &quot;Resnica je drugačna - dolgoročno bomo izgubili vsi,&quot; je opozorila.</div></div><div class="article"><div class="pub">Večer</div><div class="atitle">DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu</div><div class="body">DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma.
+
+Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb v zakonu ni mogoč. Sklep je podprlo 48 poslancev, proti jih je bilo 35.
+
+Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volivcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; pa je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.</div></div><div class="article"><div class="pub">STA</div><div class="atitle">DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu</div><div class="body">Ljubljana, 27. maja (STA) - DZ je danes odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb ...</div></div><div class="article"><div class="pub">Dnevnik</div><div class="atitle">DZ potrdil nedopustnost razpisa referenduma o interventnem zakonu</div><div class="body">Poslanci so danes odločili, da o pred kratkim sprejetem zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče odločati na referendumu.
+
+Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter drugih rezov.
+
+Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volilcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.</div></div><div class="article"><div class="pub">24ur</div><div class="atitle">Referendumska pobuda sindikatov padla v državnem zboru</div><div class="body">DZ je odločil, da o zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče razpisati naknadnega zakonodajnega referenduma. Zahtevo zanj so ob podpori civilne družbe vložili sindikati, a je v razpravi prevladalo mnenje, da referendum zaradi davčnih določb v zakonu ni mogoč. Sklep je podprlo 48 poslancev, proti jih je bilo 35.
+
+Interventni zakon, ki so ga pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS, v luči grozeče energetske krize vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so danes na izredni seji DZ te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica.</div></div><div class="article"><div class="pub">RTV Slovenija</div><div class="atitle">DZ potrdil nedopustnost razpisa referenduma o intervencijskem zakonu</div><div class="body">Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Tudi Tina Brecelj (Levica Vesna) je dejala, da se z zakonom ogroža stabilnost javnih financ. &quot;Referendum na ta zakon je pot, da se stabilnost javnih financ utrdi. Prav zato bi morala biti možnost neposrednega odločanja še toliko bolj varovana,&quot; je menila.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. &quot;Zato težko govorimo o tem, da bi referendum ogrozil javne finance,&quot; je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. &quot;Resnica je drugačna - dolgoročno bomo izgubili vsi,&quot; je opozorila.</div></div><div class="article"><div class="pub">STA</div><div class="atitle">V DZ različna mnenja glede razpisa referenduma o interventnem zakonu</div><div class="body">Ljubljana, 27. maja (STA) - DZ danes na izredni seji odloča o predlogu sklepa, da o pred kratkim sprejetem zakonu o interventnih ukrepih za razvoj Slovenije ni mogoče odločati na referendumu. Mnenja poslanskih skupin so deljena, prevladuje pa stališče, da razpis referenduma zaradi davčnih ...</div></div><div class="article"><div class="pub">RTV Slovenija</div><div class="atitle">DZ potrdil nedopustnost razpisa referenduma. Sindikati napovedali ustavno presojo.</div><div class="body">Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Cigler Kralj: Če tega sklepa ne sprejmemo, kršimo ustavo
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Opozicija: Gre za grobo zlorabo ustave
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. &quot;Zato težko govorimo o tem, da bi referendum ogrozil javne finance,&quot; je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. &quot;Resnica je drugačna - dolgoročno bomo izgubili vsi,&quot; je opozorila.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+Sindikalne centrale: Ne strinjamo se z odločitvijo DZ-ja, zato bomo zahtevale ustavno presojo
+
+V sindikalnih centralah so v odzivu napisali, da z razočaranjem sprejemajo odločitev DZ-ja. &quot;Po našem prepričanju zakon vsebuje številne vsebine, o katerih bi državljanke in državljani morali imeti pravico odločati neposredno, na referendumu, omnibus tehnika pa je bila zlorabljena za to, da se jim ta pravica odvzame. Sprašujemo se, kaj bi lahko bilo bolj primerno in pomembno za neposredno odločanje ljudstva, kot je to zakon, ki nakazuje nadaljnjo smer upravljanja države in ki, po lastnih besedah zagovornikov zakona, zadeva vsakogar?&quot; so se vprašali.
+
+Ponovno so opozorili na &quot;nesprejemljiv in nedopusten pritisk na sindikate, pobudnike referenduma, z novelo Zakona o delovnih razmerjih, ki ukinja obveznost delodajalcev, da zagotavljajo tehnični obračun članarine za sindikate&quot;. Ponovno so poudarili, da je članstvo v sindikatih v Sloveniji &quot;že ves čas samostojne Slovenije popolnoma prostovoljno&quot;.
+
+&quot;Poudarjamo, da že danes večina sindikatov omogoča tudi neposredno plačevanje članarine člana sindikatu, čeprav je dejstvo, da v veliki večini primerov obračun izvaja delodajalec. To, da delodajalec zagotavlja tehnični obračun članarine, pa ne pomeni, da delodajalec zagotavlja finančna sredstva za članarino sindikata ali da je članstvo v sindikatu obvezno. Članarino člani plačujejo iz svojih plač, delodajalec pa zagotavlja zgolj tehnični obračun te članarine,&quot; so zapisali.
+
+Ob tem so opozorili tudi na to, da so poskusi utišanja, ustrahovanja in slabljenja sindikatov v neposrednem nasprotju z usmeritvami Evropske komisije, Mednarodne organizacije dela, pa tudi domačih institucij, kot npr. UMAR, ki zagovarjajo krepitev socialnega dialoga, katerega predpogoj so močni in tudi finančno neodvisni socialni partnerji.
+
+&quot;Predlog Zakona o delovnih razmerjih pomeni najslabšo možno popotnico za socialni dialog z novo vlado in vodi v nov, nepotreben konflikt, ki si ga sindikati ne želimo, se ga pa ne bojimo,&quot; so še sklenili.
+
+Pod izjavo so se podpisali Zveza svobodnih sindikatov Slovenije, Konfederacija sindikatov Slovenije Pergam, Konfederacija sindikatov javnega sektorja Slovenije, Konfederacija sindikatov 90 Slovenije, KNSS-Neodvisnost in Slovenska zveza sindikatov Alternativa.</div></div><div class="article"><div class="pub">RTV Slovenija</div><div class="atitle">DZ potrdil nedopustnost referenduma o intervencijskem zakonu. Sindikati napovedali ustavno presojo.</div><div class="body">Intervencijski zakon, ki so ga pripravili poslanci NSi-ja, SLS-a in Fokusa ter Demokratov in Resni.ce, glasove zanj pa so v DZ-ju prispevali tudi v SDS-u, ob grozeči energetski krizi vključuje nižji DDV za osnovna živila in del energentov, prinaša pa tudi sistemske rešitve s področij ugodnejše obravnave malega gospodarstva in t. i. normirancev, davkov in socialnih prispevkov ter zdravstva in pokojnin.
+
+Pobudo za razpis naknadnega zakonodajnega referenduma so prejšnji teden vložili sindikati ob podpori civilne družbe in s podpisi več kot 47.000 volivcev. Kot so pojasnili, v interventnem zakonu vidijo zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov.
+
+Predlagatelji zakona so na izredni seji DZ-ja te pomisleke zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resni.ca. Intervencijski zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+Rado Gladek (SDS) se je vprašal, zakaj se sindikati tako odločno borijo proti zakonu, ki med drugim razbremenjuje delo, omogoča višje neto plače, spodbuja nadaljnje delo upokojencev, izboljšuje položaj normirancev in zmanjšuje obdavčitev najemnin mladih družin, samozaposlenih, kmetov ter drugih, ki s svojim delom prispevajo k razvoju Slovenije.
+
+Katja Kokot (Resni.ca) pa je spomnila, da je dosedanja vlada julija 2022 sprejela zakon za zmanjšanje neenakosti in škodljivih posegov politike ter zagotavljanje spoštovanja pravne države, s katerim se je poseglo v kar 11 zakonov ter nanj zaradi davčnih določb ni bilo mogoče razpisati referenduma. &quot;V poslanski skupini Resni.ca zato menimo, da morajo enaka pravila veljati za vse,&quot; je dejala.
+
+Po drugi strani so v poslanskih skupinah SD, Levica in Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+&quot;Gre za grobo zlorabo ustave,&quot; je o predlogu sklepa glede nedopustnosti referenduma o zakonu dejala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Tereza Novak (Svoboda) pa je spomnila na izračune fiskalnega sveta, da se bo z uveljavitvijo interventnega zakona povečal proračunski primanjkljaj za eno milijardo evrov. &quot;Zato težko govorimo o tem, da bi referendum ogrozil javne finance,&quot; je dejala in zanikala trditve bodoče koalicije, da bodo z uveljavitvijo zakona pridobili vsi. &quot;Resnica je drugačna - dolgoročno bomo izgubili vsi,&quot; je opozorila.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so že napovedali vložitev pobude za ustavno presojo sklepa</div></div><div class="article"><div class="pub">Primorske Novice</div><div class="atitle">DZ zavrnil možnost referenduma o interventnem zakonu</div><div class="body">LJUBLJANA * Interventni zakon so pripravili poslanci NSi, SLS in Fokusa ter Demokratov in Resnice, ob glasovanju 11. maja pa so ga podprli tudi v SDS. Obljubljali so, da gre za razbremenitev ljudi in podjetij po štirih letih obremenjevanja in zmanjševanja gospodarske konkurenčnosti v času levosredinske koalicije ter za polaganje temeljev za hitrejši razvoj države v prihodnje.
+
+Nasprotno sindikati opozarjajo, da gre za zakon za razkroj Slovenije, sprejet brez socialnega dialoga, četudi posega na temeljna področja, na katerih delujejo socialni partnerji. Glede na ocenjeni javnofinančni učinek se bojijo posegov v plače v javnem sektorju in v pokojnine ter ostalih rezov. Prejšnji teden so tako ob podpori civilne družbe in s podpisi več kot 47.000 volivcev vložili pobudo za razpis naknadnega zakonodajnega referenduma.
+
+Predlagatelji zakona so danes na izredni seji DZ pomisleke nasprotnikov zakona zavrnili in menili, da razpis referenduma ni mogoč. V skladu z ustavo referenduma ni dopustno razpisati o zakonih o davkih in drugih obveznih dajatvah, je v imenu predlagateljev opozoril Janez Cigler Kralj (NSi, SLS, Fokus). In interventni zakon ureja vprašanja davkov ali obveznih dajatev v več kot polovici členov, je dodal. &quot;Če tega sklepa ne sprejmemo, kršimo ustavo,&quot; je pozval navzoče na seji.
+
+Da referenduma o zakonih, ki urejajo vprašanja davkov in drugih obveznih dajatev, ni mogoče razpisati, so soglašali v poslanskih skupinah SDS, NSi, SLS in Fokus, Demokrati in Resnica. Po drugi strani so v poslanskih skupinah SD, Levica Vesna in Svoboda menili, da bi referendumsko odločanje o zakonu moralo biti dopustno.
+
+Interventni zakon prinaša številne nujne rešitve za razvoj naše države, predvsem na področju gospodarstva in davkov, je dejal Janez Žakelj (NSi, SLS, Fokus) ter dodal, da odpravlja številne škodljive ukrepe Golobove vlade.
+
+Podobno je Tadej Ostrc (Demokrati) opomnil, da zakon vsebuje tudi pomembne ukrepe za razvoj države, gospodarstva in konkurenčnosti Slovenije. &quot;Govori o razbremenitvah, o večji motivaciji za delo, o privabljanju razvojnih kadrov in o tem, da država končno začne ustvarjati pogoje za razvoj, ne pa samo za nove obremenitve,&quot; je dejal.
+
+&quot;Gre za grobo zlorabo ustave,&quot; pa je sprejemu sklepa nasprotovala Meira Hot (SD). Potrdila je, da večina določb posega na davčno področje, a kot je dodala, prepoved referenduma o davkih obstaja zato, da z referendumom ne bi mogli državi preprečiti pobiranja nujnih dajatev. Vendar se z zakonom problem izjemno slabega stanja javnih financ le še poglablja, je opozorila.
+
+Nataša Sukič (Levica Vesna) je poleg tega zavrnila navedbe predlagateljev o koristih interventnega zakona za vse. &quot;Razbremenil bo en odstotek najbogatejših. Ne bo razbremenil večine zaposlenih, kot lažete,&quot; je dejala.
+
+Zakon med drugim prinaša nižjo obdavčitev najemnin, socialno kapico, nižji DDV za osnovna živila in začasno za del energentov, ugodnejšo obravnavo samostojnih podjetnikov, odpravo prepovedi dela zdravnikov iz javne mreže pri zasebnikih, možnost hkratnega prejemanja polne plače in pokojnine za zaposlene upokojence, ukinitev prispevka za dolgotrajno oskrbo za upokojence in popoldanske samostojne podjetnike ter odstop od omejevanja kratkoročnega oddajanja stanovanj v letu 2027.
+
+V sindikatih so za primer potrditve sklepa o nedopustnosti razpisa referenduma že napovedali vložitev pobude za ustavno presojo sklepa.</div></div></div></div>
+</aside>
+
+<script>
+(function(){
+  const EVENT = "slv-125182";
+  const RENDERED = 12;
+  const NODE_TOTAL = 8;
+  const FROZEN = {"triplets": {"coverage": "5", "comment": "very good", "per_triplet": [{"idx": 0, "subject_id": "sindikati", "predicate": "vlo\u017eili", "object_id": "pobuda_za_referendum", "verdict": "correct", "note": ""}, {"idx": 1, "subject_id": "pobuda_za_referendum", "predicate": "cilja na", "object_id": "interventni_zakon", "verdict": "correct", "note": ""}, {"idx": 2, "subject_id": "drzavni_zbor", "predicate": "potrdil", "object_id": "sklep_o_nedopustnosti", "verdict": "correct", "note": ""}, {"idx": 3, "subject_id": "sklep_o_nedopustnosti", "predicate": "onemogo\u010da", "object_id": "pobuda_za_referendum", "verdict": "correct", "note": ""}, {"idx": 4, "subject_id": "davcne_dolocbe", "predicate": "onemogo\u010dajo (po ustavi)", "object_id": "pobuda_za_referendum", "verdict": "correct", "note": ""}, {"idx": 5, "subject_id": "interventni_zakon", "predicate": "vsebuje", "object_id": "davcne_dolocbe", "verdict": "correct", "note": ""}, {"idx": 6, "subject_id": "ustava_rs", "predicate": "prepoveduje referendum o", "object_id": "davcne_dolocbe", "verdict": "imprecise", "note": ""}, {"idx": 7, "subject_id": "sklep_o_nedopustnosti", "predicate": "naj bi kr\u0161il (po navedbah SD)", "object_id": "ustava_rs", "verdict": "misleading", "note": ""}, {"idx": 8, "subject_id": "opozicija", "predicate": "nasprotuje", "object_id": "sklep_o_nedopustnosti", "verdict": "correct", "note": ""}, {"idx": 9, "subject_id": "opozicija", "predicate": "kritizira", "object_id": "interventni_zakon", "verdict": "correct", "note": ""}, {"idx": 10, "subject_id": "sindikati", "predicate": "napovedali ustavno presojo", "object_id": "sklep_o_nedopustnosti", "verdict": "correct", "note": ""}, {"idx": 11, "subject_id": "drzavni_zbor", "predicate": "razpravljal o", "object_id": "interventni_zakon", "verdict": "imprecise", "note": ""}]}, "direct": {"faithfulness": "4", "clarity": "3", "comment": "", "node_count": "17"}, "triplet_image": {"faithfulness": "4", "clarity": "3", "comment": "Good triplets but wrong renders make it mediocre", "per_edge": [{"idx": 0, "subject_id": "sindikati", "predicate": "vlo\u017eili", "object_id": "pobuda_za_referendum", "render": "yes", "note": ""}, {"idx": 1, "subject_id": "pobuda_za_referendum", "predicate": "cilja na", "object_id": "interventni_zakon", "render": "yes", "note": ""}, {"idx": 2, "subject_id": "drzavni_zbor", "predicate": "potrdil", "object_id": "sklep_o_nedopustnosti", "render": "yes", "note": ""}, {"idx": 3, "subject_id": "sklep_o_nedopustnosti", "predicate": "onemogo\u010da", "object_id": "pobuda_za_referendum", "render": "yes", "note": ""}, {"idx": 4, "subject_id": "davcne_dolocbe", "predicate": "onemogo\u010dajo (po ustavi)", "object_id": "pobuda_za_referendum", "render": "wrong_connection", "note": "connects to drzavni zbor instead pobuda za razpis"}, {"idx": 5, "subject_id": "interventni_zakon", "predicate": "vsebuje", "object_id": "davcne_dolocbe", "render": "yes", "note": ""}, {"idx": 6, "subject_id": "ustava_rs", "predicate": "prepoveduje referendum o", "object_id": "davcne_dolocbe", "render": "yes", "note": ""}, {"idx": 7, "subject_id": "sklep_o_nedopustnosti", "predicate": "naj bi kr\u0161il (po navedbah SD)", "object_id": "ustava_rs", "render": "wrong_connection", "note": "drzavni zbor instead of sklep o nedopustnosti referendum"}, {"idx": 8, "subject_id": "opozicija", "predicate": "nasprotuje", "object_id": "sklep_o_nedopustnosti", "render": "wrong_connection", "note": "goes to zakon instead of sklep"}, {"idx": 9, "subject_id": "opozicija", "predicate": "kritizira", "object_id": "interventni_zakon", "render": "yes", "note": ""}, {"idx": 10, "subject_id": "sindikati", "predicate": "napovedali ustavno presojo", "object_id": "sklep_o_nedopustnosti", "render": "wrong_connection", "note": "goes to zakon o intevent instead of sklep"}, {"idx": 11, "subject_id": "drzavni_zbor", "predicate": "razpravljal o", "object_id": "interventni_zakon", "render": "yes", "note": ""}], "additions": [], "edge_total": 12, "node_total": 8}};   // when set, a baked-in scores object → read-only view
+  const KEY = "seminarScores";
+  const FIELDS = {
+    triplets: ["coverage","comment"],
+    direct: ["faithfulness","clarity","comment","node_count"],
+    triplet_image: ["faithfulness","clarity","comment"]
+  };
+  function loadAll(){ try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e){ return {}; } }
+  function fieldName(b,m){ return "sc__"+b+"__"+m; }
+  function readField(name){
+    const r = document.querySelector('input[type=radio][name="'+CSS.escape(name)+'"]:checked');
+    if (r) return r.value;
+    const el = document.getElementById(name);
+    return el ? el.value : "";
+  }
+  function setField(name, val){
+    if (val === undefined || val === null || val === "") return;
+    const radios = document.querySelectorAll('input[type=radio][name="'+CSS.escape(name)+'"]');
+    if (radios.length){ radios.forEach(r => { if (r.value === String(val)) r.checked = true; }); return; }
+    const el = document.getElementById(name);
+    if (el) el.value = val;
+  }
+  function collectPerTriplet(){
+    const rows = [];
+    document.querySelectorAll('tr[data-tidx]').forEach(tr => {
+      const idx = tr.getAttribute('data-tidx');
+      const verdict = tr.querySelector('.tr-verdict');
+      const note = tr.querySelector('.tr-note');
+      const v = verdict ? verdict.value : "";
+      const n = note ? note.value : "";
+      if (v || n) rows.push({ idx: Number(idx), subject_id: tr.getAttribute('data-s'),
+        predicate: tr.getAttribute('data-p'), object_id: tr.getAttribute('data-o'),
+        verdict: v, note: n });
+    });
+    return rows;
+  }
+  function restorePerTriplet(rows){
+    if (!rows) return;
+    rows.forEach(r => {
+      const tr = document.querySelector('tr[data-tidx="'+r.idx+'"]');
+      if (!tr) return;
+      const verdict = tr.querySelector('.tr-verdict');
+      const note = tr.querySelector('.tr-note');
+      if (verdict && r.verdict) verdict.value = r.verdict;
+      if (note && r.note) note.value = r.note;
+    });
+  }
+  // Per-edge render fidelity (how the image drew each FED triplet) + free-text
+  // unsupported additions, both collected from the focus fed-triplet list.
+  function collectPerEdge(){
+    const rows = [];
+    document.querySelectorAll('.ftl-list li[data-tidx]').forEach(li => {
+      const sel = li.querySelector('.re-verdict');
+      const note = li.querySelector('.re-note');
+      const v = sel ? sel.value : "";
+      const n = note ? note.value : "";
+      if (v || n) rows.push({ idx: Number(li.getAttribute('data-tidx')),
+        subject_id: li.getAttribute('data-s'), predicate: li.getAttribute('data-p'),
+        object_id: li.getAttribute('data-o'), render: v, note: n });
+    });
+    return rows;
+  }
+  function restorePerEdge(rows){
+    if (!rows) return;
+    rows.forEach(r => {
+      const li = document.querySelector('.ftl-list li[data-tidx="'+r.idx+'"]');
+      if (!li) return;
+      const sel = li.querySelector('.re-verdict');
+      const note = li.querySelector('.re-note');
+      if (sel && r.render) sel.value = r.render;
+      if (note && r.note) note.value = r.note;
+    });
+  }
+  // Each unsupported addition is itself a subject·predicate·object triplet
+  // (an extra relation the image drew that isn't in the fed graph). A lone
+  // invented node can be entered as subject only.
+  function additionRow(value){
+    value = value || {};
+    const div = document.createElement('div');
+    div.className = 'addition-row';
+    function mk(key, ph){
+      const i = document.createElement('input');
+      i.type = 'text'; i.className = 'addition-input'; i.dataset.key = key; i.placeholder = ph;
+      if (value[key]) i.value = value[key];
+      return i;
+    }
+    const s = mk('subject', 'subject'), p = mk('predicate', 'predicate'), o = mk('object', 'object');
+    const rm = document.createElement('button');
+    rm.type = 'button'; rm.className = 'addition-rm'; rm.textContent = '✕';
+    rm.onclick = function(){ div.remove(); save(); };
+    div.appendChild(s); div.appendChild(p); div.appendChild(o); div.appendChild(rm);
+    return div;
+  }
+  window.addAddition = function(value){
+    const list = document.getElementById('additions-list');
+    if (!list) return;
+    const row = additionRow(typeof value === 'object' ? value : undefined);
+    list.appendChild(row);
+    if (!value) row.querySelector('input').focus();
+  };
+  function collectAdditions(){
+    const rows = [];
+    document.querySelectorAll('#additions-list .addition-row').forEach(r => {
+      const get = k => { const el = r.querySelector('.addition-input[data-key="'+k+'"]'); return el ? el.value.trim() : ''; };
+      const s = get('subject'), p = get('predicate'), o = get('object');
+      if (s || p || o) rows.push({ subject: s, predicate: p, object: o });
+    });
+    return rows;
+  }
+  function restoreAdditions(arr){
+    const list = document.getElementById('additions-list');
+    if (!list) return;
+    list.innerHTML = "";
+    (arr || []).forEach(v => {
+      if (typeof v === 'string') v = { subject: v, predicate: '', object: '' };
+      list.appendChild(additionRow(v));
+    });
+  }
+  function collect(){
+    const out = {};
+    for (const b in FIELDS){ out[b] = {}; FIELDS[b].forEach(m => { out[b][m] = readField(fieldName(b,m)); }); }
+    out.triplets.per_triplet = collectPerTriplet();
+    out.triplet_image.per_edge = collectPerEdge();
+    out.triplet_image.additions = collectAdditions();
+    out.triplet_image.edge_total = RENDERED;
+    out.triplet_image.node_total = NODE_TOTAL;
+    return out;
+  }
+  let savedTimer = null;
+  function save(){
+    const all = loadAll();
+    all[EVENT] = collect();
+    localStorage.setItem(KEY, JSON.stringify(all));
+    const ind = document.getElementById("saved-ind");
+    if (ind){ ind.classList.add("show"); clearTimeout(savedTimer); savedTimer = setTimeout(()=>ind.classList.remove("show"), 1200); }
+  }
+  function restore(){
+    const e = FROZEN || loadAll()[EVENT]; if (!e) return;
+    for (const b in FIELDS){ if (!e[b]) continue; FIELDS[b].forEach(m => setField(fieldName(b,m), e[b][m])); }
+    if (e.triplets) restorePerTriplet(e.triplets.per_triplet);
+    if (e.triplet_image){ restorePerEdge(e.triplet_image.per_edge); restoreAdditions(e.triplet_image.additions); }
+  }
+  function freeze(){
+    // Read-only: lock every control and drop edit affordances.
+    document.body.classList.add("frozen");
+    document.querySelectorAll("#score-card, .triplets-table, .focus-overlay, .ftl-additions")
+      .forEach(scope => scope.querySelectorAll("input, select, textarea, button")
+        .forEach(el => { el.disabled = true; el.setAttribute("tabindex", "-1"); }));
+  }
+  window.exportScores = function(){
+    const ALL_EVENTS = ["slv-125182", "slv-125164", "slv-125162", "eng-11688905", "eng-11687250", "slv-125190", "slv-125180", "slv-125152", "slv-125151", "eng-11686783"];
+    const stored = loadAll();
+    const scores = {};
+    ALL_EVENTS.forEach(c => { scores[c] = stored[c] || {}; });
+    const payload = { _meta: { exported: new Date().toISOString(), rubric: "v1" }, scores: scores };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "seminar_scores.json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+  window.importScores = function(ev){
+    const f = ev.target.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = function(){
+      try {
+        const parsed = JSON.parse(r.result);
+        const scores = parsed.scores || parsed;
+        localStorage.setItem(KEY, JSON.stringify(scores));
+        location.reload();
+      } catch(e){ alert("Invalid JSON: " + e.message); }
+    };
+    r.readAsText(f);
+  };
+  // Source-text reading panel (persists open/closed across event navigation)
+  const SRC_KEY = "sourcePanelOpen";
+  window.toggleSource = function(){
+    const open = document.body.classList.toggle("source-open");
+    try { localStorage.setItem(SRC_KEY, open ? "1" : "0"); } catch(e){}
+  };
+  window.closeSource = function(){
+    document.body.classList.remove("source-open");
+    try { localStorage.setItem(SRC_KEY, "0"); } catch(e){}
+  };
+
+  // Focus mode: click an image → big image top-left + its rating block below,
+  // source panel open on the right. The score-block is MOVED (not copied) so
+  // the inputs stay single-source and keep autosaving.
+  let focusReturn = null;
+  const FOCUS_TITLES = { direct: "Direct — text → image", triplet_image: "Triplet → image" };
+  window.openFocus = function(cond){
+    const img = document.querySelector('.col img[data-cond="'+cond+'"]');
+    if (!img) return;
+    document.getElementById("fo-title").textContent = FOCUS_TITLES[cond] || cond;
+    document.getElementById("fo-img").src = img.getAttribute("src");
+    const block = document.querySelector(".score-block." + cond);
+    const holder = document.getElementById("fo-score");
+    holder.innerHTML = "";
+    if (block){
+      focusReturn = { node: block, parent: block.parentNode, next: block.nextSibling };
+      holder.appendChild(block);
+    } else { focusReturn = null; }
+    document.body.classList.remove("focus-cond-direct", "focus-cond-triplet_image");
+    document.body.classList.add("focus-open", "source-open", "focus-cond-" + cond);
+    try { localStorage.setItem(SRC_KEY, "1"); } catch(e){}
+  };
+  window.closeFocus = function(){
+    if (focusReturn){ focusReturn.parent.insertBefore(focusReturn.node, focusReturn.next); focusReturn = null; }
+    document.body.classList.remove("focus-open", "focus-cond-direct", "focus-cond-triplet_image");
+  };
+
+  // Source-panel in-place search (highlight + cycle through matches).
+  let spHits = [], spIdx = -1;
+  function spBody(){ return document.querySelector(".source-panel .sp-body"); }
+  function spClear(body){
+    body.querySelectorAll("mark.sp-hit").forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    body.normalize();
+  }
+  window.spSearch = function(){
+    const body = spBody(); if (!body) return;
+    const q = document.getElementById("sp-search-input").value;
+    spClear(body); spHits = []; spIdx = -1;
+    const countEl = document.getElementById("sp-search-count");
+    if (!q){ countEl.textContent = ""; return; }
+    const ql = q.toLowerCase();
+    const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT, null);
+    const nodes = []; let nn; while ((nn = walker.nextNode())) nodes.push(nn);
+    nodes.forEach(node => {
+      const text = node.nodeValue, lower = text.toLowerCase();
+      if (!lower.includes(ql)) return;
+      const frag = document.createDocumentFragment(); let i = 0, idx;
+      while ((idx = lower.indexOf(ql, i)) !== -1){
+        if (idx > i) frag.appendChild(document.createTextNode(text.slice(i, idx)));
+        const mark = document.createElement("mark"); mark.className = "sp-hit";
+        mark.textContent = text.slice(idx, idx + q.length);
+        frag.appendChild(mark); spHits.push(mark); i = idx + q.length;
+      }
+      if (i < text.length) frag.appendChild(document.createTextNode(text.slice(i)));
+      node.parentNode.replaceChild(frag, node);
+    });
+    if (spHits.length) spGo(0);
+    else countEl.textContent = "no matches";
+  };
+  function spGo(i){
+    if (!spHits.length) return;
+    if (spIdx >= 0 && spHits[spIdx]) spHits[spIdx].classList.remove("cur");
+    spIdx = (i + spHits.length) % spHits.length;
+    const m = spHits[spIdx]; m.classList.add("cur"); m.scrollIntoView({ block: "center" });
+    document.getElementById("sp-search-count").textContent = (spIdx + 1) + " / " + spHits.length;
+  }
+  window.spSearchNext = function(){ spGo(spIdx + 1); };
+  window.spSearchPrev = function(){ spGo(spIdx - 1); };
+
+  document.addEventListener("DOMContentLoaded", function(){
+    restore();
+    if (localStorage.getItem(SRC_KEY) === "1") document.body.classList.add("source-open");
+    document.querySelectorAll('.col img[data-cond]').forEach(img => {
+      img.addEventListener("click", () => window.openFocus(img.getAttribute("data-cond")));
+    });
+    const si = document.getElementById("sp-search-input");
+    if (si){
+      let t; si.addEventListener("input", () => { clearTimeout(t); t = setTimeout(window.spSearch, 120); });
+      si.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); e.shiftKey ? spSearchPrev() : spSearchNext(); } });
+    }
+    document.addEventListener("keydown", function(e){
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "f"){
+        e.preventDefault();
+        document.body.classList.add("source-open");
+        try { localStorage.setItem(SRC_KEY, "1"); } catch(err){}
+        const inp = document.getElementById("sp-search-input");
+        if (inp){ inp.focus(); inp.select(); }
+      } else if (e.key === "Escape"){
+        if (document.body.classList.contains("focus-open")) window.closeFocus();
+      }
+    });
+    if (FROZEN){ freeze(); return; }
+    // Listen at document level so the Evaluation card, the per-triplet controls,
+    // and the moved score-block (in focus overlay) all trigger autosave.
+    document.addEventListener("input", function(e){ if (e.target.closest("#score-card, .triplets-table, .focus-overlay")) save(); });
+    document.addEventListener("change", function(e){ if (e.target.closest("#score-card, .triplets-table, .focus-overlay")) save(); });
+  });
+})();
+</script>
+
+</body>
+</html>

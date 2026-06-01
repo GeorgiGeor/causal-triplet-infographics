@@ -1,0 +1,116 @@
+{
+  "entities": [
+    {
+      "id": "preklic_izstopa_iz_icc",
+      "label": "Preklic izstopa iz ICC",
+      "central": true
+    },
+    {
+      "id": "madzarski_parlament",
+      "label": "Madžarski parlament",
+      "central": false
+    },
+    {
+      "id": "vlada_petra_magyarja",
+      "label": "Vlada Petra Magyarja",
+      "central": false
+    },
+    {
+      "id": "tamas_sulyok",
+      "label": "Tamas Sulyok",
+      "central": false
+    },
+    {
+      "id": "nalog_za_prijetje_netanjahuja",
+      "label": "Nalog za prijetje Netanjahuja",
+      "central": false
+    },
+    {
+      "id": "zda",
+      "label": "ZDA",
+      "central": false
+    },
+    {
+      "id": "mednarodno_kazensko_sodisce",
+      "label": "Mednarodno kazensko sodišče (ICC)",
+      "central": false
+    },
+    {
+      "id": "zakon_o_umiku_iz_icc",
+      "label": "Zakon o umiku iz ICC",
+      "central": false
+    }
+  ],
+  "triplets": [
+    {
+      "subject_id": "madzarski_parlament",
+      "predicate": "izglasoval",
+      "object_id": "preklic_izstopa_iz_icc",
+      "evidence": "Madžarski poslanci so danes z veliko večino glasovali za preklic namere o izstopu Madžarske iz Mednarodnega kazenskega sodišča (ICC)",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "vlada_petra_magyarja",
+      "predicate": "vložila",
+      "object_id": "preklic_izstopa_iz_icc",
+      "evidence": "Predlog zakona o preklicu izstopa iz ICC je v ponedeljek v parlamentarno obravnavo vložila vlada premierja Petra Magyarja.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "tamas_sulyok",
+      "predicate": "mora podpisati",
+      "object_id": "preklic_izstopa_iz_icc",
+      "evidence": "Da bi stopil v veljavo, ga mora podpisati predsednik države Tamas Sulyok",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "madzarski_parlament",
+      "predicate": "razveljavil",
+      "object_id": "zakon_o_umiku_iz_icc",
+      "evidence": "199-članski parlament je z 133 glasovi za, 37 proti in petimi vzdržanimi uradno razveljavil zakon o umiku Madžarske iz ICC.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "nalog_za_prijetje_netanjahuja",
+      "predicate": "naj bi spodbudil",
+      "object_id": "zakon_o_umiku_iz_icc",
+      "evidence": "Namero o izstopu države iz ICC je Orban napovedal aprila lani ob obisku izraelskega premierja Benjamina Netanjahuja v Budimpešti. Za slednjega je ICC izdal nalog za prijetje",
+      "confidence": "medium"
+    },
+    {
+      "subject_id": "mednarodno_kazensko_sodisce",
+      "predicate": "izdalo",
+      "object_id": "nalog_za_prijetje_netanjahuja",
+      "evidence": "Za slednjega je ICC izdal nalog za prijetje zaradi dejanj v vojni v Gazi",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "zda",
+      "predicate": "nasprotujejo",
+      "object_id": "mednarodno_kazensko_sodisce",
+      "evidence": "Najostreje ukrepanju ICC nasprotujejo v ZDA",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "zda",
+      "predicate": "uvedle sankcije proti",
+      "object_id": "mednarodno_kazensko_sodisce",
+      "evidence": "v ZDA, ki so celo uvedle sankcije proti njegovim tožilcem in sodnikom",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "vlada_petra_magyarja",
+      "predicate": "odpravlja",
+      "object_id": "zakon_o_umiku_iz_icc",
+      "evidence": "Novi madžarski premier Peter Magyar že s prvimi dejanji odpravlja sporne odločitve šestnajstletne vladavine Viktorja Orbana.",
+      "confidence": "high"
+    },
+    {
+      "subject_id": "tamas_sulyok",
+      "predicate": "je zaveznik",
+      "object_id": "zakon_o_umiku_iz_icc",
+      "evidence": "predsednik države Tamas Sulyok, sicer zaveznik Orbana.",
+      "confidence": "medium"
+    }
+  ]
+}
